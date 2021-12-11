@@ -6,29 +6,31 @@ import en.fluffyBerserk.ui.popups.PopUp;
 import en.fluffyBerserk.ui.screens.TestScreen1;
 import en.fluffyBerserk.ui.screens.Screen;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public final class Application {
 
     @NotNull
     private final Stage primaryStage;
 
+    @Nullable
     private Screen currentScreen;
 
+    @Nullable
     private PopUp currentPopUp;
 
     public Application(@NotNull Stage stage) {
         primaryStage = stage;
         init();
+
+        // Set default screen
+        this.changeScreen(new TestScreen1());
     }
 
     public void init() {
         primaryStage.setTitle("Fluffy Berserk");
-
         primaryStage.setHeight(500.0);
         primaryStage.setWidth(500.0);
-
-        // Set default screen
-        this.changeScreen(new TestScreen1());
     }
 
     public void start() {
@@ -43,7 +45,7 @@ public final class Application {
      * Changes current screen to another and triggers
      * specific hooks
      */
-    public void changeScreen(Screen screen) {
+    public void changeScreen(@NotNull Screen screen) {
         if (currentScreen != null) {
             currentScreen.onLeave();
         }
@@ -62,18 +64,20 @@ public final class Application {
      * Shows given pop-up instance and hides
      * current pop-up if any
      */
-    public void showPopUp(PopUp popUp) {
+    public void showPopUp(@NotNull PopUp popUp) {
         if (currentPopUp != null) {
             hidePopUp();
         }
 
         popUp.onShow();
 
-        currentScreen.getScene().getRoot().setEffect(new GaussianBlur());
-
         setCurrentPopUp(popUp);
 
         popUp.getPopUpStage().show();
+
+        if (currentScreen != null) { // Add gaussian blur effect
+            currentScreen.getScene().getRoot().setEffect(new GaussianBlur());
+        }
     }
 
     /**
@@ -89,21 +93,22 @@ public final class Application {
 
         setCurrentPopUp(null);
 
-        // Remove gaussian blur effect
-        currentScreen.getScene().getRoot().setEffect(null);
+        if (currentScreen != null) { // Remove gaussian blur effect
+            currentScreen.getScene().getRoot().setEffect(null);
+        }
     }
 
     /**
      * Sets a pop-up instance as a current pop-up
      */
-    private void setCurrentPopUp(PopUp currentPopUp) {
+    private void setCurrentPopUp(@Nullable PopUp currentPopUp) {
         this.currentPopUp = currentPopUp;
     }
 
     /**
      * Sets a screen instance as a current screen
      */
-    private void setCurrentScreen(Screen currentScreen) {
+    private void setCurrentScreen(@NotNull Screen currentScreen) {
         this.currentScreen = currentScreen;
 
         // Change the screen on primary stage
