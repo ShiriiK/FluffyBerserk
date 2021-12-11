@@ -3,13 +3,14 @@ package en.fluffyBerserk.ui.utils;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import en.fluffyBerserk.Main;
+import org.jetbrains.annotations.NotNull;
 
 public final class PopUpStageBuilder {
 
     /**
      * Builds default stage for showing pop-up windows
      */
-    public static Stage buildDefaultStage() {
+    public static @NotNull Stage buildDefaultStage() {
         Stage popupStage = new Stage();
 
         popupStage.initOwner(Main.app.getPrimaryStage());
