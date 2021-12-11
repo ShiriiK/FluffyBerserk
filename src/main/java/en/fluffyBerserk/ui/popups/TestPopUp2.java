@@ -1,4 +1,4 @@
-package main.java.en.fluffyBerserk.ui.popups;
+package en.fluffyBerserk.ui.popups;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -7,8 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import main.java.en.fluffyBerserk.Main;
-import main.java.en.fluffyBerserk.ui.screens.TestScreen1;
+import en.fluffyBerserk.Main;
+import en.fluffyBerserk.ui.screens.TestScreen1;
 
 public final class TestPopUp2 extends BasePopUp {
 

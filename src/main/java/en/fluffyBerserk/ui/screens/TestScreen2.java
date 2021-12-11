@@ -1,11 +1,11 @@
-package main.java.en.fluffyBerserk.ui.screens;
+package en.fluffyBerserk.ui.screens;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import main.java.en.fluffyBerserk.Main;
-import main.java.en.fluffyBerserk.ui.popups.TestPopUp2;
+import en.fluffyBerserk.Main;
+import en.fluffyBerserk.ui.popups.TestPopUp2;
 
 public final class TestScreen2 extends BaseScreen {
 

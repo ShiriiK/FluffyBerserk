@@ -1,8 +1,8 @@
-package main.java.en.fluffyBerserk.ui.popups;
+package en.fluffyBerserk.ui.popups;
 
 import javafx.stage.Stage;
-import main.java.en.fluffyBerserk.Main;
-import main.java.en.fluffyBerserk.ui.utils.PopUpStageBuilder;
+import en.fluffyBerserk.Main;
+import en.fluffyBerserk.ui.utils.PopUpStageBuilder;
 
 /**
  * This class serves as an abstract base class for

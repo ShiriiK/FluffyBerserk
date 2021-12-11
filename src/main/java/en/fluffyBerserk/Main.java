@@ -1,7 +1,7 @@
-package main.java.en.fluffyBerserk;
+package en.fluffyBerserk;
 
 import javafx.stage.Stage;
-import main.java.en.fluffyBerserk.base.Application;
+import en.fluffyBerserk.base.Application;
 
 public final class Main extends javafx.application.Application {
 

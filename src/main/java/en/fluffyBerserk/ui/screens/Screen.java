@@ -1,4 +1,4 @@
-package main.java.en.fluffyBerserk.ui.screens;
+package en.fluffyBerserk.ui.screens;
 
 import javafx.scene.Scene;
 

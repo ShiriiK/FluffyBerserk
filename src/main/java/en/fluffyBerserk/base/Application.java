@@ -1,25 +1,20 @@
-package main.java.en.fluffyBerserk.base;
+package en.fluffyBerserk.base;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import javafx.scene.effect.GaussianBlur;
 import javafx.stage.*;
-import main.java.en.fluffyBerserk.ui.popups.PopUp;
-import main.java.en.fluffyBerserk.ui.screens.TestScreen1;
-import main.java.en.fluffyBerserk.ui.screens.Screen;
+import en.fluffyBerserk.ui.popups.PopUp;
+import en.fluffyBerserk.ui.screens.TestScreen1;
+import en.fluffyBerserk.ui.screens.Screen;
 
 public final class Application {
 
-    @NotNull
     private final Stage primaryStage;
 
-    @NotNull
     private Screen currentScreen;
 
-    @Nullable
     private PopUp currentPopUp;
 
-    public Application(@NotNull Stage stage) {
+    public Application(Stage stage) {
         primaryStage = stage;
         init();
     }
@@ -46,7 +41,7 @@ public final class Application {
      * Changes current screen to another and triggers
      * specific hooks
      */
-    public void changeScreen(@NotNull Screen screen) {
+    public void changeScreen(Screen screen) {
         if (currentScreen != null) {
             currentScreen.onLeave();
         }
@@ -65,7 +60,7 @@ public final class Application {
      * Shows given pop-up instance and hides
      * current pop-up if any
      */
-    public void showPopUp(@NotNull PopUp popUp) {
+    public void showPopUp(PopUp popUp) {
         if (currentPopUp != null) {
             hidePopUp();
         }
@@ -99,14 +94,14 @@ public final class Application {
     /**
      * Sets a pop-up instance as a current pop-up
      */
-    private void setCurrentPopUp(@Nullable PopUp currentPopUp) {
+    private void setCurrentPopUp(PopUp currentPopUp) {
         this.currentPopUp = currentPopUp;
     }
 
     /**
      * Sets a screen instance as a current screen
      */
-    private void setCurrentScreen(@NotNull Screen currentScreen) {
+    private void setCurrentScreen(Screen currentScreen) {
         this.currentScreen = currentScreen;
 
         // Change the screen on primary stage

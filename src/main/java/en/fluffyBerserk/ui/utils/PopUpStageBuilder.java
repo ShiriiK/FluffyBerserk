@@ -1,8 +1,8 @@
-package main.java.en.fluffyBerserk.ui.utils;
+package en.fluffyBerserk.ui.utils;
 
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import main.java.en.fluffyBerserk.Main;
+import en.fluffyBerserk.Main;
 
 public final class PopUpStageBuilder {
 

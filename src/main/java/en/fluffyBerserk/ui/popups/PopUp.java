@@ -1,4 +1,4 @@
-package main.java.en.fluffyBerserk.ui.popups;
+package en.fluffyBerserk.ui.popups;
 
 import javafx.stage.Stage;
 
