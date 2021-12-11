@@ -27,12 +27,12 @@ public abstract class BasePopUp implements PopUp {
         popUpStage.setOnCloseRequest(event -> Main.app.hidePopUp());
     }
 
-    protected abstract String getPopUpTitle();
-
-    protected abstract void initPopUpStage();
-
     @Override
     public Stage getPopUpStage() {
         return popUpStage;
     }
+
+    protected abstract String getPopUpTitle();
+
+    protected abstract void initPopUpStage();
 }
