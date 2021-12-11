@@ -10,13 +10,16 @@ import main.java.en.fluffyBerserk.ui.screens.Screen;
 
 public final class Application {
 
+    @NotNull
     private final Stage primaryStage;
 
+    @NotNull
     private Screen currentScreen;
 
+    @Nullable
     private PopUp currentPopUp;
 
-    public Application(Stage stage) {
+    public Application(@NotNull Stage stage) {
         primaryStage = stage;
         init();
     }
@@ -44,7 +47,7 @@ public final class Application {
      * Changes current screen to another and triggers
      * specific hooks
      */
-    public void changeScreen(Screen screen) {
+    public void changeScreen(@NotNull Screen screen) {
         if (currentScreen != null) {
             currentScreen.onLeave();
         }
