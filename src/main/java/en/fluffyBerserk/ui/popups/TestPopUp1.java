@@ -22,7 +22,6 @@ public final class TestPopUp1 extends BasePopUp {
         VBox pauseRoot = new VBox(10);
 
         pauseRoot.getChildren().add(new Label("This is test pop-up 1"));
-        pauseRoot.setStyle("-fx-background-color: rgba(150, 150, 150, 0.8);");
         pauseRoot.setAlignment(Pos.CENTER);
         pauseRoot.setPadding(new Insets(20));
 

@@ -4,6 +4,10 @@ import javafx.stage.Stage;
 import main.java.en.fluffyBerserk.Main;
 import main.java.en.fluffyBerserk.ui.utils.PopUpStageBuilder;
 
+/**
+ * This class serves as an abstract base class for
+ * all pop-ups
+ */
 public abstract class BasePopUp implements PopUp {
 
     protected final Stage popUpStage;

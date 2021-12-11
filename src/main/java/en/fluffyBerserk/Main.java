@@ -3,7 +3,7 @@ package main.java.en.fluffyBerserk;
 import javafx.stage.Stage;
 import main.java.en.fluffyBerserk.base.Application;
 
-public class Main extends javafx.application.Application {
+public final class Main extends javafx.application.Application {
 
     // Static reference to application instance
     // so all classes don't have to pass ref

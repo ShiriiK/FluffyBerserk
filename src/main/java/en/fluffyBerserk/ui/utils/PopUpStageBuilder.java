@@ -4,7 +4,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.en.fluffyBerserk.Main;
 
-public class PopUpStageBuilder {
+public final class PopUpStageBuilder {
 
     /**
      * Builds default stage for showing pop-up windows
