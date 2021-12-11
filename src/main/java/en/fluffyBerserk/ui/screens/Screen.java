@@ -4,9 +4,9 @@ import javafx.scene.Scene;
 
 public interface Screen {
 
-    public Scene getScene();
+    Scene getScene();
 
-    public void onEnter();
+    void onEnter();
 
-    public void onLeave();
+    void onLeave();
 }

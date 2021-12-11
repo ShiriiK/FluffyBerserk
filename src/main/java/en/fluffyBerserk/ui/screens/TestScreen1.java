@@ -7,15 +7,10 @@ import javafx.scene.layout.VBox;
 import main.java.en.fluffyBerserk.Main;
 import main.java.en.fluffyBerserk.ui.popups.TestPopUp;
 
-public final class TestScreen1 implements Screen {
+public final class TestScreen1 extends BaseScreen {
 
-    private Scene scene;
-
-    public TestScreen1() {
-        init();
-    }
-
-    private void init() {
+    @Override
+    protected Scene buildScene() {
         VBox root = new VBox();
 
         Label label = new Label("This is test screen 1");
@@ -28,12 +23,7 @@ public final class TestScreen1 implements Screen {
 
         root.getChildren().addAll(label, screenButton, popUpButton);
 
-        scene = new Scene(root);
-    }
-
-    @Override
-    public Scene getScene() {
-        return scene;
+        return new Scene(root);
     }
 
     @Override
