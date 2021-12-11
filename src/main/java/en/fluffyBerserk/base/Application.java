@@ -5,16 +5,18 @@ import javafx.stage.*;
 import en.fluffyBerserk.ui.popups.PopUp;
 import en.fluffyBerserk.ui.screens.TestScreen1;
 import en.fluffyBerserk.ui.screens.Screen;
+import org.jetbrains.annotations.NotNull;
 
 public final class Application {
 
+    @NotNull
     private final Stage primaryStage;
 
     private Screen currentScreen;
 
     private PopUp currentPopUp;
 
-    public Application(Stage stage) {
+    public Application(@NotNull Stage stage) {
         primaryStage = stage;
         init();
     }
@@ -33,7 +35,7 @@ public final class Application {
         primaryStage.show();
     }
 
-    public Stage getPrimaryStage() {
+    public @NotNull Stage getPrimaryStage() {
         return primaryStage;
     }
 
