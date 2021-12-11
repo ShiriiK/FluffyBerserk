@@ -1,8 +1,11 @@
 package main.java.en.fluffyBerserk.base;
 
+import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
+import javafx.scene.effect.GaussianBlur;
 import javafx.stage.*;
 import main.java.en.fluffyBerserk.ui.popups.PopUp;
-import main.java.en.fluffyBerserk.ui.screens.DefaultScreen;
+import main.java.en.fluffyBerserk.ui.screens.TestScreen1;
 import main.java.en.fluffyBerserk.ui.screens.Screen;
 
 public final class Application {
@@ -26,7 +29,7 @@ public final class Application {
         primaryStage.setWidth(500.0);
 
         // Set default screen
-        this.changeScreen(new DefaultScreen());
+        this.changeScreen(new TestScreen1());
     }
 
     public void start() {
@@ -46,23 +49,62 @@ public final class Application {
             currentScreen.onLeave();
         }
 
+        // Hide pop-up if changing screens
+        if (currentPopUp != null) {
+            hidePopUp();
+        }
+
         setCurrentScreen(screen);
 
         currentScreen.onEnter();
     }
 
-    public void showPopUp(PopUp popUp) {
+    /**
+     * Shows given pop-up instance and hides
+     * current pop-up if any
+     */
+    public void showPopUp(@NotNull PopUp popUp) {
+        if (currentPopUp != null) {
+            hidePopUp();
+        }
 
+        popUp.onShow();
+
+        currentScreen.getScene().getRoot().setEffect(new GaussianBlur());
+
+        setCurrentPopUp(popUp);
+
+        popUp.getPopUpStage().show();
     }
 
+    /**
+     * Hides current shown pop-up if any
+     */
     public void hidePopUp() {
+        if (currentPopUp == null) {
+            return;
+        }
 
+        currentPopUp.onHide();
+        currentPopUp.getPopUpStage().hide();
+
+        setCurrentPopUp(null);
+
+        // Remove gaussian blur effect
+        currentScreen.getScene().getRoot().setEffect(null);
+    }
+
+    /**
+     * Sets a pop-up instance as a current pop-up
+     */
+    private void setCurrentPopUp(@Nullable PopUp currentPopUp) {
+        this.currentPopUp = currentPopUp;
     }
 
     /**
      * Sets a screen instance as a current screen
      */
-    private void setCurrentScreen(Screen currentScreen) {
+    private void setCurrentScreen(@NotNull Screen currentScreen) {
         this.currentScreen = currentScreen;
 
         // Change the screen on primary stage

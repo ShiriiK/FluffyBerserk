@@ -1,10 +1,10 @@
 package main.java.en.fluffyBerserk.ui.popups;
 
-import javafx.scene.Parent;
+import javafx.stage.Stage;
 
 public interface PopUp {
 
-    public Parent getRoot();
+    public Stage getPopUpStage();
 
     public void onShow();
 
