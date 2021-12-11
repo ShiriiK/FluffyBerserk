@@ -12,11 +12,11 @@ import main.java.en.fluffyBerserk.Main;
 import main.java.en.fluffyBerserk.ui.screens.TestScreen1;
 import main.java.en.fluffyBerserk.ui.utils.PopUpStageBuilder;
 
-public final class TestPopUp implements PopUp {
+public final class TestPopUp2 implements PopUp {
 
     private final Stage popUpStage;
 
-    public TestPopUp() {
+    public TestPopUp2() {
         popUpStage = PopUpStageBuilder.buildDefaultStage();
         init();
     }
@@ -24,7 +24,7 @@ public final class TestPopUp implements PopUp {
     private void init() {
         VBox pauseRoot = new VBox(5);
 
-        pauseRoot.getChildren().add(new Label("Paused"));
+        pauseRoot.getChildren().add(new Label("This is test pop-up 2"));
         pauseRoot.setStyle("-fx-background-color: rgba(150, 150, 150, 0.8);");
         pauseRoot.setAlignment(Pos.CENTER);
         pauseRoot.setPadding(new Insets(20));
@@ -32,18 +32,14 @@ public final class TestPopUp implements PopUp {
         Button resume = new Button("Resume");
         pauseRoot.getChildren().add(resume);
 
-        Button toDefaultScreen = new Button("Default screen");
+        Button toDefaultScreen = new Button("To test screen 1");
         pauseRoot.getChildren().add(toDefaultScreen);
 
-        resume.setOnAction(event -> {
-            Main.app.hidePopUp();
-        });
+        resume.setOnAction(event -> Main.app.hidePopUp());
 
-        toDefaultScreen.setOnAction(event -> {
-            Main.app.changeScreen(new TestScreen1());
-        });
+        toDefaultScreen.setOnAction(event -> Main.app.changeScreen(new TestScreen1()));
 
-        popUpStage.setTitle("Test pop-up");
+        popUpStage.setTitle("Test pop-up 2");
         popUpStage.setScene(new Scene(pauseRoot, Color.TRANSPARENT));
     }
 
@@ -54,11 +50,11 @@ public final class TestPopUp implements PopUp {
 
     @Override
     public void onShow() {
-        System.out.println("Test pop up shown");
+        System.out.println("Test pop up 2 shown");
     }
 
     @Override
     public void onHide() {
-        System.out.println("Test pop up hidden");
+        System.out.println("Test pop up 2 hidden");
     }
 }
