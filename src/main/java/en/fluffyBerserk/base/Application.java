@@ -26,7 +26,7 @@ public final class Application {
         primaryStage.setWidth(500.0);
 
         // Set default screen
-        this.changeScreen(new DefaultScreen(this));
+        this.changeScreen(new DefaultScreen());
     }
 
     public void start() {

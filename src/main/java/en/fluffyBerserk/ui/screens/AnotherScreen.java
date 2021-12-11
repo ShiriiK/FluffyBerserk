@@ -2,7 +2,6 @@ package main.java.en.fluffyBerserk.ui.screens;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,16 +11,13 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import main.java.en.fluffyBerserk.base.Application;
+import main.java.en.fluffyBerserk.Main;
 
 public class AnotherScreen implements Screen {
 
-    private Application application;
-
     private Scene scene;
 
-    public AnotherScreen(Application application) {
-        this.application = application;
+    public AnotherScreen() {
         init();
     }
 
@@ -30,7 +26,7 @@ public class AnotherScreen implements Screen {
 
         Button button = new Button("Switch to default scene");
         button.setOnAction(event -> {
-            application.changeScreen(new DefaultScreen(application));
+            Main.app.changeScreen(new DefaultScreen());
         });
 
         Button modalButton = new Button("Show pop up");
@@ -51,7 +47,7 @@ public class AnotherScreen implements Screen {
             pauseRoot.getChildren().add(toDefaultScreen);
 
             Stage popupStage = new Stage(StageStyle.TRANSPARENT);
-            popupStage.initOwner(application.getPrimaryStage());
+            popupStage.initOwner(Main.app.getPrimaryStage());
             popupStage.initModality(Modality.APPLICATION_MODAL);
             popupStage.setScene(new Scene(pauseRoot, Color.BLACK));
 
@@ -61,7 +57,7 @@ public class AnotherScreen implements Screen {
             });
 
             toDefaultScreen.setOnAction(event -> {
-                application.changeScreen(new DefaultScreen(application));
+                Main.app.changeScreen(new DefaultScreen());
             });
 
             popupStage.show();

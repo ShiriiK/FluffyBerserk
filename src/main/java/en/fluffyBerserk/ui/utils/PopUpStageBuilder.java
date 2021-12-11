@@ -6,6 +6,6 @@ import main.java.en.fluffyBerserk.base.Application;
 public class PopUpStageBuilder {
 
     public static Stage buildStage(Application application) {
-
+        return null;
     }
 }
