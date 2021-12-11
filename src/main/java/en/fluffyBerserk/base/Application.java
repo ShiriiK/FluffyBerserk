@@ -25,7 +25,6 @@ public final class Application {
     }
 
     public void init() {
-        // init primary stage
         primaryStage.setTitle("Fluffy Berserk");
 
         primaryStage.setHeight(500.0);
