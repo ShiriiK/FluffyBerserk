@@ -2,9 +2,9 @@ package en.fluffyBerserk.base;
 
 import javafx.scene.effect.GaussianBlur;
 import javafx.stage.*;
-import en.fluffyBerserk.ui.popups.PopUp;
-import en.fluffyBerserk.ui.screens.TestScreen1;
-import en.fluffyBerserk.ui.screens.Screen;
+import en.fluffyBerserk.gui.popups.PopUp;
+import en.fluffyBerserk.gui.screens.TestScreen1;
+import en.fluffyBerserk.gui.screens.Screen;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
