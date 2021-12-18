@@ -8,15 +8,14 @@ import en.fluffyBerserk.base.Main;
 import en.fluffyBerserk.gui.utils.PopUpStageBuilder;
 
 /**
- * This class serves as an abstract base class for
- * all pop-ups
+ * This class serves as an abstract base class for all pop-ups
  */
 public abstract class BasePopUp implements PopUp {
 
     // Stage specific for pop-up
     protected final Stage popUpStage;
 
-    // Structure of abstract class
+    // Structure of BasePopUp
     public BasePopUp() {
         // Setting base structure for popup using PopUpStageBuilder in package utils
         popUpStage = PopUpStageBuilder.buildDefaultStage();
@@ -47,7 +46,7 @@ public abstract class BasePopUp implements PopUp {
         return popUpStage;
     }
 
-    // Abstract methods used in each class extending this class
+    // Abstract methods used in classes extending this class
     protected abstract String getPopUpTitle();
     protected abstract void initPopUpStage();
 }

@@ -1,15 +1,11 @@
 package en.fluffyBerserk.gui.popups;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import en.fluffyBerserk.base.Main;
-import en.fluffyBerserk.gui.screens.TestScreen1;
 import javafx.scene.web.WebView;
+
+/**
+ * BasePopUp extension class that displays help.
+ */
 
 public final class PopUpHelp extends BasePopUp {
 

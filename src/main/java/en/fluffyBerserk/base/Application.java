@@ -1,9 +1,9 @@
 package en.fluffyBerserk.base;
 
+import en.fluffyBerserk.gui.screens.HomeScreen;
 import javafx.scene.effect.GaussianBlur;
 import javafx.stage.*;
 import en.fluffyBerserk.gui.popups.PopUp;
-import en.fluffyBerserk.gui.screens.TestScreen1;
 import en.fluffyBerserk.gui.screens.Screen;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,7 +24,7 @@ public final class Application {
         init();
 
         // Set default screen
-        this.changeScreen(new TestScreen1());
+        this.changeScreen(new HomeScreen());
     }
 
     public void init() {

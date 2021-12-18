@@ -7,7 +7,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import en.fluffyBerserk.base.Main;
-import en.fluffyBerserk.gui.screens.TestScreen1;
+import en.fluffyBerserk.gui.screens.LoginScreen;
+
+/**
+ * BasePopUp extension class that displays menu.
+ */
 
 public final class PopUpMenu extends BasePopUp {
 
@@ -31,7 +35,7 @@ public final class PopUpMenu extends BasePopUp {
         helpButton.setOnAction(event -> Main.app.showPopUp(new PopUpHelp()));
 
         Button logoutButton = new Button("Logout");
-        logoutButton.setOnAction(event -> Main.app.changeScreen(new TestScreen1()));
+        logoutButton.setOnAction(event -> Main.app.changeScreen(new LoginScreen()));
 
         Button deleteSaveButton = new Button("Delete save");
         Button deleteAccountButton = new Button("Delete account");
