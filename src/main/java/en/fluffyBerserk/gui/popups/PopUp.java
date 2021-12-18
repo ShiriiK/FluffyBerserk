@@ -4,9 +4,12 @@ import javafx.stage.Stage;
 
 public interface PopUp {
 
-    public Stage getPopUpStage();
+    // Returns pop-up stage -> currently used for hiding and showing of pop-up
+    Stage getPopUpStage();
 
-    public void onShow();
+    // Message for console
+    void onShow();
 
-    public void onHide();
+    // Message for console
+    void onHide();
 }

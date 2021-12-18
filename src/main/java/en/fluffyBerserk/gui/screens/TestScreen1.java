@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import en.fluffyBerserk.base.Main;
-import en.fluffyBerserk.gui.popups.TestPopUp1;
+import en.fluffyBerserk.gui.popups.PopUpMenu;
 
 public final class TestScreen1 extends BaseScreen {
 
@@ -19,7 +19,7 @@ public final class TestScreen1 extends BaseScreen {
         screenButton.setOnAction(event -> Main.app.changeScreen(new TestScreen2()));
 
         Button popUpButton = new Button("Test pop-up 1");
-        popUpButton.setOnAction(e -> Main.app.showPopUp(new TestPopUp1()));
+        popUpButton.setOnAction(e -> Main.app.showPopUp(new PopUpMenu()));
 
         root.getChildren().addAll(label, screenButton, popUpButton);
 
