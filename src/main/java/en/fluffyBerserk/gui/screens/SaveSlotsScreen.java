@@ -1,10 +1,8 @@
 package en.fluffyBerserk.gui.screens;
 
-import en.fluffyBerserk.base.Main;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 /**
@@ -17,17 +15,17 @@ public class SaveSlotsScreen extends BaseScreen{
     protected Scene buildScene() {
         VBox root = new VBox();
 
-        Button SaveSlot1 = new Button("Empty Save");
-        Button SaveSlot2 = new Button("Empty Save");
-        Button SaveSlot3 = new Button("Empty Save");
+        Button saveSlot1 = new Button("Empty Save");
+        Button saveSlot2 = new Button("Empty Save");
+        Button saveSlot3 = new Button("Empty Save");
 
-        Button LoadSave = new Button("Load Save");
-        Button DeleteSave = new Button("Delete Save");
-        Button DeleteAccount = new Button("Delete Account");
-        Button Cancel = new Button("Cancel");
+        Button loadSave = new Button("Load Save");
+        Button deleteSave = new Button("Delete Save");
+        Button deleteAccount = new Button("Delete Account");
+        Button cancel = new Button("Cancel");
 
         root.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(SaveSlot1, SaveSlot2, SaveSlot3);
+        root.getChildren().addAll(saveSlot1, saveSlot2, saveSlot3, loadSave, deleteSave, deleteAccount, cancel);
 
         return new Scene(root);
     }
