@@ -15,9 +15,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Class representing players.
+ */
 public class Player extends Creature implements CanShoot, CanAttack, CanDie, SubjectOfChange {
 
-    private int hp;
+    private String playerName;
     private boolean isAlive;
     private int positionX;
     private int positionY;
@@ -26,19 +29,29 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie, Sub
     private MovableEntityAnimations playerAnimations;
     private final Set<Observer> observers = new HashSet<>();
 
-    public Player(int positionX, int positionY){
-        this.positionX = positionX;
-        this.positionY = positionY;
+    // Constructor
+    public Player(String playerName){
+        this.playerName = playerName;
         this.isAlive = true;
-
+        setY(100);
+        setX(100);
+        setHp(100);
+        setStr(20);
         init();
     }
 
+    // Sets default sprite for animations and current sprite
     private void init() {
         playerAnimations = new MovableEntityAnimations(this, Sprites.fluf1);
         currentSprite = playerAnimations.getIdle();
     }
 
+    // Changes sprite, which player animations are taken from (fluf1, fluf2, fluf3,...)
+    private void changeAnimationsSprite(Image image){
+        playerAnimations = new MovableEntityAnimations(this, image);
+    }
+
+    // Sets current animation sprite (moveDown, moveUp, moveLeft, moveRight, idle)
     private void setCurrentSprite(Image[] sprite){
         if (sprite != null){
             currentSprite = sprite;
@@ -47,6 +60,7 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie, Sub
         }
     }
 
+    //
     @Override
     public void move(int steps, Direction direction) {
         if (steps == 0 && !Arrays.equals(currentSprite, playerAnimations.getIdle())){
@@ -74,6 +88,14 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie, Sub
         }
     }
 
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
+    }
+
 
     @Override
     public String getImagePath() {
@@ -82,7 +104,7 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie, Sub
 
     @Override
     public String getName() {
-        return ""; // TODO players name
+        return playerName; // TODO players name
     }
 
     @Override
