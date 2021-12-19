@@ -1,5 +1,7 @@
 package en.fluffyBerserk.gui.popups;
 
+import en.fluffyBerserk.gui.screens.EditScreen;
+import en.fluffyBerserk.gui.screens.SaveSlotsScreen;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -29,7 +31,11 @@ public final class PopUpMenu extends BasePopUp {
 
         Button saveButton = new Button("Save game");
         Button loadButton = new Button("Load game");
+
+        loadButton.setOnAction(event -> Main.app.changeScreen(new SaveSlotsScreen()));
+
         Button editButton = new Button("Edit character");
+        editButton.setOnAction(event -> Main.app.changeScreen(new EditScreen()));
 
         Button helpButton = new Button("Help");
         helpButton.setOnAction(event -> Main.app.showPopUp(new PopUpHelp()));

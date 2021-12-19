@@ -22,10 +22,15 @@ public final class HomeScreen extends BaseScreen {
         BorderPane root = new BorderPane();
         VBox buttons = new VBox();
 
+        // Login screen
         Button loginButton = new Button("Login");
         loginButton.setOnAction(event -> Main.app.changeScreen(new LoginScreen()));
+
+        // Register screen
         Button registerButton = new Button("Register");
         registerButton.setOnAction(event -> Main.app.changeScreen(new RegisterScreen()));
+
+        // Safe-zone screen
         Button guestButton = new Button("Continue as guest");
         guestButton.setOnAction(event -> Main.app.changeScreen(new SafeZoneScreen()));
 
@@ -47,9 +52,7 @@ public final class HomeScreen extends BaseScreen {
         root.setLeft(buttons);
         root.setCenter(pic);
 
-        Scene scene = new Scene(root);
-
-        return scene;
+        return new Scene(root);
     }
 
     @Override

@@ -20,45 +20,44 @@ public class SaveSlotsScreen extends BaseScreen{
 
         Button saveSlot1 = new Button("Empty Save");
         saveSlot1.setStyle("-fx-border-color: Black");
+        saveSlot1.setStyle("-fx-font-size: 32");
         Button saveSlot2 = new Button("Empty Save");
         saveSlot2.setStyle("-fx-border-color: Black");
+        saveSlot2.setStyle("-fx-font-size: 32");
         Button saveSlot3 = new Button("Empty Save");
         saveSlot3.setStyle("-fx-border-color: Black");
+        saveSlot3.setStyle("-fx-font-size: 32");
 
         saveSlot1.setOnAction(event -> {
-            saveSlot1.setStyle("-fx-border-color: Green");
-            saveSlot2.setStyle("-fx-border-color: Black");
-            saveSlot3.setStyle("-fx-border-color: Black");
             string = "saveSlot1";
         });
 
-        saveSlot1.setOnAction(event -> {
-            saveSlot1.setStyle("-fx-border-color: Black");
-            saveSlot2.setStyle("-fx-border-color: Green");
-            saveSlot3.setStyle("-fx-border-color: Black");
+        saveSlot2.setOnAction(event -> {
             string = "saveSlot2";
         });
 
         saveSlot3.setOnAction(event -> {
-            saveSlot1.setStyle("-fx-border-color: Black");
-            saveSlot2.setStyle("-fx-border-color: Black");
-            saveSlot3.setStyle("-fx-border-color: Green");
             string = "saveSlot3";
         });
 
-        Button loadSave = new Button("Load Save");
-        loadSave.setOnAction(event -> { //TODO make difference between saves
+        Button loadSave = new Button("Load Save"); // TODO needs to actually make difference between loaded saves
+        loadSave.setOnAction(event -> {
             Main.app.changeScreen(new EditScreen());
         });
-        Button deleteSave = new Button("Delete Save"); //TODO
-        Button deleteAccount = new Button("Delete Account"); //TODO
+
+        Button deleteSave = new Button("Delete Save"); // TODO
+        Button deleteAccount = new Button("Delete Account"); // TODO
+
         Button cancel = new Button("Cancel");
         cancel.setOnAction(event -> {
             Main.app.changeScreen(new HomeScreen());
         });
 
         root.setAlignment(Pos.CENTER);
+        root.setSpacing(20);
         root.getChildren().addAll(saveSlot1, saveSlot2, saveSlot3, loadSave, deleteSave, deleteAccount, cancel);
+
+
 
         return new Scene(root);
     }

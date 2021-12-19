@@ -1,5 +1,6 @@
 package en.fluffyBerserk.gui.screens;
 
+import en.fluffyBerserk.base.Main;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,8 +19,14 @@ public class EditScreen extends BaseScreen{
 
         Label label1 = new Label("Character name");
         TextField name = new TextField("enter name");
+
+        // Safe-zone
         Button saveCharacter = new Button("Save character");
+        saveCharacter.setOnAction(event -> Main.app.changeScreen(new SafeZoneScreen()));
+
+        // Save slots
         Button cancel = new Button("Cancel");
+        cancel.setOnAction(event -> Main.app.changeScreen(new SaveSlotsScreen()));
 
         root.setAlignment(Pos.CENTER);
         root.getChildren().addAll(label1, name,saveCharacter,cancel);

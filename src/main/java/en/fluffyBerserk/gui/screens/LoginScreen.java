@@ -20,9 +20,11 @@ public final class LoginScreen extends BaseScreen {
         TextField userName = new TextField("User name");
         TextField password = new TextField("Password");
 
+        // Save slot screen
         Button loginButton = new Button("Login");
         loginButton.setOnAction(event -> Main.app.changeScreen(new SaveSlotsScreen()));
 
+        // Home screen
         Button closeButton = new Button("Close");
         closeButton.setOnAction(event -> Main.app.changeScreen(new HomeScreen()));
 
