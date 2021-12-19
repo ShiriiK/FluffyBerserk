@@ -1,6 +1,7 @@
 package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.base.Main;
+import en.fluffyBerserk.logic.Game;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,6 +14,12 @@ import javafx.scene.layout.VBox;
  */
 
 public class EditScreen extends BaseScreen{
+    private Game game;
+
+    public EditScreen(Game game){
+        this.game = game;
+    }
+
     @Override
     protected Scene buildScene() {
         VBox root = new VBox();

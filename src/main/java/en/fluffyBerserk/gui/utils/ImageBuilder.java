@@ -25,7 +25,6 @@ public class ImageBuilder {
 
     public static Image crop(Image image, int x, int y, int width, int height){
         PixelReader reader = image.getPixelReader();
-        WritableImage newImage = new WritableImage(reader, x, y, width, height);
-        return  newImage;
+        return new WritableImage(reader, x, y, width, height);
     }
 }
