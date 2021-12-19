@@ -1,5 +1,9 @@
 package en.fluffyBerserk.logic.objects;
 
+/**
+ * Abstract class for all movable objects
+ */
+
 public abstract class MovableEntity extends Entity implements MovableObject {
 
     private float moveX;

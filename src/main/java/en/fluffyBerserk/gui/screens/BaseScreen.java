@@ -1,10 +1,12 @@
 package en.fluffyBerserk.gui.screens;
 
+import en.fluffyBerserk.logic.objects.creatures.player.Player;
 import javafx.scene.Scene;
 
 /**
  * This class serves as an abstract base class for all screens
  */
+
 public abstract class BaseScreen implements Screen {
 
     protected final Scene scene;

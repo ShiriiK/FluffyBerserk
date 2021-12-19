@@ -3,6 +3,9 @@ package en.fluffyBerserk.logic.objects.creatures;
 import en.fluffyBerserk.logic.objects.HasName;
 import en.fluffyBerserk.logic.objects.MovableEntity;
 
+/**
+ * Abstract class for all creatures
+ */
 public abstract class Creature extends MovableEntity implements HasName {
 
     private int health;

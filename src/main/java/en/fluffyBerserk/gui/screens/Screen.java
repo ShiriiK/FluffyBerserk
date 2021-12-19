@@ -1,5 +1,6 @@
 package en.fluffyBerserk.gui.screens;
 
+import en.fluffyBerserk.logic.objects.creatures.player.Player;
 import javafx.scene.Scene;
 
 /**
@@ -8,7 +9,6 @@ import javafx.scene.Scene;
 
 public interface Screen {
 
-    // Returns scene -> currently used for switching scenes
     Scene getScene();
 
     // Message for console
