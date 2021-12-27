@@ -1,5 +1,6 @@
 package en.fluffyBerserk.gui.animations;
 
+import en.fluffyBerserk.gui.utils.LocateImage;
 import en.fluffyBerserk.invariables.Invariables;
 import javafx.scene.image.Image;
 
@@ -12,7 +13,7 @@ public class MovableEntityAnimations {
     public Image[] idle;
 
 
-    public MovableEntityAnimations(Object object, Image sprite){
+    public MovableEntityAnimations(Object object, LocateImage sprite){
         int w = Invariables.CELLS_SIZE;
         int h = Invariables.CELLS_SIZE;
         moveDown = new Image[3];
