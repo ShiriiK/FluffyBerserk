@@ -2,7 +2,7 @@ package en.fluffyBerserk.gui.utils;
 
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import en.fluffyBerserk.base.Main;
+import en.fluffyBerserk.Main;
 import javafx.stage.StageStyle;
 import org.jetbrains.annotations.NotNull;
 

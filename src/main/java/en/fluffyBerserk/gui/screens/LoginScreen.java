@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import en.fluffyBerserk.base.Main;
+import en.fluffyBerserk.Main;
 
 /**
  * BaseScreen extension class that displays login screen.

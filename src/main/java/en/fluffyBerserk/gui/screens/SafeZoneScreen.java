@@ -1,9 +1,8 @@
 package en.fluffyBerserk.gui.screens;
 
-import en.fluffyBerserk.base.Main;
+import en.fluffyBerserk.Main;
 import en.fluffyBerserk.gui.popups.PopUpMenu;
 import en.fluffyBerserk.gui.utils.Observer;
-import en.fluffyBerserk.logic.objects.creatures.player.Player;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;

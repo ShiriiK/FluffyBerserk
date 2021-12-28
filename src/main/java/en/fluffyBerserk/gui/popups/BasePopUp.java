@@ -4,7 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import en.fluffyBerserk.base.Main;
+import en.fluffyBerserk.Main;
 import en.fluffyBerserk.gui.utils.PopUpStageBuilder;
 
 /**
