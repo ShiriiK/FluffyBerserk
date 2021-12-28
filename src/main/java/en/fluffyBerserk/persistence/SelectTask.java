@@ -49,7 +49,7 @@ public class SelectTask<T> {
 
     /**
      * Performs a multiple select named query to the DB layer and returns the
-     * single result, null otherwise
+     * multi result, null otherwise
      *
      * @param builder lambda which builds the named query
      */
