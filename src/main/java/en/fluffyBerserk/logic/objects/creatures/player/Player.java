@@ -1,6 +1,7 @@
 package en.fluffyBerserk.logic.objects.creatures.player;
 
 import en.fluffyBerserk.gui.animations.MovableEntityAnimations;
+import en.fluffyBerserk.gui.utils.LocateImage;
 import en.fluffyBerserk.gui.utils.Observer;
 import en.fluffyBerserk.gui.utils.SubjectOfChange;
 import en.fluffyBerserk.invariables.Direction;
@@ -47,7 +48,7 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie, Sub
     }
 
     // Changes sprite, which player animations are taken from (fluf1, fluf2, fluf3,...)
-    private void changeAnimationsSprite(Image image){
+    private void changeAnimationsSprite(LocateImage image){
         playerAnimations = new MovableEntityAnimations(this, image);
     }
 

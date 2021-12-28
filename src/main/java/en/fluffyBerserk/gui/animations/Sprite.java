@@ -1,6 +1,7 @@
 package en.fluffyBerserk.gui.animations;
 
 import en.fluffyBerserk.gui.utils.ImageBuilder;
+import en.fluffyBerserk.gui.utils.LocateImage;
 import javafx.scene.image.Image;
 
 public class Sprite {
@@ -10,11 +11,11 @@ public class Sprite {
     private double speed;
     private boolean moving;
     private Image frame;
-    private Image sprite;
+    private LocateImage sprite;
     private Image[] frames;
 
     //Moving entity
-    public Sprite(Object objectReference, int spriteLocationX, int spriteLocationY, int width, int height, Image sprite){
+    public Sprite(Object objectReference, int spriteLocationX, int spriteLocationY, int width, int height, LocateImage sprite){
         this.objectReference = objectReference;
         this.spriteLocationX = spriteLocationX;
         this.spriteLocationY = spriteLocationY;
