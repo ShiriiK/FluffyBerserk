@@ -8,4 +8,9 @@ public class Bullet extends Entity {
     public String getImagePath() {
         return ""; // TODO
     }
+
+    @Override
+    public String getName() {
+        return "bullet";
+    }
 }
