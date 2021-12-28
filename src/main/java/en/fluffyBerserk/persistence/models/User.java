@@ -4,7 +4,8 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@NamedQuery(name = "User.byId", query="SELECT u FROM user u WHERE u.id = ?1")
+@NamedQuery(name = "User.byId", query = "SELECT u FROM User u WHERE u.id = ?1")
+@NamedQuery(name = "User.byUsername", query = "SELECT u FROM User u WHERE u.username = ?1")
 public class User {
     private long id;
     private String username;
@@ -12,7 +13,7 @@ public class User {
     private byte isAdmin;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public long getId() {
         return id;
@@ -63,5 +64,15 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, username, password, isAdmin);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", isAdmin=" + isAdmin +
+                '}';
     }
 }

@@ -4,8 +4,10 @@ import javax.persistence.Persistence;
 
 public class EntityManagerFactory {
 
-    // Unit name used to load entity manager
-    // Can be found in persistence.xml file
+    /**
+     * Unit name used to load entity manager
+     * Refers to a unit defined in persistence.xml
+     */
     private static final String UNIT_NAME = "default";
 
     public static javax.persistence.EntityManagerFactory getFactory() {
