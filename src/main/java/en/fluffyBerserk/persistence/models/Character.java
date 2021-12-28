@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
+@Table(name = "`character`")
+@NamedQuery(name = "Character.byUserId", query = "SELECT c FROM Character c WHERE c.user.id = ?1")
 public class Character {
     private long id;
     private String name;
@@ -16,9 +18,10 @@ public class Character {
     private String saveFilePath;
     private Timestamp savedAt;
     private Timestamp createdAt;
+    private User user;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public long getId() {
         return id;
@@ -26,6 +29,16 @@ public class Character {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    @ManyToOne(targetEntity = User.class)
+    @JoinColumn(name = "fk_user_id", referencedColumnName = "id")
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Basic
