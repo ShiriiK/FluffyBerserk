@@ -21,7 +21,11 @@ public class RegisterScreen extends BaseScreen{
         TextField password = new TextField("Password");
         TextField password2 = new TextField("Repeat password");
 
+        // Save slot screen
         Button registerButton = new Button("Register");
+        registerButton.setOnAction(event -> { Main.app.changeScreen(new SaveSlotsScreen());});
+
+        // Home screen
         Button closeButton = new Button("Close");
         closeButton.setOnAction(event -> Main.app.changeScreen(new HomeScreen()));
 
