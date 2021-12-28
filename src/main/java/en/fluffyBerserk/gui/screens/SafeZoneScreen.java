@@ -2,6 +2,8 @@ package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.base.Main;
 import en.fluffyBerserk.gui.popups.PopUpMenu;
+import en.fluffyBerserk.gui.utils.Observer;
+import en.fluffyBerserk.logic.objects.creatures.player.Player;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -12,7 +14,7 @@ import javafx.scene.layout.BorderPane;
  * BaseScreen extension class that displays safe-zone screen.
  */
 
-public class SafeZoneScreen extends BaseScreen{
+public class SafeZoneScreen extends BaseScreen implements Observer {
 
     @Override
     protected Scene buildScene() {
@@ -41,5 +43,10 @@ public class SafeZoneScreen extends BaseScreen{
     @Override
     public void onLeave() {
         System.out.println("Left safe-zone screen");
+    }
+
+    @Override
+    public void update() {
+
     }
 }

@@ -1,6 +1,11 @@
 package en.fluffyBerserk.logic.objects;
 
+/**
+ * Interface for objects
+ */
+
+
 public interface HasName {
 
-    public String getName();
+    String getName();
 }

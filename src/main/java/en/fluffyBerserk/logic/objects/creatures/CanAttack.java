@@ -1,6 +1,10 @@
 package en.fluffyBerserk.logic.objects.creatures;
 
+/**
+ * Interface for creatures that can attack
+ */
+
 public interface CanAttack {
 
-    public void attack(Creature creature);
+    void attack(Creature creature);
 }

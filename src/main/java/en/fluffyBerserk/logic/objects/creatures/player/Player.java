@@ -1,10 +1,79 @@
 package en.fluffyBerserk.logic.objects.creatures.player;
 
+import en.fluffyBerserk.gui.animations.MovableEntityAnimations;
+import en.fluffyBerserk.gui.utils.Observer;
+import en.fluffyBerserk.gui.utils.SubjectOfChange;
+import en.fluffyBerserk.invariables.Direction;
+import en.fluffyBerserk.invariables.Sprites;
 import en.fluffyBerserk.logic.objects.creatures.CanAttack;
+import en.fluffyBerserk.logic.objects.creatures.CanDie;
 import en.fluffyBerserk.logic.objects.creatures.CanShoot;
 import en.fluffyBerserk.logic.objects.creatures.Creature;
+import javafx.scene.image.Image;
 
-public class Player extends Creature implements CanShoot, CanAttack {
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+public class Player extends Creature implements CanShoot, CanAttack, CanDie, SubjectOfChange {
+
+    private int hp;
+    private boolean isAlive;
+    private int positionX;
+    private int positionY;
+    private Image[] currentSprite;
+    private Direction currentDirection;
+    private MovableEntityAnimations playerAnimations;
+    private final Set<Observer> observers = new HashSet<>();
+
+    public Player(int positionX, int positionY){
+        this.positionX = positionX;
+        this.positionY = positionY;
+        this.isAlive = true;
+
+        init();
+    }
+
+    private void init() {
+        playerAnimations = new MovableEntityAnimations(this, Sprites.fluf1);
+        currentSprite = playerAnimations.getIdle();
+    }
+
+    private void setCurrentSprite(Image[] sprite){
+        if (sprite != null){
+            currentSprite = sprite;
+        } else {
+            System.out.println("Missing sprite!");
+        }
+    }
+
+    @Override
+    public void move(int steps, Direction direction) {
+        if (steps == 0 && !Arrays.equals(currentSprite, playerAnimations.getIdle())){
+            setCurrentSprite(playerAnimations.getIdle());
+            notifyObservers();
+        } else {
+            switch (direction) {
+                case DOWN:
+                    setCurrentSprite(playerAnimations.getMoveDown());
+                    currentDirection = Direction.UP;
+                    break;
+                case LEFT:
+                    setCurrentSprite(playerAnimations.getMoveLeft());
+                    currentDirection = Direction.LEFT;
+                    break;
+                case RIGHT:
+                    setCurrentSprite(playerAnimations.getMoveRight());
+                    currentDirection = Direction.RIGHT;
+                    break;
+                case UP:
+                    setCurrentSprite(playerAnimations.getMoveUp());
+                    currentDirection = Direction.UP;
+            }
+            notifyObservers();
+        }
+    }
+
 
     @Override
     public String getImagePath() {
@@ -24,5 +93,33 @@ public class Player extends Creature implements CanShoot, CanAttack {
     @Override
     public void shoot() {
         // TODO
+    }
+
+
+    @Override
+    public void die() {
+
+    }
+
+    @Override
+    public int looseHP(int dmg) {
+        return 0;
+    }
+
+    @Override
+    public void registerObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void unregisterObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer observer : observers) {
+            observer.update();
+        }
     }
 }

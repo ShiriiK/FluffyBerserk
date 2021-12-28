@@ -1,14 +1,19 @@
 package en.fluffyBerserk.logic.objects;
 
+/**
+ * Interface for static objects
+ */
+
+
 public interface Object {
 
-    public void setX(float x);
+    void setX(float x);
 
-    public void setY(float y);
+   void setY(float y);
 
-    public float getX();
+    float getX();
 
-    public float getY();
+    float getY();
 
-    public String getImagePath();
+    String getImagePath();
 }

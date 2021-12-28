@@ -1,14 +1,23 @@
 package en.fluffyBerserk.logic.objects;
 
+import en.fluffyBerserk.invariables.Direction;
+
+/**
+ * Interface for movable objects
+ */
+
+
 public interface MovableObject {
 
-    public void setMoveX(float moveX);
+    void move(int steps, Direction direction);
 
-    public void setMoveY(float moveY);
+    void setMoveX(float moveX);
 
-    public float getMoveX();
+    void setMoveY(float moveY);
 
-    public float getMoveY();
+    float getMoveX();
 
-    public void move();
+    float getMoveY();
+
+    void move();
 }

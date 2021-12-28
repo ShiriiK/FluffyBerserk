@@ -1,5 +1,9 @@
 package en.fluffyBerserk.logic.objects;
 
+/**
+ * Abstract class for all static objects
+ */
+
 public abstract class Entity implements Object {
 
     private float x;
