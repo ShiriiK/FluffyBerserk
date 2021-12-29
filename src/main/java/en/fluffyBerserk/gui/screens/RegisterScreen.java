@@ -4,7 +4,6 @@ import en.fluffyBerserk.Main;
 import en.fluffyBerserk.form.RegisterForm;
 import en.fluffyBerserk.persistence.InsertTask;
 import en.fluffyBerserk.persistence.SelectTask;
-import en.fluffyBerserk.persistence.SelectTaskQuery;
 import en.fluffyBerserk.persistence.models.User;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,7 +14,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 public class RegisterScreen extends BaseScreen {
@@ -97,7 +95,7 @@ public class RegisterScreen extends BaseScreen {
             User user = new User();
             user.setUsername(form.getUsername());
             user.setPassword(form.getPassword());
-            user.setIsAdmin((byte)0);
+            user.setIsAdmin((byte) 0);
 
             user = new InsertTask<User>().insert(user);
 

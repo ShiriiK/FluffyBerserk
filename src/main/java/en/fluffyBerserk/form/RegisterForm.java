@@ -2,9 +2,7 @@ package en.fluffyBerserk.form;
 
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
-
-public class RegisterForm {
+public final class RegisterForm extends Form {
 
     @Nullable
     private String username = null;
@@ -14,8 +12,6 @@ public class RegisterForm {
 
     @Nullable
     private String passwordConfirm = null;
-
-    private final Map<String, List<String>> errors = new HashMap<>();
 
     public @Nullable String getUsername() {
         return username;
@@ -39,26 +35,6 @@ public class RegisterForm {
 
     public void setPasswordConfirm(@Nullable String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
-    }
-
-    public void addError(String field, String... error) {
-        List<String> currentErrors = errors.containsKey(field) ? errors.get(field) : new ArrayList<>();
-
-        currentErrors.addAll(Arrays.asList(error));
-
-        errors.put(field, currentErrors);
-    }
-
-    public void clearErrors() {
-        errors.clear();
-    }
-
-    public Map<String, List<String>> getErrors() {
-        return errors;
-    }
-
-    public List<String> getErrorsForField(String field) {
-        return errors.containsKey(field) ? errors.get(field) : new ArrayList<>();
     }
 
     public boolean validate() {
