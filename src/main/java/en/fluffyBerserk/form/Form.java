@@ -27,10 +27,6 @@ abstract public class Form {
         errors.clear();
     }
 
-    public @NotNull Map<String, List<String>> getErrors() {
-        return errors;
-    }
-
     /**
      * Gets errors list for specific field
      *
