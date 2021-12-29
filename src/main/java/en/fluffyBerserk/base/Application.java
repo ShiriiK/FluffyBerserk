@@ -103,8 +103,10 @@ public final class Application {
         }
     }
 
-    public void redrawScene(Scene scene) {
-        primaryStage.setScene(scene);
+    public void redrawScene() {
+        if (currentScreen != null) {
+            primaryStage.setScene(currentScreen.getScene());
+        }
     }
 
     public void login(@NotNull User user) {

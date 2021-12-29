@@ -71,7 +71,7 @@ public class RegisterScreen extends BaseScreen {
             form.clearErrors();
 
             if (!form.validate()) {
-                Main.app.redrawScene(buildScene());
+                Main.app.redrawScene();
                 return;
             }
 
