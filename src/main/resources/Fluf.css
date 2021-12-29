@@ -1,0 +1,37 @@
+.root{
+    -fx-font-family: Garamond;
+    -fx-font-size: 25;
+    -fx-background-color: rgb(19, 29, 32);
+}
+.popup {
+    -fx-background-color: transparent;
+    -fx-border-width: 5;
+    -fx-pref-width: 200;
+    -fx-pref-height: 500;
+}
+.button{
+    -fx-background-color: rgba(191, 191, 191, 0.6);
+    -fx-border-color: rgb(13, 13, 13);
+    -fx-font-size: 20;
+    -fx-pref-width: 200;
+    -fx-max-width: 300;
+}
+.button:hover{
+    -fx-background-color: rgba(65, 74, 77,0.6);
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-effect: dropshadow(one-pass-box,gray,20,0.0,15,-2);
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-font-size: 20;
+    -fx-padding: 10 20 10 20;
+}
+.vbox{
+    -fx-pref-width: 300;
+    -fx-pref-height: 500;
+    -fx-spacing: 5;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-padding: 20,20,20,20;
+}

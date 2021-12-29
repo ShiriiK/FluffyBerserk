@@ -1,5 +1,6 @@
-package en.fluffyBerserk.base;
+package en.fluffyBerserk;
 
+import en.fluffyBerserk.gui.screens.HomeScreen;
 import javafx.stage.Stage;
 import en.fluffyBerserk.base.Application;
 
@@ -16,6 +17,6 @@ public final class Main extends javafx.application.Application {
 
     @Override
     public void start(Stage primaryStage) {
-        (app = new Application(primaryStage)).start();
+        (app = new Application(primaryStage)).start(new HomeScreen());
     }
 }

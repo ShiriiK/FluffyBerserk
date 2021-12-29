@@ -1,6 +1,6 @@
 package en.fluffyBerserk.base;
 
-import en.fluffyBerserk.gui.screens.HomeScreen;
+import en.fluffyBerserk.persistence.models.User;
 import javafx.scene.effect.GaussianBlur;
 import javafx.stage.*;
 import en.fluffyBerserk.gui.popups.PopUp;
@@ -19,12 +19,12 @@ public final class Application {
     @Nullable
     private PopUp currentPopUp;
 
+    @Nullable
+    private User user;
+
     public Application(@NotNull Stage stage) {
         primaryStage = stage;
         init();
-
-        // Set default screen
-        this.changeScreen(new HomeScreen());
     }
 
     public void init() {
@@ -33,7 +33,8 @@ public final class Application {
         primaryStage.setWidth(500.0);
     }
 
-    public void start() {
+    public void start(Screen defaultScreen) {
+        this.changeScreen(defaultScreen);
         primaryStage.show();
     }
 
@@ -70,10 +71,8 @@ public final class Application {
         }
 
         popUp.onShow();
-
         setCurrentPopUp(popUp);
 
-        popUp.getPopUpStage().show();
 
         if (currentScreen != null) { // Add gaussian blur effect
             currentScreen.getScene().getRoot().setEffect(new GaussianBlur());
@@ -89,13 +88,38 @@ public final class Application {
         }
 
         currentPopUp.onHide();
-        currentPopUp.getPopUpStage().hide();
+        currentPopUp.getPopUp().hide();
 
         setCurrentPopUp(null);
 
         if (currentScreen != null) { // Remove gaussian blur effect
             currentScreen.getScene().getRoot().setEffect(null);
         }
+    }
+
+    /**
+     * Redraws current scene from current screen
+     */
+    public void redrawScene() {
+        if (currentScreen != null) {
+            primaryStage.setScene(currentScreen.getScene());
+        }
+    }
+
+    public void login(@NotNull User user) {
+        this.user = user;
+    }
+
+    public void logout() {
+        this.user = null;
+    }
+
+    public boolean isUserLoggedIn() {
+        return user != null;
+    }
+
+    public @Nullable User getUser() {
+        return user;
     }
 
     /**

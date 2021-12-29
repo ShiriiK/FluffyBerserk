@@ -10,16 +10,11 @@ import javafx.scene.web.WebView;
 public final class PopUpHelp extends BasePopUp {
 
     @Override
-    protected String getPopUpTitle() {
-        return "Test pop-up 2";
-    }
-
-    @Override
     protected void initPopUpStage() {
         WebView view = new WebView();
         view.getEngine().load(getClass().getResource("/other/help.html").toExternalForm());
 
-        popUpStage.setScene(new Scene(view));
+        popup.getContent().add(view);
     }
 
     @Override

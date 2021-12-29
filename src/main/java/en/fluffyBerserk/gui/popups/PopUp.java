@@ -1,6 +1,5 @@
 package en.fluffyBerserk.gui.popups;
-
-import javafx.stage.Stage;
+import javafx.stage.Popup;
 
 /**
  * Interface for pop-up implemented by BasePopUp
@@ -8,8 +7,8 @@ import javafx.stage.Stage;
 
 public interface PopUp {
 
-    // Returns pop-up stage -> currently used for hiding and showing of pop-up
-    Stage getPopUpStage();
+    // Returns pop-up
+    Popup getPopUp();
 
     // Message for console
     void onShow();

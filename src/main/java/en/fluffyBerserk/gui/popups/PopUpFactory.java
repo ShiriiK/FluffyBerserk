@@ -7,16 +7,14 @@ import en.fluffyBerserk.gui.screens.SaveSlotsScreen;
 import en.fluffyBerserk.logic.Game;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
 
-/**
- * BasePopUp extension class that displays menu.
- */
+public class PopUpFactory {
 
-public final class PopUpMenu extends BasePopUp {
-
-    @Override
-    protected void initPopUpStage() {
-        VBox buttons = new VBox();
+    public static Popup getPopUpMenu(){
+        VBox vBox = new VBox();
+        Popup popup = new Popup();
+        popup.setAutoHide(true);
 
         Button resumeButton = new Button("Resume");
         resumeButton.setOnAction(event -> Main.app.hidePopUp());
@@ -30,27 +28,21 @@ public final class PopUpMenu extends BasePopUp {
         editButton.setOnAction(event -> Main.app.changeScreen(new EditScreen(new Game())));
 
         Button helpButton = new Button("Help");
-        helpButton.setOnAction(event -> Main.app.showPopUp(new PopUpHelp()));
 
         Button logoutButton = new Button("Logout");
-        logoutButton.setOnAction(event -> Main.app.changeScreen(new LoginScreen()));
+        logoutButton.setOnAction(event ->{
+            Main.app.changeScreen(new LoginScreen());
+            popup.hide();
+        });
 
         Button deleteSaveButton = new Button("Delete save");
         Button deleteAccountButton = new Button("Delete account");
 
-        buttons.getChildren().addAll(resumeButton, saveButton, loadButton, editButton, helpButton, logoutButton, deleteSaveButton, deleteAccountButton);
-        buttons.getStyleClass().add("vbox");
+        vBox.getChildren().addAll(resumeButton,saveButton,loadButton,editButton,helpButton,logoutButton,deleteSaveButton,deleteAccountButton);
 
-        popup.getContent().add(buttons);
-    }
+        vBox.getStyleClass().add("vbox");
+        popup.getContent().add(vBox);
+        return popup;
+    };
 
-    @Override
-    public void onShow() {
-        System.out.println("Menu shown");
-    }
-
-    @Override
-    public void onHide() {
-        System.out.println("Menu hidden");
-    }
 }
