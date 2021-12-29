@@ -3,6 +3,7 @@ package en.fluffyBerserk.gui.screens;
 import en.fluffyBerserk.form.LoginForm;
 import en.fluffyBerserk.persistence.SelectTask;
 import en.fluffyBerserk.persistence.models.User;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,6 +23,8 @@ public final class LoginScreen extends BaseScreen {
     @Override
     protected Scene buildScene() {
         VBox root = new VBox();
+        root.setPadding(new Insets(15, 15, 15, 15));
+        root.setSpacing(15.0);
 
         TextField usernameField = new TextField(form.getUsername());
         usernameField.setPromptText("Enter username");

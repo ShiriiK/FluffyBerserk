@@ -40,14 +40,23 @@ public final class SaveSlotsScreen extends BaseScreen {
         Button deleteSave = new Button("Delete Save"); // TODO
         Button deleteAccount = new Button("Delete Account"); // TODO
 
-        Button cancel = new Button("Cancel");
-        cancel.setOnAction(event -> {
+        Button logOutButton = new Button("Log out");
+        logOutButton.setOnAction(event -> {
+            Main.app.logout();
             Main.app.changeScreen(new HomeScreen());
         });
 
         root.setAlignment(Pos.CENTER);
         root.setSpacing(20);
-        root.getChildren().addAll(saveSlot1, saveSlot2, saveSlot3, loadSave, deleteSave, deleteAccount, cancel);
+        root.getChildren().addAll(
+                saveSlot1,
+                saveSlot2,
+                saveSlot3,
+                loadSave,
+                deleteSave,
+                deleteAccount,
+                logOutButton
+        );
 
         return new Scene(root);
     }
