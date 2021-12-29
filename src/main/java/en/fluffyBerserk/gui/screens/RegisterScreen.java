@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.TypedQuery;
+import java.security.SecureRandom;
 
 public final class RegisterScreen extends BaseScreen {
 
@@ -97,7 +98,7 @@ public final class RegisterScreen extends BaseScreen {
                 return;
             }
 
-            PasswordEncoder encoder = new BCryptPasswordEncoder();
+            PasswordEncoder encoder = new BCryptPasswordEncoder(16, new SecureRandom());
 
             User user = new User();
             user.setUsername(form.getUsername());
