@@ -14,6 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.TypedQuery;
 
@@ -95,9 +97,11 @@ public final class RegisterScreen extends BaseScreen {
                 return;
             }
 
+            PasswordEncoder encoder = new BCryptPasswordEncoder();
+
             User user = new User();
             user.setUsername(form.getUsername());
-            user.setPassword(form.getPassword());
+            user.setPassword(encoder.encode(form.getPassword()));
             user.setIsAdmin((byte) 0);
 
             user = new InsertTask<User>().insert(user);

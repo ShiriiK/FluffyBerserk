@@ -13,6 +13,8 @@ import javafx.scene.layout.VBox;
 import en.fluffyBerserk.Main;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.TypedQuery;
 
@@ -66,21 +68,27 @@ public final class LoginScreen extends BaseScreen {
                 return;
             }
 
-            User existingUser = new SelectTask<User>().singleNamedQuery(manager -> {
+            User user = new SelectTask<User>().singleNamedQuery(manager -> {
                 TypedQuery<User> query = manager.createNamedQuery("User.byUsername", User.class);
                 query.setParameter(1, form.getUsername());
                 return query;
             });
 
-            if (existingUser == null) {
+            if (user == null) {
                 form.addError("username", "User with this username does not exist!");
                 Main.app.redrawScene();
                 return;
             }
 
-            // check password
+            // Check password hash
+            PasswordEncoder encoder = new BCryptPasswordEncoder();
+            if (!encoder.matches(form.getPassword(), user.getPassword())) {
+                form.addError("password", "Password is wrong!");
+                Main.app.redrawScene();
+                return;
+            }
 
-            Main.app.login(existingUser);
+            Main.app.login(user);
             Main.app.changeScreen(new SaveSlotsScreen());
         });
 
