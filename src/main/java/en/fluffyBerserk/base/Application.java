@@ -1,6 +1,8 @@
 package en.fluffyBerserk.base;
 
 import en.fluffyBerserk.gui.screens.HomeScreen;
+import en.fluffyBerserk.persistence.models.User;
+import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
 import javafx.stage.*;
 import en.fluffyBerserk.gui.popups.PopUp;
@@ -18,6 +20,9 @@ public final class Application {
 
     @Nullable
     private PopUp currentPopUp;
+
+    @Nullable
+    private User user;
 
     public Application(@NotNull Stage stage) {
         primaryStage = stage;
@@ -96,6 +101,26 @@ public final class Application {
         if (currentScreen != null) { // Remove gaussian blur effect
             currentScreen.getScene().getRoot().setEffect(null);
         }
+    }
+
+    public void redrawScene(Scene scene) {
+        primaryStage.setScene(scene);
+    }
+
+    public void login(@NotNull User user) {
+        this.user = user;
+    }
+
+    public void logout() {
+        this.user = null;
+    }
+
+    public boolean isUserLoggedIn() {
+        return user != null;
+    }
+
+    public @Nullable User getUser() {
+        return user;
     }
 
     /**

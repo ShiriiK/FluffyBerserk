@@ -1,6 +1,5 @@
 package en.fluffyBerserk.gui.screens;
 
-import en.fluffyBerserk.logic.objects.creatures.player.Player;
 import javafx.scene.Scene;
 
 /**
@@ -9,17 +8,9 @@ import javafx.scene.Scene;
 
 public abstract class BaseScreen implements Screen {
 
-    protected final Scene scene;
-
-    // Structure of BaseScreen
-    public BaseScreen() {
-        // Defines scene
-        scene = buildScene();
-    }
-
     @Override
     public Scene getScene() {
-        return scene;
+        return buildScene();
     }
 
     // Abstract methods used in classes extending this class
