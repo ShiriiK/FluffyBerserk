@@ -1,8 +1,6 @@
 package en.fluffyBerserk.base;
 
-import en.fluffyBerserk.gui.screens.HomeScreen;
 import en.fluffyBerserk.persistence.models.User;
-import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
 import javafx.stage.*;
 import en.fluffyBerserk.gui.popups.PopUp;
@@ -27,9 +25,6 @@ public final class Application {
     public Application(@NotNull Stage stage) {
         primaryStage = stage;
         init();
-
-        // Set default screen
-        this.changeScreen(new HomeScreen());
     }
 
     public void init() {
@@ -38,7 +33,8 @@ public final class Application {
         primaryStage.setWidth(500.0);
     }
 
-    public void start() {
+    public void start(Screen defaultScreen) {
+        this.changeScreen(defaultScreen);
         primaryStage.show();
     }
 

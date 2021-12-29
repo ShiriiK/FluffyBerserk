@@ -57,11 +57,8 @@ public final class HomeScreen extends BaseScreen {
 
     @Override
     public void onEnter() {
-        System.out.println("Entered home screen");
-    }
-
-    @Override
-    public void onLeave() {
-        System.out.println("Left home screen");
+        if (Main.app.isUserLoggedIn()) {
+            throw new RuntimeException("Logged in user cannot go to home screen!");
+        }
     }
 }

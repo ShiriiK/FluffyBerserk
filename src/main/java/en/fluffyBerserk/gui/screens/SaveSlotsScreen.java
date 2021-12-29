@@ -7,16 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
-/**
- * BaseScreen extension class that displays save slot screen.
- */
-
-public class SaveSlotsScreen extends BaseScreen{
-    private String string;
+public final class SaveSlotsScreen extends BaseScreen {
 
     @Override
     protected Scene buildScene() {
-        string = null;
         VBox root = new VBox();
 
         Button saveSlot1 = new Button("Empty Save");
@@ -30,15 +24,12 @@ public class SaveSlotsScreen extends BaseScreen{
         saveSlot3.setStyle("-fx-font-size: 32");
 
         saveSlot1.setOnAction(event -> {
-            string = "saveSlot1";
         });
 
         saveSlot2.setOnAction(event -> {
-            string = "saveSlot2";
         });
 
         saveSlot3.setOnAction(event -> {
-            string = "saveSlot3";
         });
 
         Button loadSave = new Button("Load Save"); // TODO needs to actually make difference between loaded saves
@@ -58,22 +49,13 @@ public class SaveSlotsScreen extends BaseScreen{
         root.setSpacing(20);
         root.getChildren().addAll(saveSlot1, saveSlot2, saveSlot3, loadSave, deleteSave, deleteAccount, cancel);
 
-
-
         return new Scene(root);
     }
 
     @Override
     public void onEnter() {
-        {
-            System.out.println("Entered save slot screen");
-        }
-    }
-
-    @Override
-    public void onLeave() {
-        {
-            System.out.println("Left save slot screen");
+        if (!Main.app.isUserLoggedIn()) {
+            throw new RuntimeException("User must be logged in to enter save slot screen!");
         }
     }
 }

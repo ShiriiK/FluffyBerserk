@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
 
 import javax.persistence.TypedQuery;
 
-public class RegisterScreen extends BaseScreen {
+public final class RegisterScreen extends BaseScreen {
 
     private final RegisterForm form = new RegisterForm();
 
@@ -25,7 +25,7 @@ public class RegisterScreen extends BaseScreen {
         VBox root = new VBox();
 
         TextField usernameField = new TextField(form.getUsername());
-        usernameField.setPromptText("User name");
+        usernameField.setPromptText("Enter username");
         usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
             form.setUsername(newValue);
         });
@@ -87,7 +87,7 @@ public class RegisterScreen extends BaseScreen {
             });
 
             if (existingUser != null) {
-                form.addError("username", "This username is already used! Try another one!");
+                form.addError("username", "This username is already used!");
                 Main.app.redrawScene();
                 return;
             }
@@ -117,11 +117,8 @@ public class RegisterScreen extends BaseScreen {
 
     @Override
     public void onEnter() {
-        System.out.println("Entered register screen");
-    }
-
-    @Override
-    public void onLeave() {
-        System.out.println("Left register screen");
+        if (Main.app.isUserLoggedIn()) {
+            throw new RuntimeException("Logged in user cannot go to register screen!");
+        }
     }
 }
