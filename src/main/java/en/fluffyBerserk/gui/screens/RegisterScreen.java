@@ -2,6 +2,10 @@ package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.form.RegisterForm;
+import en.fluffyBerserk.persistence.InsertTask;
+import en.fluffyBerserk.persistence.SelectTask;
+import en.fluffyBerserk.persistence.SelectTaskQuery;
+import en.fluffyBerserk.persistence.models.User;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,6 +14,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 public class RegisterScreen extends BaseScreen {
 
@@ -75,6 +82,26 @@ public class RegisterScreen extends BaseScreen {
                 return;
             }
 
+            User existingUser = new SelectTask<User>().singleNamedQuery(manager -> {
+                TypedQuery<User> query = manager.createNamedQuery("User.byUsername", User.class);
+                query.setParameter(1, form.getUsername());
+                return query;
+            });
+
+            if (existingUser != null) {
+                form.addError("username", "This username is already used! Try another one!");
+                Main.app.redrawScene();
+                return;
+            }
+
+            User user = new User();
+            user.setUsername(form.getUsername());
+            user.setPassword(form.getPassword());
+            user.setIsAdmin((byte)0);
+
+            user = new InsertTask<User>().insert(user);
+
+            Main.app.login(user);
             Main.app.changeScreen(new SaveSlotsScreen());
         });
 

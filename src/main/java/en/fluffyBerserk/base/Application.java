@@ -103,6 +103,9 @@ public final class Application {
         }
     }
 
+    /**
+     * Redraws current scene from current screen
+     */
     public void redrawScene() {
         if (currentScreen != null) {
             primaryStage.setScene(currentScreen.getScene());
