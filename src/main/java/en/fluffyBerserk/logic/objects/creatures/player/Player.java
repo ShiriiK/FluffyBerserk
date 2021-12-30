@@ -38,6 +38,10 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie, Sub
         setX(100);
         setHp(100);
         setStr(20);
+        setArmor(20);
+        setIntelllect(20);
+        setStamina(20);
+        setLevel(1);
         init();
     }
 

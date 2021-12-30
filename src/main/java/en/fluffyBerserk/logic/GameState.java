@@ -3,6 +3,7 @@ package en.fluffyBerserk.logic;
 import en.fluffyBerserk.gui.utils.Observer;
 import en.fluffyBerserk.gui.utils.SubjectOfChange;
 import en.fluffyBerserk.logic.objects.creatures.player.Player;
+import en.fluffyBerserk.logic.objects.items.armor.Armor;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -10,16 +11,17 @@ import java.util.Set;
 
 public class GameState implements SubjectOfChange {
     private final Inventory inventory;
-    private final Player player;
+    public static Player player;
     private Location currentLocation;
     private int phase;
     private final Set<Observer> observers = new HashSet<>();
+    private final String[] armorType = {"boots", "pants", "body", "head"};
 
     public GameState(){
-        createGame();
         player = new Player(null);
         inventory = new Inventory();
         phase = 1;
+        createGame();
     }
 
     public void createGame(){
@@ -36,6 +38,25 @@ public class GameState implements SubjectOfChange {
         level1.addExits(Arrays.asList(safeLocation, endlessModeLocation, level2, level3));
         level2.addExits(Arrays.asList(safeLocation, endlessModeLocation, level1, level3));
         level3.addExits(Arrays.asList(safeLocation, endlessModeLocation, level1, level2));
+
+        Armor head = new Armor(7,4,2,3,false,armorType[3]);
+        Armor boots = new Armor(1,2,3,6,false,armorType[0]);
+        Armor body = new Armor(8,6,9,6,false,armorType[2]);
+
+        inventory.addItem(head);
+        inventory.addItem(body);
+        inventory.addItem(boots);
+
+        inventory.equip(head);
+        inventory.equip(body);
+        inventory.equip(boots);
+
+        System.out.println("Combined str " + player.getStr());
+        System.out.println("Combined armor " + player.getArmor());
+        System.out.println("Combined stamina " + player.getStamina());
+        System.out.println("Combined intellect " + player.getIntelllect());
+
+
     }
 
     public Inventory getInventory() {
