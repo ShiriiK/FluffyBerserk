@@ -39,24 +39,11 @@ public class GameState implements SubjectOfChange {
         level2.addExits(Arrays.asList(safeLocation, endlessModeLocation, level1, level3));
         level3.addExits(Arrays.asList(safeLocation, endlessModeLocation, level1, level2));
 
+        //For testing
         Armor head = new Armor(7,4,2,3,false,armorType[3]);
         Armor boots = new Armor(1,2,3,6,false,armorType[0]);
         Armor body = new Armor(8,6,9,6,false,armorType[2]);
 
-        inventory.addItem(head);
-        inventory.addItem(body);
-        inventory.addItem(boots);
-
-        inventory.equip(head);
-        inventory.equip(body);
-        inventory.equip(boots);
-
-        inventory.unEquip(boots);
-
-        System.out.println("Combined str " + player.getStr());
-        System.out.println("Combined armor " + player.getArmor());
-        System.out.println("Combined stamina " + player.getStamina());
-        System.out.println("Combined intellect " + player.getIntelllect());
 
 
     }

@@ -1,10 +1,5 @@
 package en.fluffyBerserk.logic.objects.items.armor;
 
-import en.fluffyBerserk.Main;
-import en.fluffyBerserk.logic.Game;
-import en.fluffyBerserk.logic.GameState;
-import en.fluffyBerserk.logic.objects.creatures.player.Player;
-import en.fluffyBerserk.logic.objects.items.PickableItem;
 import en.fluffyBerserk.logic.objects.items.WearableItem;
 
 public class Armor extends WearableItem {
