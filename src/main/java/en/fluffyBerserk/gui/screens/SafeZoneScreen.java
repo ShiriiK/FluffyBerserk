@@ -31,12 +31,13 @@ public class SafeZoneScreen extends BaseScreen implements Observer {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode() == KeyCode.ESCAPE) {
-
-                    popup.show(Main.app.getPrimaryStage());
                     double x = Main.app.getPrimaryStage().getX() + 0.5*(Main.app.getPrimaryStage().getWidth()-300);
                     popup.setX(x);
+
                     double y  = Main.app.getPrimaryStage().getY() + 0.5*(Main.app.getPrimaryStage().getHeight()-500);
                     popup.setY(y);
+
+                    popup.show(Main.app.getPrimaryStage());
                 }
             }
         });

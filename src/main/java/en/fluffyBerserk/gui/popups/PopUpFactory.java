@@ -5,16 +5,28 @@ import en.fluffyBerserk.gui.screens.EditScreen;
 import en.fluffyBerserk.gui.screens.LoginScreen;
 import en.fluffyBerserk.gui.screens.SaveSlotsScreen;
 import en.fluffyBerserk.logic.Game;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebView;
 import javafx.stage.Popup;
 
+import java.awt.event.MouseEvent;
+
 public class PopUpFactory {
+        private static Popup popup = new Popup();
+
+    private static void init(){
+        popup.getContent().clear();
+        popup.setAutoHide(true);
+        popup.setAutoFix(true);
+    }
+
 
     public static Popup getPopUpMenu(){
+        init();
         VBox vBox = new VBox();
-        Popup popup = new Popup();
-        popup.setAutoHide(true);
 
         Button resumeButton = new Button("Resume");
         resumeButton.setOnAction(event -> Main.app.hidePopUp());
@@ -45,4 +57,11 @@ public class PopUpFactory {
         return popup;
     };
 
+    public static Popup getPopUpHelp(){
+        WebView view = new WebView();
+        view.getEngine().load("/other/help.html");
+
+        popup.getContent().add(view);
+        return popup;
+    }
 }
