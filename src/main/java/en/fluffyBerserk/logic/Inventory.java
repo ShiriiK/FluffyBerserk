@@ -50,6 +50,7 @@ public class Inventory implements SubjectOfChange {
     }
 
     // Equips selected item and applies it's stats
+    //TODO item slots
     public void equip(Item item){
         if (item instanceof Armor){
             ((Armor) item).setEquiped(true);
@@ -59,11 +60,12 @@ public class Inventory implements SubjectOfChange {
             int intellect = ((Armor) item).getIntelllect();
 
             Player player = GameState.player;
-            int newStr = str + player.getStr();
 
+            int newStr = str + player.getStr();
             int newArmor = armor + player.getArmor();
             int newStamina = stamina + player.getStamina();
             int newIntellect = intellect + player.getIntelllect();
+
             player.setStr(newStr);
             player.setArmor(newArmor);
             player.setStamina(newStamina);
@@ -71,6 +73,28 @@ public class Inventory implements SubjectOfChange {
         }
     }
 
+    //Uneuips selected item and changes player's stats accordingly
+    public void unEquip(Item item){
+        if (item instanceof Armor && ((Armor) item).isEquiped()){
+            ((Armor) item).setEquiped(false);
+            Player player = GameState.player;
+
+            int str = ((Armor) item).getStr();
+            int armor = ((Armor) item).getArmor();
+            int stamina = ((Armor) item).getStamina();
+            int intellect = ((Armor) item).getIntelllect();
+
+            int newStr = player.getStr() - str;
+            int newArmor = player.getArmor() - armor;
+            int newStamina = player.getStamina() - stamina;
+            int newIntellect = player.getIntelllect() - intellect;
+
+            player.setStr(newStr);
+            player.setArmor(newArmor);
+            player.setStamina(newStamina);
+            player.setIntelllect(newIntellect);
+        }
+    }
 
     // Return a reference to an item by its name
     public Item getItem(String name) {

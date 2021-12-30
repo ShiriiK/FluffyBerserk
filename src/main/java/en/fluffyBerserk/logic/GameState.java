@@ -51,6 +51,8 @@ public class GameState implements SubjectOfChange {
         inventory.equip(body);
         inventory.equip(boots);
 
+        inventory.unEquip(boots);
+
         System.out.println("Combined str " + player.getStr());
         System.out.println("Combined armor " + player.getArmor());
         System.out.println("Combined stamina " + player.getStamina());
