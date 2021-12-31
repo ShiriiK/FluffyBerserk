@@ -1,15 +1,23 @@
 package en.fluffyBerserk.logic.objects.creatures.player;
 
+import en.fluffyBerserk.base.GamePanel;
 import en.fluffyBerserk.gui.animations.MovableEntityAnimations;
+import en.fluffyBerserk.gui.gamecontroller.KeyPressHandler;
+import en.fluffyBerserk.gui.gamecontroller.KeyReleaseHandler;
 import en.fluffyBerserk.gui.utils.LocateImage;
 import en.fluffyBerserk.invariables.Direction;
+import en.fluffyBerserk.invariables.Invariables;
 import en.fluffyBerserk.invariables.Sprites;
 import en.fluffyBerserk.logic.objects.creatures.CanAttack;
 import en.fluffyBerserk.logic.objects.creatures.CanDie;
 import en.fluffyBerserk.logic.objects.creatures.CanShoot;
 import en.fluffyBerserk.logic.objects.creatures.Creature;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,6 +26,10 @@ import java.util.Set;
  * Class representing players.
  */
 public class Player extends Creature implements CanShoot, CanAttack, CanDie{
+
+    private final GamePanel gamePanel;
+    private final KeyPressHandler keyPressHandler;
+    private final KeyReleaseHandler keyReleaseHandler;
 
     private String playerName;
     private boolean isAlive;
@@ -28,20 +40,25 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie{
     private MovableEntityAnimations playerAnimations;
 
     // Constructor
-    public Player(String playerName){
-        this.playerName = playerName;
+    public Player(GamePanel gamePanel, KeyReleaseHandler keyReleaseHandler, KeyPressHandler keyPressHandler){
+        this.gamePanel = gamePanel;
+        this.keyReleaseHandler= keyReleaseHandler;
+        this.keyPressHandler = keyPressHandler;
         this.isAlive = true;
+
+        init();
+    }
+
+    private void init(){
         setY(100);
         setX(100);
         setHp(100);
         setStr(20);
-        init();
-    }
+        direction = "down";
+        counter = 0;
+        imgNumber = 1;
 
-    // Sets default sprite for animations and current sprite
-    private void init() {
         playerAnimations = new MovableEntityAnimations(this, Sprites.fluf1);
-        currentSprite = playerAnimations.getIdle();
     }
 
     // Changes sprite, which player animations are taken from (fluf1, fluf2, fluf3,...)
@@ -58,9 +75,93 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie{
         }
     }
 
-    //
+    public void update(){
+        if(keyPressHandler.UP || keyPressHandler.DOWN || keyPressHandler.LEFT || keyPressHandler.RIGHT){
+            if(keyPressHandler.UP){
+                direction = "up";
+                y -= speed;
+            }
+            else if (keyPressHandler.DOWN){
+                direction = "down";
+                y += speed;
+            }
+            else if (keyPressHandler.LEFT){
+                direction = "left";
+                x -= speed;
+            }
+            else {
+                direction = "right";
+                x += speed;
+            }
+
+            counter++;
+            if(counter > 10){ //player image changes every 10 frames
+                if(imgNumber == 1){
+                    imgNumber = 2;
+                } else if (imgNumber == 2){
+                    imgNumber = 3;
+                } else if (imgNumber == 3){
+                    imgNumber = 1;
+                }
+                counter = 0;
+            }
+        }
+
+    }
+    public void render(GraphicsContext graphicsContext) {
+        Image image = null;
+        switch (direction) {
+            case "up":
+                if (imgNumber == 1) {
+                    image = playerAnimations.getMoveUp().get(0);
+                }
+                if (imgNumber == 2) {
+                    image = playerAnimations.getMoveUp().get(1);
+                }
+                if (imgNumber == 3) {
+                    image = playerAnimations.getMoveUp().get(2);
+                }
+                break;
+            case "down":
+                if (imgNumber == 1) {
+                    image = playerAnimations.getMoveDown().get(0);
+                }
+                if (imgNumber == 2) {
+                    image = playerAnimations.getMoveDown().get(1);
+                }
+                if (imgNumber == 3) {
+                    image = playerAnimations.getMoveDown().get(2);
+                }
+                break;
+            case "left":
+                if (imgNumber == 1) {
+                    image = playerAnimations.getMoveLeft().get(0);
+                }
+                if (imgNumber == 2) {
+                    image = playerAnimations.getMoveLeft().get(1);
+                }
+                if (imgNumber == 3) {
+                    image = playerAnimations.getMoveLeft().get(2);
+                }
+                break;
+            case "right":
+                if (imgNumber == 1) {
+                    image = playerAnimations.getMoveRight().get(0);
+                }
+                if (imgNumber == 2) {
+                    image = playerAnimations.getMoveRight().get(1);
+                }
+                if (imgNumber == 3) {
+                    image = playerAnimations.getMoveRight().get(2);
+                }
+                break;
+        }
+        graphicsContext.drawImage(image, x, y, Invariables.TILE_SIZE, Invariables.TILE_SIZE);
+    }
+
     @Override
     public void move(int steps, Direction direction) {
+        /**
         if (steps == 0 && !Arrays.equals(currentSprite, playerAnimations.getIdle())){
             setCurrentSprite(playerAnimations.getIdle());
         } else {
@@ -81,7 +182,7 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie{
                     setCurrentSprite(playerAnimations.getMoveUp());
                     currentDirection = Direction.UP;
             }
-        }
+        }*/
     }
 
     public boolean isAlive() {

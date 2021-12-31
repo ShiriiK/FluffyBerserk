@@ -1,6 +1,7 @@
 package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
+import en.fluffyBerserk.base.GamePanel;
 import en.fluffyBerserk.logic.Game;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,11 +15,6 @@ import javafx.scene.layout.VBox;
  */
 
 public class EditScreen extends BaseScreen{
-    private Game game;
-
-    public EditScreen(Game game){
-        this.game = game;
-    }
 
     @Override
     protected Scene buildScene() {
@@ -32,7 +28,6 @@ public class EditScreen extends BaseScreen{
 
         saveCharacter.setOnAction(event -> {
             Main.app.changeScreen(new SafeZoneScreen());
-            Main.app.setGame(game);
         });
 
 

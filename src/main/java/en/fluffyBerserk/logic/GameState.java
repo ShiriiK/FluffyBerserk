@@ -2,18 +2,15 @@ package en.fluffyBerserk.logic;
 
 import en.fluffyBerserk.logic.objects.creatures.player.Player;
 import java.util.Arrays;
-import java.util.HashSet;
 
 public class GameState  {
     private final Inventory inventory;
-    private final Player player;
     private Location currentLocation;
     private int phase;
 
 
     public GameState(){
         createGame();
-        player = new Player(null);
         inventory = new Inventory();
         phase = 1;
     }
@@ -36,10 +33,6 @@ public class GameState  {
 
     public Inventory getInventory() {
         return inventory;
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 
     public Location getCurrentLocation() {

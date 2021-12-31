@@ -1,6 +1,7 @@
 package en.fluffyBerserk.gui.popups;
 
 import en.fluffyBerserk.Main;
+import en.fluffyBerserk.base.GamePanel;
 import en.fluffyBerserk.gui.screens.EditScreen;
 import en.fluffyBerserk.gui.screens.LoginScreen;
 import en.fluffyBerserk.gui.screens.SaveSlotsScreen;
@@ -28,7 +29,9 @@ public final class PopUpMenu extends BasePopUp {
         loadButton.setOnAction(event -> Main.app.changeScreen(new SaveSlotsScreen()));
 
         Button editButton = new Button("Edit character");
-        editButton.setOnAction(event -> Main.app.changeScreen(new EditScreen(new Game())));
+        editButton.setOnAction(event -> {
+            Main.app.changeScreen(new EditScreen());
+        });
 
         PopUpHelp popUpHelp = new PopUpHelp();
         Popup helpPopUp = popUpHelp.getPopUp();

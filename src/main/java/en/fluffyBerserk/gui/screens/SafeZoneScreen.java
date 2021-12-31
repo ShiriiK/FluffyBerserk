@@ -1,7 +1,7 @@
 package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
-import en.fluffyBerserk.gui.popups.PopUpFactory;
+import en.fluffyBerserk.base.GamePanel;
 import en.fluffyBerserk.gui.popups.PopUpMenu;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -15,11 +15,12 @@ import javafx.stage.Popup;
  */
 
 public class SafeZoneScreen extends BaseScreen {
-
     @Override
     protected Scene buildScene() {
         BorderPane root = new BorderPane();
+        GamePanel gamePanel = new GamePanel();
 
+        root.getChildren().add(gamePanel);
         Scene scene = new Scene(root);
         scene.getStylesheets().add("fluf.css");
 
@@ -39,6 +40,7 @@ public class SafeZoneScreen extends BaseScreen {
             }
         });
 
+        gamePanel.startGameThread();
         return scene;
     }
 

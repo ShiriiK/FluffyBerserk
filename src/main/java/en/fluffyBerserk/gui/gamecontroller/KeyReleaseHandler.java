@@ -1,16 +1,26 @@
 package en.fluffyBerserk.gui.gamecontroller;
 
-import javafx.scene.input.KeyCode;
+import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 
-public class KeyReleaseHandler implements javafx.event.EventHandler<KeyEvent> {
+public class KeyReleaseHandler implements EventHandler<KeyEvent> {
+    public boolean UP, LEFT, DOWN, RIGHT;
 
     @Override
-    public void handle(KeyEvent evt) {
-
-        KeyCode code = evt.getCode();
-
-        if (EventHandler.inputList.contains(code) )
-            EventHandler.inputList.remove( code );
+    public void handle(KeyEvent event) {
+        switch (event.getCode()) {
+            case W:
+                UP = false;
+                break;
+            case A:
+                LEFT = false;
+                break;
+            case S:
+                DOWN = false;
+                break;
+            case D:
+                RIGHT = false;
+                break;
+        }
     }
 }

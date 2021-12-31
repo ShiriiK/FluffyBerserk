@@ -1,7 +1,6 @@
 package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
-import en.fluffyBerserk.logic.Game;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -34,7 +33,7 @@ public final class SaveSlotsScreen extends BaseScreen {
 
         Button loadSave = new Button("Load Save"); // TODO needs to actually make difference between loaded saves
         loadSave.setOnAction(event -> {
-            Main.app.changeScreen(new EditScreen(new Game()));
+            Main.app.changeScreen(new EditScreen());
         });
 
         Button deleteSave = new Button("Delete Save"); // TODO

@@ -4,57 +4,58 @@ import en.fluffyBerserk.gui.utils.LocateImage;
 import en.fluffyBerserk.invariables.Invariables;
 import javafx.scene.image.Image;
 
+import java.util.ArrayList;
+
 public class MovableEntityAnimations {
-    public Sprite sprite;
-    public Image[] moveDown;
-    public Image[] moveLeft;
-    public Image[] moveRight;
-    public Image[] moveUp;
-    public Image[] idle;
+    public ArrayList<Image> moveDown;
+    public ArrayList<Image> moveLeft;
+    public ArrayList<Image> moveRight;
+    public ArrayList<Image> moveUp;
+    public ArrayList<Image> idle;
 
 
-    public MovableEntityAnimations(Object object, LocateImage sprite){
-        int w = Invariables.CELLS_SIZE;
-        int h = Invariables.CELLS_SIZE;
-        moveDown = new Image[3];
-        moveLeft = new Image[3];
-        moveRight = new Image[3];
-        moveUp = new Image[3];
-        idle = new Image[1];
+    public MovableEntityAnimations(Object object, LocateImage sprite) {
+        int w = Invariables.DEF_TILE_SIZE;
+        int h = Invariables.DEF_TILE_SIZE;
+        moveDown = new ArrayList<>(3);
+        moveLeft = new ArrayList<>(3);
+        moveRight = new ArrayList<>(3);
+        moveUp = new ArrayList<>(3);
+        idle = new ArrayList<>(1);
 
-        moveDown[0] = new Sprite(object, 0,0, w, h, sprite).getFrame();
-        moveDown[1] = new Sprite(object, w,0, w, h, sprite).getFrame();
-        moveDown[2] = new Sprite(object, w*2,0, w, h, sprite).getFrame();
-        moveLeft[0] = new Sprite(object, 0,h, w, h, sprite).getFrame();
-        moveLeft[1] = new Sprite(object, w,h, w, h, sprite).getFrame();
-        moveLeft[2] = new Sprite(object, w*2,h, w, h, sprite).getFrame();
-        moveRight[0] = new Sprite(object, 0,h*2, w, h, sprite).getFrame();
-        moveRight[1] =  new Sprite(object, w,h*2, w, h, sprite).getFrame();
-        moveRight[2] =  new Sprite(object, w*2,h*2, w, h, sprite).getFrame();
-        moveUp[0] = new Sprite(object, 0,h*3, w, h, sprite).getFrame();
-        moveUp[1] = new Sprite(object, w,h*3, w, h, sprite).getFrame();
-        moveUp[2] = new Sprite(object, w*2,h*3, w, h, sprite).getFrame();
+        moveDown.add(0, new Sprite(object, 0, 0, w, h, sprite).getFrame());
+        moveDown.add(1, new Sprite(object, w, 0, w, h, sprite).getFrame());
+        moveDown.add(2, new Sprite(object, w * 2, 0, w, h, sprite).getFrame());
+        moveLeft.add(0, new Sprite(object, 0, h, w, h, sprite).getFrame());
+        moveLeft.add(1, new Sprite(object, w, h, w, h, sprite).getFrame());
+        moveLeft.add(2, new Sprite(object, w * 2, h, w, h, sprite).getFrame());
+        moveRight.add(0, new Sprite(object, 0, h * 2, w, h, sprite).getFrame());
+        moveRight.add(1, new Sprite(object, w, h * 2, w, h, sprite).getFrame());
+        moveRight.add(2, new Sprite(object, w * 2, h * 2, w, h, sprite).getFrame());
+        moveUp.add(0, new Sprite(object, 0, h * 3, w, h, sprite).getFrame());
+        moveUp.add(1, new Sprite(object, w, h * 3, w, h, sprite).getFrame());
+        moveUp.add(2, new Sprite(object, w * 2, h * 3, w, h, sprite).getFrame());
 
-        idle[0] = moveDown[1];
+        idle.add(0, moveDown.get(1));
     }
 
-    public Image[] getMoveDown(){
+    public ArrayList<Image> getMoveDown() {
         return moveDown;
     }
 
-    public Image[] getMoveLeft(){
+    public ArrayList<Image> getMoveLeft() {
         return moveLeft;
     }
 
-    public Image[] getMoveRight(){
+    public ArrayList<Image> getMoveRight() {
         return moveRight;
     }
 
-    public Image[] getMoveUp(){
+    public ArrayList<Image> getMoveUp() {
         return moveUp;
     }
 
-    public Image[] getIdle(){
+    public ArrayList<Image> getIdle() {
         return idle;
     }
 }
