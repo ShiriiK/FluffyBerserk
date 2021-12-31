@@ -2,8 +2,6 @@ package en.fluffyBerserk.logic.objects.creatures.player;
 
 import en.fluffyBerserk.gui.animations.MovableEntityAnimations;
 import en.fluffyBerserk.gui.utils.LocateImage;
-import en.fluffyBerserk.gui.utils.Observer;
-import en.fluffyBerserk.gui.utils.SubjectOfChange;
 import en.fluffyBerserk.invariables.Direction;
 import en.fluffyBerserk.invariables.Sprites;
 import en.fluffyBerserk.logic.objects.creatures.CanAttack;
@@ -19,7 +17,7 @@ import java.util.Set;
 /**
  * Class representing players.
  */
-public class Player extends Creature implements CanShoot, CanAttack, CanDie, SubjectOfChange {
+public class Player extends Creature implements CanShoot, CanAttack, CanDie{
 
     private String playerName;
     private boolean isAlive;
@@ -28,7 +26,6 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie, Sub
     private Image[] currentSprite;
     private Direction currentDirection;
     private MovableEntityAnimations playerAnimations;
-    private final Set<Observer> observers = new HashSet<>();
 
     // Constructor
     public Player(String playerName){
@@ -66,7 +63,6 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie, Sub
     public void move(int steps, Direction direction) {
         if (steps == 0 && !Arrays.equals(currentSprite, playerAnimations.getIdle())){
             setCurrentSprite(playerAnimations.getIdle());
-            notifyObservers();
         } else {
             switch (direction) {
                 case DOWN:
@@ -85,7 +81,6 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie, Sub
                     setCurrentSprite(playerAnimations.getMoveUp());
                     currentDirection = Direction.UP;
             }
-            notifyObservers();
         }
     }
 
@@ -127,22 +122,5 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie, Sub
     @Override
     public int looseHP(int dmg) {
         return 0;
-    }
-
-    @Override
-    public void registerObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void unregisterObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (Observer observer : observers) {
-            observer.update();
-        }
     }
 }

@@ -1,5 +1,6 @@
 package en.fluffyBerserk.base;
 
+import en.fluffyBerserk.logic.Game;
 import en.fluffyBerserk.persistence.models.User;
 import javafx.scene.effect.GaussianBlur;
 import javafx.stage.*;
@@ -21,6 +22,7 @@ public final class Application {
 
     @Nullable
     private User user;
+    private Game game;
 
     public Application(@NotNull Stage stage) {
         primaryStage = stage;
@@ -137,5 +139,13 @@ public final class Application {
 
         // Change the screen on primary stage
         primaryStage.setScene(currentScreen.getScene());
+    }
+
+    public Game getGame(){
+        return game;
+    }
+
+    public void setGame(Game game){
+        this.game = game;
     }
 }

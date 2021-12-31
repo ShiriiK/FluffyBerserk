@@ -7,6 +7,7 @@ import en.fluffyBerserk.gui.screens.SaveSlotsScreen;
 import en.fluffyBerserk.logic.Game;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
 
 /**
  * BasePopUp extension class that displays menu.
@@ -29,8 +30,16 @@ public final class PopUpMenu extends BasePopUp {
         Button editButton = new Button("Edit character");
         editButton.setOnAction(event -> Main.app.changeScreen(new EditScreen(new Game())));
 
+        PopUpHelp popUpHelp = new PopUpHelp();
+        Popup helpPopUp = popUpHelp.getPopUp();
+
         Button helpButton = new Button("Help");
-        helpButton.setOnAction(event -> Main.app.showPopUp(new PopUpHelp()));
+        helpButton.setOnAction(event -> {
+            popUpCenter.centerPopUp(helpPopUp);
+
+            Main.app.showPopUp(popUpHelp);
+            helpPopUp.show(Main.app.getPrimaryStage());
+        });
 
         Button logoutButton = new Button("Logout");
         logoutButton.setOnAction(event -> Main.app.changeScreen(new LoginScreen()));

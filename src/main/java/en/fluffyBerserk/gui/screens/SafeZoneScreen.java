@@ -3,7 +3,6 @@ package en.fluffyBerserk.gui.screens;
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.gui.popups.PopUpFactory;
 import en.fluffyBerserk.gui.popups.PopUpMenu;
-import en.fluffyBerserk.gui.utils.Observer;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -15,7 +14,7 @@ import javafx.stage.Popup;
  * BaseScreen extension class that displays safe-zone screen.
  */
 
-public class SafeZoneScreen extends BaseScreen implements Observer {
+public class SafeZoneScreen extends BaseScreen {
 
     @Override
     protected Scene buildScene() {
@@ -24,20 +23,18 @@ public class SafeZoneScreen extends BaseScreen implements Observer {
         Scene scene = new Scene(root);
         scene.getStylesheets().add("fluf.css");
 
-        Popup popup = PopUpFactory.getPopUpMenu();
+        PopUpMenu popUpMenu = new PopUpMenu();
+        Popup menuPopUp = popUpMenu.getPopUp();
 
         // Attach event on scene for displaying menu
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode() == KeyCode.ESCAPE) {
-                    double x = Main.app.getPrimaryStage().getX() + 0.5*(Main.app.getPrimaryStage().getWidth()-300);
-                    popup.setX(x);
+                    popUpCenter.centerPopUp(menuPopUp);
 
-                    double y  = Main.app.getPrimaryStage().getY() + 0.5*(Main.app.getPrimaryStage().getHeight()-500);
-                    popup.setY(y);
-
-                    popup.show(Main.app.getPrimaryStage());
+                    Main.app.showPopUp(popUpMenu);
+                    menuPopUp.show(Main.app.getPrimaryStage());
                 }
             }
         });
@@ -55,8 +52,4 @@ public class SafeZoneScreen extends BaseScreen implements Observer {
         System.out.println("Left safe-zone screen");
     }
 
-    @Override
-    public void update() {
-
-    }
 }

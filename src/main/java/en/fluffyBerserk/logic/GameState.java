@@ -1,19 +1,15 @@
 package en.fluffyBerserk.logic;
 
-import en.fluffyBerserk.gui.utils.Observer;
-import en.fluffyBerserk.gui.utils.SubjectOfChange;
 import en.fluffyBerserk.logic.objects.creatures.player.Player;
-
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
 
-public class GameState implements SubjectOfChange {
+public class GameState  {
     private final Inventory inventory;
     private final Player player;
     private Location currentLocation;
     private int phase;
-    private final Set<Observer> observers = new HashSet<>();
+
 
     public GameState(){
         createGame();
@@ -60,22 +56,5 @@ public class GameState implements SubjectOfChange {
 
     public void setPhase(int phase) {
         this.phase = phase;
-    }
-
-    @Override
-    public void registerObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void unregisterObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (Observer observer : observers) {
-            observer.update();
-        }
     }
 }

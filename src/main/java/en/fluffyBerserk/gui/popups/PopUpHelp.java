@@ -1,6 +1,5 @@
 package en.fluffyBerserk.gui.popups;
 
-import javafx.scene.Scene;
 import javafx.scene.web.WebView;
 
 /**

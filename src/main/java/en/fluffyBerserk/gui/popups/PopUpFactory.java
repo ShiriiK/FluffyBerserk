@@ -5,14 +5,11 @@ import en.fluffyBerserk.gui.screens.EditScreen;
 import en.fluffyBerserk.gui.screens.LoginScreen;
 import en.fluffyBerserk.gui.screens.SaveSlotsScreen;
 import en.fluffyBerserk.logic.Game;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 import javafx.stage.Popup;
 
-import java.awt.event.MouseEvent;
 
 public class PopUpFactory {
         private static Popup popup = new Popup();

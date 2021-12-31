@@ -29,7 +29,12 @@ public class EditScreen extends BaseScreen{
 
         // Safe-zone
         Button saveCharacter = new Button("Save character");
-        saveCharacter.setOnAction(event -> Main.app.changeScreen(new SafeZoneScreen()));
+
+        saveCharacter.setOnAction(event -> {
+            Main.app.changeScreen(new SafeZoneScreen());
+            Main.app.setGame(game);
+        });
+
 
         // Save slots
         Button cancel = new Button("Cancel");

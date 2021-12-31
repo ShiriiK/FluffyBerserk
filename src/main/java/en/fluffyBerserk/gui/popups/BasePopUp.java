@@ -1,10 +1,7 @@
 package en.fluffyBerserk.gui.popups;
 
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import en.fluffyBerserk.gui.utils.PopUpCenter;
 import javafx.stage.Popup;
-import javafx.stage.Stage;
-import en.fluffyBerserk.Main;
 import en.fluffyBerserk.gui.utils.PopUpBuilder;
 
 /**
@@ -13,9 +10,11 @@ import en.fluffyBerserk.gui.utils.PopUpBuilder;
 public abstract class BasePopUp implements PopUp {
 
     protected final Popup popup;
+    protected final PopUpCenter popUpCenter;
 
     // Structure of BasePopUp
     public BasePopUp() {
+        popUpCenter = new PopUpCenter();
         // Setting base structure for popup using PopUpStageBuilder in package utils
         popup = PopUpBuilder.buildDefaultPopUp();
 
