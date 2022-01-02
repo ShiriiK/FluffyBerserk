@@ -2,10 +2,16 @@ package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.logic.Game;
+import en.fluffyBerserk.persistence.DeleteTask;
+import en.fluffyBerserk.persistence.models.User;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.VBox;
+
+import java.util.Optional;
 
 public final class SaveSlotsScreen extends BaseScreen {
 
@@ -37,7 +43,22 @@ public final class SaveSlotsScreen extends BaseScreen {
             Main.app.changeScreen(new EditScreen(new Game()));
         });
 
-        Button deleteAccount = new Button("Delete Account"); // TODO
+        Button deleteAccount = new Button("Delete Account");
+        deleteAccount.setOnAction(event -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm deleting your account");
+            alert.setHeaderText("Are you sure you want to delete your account?");
+            alert.setContentText("If the account will be deleted, you will lose your progress in the game.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK){
+                User user = Main.app.getUser();
+                Main.app.logout();
+                if (user != null && new DeleteTask<User>().delete(user)) {
+                    Main.app.changeScreen(new HomeScreen());
+                }
+            }
+        });
 
         Button logOutButton = new Button("Log out");
         logOutButton.setOnAction(event -> {
