@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import en.fluffyBerserk.Main;
 import javafx.scene.paint.Color;
@@ -97,13 +98,16 @@ public final class LoginScreen extends BaseScreen {
         });
 
         // Home screen
-        Button closeButton = new Button("Back");
-        closeButton.setOnAction(event -> Main.app.changeScreen(new HomeScreen()));
+        Button backButton = new Button("Back");
+        backButton.setOnAction(event -> Main.app.changeScreen(new HomeScreen()));
 
-        root.getChildren().addAll(
-                loginButton,
-                closeButton
-        );
+        FlowPane buttonPane = new FlowPane();
+        buttonPane.setHgap(5.0);
+        buttonPane.setAlignment(Pos.CENTER);
+        buttonPane.getChildren().add(backButton);
+        buttonPane.getChildren().add(loginButton);
+
+        root.getChildren().add(buttonPane);
 
         return new Scene(root);
     }

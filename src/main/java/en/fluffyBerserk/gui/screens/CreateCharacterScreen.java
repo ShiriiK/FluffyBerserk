@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -24,7 +25,7 @@ public final class CreateCharacterScreen extends BaseScreen {
 
         final VBox root = new VBox();
         root.setPadding(new Insets(15, 15, 15, 15));
-        root.setSpacing(5.0);
+        root.setSpacing(10.0);
         root.setAlignment(Pos.CENTER);
 
         final Label nameLabel = new Label("Character name");
@@ -174,10 +175,13 @@ public final class CreateCharacterScreen extends BaseScreen {
             Main.app.changeScreen(new SaveSlotsScreen());
         });
 
-        root.getChildren().addAll(
-                createButton,
-                backButton
-        );
+        FlowPane buttonPane = new FlowPane();
+        buttonPane.setHgap(5.0);
+        buttonPane.setAlignment(Pos.CENTER);
+        buttonPane.getChildren().add(backButton);
+        buttonPane.getChildren().add(createButton);
+
+        root.getChildren().add(buttonPane);
 
         return new Scene(root);
     }

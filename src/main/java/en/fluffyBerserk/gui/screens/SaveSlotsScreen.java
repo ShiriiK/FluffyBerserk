@@ -28,7 +28,7 @@ public final class SaveSlotsScreen extends BaseScreen {
 
         VBox root = new VBox();
         root.setPadding(new Insets(15, 15, 15, 15));
-        root.setSpacing(5.0);
+        root.setSpacing(10.0);
         root.setAlignment(Pos.CENTER);
 
         List<Character> characters = new SelectTask<Character>().multiNamedQuery(manager -> {

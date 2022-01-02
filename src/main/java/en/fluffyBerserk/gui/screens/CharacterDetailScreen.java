@@ -21,7 +21,7 @@ public final class CharacterDetailScreen extends BaseScreen {
     protected Scene buildScene() {
         VBox root = new VBox();
         root.setPadding(new Insets(15, 15, 15, 15));
-        root.setSpacing(5.0);
+        root.setSpacing(10.0);
         root.setAlignment(Pos.CENTER);
 
         root.getChildren().addAll();
@@ -32,7 +32,7 @@ public final class CharacterDetailScreen extends BaseScreen {
     @Override
     public void onEnter() {
         if (!Main.app.isUserLoggedIn()) {
-            throw new RuntimeException("User must be logged in to enter slot screen!");
+            throw new RuntimeException("User must be logged in to enter character detail screen!");
         }
     }
 }

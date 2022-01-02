@@ -36,7 +36,7 @@ public final class HomeScreen extends BaseScreen {
 
         buttons.getChildren().addAll(loginButton, registerButton, guestButton);
         buttons.setAlignment(Pos.CENTER);
-        buttons.setSpacing(5.0);
+        buttons.setSpacing(10.0);
 
         // Temporary creating of image
         final Image image = new Image("player/fluf1.png");

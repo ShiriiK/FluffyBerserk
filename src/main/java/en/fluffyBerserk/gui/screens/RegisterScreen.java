@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -29,7 +30,7 @@ public final class RegisterScreen extends BaseScreen {
     protected Scene buildScene() {
         VBox root = new VBox();
         root.setPadding(new Insets(15, 15, 15, 15));
-        root.setSpacing(5.0);
+        root.setSpacing(10.0);
         root.setAlignment(Pos.CENTER);
 
         TextField usernameField = new TextField(form.getUsername());
@@ -119,10 +120,13 @@ public final class RegisterScreen extends BaseScreen {
         Button backButton = new Button("Back");
         backButton.setOnAction(event -> Main.app.changeScreen(new HomeScreen()));
 
-        root.getChildren().addAll(
-                registerButton,
-                backButton
-        );
+        FlowPane buttonPane = new FlowPane();
+        buttonPane.setHgap(5.0);
+        buttonPane.setAlignment(Pos.CENTER);
+        buttonPane.getChildren().add(backButton);
+        buttonPane.getChildren().add(registerButton);
+
+        root.getChildren().add(buttonPane);
 
         return new Scene(root);
     }
