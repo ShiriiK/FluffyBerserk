@@ -5,7 +5,11 @@ import en.fluffyBerserk.persistence.models.Character;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
 
 public final class CharacterDetailScreen extends BaseScreen {
@@ -24,7 +28,50 @@ public final class CharacterDetailScreen extends BaseScreen {
         root.setSpacing(10.0);
         root.setAlignment(Pos.CENTER);
 
-        root.getChildren().addAll();
+        final Label nameLabel = new Label("Name");
+        final Text nameText = new Text(character.getName());
+
+        final Label staminaLabel = new Label("Stamina");
+        final Text staminaText = new Text(character.getStamina() + "");
+
+        final Label strengthLabel = new Label("Strength");
+        final Text strengthText = new Text(character.getStrength() + "");
+
+        final Label armorLabel = new Label("Armor");
+        final Text armorText = new Text(character.getArmor() + "");
+
+        final Label intellectLabel = new Label("Intellect");
+        final Text intellectText = new Text(character.getIntellect() + "");
+
+        final Button backButton = new Button("Back to profile");
+        backButton.setOnAction(event -> {
+            Main.app.changeScreen(new SaveSlotsScreen());
+        });
+
+        final Button gameButton = new Button("Play");
+        gameButton.setOnAction(event -> {
+            Main.app.changeScreen(new GameScreen(character));
+        });
+
+        final FlowPane buttonPane = new FlowPane();
+        buttonPane.setHgap(5.0);
+        buttonPane.setAlignment(Pos.CENTER);
+        buttonPane.getChildren().add(backButton);
+        buttonPane.getChildren().add(gameButton);
+
+        root.getChildren().addAll(
+                nameLabel,
+                nameText,
+                staminaLabel,
+                staminaText,
+                strengthLabel,
+                strengthText,
+                armorLabel,
+                armorText,
+                intellectLabel,
+                intellectText,
+                buttonPane
+        );
 
         return new Scene(root);
     }
