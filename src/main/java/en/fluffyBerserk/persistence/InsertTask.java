@@ -17,7 +17,7 @@ public class InsertTask<T> {
      *
      * @param object object to be inserted
      */
-    public T insert(T object) {
+    public T insert(final T object) {
         EntityManagerFactory factory = en.fluffyBerserk.persistence.EntityManagerFactory.getFactory();
         EntityManager manager = factory.createEntityManager();
         EntityTransaction transaction = manager.getTransaction();

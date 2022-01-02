@@ -1,23 +1,28 @@
 package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
+import en.fluffyBerserk.persistence.DeleteTask;
 import en.fluffyBerserk.persistence.models.Character;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Optional;
+
 public final class CharacterDetailScreen extends BaseScreen {
 
     @NotNull
     private final Character character;
 
-    public CharacterDetailScreen(@NotNull Character character) {
+    public CharacterDetailScreen(@NotNull final Character character) {
         this.character = character;
     }
 
@@ -53,10 +58,28 @@ public final class CharacterDetailScreen extends BaseScreen {
             Main.app.changeScreen(new GameScreen(character));
         });
 
+        final Button deleteButton = new Button("Delete character");
+        deleteButton.setOnAction(event -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm deleting your character");
+            alert.setHeaderText("Are you sure you want to delete your character?");
+            alert.setContentText("If the character will be deleted, you will lose your progress in the game.");
+
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Delete");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                if (new DeleteTask<Character>().delete(character)) {
+                    Main.app.changeScreen(new SaveSlotsScreen());
+                }
+            }
+        });
+
         final FlowPane buttonPane = new FlowPane();
         buttonPane.setHgap(5.0);
         buttonPane.setAlignment(Pos.CENTER);
         buttonPane.getChildren().add(backButton);
+        buttonPane.getChildren().add(deleteButton);
         buttonPane.getChildren().add(gameButton);
 
         root.getChildren().addAll(

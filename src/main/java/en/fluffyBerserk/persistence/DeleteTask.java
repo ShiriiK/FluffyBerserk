@@ -19,7 +19,7 @@ public class DeleteTask<T> {
      *
      * @param object object to be deleted
      */
-    public boolean delete(@NotNull T object) {
+    public boolean delete(@NotNull final T object) {
         EntityManagerFactory factory = en.fluffyBerserk.persistence.EntityManagerFactory.getFactory();
         EntityManager manager = factory.createEntityManager();
         EntityTransaction transaction = manager.getTransaction();

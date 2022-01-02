@@ -30,6 +30,7 @@ public final class CreateCharacterScreen extends BaseScreen {
 
         final Label nameLabel = new Label("Character name");
         final TextField nameField = new TextField();
+        nameField.setText(form.getName());
         nameField.setPromptText("Enter character name");
         nameField.textProperty().addListener((observable, oldValue, newValue) -> {
             form.setName(newValue);

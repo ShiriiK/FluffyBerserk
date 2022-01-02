@@ -14,7 +14,7 @@ public final class LoginForm extends Form {
         return username;
     }
 
-    public void setUsername(@Nullable String username) {
+    public void setUsername(@Nullable final String username) {
         this.username = username;
     }
 
@@ -22,7 +22,7 @@ public final class LoginForm extends Form {
         return password;
     }
 
-    public void setPassword(@Nullable String password) {
+    public void setPassword(@Nullable final String password) {
         this.password = password;
     }
 

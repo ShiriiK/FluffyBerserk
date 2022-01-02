@@ -12,7 +12,7 @@ public final class GameScreen extends BaseScreen {
     @NotNull
     private final Character character;
 
-    public GameScreen(@NotNull Character character) {
+    public GameScreen(@NotNull final Character character) {
         this.character = character;
 
         // TODO GAME

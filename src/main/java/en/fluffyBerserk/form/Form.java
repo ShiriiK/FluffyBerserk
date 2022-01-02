@@ -15,7 +15,7 @@ abstract public class Form {
      * @param field     name of a field
      * @param newErrors array of new errors
      */
-    public void addError(@NotNull String field, @NotNull String... newErrors) {
+    public void addError(@NotNull final String field, @NotNull final String... newErrors) {
         final List<String> currentErrors = errors.containsKey(field) ? errors.get(field) : new ArrayList<>();
 
         currentErrors.addAll(Arrays.asList(newErrors));
@@ -33,7 +33,7 @@ abstract public class Form {
      * @param field name of a field
      * @return list of all errors for a field, empty list otherwise
      */
-    public @NotNull List<String> getErrorsForField(String field) {
+    public @NotNull List<String> getErrorsForField(final String field) {
         return errors.containsKey(field) ? errors.get(field) : new ArrayList<>();
     }
 
