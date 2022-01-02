@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -26,7 +27,8 @@ public final class LoginScreen extends BaseScreen {
     protected Scene buildScene() {
         VBox root = new VBox();
         root.setPadding(new Insets(15, 15, 15, 15));
-        root.setSpacing(15.0);
+        root.setSpacing(5.0);
+        root.setAlignment(Pos.CENTER);
 
         TextField usernameField = new TextField(form.getUsername());
         usernameField.setPromptText("Enter username");
@@ -34,6 +36,7 @@ public final class LoginScreen extends BaseScreen {
             form.setUsername(newValue);
         });
 
+        root.getChildren().add(new Label("Username"));
         root.getChildren().add(usernameField);
 
         // Render errors if any
@@ -43,13 +46,14 @@ public final class LoginScreen extends BaseScreen {
             root.getChildren().add(errorText);
         }
 
-        TextField passwordField = new PasswordField();
+        PasswordField passwordField = new PasswordField();
         passwordField.setText(form.getPassword());
         passwordField.setPromptText("Enter password");
         passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
             form.setPassword(newValue);
         });
 
+        root.getChildren().add(new Label("Password"));
         root.getChildren().add(passwordField);
 
         // Render errors if any
@@ -96,7 +100,6 @@ public final class LoginScreen extends BaseScreen {
         Button closeButton = new Button("Back");
         closeButton.setOnAction(event -> Main.app.changeScreen(new HomeScreen()));
 
-        root.setAlignment(Pos.CENTER);
         root.getChildren().addAll(
                 loginButton,
                 closeButton
