@@ -43,6 +43,12 @@ public final class RegisterForm extends Form {
             return false;
         }
 
+        // check if username has space character
+        if (!username.matches("^[^\\s]+$")) {
+            addError("username", "Username most not include space character!");
+            return false;
+        }
+
         if (password == null || password.isEmpty()) {
             addError("password", "Password must not be empty!");
             return false;
