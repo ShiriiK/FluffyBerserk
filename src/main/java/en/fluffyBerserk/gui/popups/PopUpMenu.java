@@ -10,10 +10,6 @@ import javafx.scene.paint.Color;
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.gui.screens.LoginScreen;
 
-/**
- * BasePopUp extension class that displays menu.
- */
-
 public final class PopUpMenu extends BasePopUp {
 
     @Override

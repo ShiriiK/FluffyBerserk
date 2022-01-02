@@ -16,7 +16,6 @@ public final class PopUpStageBuilder {
 
         popupStage.initOwner(Main.app.getPrimaryStage());
         popupStage.initModality(Modality.WINDOW_MODAL);
-        popupStage.initStyle(StageStyle.UNDECORATED);
 
         return popupStage;
     }
