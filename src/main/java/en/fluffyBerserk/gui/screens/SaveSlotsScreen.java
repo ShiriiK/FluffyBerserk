@@ -37,7 +37,6 @@ public final class SaveSlotsScreen extends BaseScreen {
             Main.app.changeScreen(new EditScreen(new Game()));
         });
 
-        Button deleteSave = new Button("Delete Save"); // TODO
         Button deleteAccount = new Button("Delete Account"); // TODO
 
         Button logOutButton = new Button("Log out");
@@ -53,7 +52,6 @@ public final class SaveSlotsScreen extends BaseScreen {
                 saveSlot2,
                 saveSlot3,
                 loadSave,
-                deleteSave,
                 deleteAccount,
                 logOutButton
         );
