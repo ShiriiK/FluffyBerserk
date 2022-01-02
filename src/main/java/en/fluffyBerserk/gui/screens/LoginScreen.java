@@ -26,12 +26,12 @@ public final class LoginScreen extends BaseScreen {
 
     @Override
     protected Scene buildScene() {
-        VBox root = new VBox();
+        final VBox root = new VBox();
         root.setPadding(new Insets(15, 15, 15, 15));
         root.setSpacing(5.0);
         root.setAlignment(Pos.CENTER);
 
-        TextField usernameField = new TextField(form.getUsername());
+        final TextField usernameField = new TextField(form.getUsername());
         usernameField.setPromptText("Enter username");
         usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
             form.setUsername(newValue);
@@ -42,12 +42,12 @@ public final class LoginScreen extends BaseScreen {
 
         // Render errors if any
         for (String error : form.getErrorsForField("username")) {
-            Text errorText = new Text(error);
+            final Text errorText = new Text(error);
             errorText.setFill(Color.RED);
             root.getChildren().add(errorText);
         }
 
-        PasswordField passwordField = new PasswordField();
+        final PasswordField passwordField = new PasswordField();
         passwordField.setText(form.getPassword());
         passwordField.setPromptText("Enter password");
         passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -59,12 +59,12 @@ public final class LoginScreen extends BaseScreen {
 
         // Render errors if any
         for (String error : form.getErrorsForField("password")) {
-            Text errorText = new Text(error);
+            final Text errorText = new Text(error);
             errorText.setFill(Color.RED);
             root.getChildren().add(errorText);
         }
 
-        Button loginButton = new Button("Login");
+        final Button loginButton = new Button("Login");
         loginButton.setOnAction(event -> {
             form.clearErrors();
 
@@ -73,7 +73,7 @@ public final class LoginScreen extends BaseScreen {
                 return;
             }
 
-            User user = new SelectTask<User>().singleNamedQuery(manager -> {
+            final User user = new SelectTask<User>().singleNamedQuery(manager -> {
                 TypedQuery<User> query = manager.createNamedQuery("User.byUsername", User.class);
                 query.setParameter(1, form.getUsername());
                 return query;
@@ -98,10 +98,10 @@ public final class LoginScreen extends BaseScreen {
         });
 
         // Home screen
-        Button backButton = new Button("Back");
+        final Button backButton = new Button("Back");
         backButton.setOnAction(event -> Main.app.changeScreen(new HomeScreen()));
 
-        FlowPane buttonPane = new FlowPane();
+        final FlowPane buttonPane = new FlowPane();
         buttonPane.setHgap(5.0);
         buttonPane.setAlignment(Pos.CENTER);
         buttonPane.getChildren().add(backButton);

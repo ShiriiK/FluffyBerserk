@@ -16,7 +16,7 @@ abstract public class Form {
      * @param newErrors array of new errors
      */
     public void addError(@NotNull String field, @NotNull String... newErrors) {
-        List<String> currentErrors = errors.containsKey(field) ? errors.get(field) : new ArrayList<>();
+        final List<String> currentErrors = errors.containsKey(field) ? errors.get(field) : new ArrayList<>();
 
         currentErrors.addAll(Arrays.asList(newErrors));
 

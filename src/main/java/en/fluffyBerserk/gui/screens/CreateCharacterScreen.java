@@ -175,7 +175,7 @@ public final class CreateCharacterScreen extends BaseScreen {
             Main.app.changeScreen(new SaveSlotsScreen());
         });
 
-        FlowPane buttonPane = new FlowPane();
+        final FlowPane buttonPane = new FlowPane();
         buttonPane.setHgap(5.0);
         buttonPane.setAlignment(Pos.CENTER);
         buttonPane.getChildren().add(backButton);

@@ -23,15 +23,15 @@ public final class SaveSlotsScreen extends BaseScreen {
 
     @Override
     protected Scene buildScene() {
-        User user = Main.app.getUser();
+        final User user = Main.app.getUser();
         assert user != null;
 
-        VBox root = new VBox();
+        final VBox root = new VBox();
         root.setPadding(new Insets(15, 15, 15, 15));
         root.setSpacing(10.0);
         root.setAlignment(Pos.CENTER);
 
-        List<Character> characters = new SelectTask<Character>().multiNamedQuery(manager -> {
+        final List<Character> characters = new SelectTask<Character>().multiNamedQuery(manager -> {
             TypedQuery<Character> query = manager.createNamedQuery("Character.byUserId", Character.class);
             query.setParameter(1, user.getId());
             return query;
@@ -45,7 +45,7 @@ public final class SaveSlotsScreen extends BaseScreen {
         }
 
         for (@Nullable Character character : characters) {
-            Button button = new Button();
+            final Button button = new Button();
             button.setStyle("-fx-border-color: Black");
             button.setStyle("-fx-font-size: 25px");
 
@@ -65,7 +65,7 @@ public final class SaveSlotsScreen extends BaseScreen {
             root.getChildren().add(button);
         }
 
-        Button deleteAccount = new Button("Delete Account");
+        final Button deleteAccount = new Button("Delete Account");
         deleteAccount.setOnAction(event -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm deleting your account");
@@ -83,16 +83,13 @@ public final class SaveSlotsScreen extends BaseScreen {
             }
         });
 
-        Button logOutButton = new Button("Log out");
+        final Button logOutButton = new Button("Log out");
         logOutButton.setOnAction(event -> {
             Main.app.logout();
             Main.app.changeScreen(new HomeScreen());
         });
 
-        root.getChildren().addAll(
-                deleteAccount,
-                logOutButton
-        );
+        root.getChildren().addAll(deleteAccount, logOutButton);
 
         return new Scene(root);
     }
