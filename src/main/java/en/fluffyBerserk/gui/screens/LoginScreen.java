@@ -1,6 +1,5 @@
 package en.fluffyBerserk.gui.screens;
 
-import en.fluffyBerserk.base.GamePanel;
 import en.fluffyBerserk.form.LoginForm;
 import en.fluffyBerserk.persistence.SelectTask;
 import en.fluffyBerserk.persistence.models.User;

@@ -1,7 +1,6 @@
 package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
-import en.fluffyBerserk.base.GamePanel;
 import en.fluffyBerserk.form.RegisterForm;
 import en.fluffyBerserk.persistence.InsertTask;
 import en.fluffyBerserk.persistence.SelectTask;

@@ -1,8 +1,6 @@
 package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
-import en.fluffyBerserk.base.GamePanel;
-import en.fluffyBerserk.logic.Game;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

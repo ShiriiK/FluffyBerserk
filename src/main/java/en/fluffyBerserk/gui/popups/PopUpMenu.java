@@ -1,11 +1,9 @@
 package en.fluffyBerserk.gui.popups;
 
 import en.fluffyBerserk.Main;
-import en.fluffyBerserk.base.GamePanel;
 import en.fluffyBerserk.gui.screens.EditScreen;
 import en.fluffyBerserk.gui.screens.LoginScreen;
 import en.fluffyBerserk.gui.screens.SaveSlotsScreen;
-import en.fluffyBerserk.logic.Game;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;

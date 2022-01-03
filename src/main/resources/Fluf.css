@@ -11,6 +11,9 @@
 }
 .button{
     -fx-background-color: rgba(191, 191, 191, 0.6);
+
+.........................................................................................................................................................................    -fx-background-radius: 25px 0 25px 0;
+    -fx-border-radius: 25px 0 25px 0;
     -fx-border-color: rgb(13, 13, 13);
     -fx-font-size: 20;
     -fx-pref-width: 200;
@@ -18,7 +21,8 @@
 }
 .button:hover{
     -fx-background-color: rgba(65, 74, 77,0.6);
-    -fx-background-radius: 5,4,3,5;
+    -fx-background-radius: 25px 0 25px 0;
+    -fx-border-radius: 25px 0 25px 0;
     -fx-background-insets: 0,1,2,0;
     -fx-text-fill: white;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
