@@ -9,7 +9,7 @@ import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import en.fluffyBerserk.base.Main;
+import en.fluffyBerserk.Main;
 
 /**
  * BaseScreen extension class that displays home screen.

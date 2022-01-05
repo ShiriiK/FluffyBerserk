@@ -1,4 +1,4 @@
-package en.fluffyBerserk.base;
+package en.fluffyBerserk;
 
 import javafx.stage.Stage;
 import en.fluffyBerserk.base.Application;
