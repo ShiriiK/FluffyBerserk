@@ -120,13 +120,22 @@ public final class RegisterScreen extends BaseScreen {
                 backButton
         );
 
-        return new Scene(root);
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("fluf.css");
+        return scene;
     }
 
     @Override
     public void onEnter() {
         if (Main.app.isUserLoggedIn()) {
             throw new RuntimeException("Logged in user cannot go to register screen!");
+
         }
+        System.out.println("Entered register screen");
+    }
+
+    @Override
+    public void onLeave() {
+        System.out.println("Left register screen");
     }
 }

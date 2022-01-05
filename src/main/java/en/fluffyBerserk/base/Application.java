@@ -76,9 +76,9 @@ public final class Application {
         setCurrentPopUp(popUp);
 
 
-        if (currentScreen != null) { // Add gaussian blur effect
+       /**if (currentScreen != null) { // Add gaussian blur effect
             currentScreen.getScene().getRoot().setEffect(new GaussianBlur());
-        }
+        }*/
     }
 
     /**
@@ -94,9 +94,9 @@ public final class Application {
 
         setCurrentPopUp(null);
 
-        if (currentScreen != null) { // Remove gaussian blur effect
+        /**if (currentScreen != null) { // Remove gaussian blur effect
             currentScreen.getScene().getRoot().setEffect(null);
-        }
+        }*/
     }
 
     /**

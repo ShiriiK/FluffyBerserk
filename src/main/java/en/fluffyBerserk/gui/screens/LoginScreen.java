@@ -103,7 +103,9 @@ public final class LoginScreen extends BaseScreen {
                 closeButton
         );
 
-        return new Scene(root);
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("fluf.css");
+        return scene;
     }
 
     @Override
@@ -111,5 +113,11 @@ public final class LoginScreen extends BaseScreen {
         if (Main.app.isUserLoggedIn()) {
             throw new RuntimeException("Logged in user cannot go to login screen!");
         }
+        System.out.println("Entered login screen");
+    }
+
+    @Override
+    public void onLeave() {
+        System.out.println("Left login screen");
     }
 }

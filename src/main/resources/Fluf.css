@@ -11,8 +11,7 @@
 }
 .button{
     -fx-background-color: rgba(191, 191, 191, 0.6);
-
-.........................................................................................................................................................................    -fx-background-radius: 25px 0 25px 0;
+    -fx-background-radius: 25px 0 25px 0;
     -fx-border-radius: 25px 0 25px 0;
     -fx-border-color: rgb(13, 13, 13);
     -fx-font-size: 20;

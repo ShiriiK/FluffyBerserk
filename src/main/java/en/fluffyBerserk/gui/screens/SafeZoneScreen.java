@@ -6,20 +6,14 @@ import en.fluffyBerserk.gui.popups.PopUpMenu;
 import en.fluffyBerserk.invariables.Invariables;
 import en.fluffyBerserk.logic.objects.creatures.player.Player;
 import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Popup;
-import javafx.stage.Stage;
-import javafx.util.Duration;
-
 
 /**
  * BaseScreen extension class that displays safe-zone screen.
@@ -52,19 +46,6 @@ public class SafeZoneScreen extends BaseScreen {
         PopUpMenu popUpMenu = new PopUpMenu();
         Popup menuPopUp = popUpMenu.getPopUp();
 
-        // Attach event on scene for displaying menu
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode() == KeyCode.ESCAPE) {
-                    popUpCenter.centerPopUp(menuPopUp);
-
-                    Main.app.showPopUp(popUpMenu);
-                    menuPopUp.show(Main.app.getPrimaryStage());
-                }
-            }
-        });
-
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -74,6 +55,13 @@ public class SafeZoneScreen extends BaseScreen {
                     case S: DOWN = true; break;
                     case D: RIGHT = true; break;
                     case SHIFT: speed = 6;
+                    case ESCAPE:
+                        popUpCenter.centerPopUp(menuPopUp);
+
+                        Main.app.showPopUp(popUpMenu);
+                        menuPopUp.show(Main.app.getPrimaryStage());
+                        System.out.println("Menu popup");
+                        break;
                 }
             }
         });
@@ -177,7 +165,7 @@ public class SafeZoneScreen extends BaseScreen {
                 }
             }
             graphicsContext.clearRect(0,0,canvas.getWidth(), canvas.getHeight());
-            graphicsContext.drawImage(image, dx, dy, Invariables.TILE_SIZE, Invariables.TILE_SIZE);
+            graphicsContext.drawImage(image, dx, dy, Invariables.TILE_SIZE*2, Invariables.TILE_SIZE*2);
         }
 
     @Override
