@@ -14,7 +14,7 @@ public class MovableEntityAnimations {
     public ArrayList<Image> idle;
 
 
-    public MovableEntityAnimations(Object object, LocateImage sprite) {
+    public MovableEntityAnimations(LocateImage sprite) {
         int w = Invariables.DEF_TILE_SIZE;
         int h = Invariables.DEF_TILE_SIZE;
         moveDown = new ArrayList<>(3);
@@ -23,18 +23,18 @@ public class MovableEntityAnimations {
         moveUp = new ArrayList<>(3);
         idle = new ArrayList<>(1);
 
-        moveDown.add(0, new Sprite(object, 0, 0, w, h, sprite).getFrame());
-        moveDown.add(1, new Sprite(object, w, 0, w, h, sprite).getFrame());
-        moveDown.add(2, new Sprite(object, w * 2, 0, w, h, sprite).getFrame());
-        moveLeft.add(0, new Sprite(object, 0, h, w, h, sprite).getFrame());
-        moveLeft.add(1, new Sprite(object, w, h, w, h, sprite).getFrame());
-        moveLeft.add(2, new Sprite(object, w * 2, h, w, h, sprite).getFrame());
-        moveRight.add(0, new Sprite(object, 0, h * 2, w, h, sprite).getFrame());
-        moveRight.add(1, new Sprite(object, w, h * 2, w, h, sprite).getFrame());
-        moveRight.add(2, new Sprite(object, w * 2, h * 2, w, h, sprite).getFrame());
-        moveUp.add(0, new Sprite(object, 0, h * 3, w, h, sprite).getFrame());
-        moveUp.add(1, new Sprite(object, w, h * 3, w, h, sprite).getFrame());
-        moveUp.add(2, new Sprite(object, w * 2, h * 3, w, h, sprite).getFrame());
+        moveDown.add(0, new Sprite(0, 0, w, h, sprite).getFrame());
+        moveDown.add(1, new Sprite(w, 0, w, h, sprite).getFrame());
+        moveDown.add(2, new Sprite(w * 2, 0, w, h, sprite).getFrame());
+        moveLeft.add(0, new Sprite(0, h, w, h, sprite).getFrame());
+        moveLeft.add(1, new Sprite(w, h, w, h, sprite).getFrame());
+        moveLeft.add(2, new Sprite(w * 2, h, w, h, sprite).getFrame());
+        moveRight.add(0, new Sprite(0, h * 2, w, h, sprite).getFrame());
+        moveRight.add(1, new Sprite(w, h * 2, w, h, sprite).getFrame());
+        moveRight.add(2, new Sprite( w * 2, h * 2, w, h, sprite).getFrame());
+        moveUp.add(0, new Sprite(0, h * 3, w, h, sprite).getFrame());
+        moveUp.add(1, new Sprite(w, h * 3, w, h, sprite).getFrame());
+        moveUp.add(2, new Sprite(w * 2, h * 3, w, h, sprite).getFrame());
 
         idle.add(0, moveDown.get(1));
     }

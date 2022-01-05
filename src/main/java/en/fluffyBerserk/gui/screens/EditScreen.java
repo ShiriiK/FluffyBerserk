@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
+
 /**
  * BaseScreen extension class that displays edit screen.
  */
@@ -25,7 +27,11 @@ public class EditScreen extends BaseScreen{
         Button saveCharacter = new Button("Save character");
 
         saveCharacter.setOnAction(event -> {
-            Main.app.changeScreen(new SafeZoneScreen());
+            try {
+                Main.app.changeScreen(new SafeZoneScreen());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
 

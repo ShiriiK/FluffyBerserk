@@ -12,6 +12,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import en.fluffyBerserk.Main;
 
+import java.io.IOException;
+
 /**
  * BaseScreen extension class that displays home screen.
  */
@@ -34,7 +36,13 @@ public final class HomeScreen extends BaseScreen {
 
         // Safe-zone screen
         Button guestButton = new Button("Continue as guest");
-        guestButton.setOnAction(event -> Main.app.changeScreen(new SafeZoneScreen()));
+        guestButton.setOnAction(event -> {
+            try {
+                Main.app.changeScreen(new SafeZoneScreen());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         loginButton.getStyleClass().add("button1");
 

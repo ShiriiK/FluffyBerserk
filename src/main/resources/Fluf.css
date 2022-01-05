@@ -3,6 +3,9 @@
     -fx-font-size: 25;
     -fx-background-color: rgb(19, 29, 32);
 }
+.my-scene{
+    -fx-background-color: transparent;
+}
 .popup {
     -fx-background-color: transparent;
     -fx-border-width: 5;

@@ -40,12 +40,12 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie{
         counter = 0;
         imgNumber = 1;
 
-        playerAnimations = new MovableEntityAnimations(this, Sprites.fluf1);
+        playerAnimations = new MovableEntityAnimations(Sprites.fluf1);
     }
 
     // Changes sprite, which player animations are taken from (fluf1, fluf2, fluf3,...)
     private void changeAnimationsSprite(LocateImage image){
-        playerAnimations = new MovableEntityAnimations(this, image);
+        playerAnimations = new MovableEntityAnimations(image);
     }
 
     // Sets current animation sprite (moveDown, moveUp, moveLeft, moveRight, idle)

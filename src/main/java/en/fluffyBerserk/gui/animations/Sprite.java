@@ -9,7 +9,7 @@ public class Sprite {
     private final Image frame;
 
     //Moving entity
-    public Sprite(Object objectReference, int spriteLocationX, int spriteLocationY, int width, int height, LocateImage sprite){
+    public Sprite(int spriteLocationX, int spriteLocationY, int width, int height, LocateImage sprite){
         frame = ImageBuilder.crop(sprite, spriteLocationX, spriteLocationY, width, height);
     }
 

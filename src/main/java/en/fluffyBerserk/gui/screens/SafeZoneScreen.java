@@ -1,6 +1,7 @@
 package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
+import en.fluffyBerserk.gui.Tile.TileManager;
 import en.fluffyBerserk.gui.animations.MovableEntityAnimations;
 import en.fluffyBerserk.gui.popups.PopUpMenu;
 import en.fluffyBerserk.invariables.Invariables;
@@ -15,20 +16,28 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Popup;
 
+import java.io.IOException;
+
 /**
  * BaseScreen extension class that displays safe-zone screen.
  */
 
 public class SafeZoneScreen extends BaseScreen {
     private boolean UP, DOWN, LEFT, RIGHT;
-    private final Canvas canvas = new Canvas(Invariables.SCREEN_WIDTH, Invariables.SCREEN_HEIGHT);
-    private final GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
-    private static Player player = new Player();
+    private final Canvas layer1 = new Canvas(Invariables.SCREEN_WIDTH, Invariables.SCREEN_HEIGHT);
+    private final Canvas layer2 = new Canvas(Invariables.SCREEN_WIDTH, Invariables.SCREEN_HEIGHT);
+    private final GraphicsContext graphicsContext1 = layer1.getGraphicsContext2D();
+    private final GraphicsContext graphicsContext2 = layer2.getGraphicsContext2D();
+    private static final Player player = new Player();
+    private TileManager tileManager = new TileManager();
     private int imgNumber = 1;
     private int counter = 0;
     private int speed = 3;
     private int dx = 0;
     private int dy = 0;
+
+    public SafeZoneScreen() throws IOException {
+    }
 
 
     @Override
@@ -36,11 +45,13 @@ public class SafeZoneScreen extends BaseScreen {
         BorderPane root = new BorderPane();
 
 
-        root.getChildren().add(canvas);
+        root.getChildren().addAll(layer1, layer2);
+        layer2.toBack();
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("fluf.css");
+      //  scene.getStylesheets().add("fluf.css");
 
+       // root.getStyleClass().add("my-scene");
 
 
         PopUpMenu popUpMenu = new PopUpMenu();
@@ -100,7 +111,8 @@ public class SafeZoneScreen extends BaseScreen {
                 }
 
                 movePlayerTo(dx, dy);
-                renderPlayer(graphicsContext, dx, dy);
+                tileManager.render(graphicsContext2);
+                renderPlayer(graphicsContext1, dx, dy);
             }
 
         };
@@ -164,8 +176,8 @@ public class SafeZoneScreen extends BaseScreen {
                     image = playerAnimations.getMoveRight().get(2);
                 }
             }
-            graphicsContext.clearRect(0,0,canvas.getWidth(), canvas.getHeight());
-            graphicsContext.drawImage(image, dx, dy, Invariables.TILE_SIZE*2, Invariables.TILE_SIZE*2);
+            graphicsContext.clearRect(0,0, layer1.getWidth(), layer1.getHeight());
+            graphicsContext.drawImage(image, dx, dy, Invariables.TILE_SIZE, Invariables.TILE_SIZE);
         }
 
     @Override

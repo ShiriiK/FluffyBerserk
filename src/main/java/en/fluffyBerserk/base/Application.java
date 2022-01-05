@@ -1,11 +1,11 @@
 package en.fluffyBerserk.base;
 
-import en.fluffyBerserk.logic.Game;
-import en.fluffyBerserk.persistence.models.User;
-import javafx.scene.effect.GaussianBlur;
-import javafx.stage.*;
 import en.fluffyBerserk.gui.popups.PopUp;
 import en.fluffyBerserk.gui.screens.Screen;
+import en.fluffyBerserk.invariables.Invariables;
+import en.fluffyBerserk.logic.Game;
+import en.fluffyBerserk.persistence.models.User;
+import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,9 +30,9 @@ public final class Application {
     }
 
     public void init() {
-        primaryStage.setTitle("Fluffy Berserk");
-        primaryStage.setHeight(500.0);
-        primaryStage.setWidth(500.0);
+        primaryStage.setTitle(Invariables.GAME_NAME);
+        primaryStage.setHeight(Invariables.SCREEN_HEIGHT);
+        primaryStage.setWidth(Invariables.SCREEN_WIDTH);
     }
 
     public void start(Screen defaultScreen) {
@@ -76,9 +76,9 @@ public final class Application {
         setCurrentPopUp(popUp);
 
 
-       /**if (currentScreen != null) { // Add gaussian blur effect
-            currentScreen.getScene().getRoot().setEffect(new GaussianBlur());
-        }*/
+        /**if (currentScreen != null) { // Add gaussian blur effect
+         currentScreen.getScene().getRoot().setEffect(new GaussianBlur());
+         }*/
     }
 
     /**
@@ -95,8 +95,8 @@ public final class Application {
         setCurrentPopUp(null);
 
         /**if (currentScreen != null) { // Remove gaussian blur effect
-            currentScreen.getScene().getRoot().setEffect(null);
-        }*/
+         currentScreen.getScene().getRoot().setEffect(null);
+         }*/
     }
 
     /**
@@ -141,11 +141,11 @@ public final class Application {
         primaryStage.setScene(currentScreen.getScene());
     }
 
-    public Game getGame(){
+    public Game getGame() {
         return game;
     }
 
-    public void setGame(Game game){
+    public void setGame(Game game) {
         this.game = game;
     }
 }
