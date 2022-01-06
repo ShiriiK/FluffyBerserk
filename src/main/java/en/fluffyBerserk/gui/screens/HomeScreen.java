@@ -1,24 +1,26 @@
 package en.fluffyBerserk.gui.screens;
 
+import en.fluffyBerserk.Main;
+import en.fluffyBerserk.gui.animations.SpriteImage;
+import en.fluffyBerserk.gui.utils.AttachCSS;
+import en.fluffyBerserk.gui.animations.SpritesFactory;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelReader;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import en.fluffyBerserk.Main;
 
 import java.io.IOException;
 
 /**
- * BaseScreen extension class that displays home screen.
+ * Screen representing Home screen
  */
 
-public final class HomeScreen extends BaseScreen {
+public final class HomeScreen extends Screen {
+
 
     @Override
     protected Scene buildScene() {
@@ -46,16 +48,16 @@ public final class HomeScreen extends BaseScreen {
 
         loginButton.getStyleClass().add("button1");
 
-        buttons.getChildren().addAll(loginButton,registerButton,guestButton);
+        buttons.getChildren().addAll(loginButton, registerButton, guestButton);
         buttons.setAlignment(Pos.CENTER);
         buttons.setSpacing(5);
 
-        // Temporary creating of image
-        Image image = new Image("player/fluf1.png");
-        PixelReader reader = image.getPixelReader();
-        ImageView kitty = new ImageView(new WritableImage(reader,32,0, 32, 32));
-        kitty.setFitHeight(200);
-        kitty.setFitWidth(200);
+        // Kitty picture randomizer
+        int index = getIndex();
+        Image image = new SpriteImage(SpritesFactory.getImages()[index], 32, 0, 32, 32).getFrame();
+        ImageView kitty = new ImageView(image);
+        kitty.setFitWidth(300);
+        kitty.setFitHeight(300);
 
         VBox pic = new VBox();
         pic.getChildren().add(kitty);
@@ -65,7 +67,7 @@ public final class HomeScreen extends BaseScreen {
         root.setCenter(pic);
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("fluf.css");
+        AttachCSS.attachCSS(scene);
 
         return scene;
     }
@@ -75,5 +77,15 @@ public final class HomeScreen extends BaseScreen {
         if (Main.app.isUserLoggedIn()) {
             throw new RuntimeException("Logged in user cannot go to home screen!");
         }
+        System.out.println("Entered home screen");
+    }
+
+    @Override
+    public void onLeave() {
+        System.out.println("Left home screen");
+    }
+
+    private int getIndex() {
+        return (int) ((Math.random() * (SpritesFactory.getImages().length - 1)) + 1);
     }
 }

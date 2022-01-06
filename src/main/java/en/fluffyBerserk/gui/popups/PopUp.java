@@ -1,18 +1,30 @@
 package en.fluffyBerserk.gui.popups;
-import javafx.stage.Popup;
+
+import en.fluffyBerserk.gui.utils.PopUpBuilder;
+import javafx.stage.Stage;
 
 /**
- * Interface for pop-up implemented by BasePopUp
+ * This class serves as an abstract base class for all pop-ups
  */
+public abstract class PopUp {
 
-public interface PopUp {
+    protected final Stage popUpStage;
 
-    // Returns pop-up
-    Popup getPopUp();
+    // Structure of PopUp
+    public PopUp() {
+        popUpStage = PopUpBuilder.buildDefaultStage();
+        initPopUpStage();
+    }
 
-    // Message for console
-    void onShow();
+    public Stage getPopUpStage() {
+        return popUpStage;
+    }
 
-    // Message for console
-    void onHide();
+    // Abstract methods
+
+    protected abstract void initPopUpStage();
+
+    public abstract void onShow();
+
+    public abstract void onHide();
 }

@@ -2,6 +2,7 @@ package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.form.RegisterForm;
+import en.fluffyBerserk.gui.utils.AttachCSS;
 import en.fluffyBerserk.persistence.InsertTask;
 import en.fluffyBerserk.persistence.SelectTask;
 import en.fluffyBerserk.persistence.models.User;
@@ -20,7 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.persistence.TypedQuery;
 import java.security.SecureRandom;
 
-public final class RegisterScreen extends BaseScreen {
+public final class RegisterScreen extends Screen {
 
     private final RegisterForm form = new RegisterForm();
 
@@ -121,7 +122,7 @@ public final class RegisterScreen extends BaseScreen {
         );
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("fluf.css");
+        AttachCSS.attachCSS(scene);
         return scene;
     }
 

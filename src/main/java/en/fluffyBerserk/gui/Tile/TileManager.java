@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/**
+ * Class where loading and rendering of map takes place
+ */
 public class TileManager {
     private static final int cols = Invariables.MAX_SCREEN_COL;
     private static final int rows = Invariables.MAX_SCREEN_ROW;
@@ -23,6 +26,10 @@ public class TileManager {
         loadMap("/maps/map1.txt");
     }
 
+    /**
+     * Reads text file
+     * @param path desired map for loading
+     */
     private void loadMap(String path) throws IOException {
         try {
             InputStream inputStream = getClass().getResourceAsStream(path);
@@ -31,6 +38,7 @@ public class TileManager {
             int col = 0;
             int row = 0;
 
+            // Reads the max columns and rows defined in invariables for screen
             while (col < cols && row < rows) {
                 String line = reader.readLine();
 
@@ -54,6 +62,10 @@ public class TileManager {
 
     }
 
+    /**
+     * Renders information given by loadMap method
+     * @param graphicsContext gc to which map will be rendered to, in this case its gc for canvas that is in bottom of other canvases
+     */
     public void render(GraphicsContext graphicsContext) {
         int col = 0;
         int row = 0;

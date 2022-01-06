@@ -1,15 +1,13 @@
 package en.fluffyBerserk.logic.objects.creatures.player;
 
 import en.fluffyBerserk.gui.animations.MovableEntityAnimations;
+import en.fluffyBerserk.gui.animations.SpriteImage;
 import en.fluffyBerserk.gui.utils.LocateImage;
-import en.fluffyBerserk.invariables.Direction;
-import en.fluffyBerserk.invariables.Sprites;
+import en.fluffyBerserk.gui.animations.SpritesFactory;
 import en.fluffyBerserk.logic.objects.creatures.CanAttack;
 import en.fluffyBerserk.logic.objects.creatures.CanDie;
 import en.fluffyBerserk.logic.objects.creatures.CanShoot;
 import en.fluffyBerserk.logic.objects.creatures.Creature;
-import javafx.scene.image.Image;
-import java.util.ArrayList;
 
 
 /**
@@ -17,11 +15,10 @@ import java.util.ArrayList;
  */
 public class Player extends Creature implements CanShoot, CanAttack, CanDie{
 
+    private static MovableEntityAnimations playerAnimations;
+    public static SpriteImage currentSkin;
     private String playerName;
-    private ArrayList<Image> currentSprite;
     private boolean isAlive;
-    private MovableEntityAnimations playerAnimations;
-    private String direction;
 
     // Constructor
     public Player(){
@@ -40,29 +37,29 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie{
         counter = 0;
         imgNumber = 1;
 
-        playerAnimations = new MovableEntityAnimations(Sprites.fluf1);
+        playerAnimations = new MovableEntityAnimations(SpritesFactory.getImages()[0]);
+        currentSkin = new SpriteImage(playerAnimations.getUsedSprite(), 32, 0, 32, 32);
     }
 
-    // Changes sprite, which player animations are taken from (fluf1, fluf2, fluf3,...)
-    private void changeAnimationsSprite(LocateImage image){
+    /**
+     *  Changes sprite, which player animations are taken from (fluf1, fluf2, fluf3,...)
+     *  as well as currentSkin
+      */
+    public static void changeAnimationsSprite(LocateImage image){
         playerAnimations = new MovableEntityAnimations(image);
+        currentSkin = new SpriteImage(image, 32, 0, 32, 32);
     }
 
-    // Sets current animation sprite (moveDown, moveUp, moveLeft, moveRight, idle)
-    private void setCurrentSprite(ArrayList<Image> sprite){
-        if (sprite != null){
-            currentSprite = sprite;
-        } else {
-            System.out.println("Missing sprite!");
-        }
-    }
-
-    public MovableEntityAnimations getPlayerAnimations() {
+    public static MovableEntityAnimations getPlayerAnimations() {
         return playerAnimations;
     }
 
+    public static SpriteImage getCurrentSkin() {
+        return currentSkin;
+    }
+
     @Override
-    public void move(int steps, Direction direction) {
+    public void move(int steps) {
     }
 
     public boolean isAlive() {

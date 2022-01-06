@@ -1,6 +1,8 @@
 package en.fluffyBerserk.gui.screens;
 
+import en.fluffyBerserk.Main;
 import en.fluffyBerserk.form.LoginForm;
+import en.fluffyBerserk.gui.utils.AttachCSS;
 import en.fluffyBerserk.persistence.SelectTask;
 import en.fluffyBerserk.persistence.models.User;
 import javafx.geometry.Insets;
@@ -10,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import en.fluffyBerserk.Main;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.TypedQuery;
 
-public final class LoginScreen extends BaseScreen {
+public final class LoginScreen extends Screen {
 
     private final LoginForm form = new LoginForm();
 
@@ -104,7 +105,7 @@ public final class LoginScreen extends BaseScreen {
         );
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("fluf.css");
+        AttachCSS.attachCSS(scene);
         return scene;
     }
 

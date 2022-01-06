@@ -1,7 +1,5 @@
 package en.fluffyBerserk.logic.objects;
 
-import en.fluffyBerserk.invariables.Direction;
-
 /**
  * Interface for movable objects
  */
@@ -9,7 +7,7 @@ import en.fluffyBerserk.invariables.Direction;
 
 public interface MovableObject {
 
-    void move(int steps, Direction direction);
+    void move(int steps);
 
     void setMoveX(float moveX);
 
