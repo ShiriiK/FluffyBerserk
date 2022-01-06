@@ -17,7 +17,7 @@ public final class RegisterForm extends Form {
         return username;
     }
 
-    public void setUsername(@Nullable String username) {
+    public void setUsername(@Nullable final String username) {
         this.username = username;
     }
 
@@ -25,7 +25,7 @@ public final class RegisterForm extends Form {
         return password;
     }
 
-    public void setPassword(@Nullable String password) {
+    public void setPassword(@Nullable final String password) {
         this.password = password;
     }
 
@@ -33,7 +33,7 @@ public final class RegisterForm extends Form {
         return passwordConfirm;
     }
 
-    public void setPasswordConfirm(@Nullable String passwordConfirm) {
+    public void setPasswordConfirm(@Nullable final String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
     }
 
@@ -45,7 +45,7 @@ public final class RegisterForm extends Form {
 
         // check if username has space character
         if (!username.matches("^[^\\s]+$")) {
-            addError("username", "Username most not include space character!");
+            addError("username", "Username must not include space character!");
             return false;
         }
 

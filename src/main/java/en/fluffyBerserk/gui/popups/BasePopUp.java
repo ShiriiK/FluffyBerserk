@@ -1,6 +1,5 @@
 package en.fluffyBerserk.gui.popups;
 
-import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -12,10 +11,8 @@ import en.fluffyBerserk.gui.utils.PopUpStageBuilder;
  */
 public abstract class BasePopUp implements PopUp {
 
-    // Stage specific for pop-up
     protected final Stage popUpStage;
 
-    // Structure of BasePopUp
     public BasePopUp() {
         // Setting base structure for popup using PopUpStageBuilder in package utils
         popUpStage = PopUpStageBuilder.buildDefaultStage();
@@ -24,17 +21,15 @@ public abstract class BasePopUp implements PopUp {
     }
 
     private void initStage() {
-        // Add scene to pop-up
         initPopUpStage();
 
-        // Set title of the pop-up
         popUpStage.setTitle(getPopUpTitle());
 
         popUpStage.setOnCloseRequest(event -> Main.app.hidePopUp());
 
         // Attach hide event on stage close event
         popUpStage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getCode().equals(KeyCode.ESCAPE)){
+            if (event.getCode().equals(KeyCode.ESCAPE)) {
                 Main.app.hidePopUp();
             }
         });
@@ -45,7 +40,7 @@ public abstract class BasePopUp implements PopUp {
         return popUpStage;
     }
 
-    // Abstract methods used in classes extending this class
     protected abstract String getPopUpTitle();
+
     protected abstract void initPopUpStage();
 }

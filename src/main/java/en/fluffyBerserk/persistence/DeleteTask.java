@@ -1,34 +1,36 @@
 package en.fluffyBerserk.persistence;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
 /**
- * Class used for performing insert tasks to DB layer
+ * Class used for performing delete tasks to DB layer
  *
  * @param <T>
  */
-public class InsertTask<T> {
+public class DeleteTask<T> {
 
     /**
-     * Performs an insert query into the DB layer and returns the
-     * inserted result, null otherwise
+     * Performs delete query into the DB layer and returns the
+     * result
      *
-     * @param object object to be inserted
+     * @param object object to be deleted
      */
-    public T insert(final T object) {
+    public boolean delete(@NotNull final T object) {
         EntityManagerFactory factory = en.fluffyBerserk.persistence.EntityManagerFactory.getFactory();
         EntityManager manager = factory.createEntityManager();
         EntityTransaction transaction = manager.getTransaction();
 
         try {
             transaction.begin();
-            manager.persist(object);
+            manager.remove(manager.contains(object) ? object : manager.merge(object));
             transaction.commit();
         } catch (Exception e) {
-            System.out.println("Insert task failed with exception: " + e);
-            return null;
+            System.out.println("Delete task failed with exception: " + e);
+            return false;
         } finally {
             if (transaction.isActive()) {
                 transaction.rollback();
@@ -37,6 +39,6 @@ public class InsertTask<T> {
             factory.close();
         }
 
-        return object;
+        return true;
     }
 }

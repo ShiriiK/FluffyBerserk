@@ -19,7 +19,7 @@ public class SelectTask<T> {
      *
      * @param builder lambda which builds the named query
      */
-    public T singleNamedQuery(SelectTaskQuery<T> builder) {
+    public T singleNamedQuery(final SelectTaskQuery<T> builder) {
         EntityManagerFactory factory = en.fluffyBerserk.persistence.EntityManagerFactory.getFactory();
         EntityManager manager = factory.createEntityManager();
         EntityTransaction transaction = manager.getTransaction();
@@ -53,7 +53,7 @@ public class SelectTask<T> {
      *
      * @param builder lambda which builds the named query
      */
-    public List<T> multiNamedQuery(SelectTaskQuery<T> builder) {
+    public List<T> multiNamedQuery(final SelectTaskQuery<T> builder) {
         EntityManagerFactory factory = en.fluffyBerserk.persistence.EntityManagerFactory.getFactory();
         EntityManager manager = factory.createEntityManager();
         EntityTransaction transaction = manager.getTransaction();

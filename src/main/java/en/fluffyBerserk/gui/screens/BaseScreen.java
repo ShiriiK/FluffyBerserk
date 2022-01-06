@@ -1,6 +1,7 @@
 package en.fluffyBerserk.gui.screens;
 
 import javafx.scene.Scene;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This class serves as an abstract base class for all screens
@@ -8,7 +9,7 @@ import javafx.scene.Scene;
 public abstract class BaseScreen implements Screen {
 
     @Override
-    public Scene getScene() {
+    public @NotNull Scene getScene() {
         return buildScene();
     }
 

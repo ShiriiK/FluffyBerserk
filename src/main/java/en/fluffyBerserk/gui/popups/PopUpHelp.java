@@ -3,10 +3,6 @@ package en.fluffyBerserk.gui.popups;
 import javafx.scene.Scene;
 import javafx.scene.web.WebView;
 
-/**
- * BasePopUp extension class that displays help.
- */
-
 public final class PopUpHelp extends BasePopUp {
 
     @Override

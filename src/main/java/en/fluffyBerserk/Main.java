@@ -11,12 +11,12 @@ public final class Main extends javafx.application.Application {
     // over and over
     public static Application app;
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(final Stage primaryStage) {
         (app = new Application(primaryStage)).start(new HomeScreen());
     }
 }
