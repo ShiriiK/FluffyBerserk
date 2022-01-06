@@ -10,6 +10,8 @@ import org.jetbrains.annotations.Nullable;
 
 public final class Application {
 
+    private static final String APP_NAME = "Fluffy Berserk";
+
     @NotNull
     private final Stage primaryStage;
 
@@ -28,7 +30,7 @@ public final class Application {
     }
 
     public void init() {
-        primaryStage.setTitle("Fluffy Berserk");
+        primaryStage.setTitle(APP_NAME);
         primaryStage.setHeight(500.0);
         primaryStage.setWidth(500.0);
     }
