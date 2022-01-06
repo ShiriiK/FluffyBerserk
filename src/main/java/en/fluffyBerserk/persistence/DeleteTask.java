@@ -3,7 +3,6 @@ package en.fluffyBerserk.persistence;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
 /**
@@ -20,8 +19,7 @@ public class DeleteTask<T> {
      * @param object object to be deleted
      */
     public boolean delete(@NotNull final T object) {
-        EntityManagerFactory factory = en.fluffyBerserk.persistence.EntityManagerFactory.getFactory();
-        EntityManager manager = factory.createEntityManager();
+        EntityManager manager = DatabaseSession.getSession();
         EntityTransaction transaction = manager.getTransaction();
 
         try {
@@ -35,8 +33,6 @@ public class DeleteTask<T> {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            manager.close();
-            factory.close();
         }
 
         return true;

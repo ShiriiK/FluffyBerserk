@@ -1,5 +1,6 @@
 package en.fluffyBerserk.base;
 
+import en.fluffyBerserk.persistence.DatabaseSession;
 import en.fluffyBerserk.persistence.models.User;
 import javafx.scene.effect.GaussianBlur;
 import javafx.stage.*;
@@ -33,9 +34,13 @@ public final class Application {
         primaryStage.setTitle(APP_NAME);
         primaryStage.setHeight(500.0);
         primaryStage.setWidth(500.0);
+        primaryStage.setOnCloseRequest(event -> {
+            DatabaseSession.closeSession();
+        });
     }
 
     public void start(Screen defaultScreen) {
+        DatabaseSession.startSession();
         this.changeScreen(defaultScreen);
         primaryStage.show();
     }
