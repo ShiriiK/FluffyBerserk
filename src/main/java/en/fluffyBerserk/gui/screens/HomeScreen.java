@@ -1,5 +1,6 @@
 package en.fluffyBerserk.gui.screens;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,6 +21,7 @@ public final class HomeScreen extends BaseScreen {
     @Override
     protected Scene buildScene() {
         BorderPane root = new BorderPane();
+        root.setPadding(new Insets(15, 15, 15, 15));
         VBox buttons = new VBox();
 
         // Login screen
@@ -57,11 +59,8 @@ public final class HomeScreen extends BaseScreen {
 
     @Override
     public void onEnter() {
-        System.out.println("Entered home screen");
-    }
-
-    @Override
-    public void onLeave() {
-        System.out.println("Left home screen");
+        if (Main.app.isUserLoggedIn()) {
+            throw new RuntimeException("Logged in user cannot go to home screen!");
+        }
     }
 }

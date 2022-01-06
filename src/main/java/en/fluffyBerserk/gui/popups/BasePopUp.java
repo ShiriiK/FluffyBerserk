@@ -30,13 +30,12 @@ public abstract class BasePopUp implements PopUp {
         // Set title of the pop-up
         popUpStage.setTitle(getPopUpTitle());
 
+        popUpStage.setOnCloseRequest(event -> Main.app.hidePopUp());
+
         // Attach hide event on stage close event
-        popUpStage.addEventHandler(KeyEvent.KEY_PRESSED,new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode().equals(KeyCode.ESCAPE)){
-                    Main.app.hidePopUp();
-                }
+        popUpStage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode().equals(KeyCode.ESCAPE)){
+                Main.app.hidePopUp();
             }
         });
     }
