@@ -9,7 +9,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import org.jetbrains.annotations.NotNull;
 
-public final class GameScreen extends BaseScreen {
+public final class GameScreen extends Screen {
 
     @NotNull
     private final Character character;
@@ -42,5 +42,11 @@ public final class GameScreen extends BaseScreen {
         if (!Main.app.isUserLoggedIn()) {
             throw new RuntimeException("User must be logged in to enter game screen!");
         }
+        System.out.println("Entered game screen");
+    }
+
+    @Override
+    public void onLeave() {
+        System.out.println("Left game screen");
     }
 }

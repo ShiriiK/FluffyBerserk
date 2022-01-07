@@ -1,16 +1,20 @@
 package en.fluffyBerserk.base;
 
-import en.fluffyBerserk.persistence.DatabaseSession;
-import en.fluffyBerserk.persistence.models.User;
-import en.fluffyBerserk.logic.Game;
-import en.fluffyBerserk.persistence.models.User;
-import javafx.scene.effect.GaussianBlur;
-import javafx.stage.*;
 import en.fluffyBerserk.gui.popups.PopUp;
 import en.fluffyBerserk.gui.screens.Screen;
+import en.fluffyBerserk.gui.utils.PopUpBuilder;
+import en.fluffyBerserk.invariables.Invariables;
+import en.fluffyBerserk.persistence.DatabaseSession;
+import en.fluffyBerserk.persistence.models.User;
+import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * The core of the application, where the primaryStage is created
+ * and where the scenes for it are swapped when needed
+ * as well as pop-ups are being displayed and hidden.
+ */
 public final class Application {
 
     @NotNull
@@ -31,12 +35,9 @@ public final class Application {
     }
 
     public void init() {
-        primaryStage.setTitle("Fluffy Berserk");
-        primaryStage.setHeight(500.0);
-        primaryStage.setWidth(500.0);
-        primaryStage.setOnCloseRequest(event -> {
-            DatabaseSession.closeSession();
-        });
+        primaryStage.setTitle(Invariables.GAME_NAME);
+        primaryStage.setHeight(Invariables.SCREEN_HEIGHT);
+        primaryStage.setWidth(Invariables.SCREEN_WIDTH);
     }
 
     public void start(Screen defaultScreen) {
@@ -50,6 +51,14 @@ public final class Application {
     }
 
     /**
+     * Sets a screen instance as a current screen
+     */
+    private void setCurrentScreen(@NotNull Screen currentScreen) {
+        this.currentScreen = currentScreen;
+        primaryStage.setScene(currentScreen.getScene());
+    }
+
+    /**
      * Changes current screen to another and triggers
      * specific hooks
      */
@@ -58,51 +67,12 @@ public final class Application {
             currentScreen.onLeave();
         }
 
-        // Hide pop-up if changing screens
         if (currentPopUp != null) {
             hidePopUp();
         }
 
         setCurrentScreen(screen);
-
         currentScreen.onEnter();
-    }
-
-    /**
-     * Shows given pop-up instance and hides
-     * current pop-up if any
-     */
-    public void showPopUp(@NotNull PopUp popUp) {
-        if (currentPopUp != null) {
-            hidePopUp();
-        }
-
-        popUp.onShow();
-        setCurrentPopUp(popUp);
-
-        popUp.getPopUpStage().show();
-
-        if (currentScreen != null) { // Add gaussian blur effect
-            currentScreen.getScene().getRoot().setEffect(new GaussianBlur());
-        }
-    }
-
-    /**
-     * Hides current shown pop-up if any
-     */
-    public void hidePopUp() {
-        if (currentPopUp == null) {
-            return;
-        }
-
-        currentPopUp.onHide();
-        currentPopUp.getPopUpStage().hide();
-
-        setCurrentPopUp(null);
-
-        if (currentScreen != null) { // Remove gaussian blur effect
-            currentScreen.getScene().getRoot().setEffect(null);
-        }
     }
 
     /**
@@ -113,6 +83,49 @@ public final class Application {
             primaryStage.setScene(currentScreen.getScene());
         }
     }
+
+    /**
+     * Sets a pop-up instance as a current pop-up
+     */
+    private void setCurrentPopUp(@Nullable PopUp currentPopUp) {
+        this.currentPopUp = currentPopUp;
+    }
+
+    /**
+     * Shows given pop-up instance and hides current pop-up if any
+     */
+    public void showPopUp(@NotNull PopUp popUp) {
+        if (currentPopUp != null) {
+            hidePopUp();
+        }
+
+        popUp.onShow();
+        popUp.getPopUpStage().show();
+        PopUpBuilder.alignPopUp(popUp.getPopUpStage());
+        setCurrentPopUp(popUp);
+
+        /**if (currentScreen != null) { // Add gaussian blur effect
+         currentScreen.getScene().getRoot().setEffect(new GaussianBlur());
+         }*/
+    }
+
+    /**
+     * Hides currently shown pop-up if any
+     */
+    public void hidePopUp() {
+        if (currentPopUp == null) {
+            return;
+        }
+
+        currentPopUp.onHide();
+        currentPopUp.getPopUpStage().hide();
+        setCurrentPopUp(null);
+
+        /**if (currentScreen != null) { // Remove gaussian blur effect
+         currentScreen.getScene().getRoot().setEffect(null);
+         }*/
+    }
+
 
     public void login(@NotNull User user) {
         this.user = user;
@@ -128,22 +141,5 @@ public final class Application {
 
     public @Nullable User getUser() {
         return user;
-    }
-
-    /**
-     * Sets a pop-up instance as a current pop-up
-     */
-    private void setCurrentPopUp(@Nullable PopUp currentPopUp) {
-        this.currentPopUp = currentPopUp;
-    }
-
-    /**
-     * Sets a screen instance as a current screen
-     */
-    private void setCurrentScreen(@NotNull Screen currentScreen) {
-        this.currentScreen = currentScreen;
-
-        // Change the screen on primary stage
-        primaryStage.setScene(currentScreen.getScene());
     }
 }

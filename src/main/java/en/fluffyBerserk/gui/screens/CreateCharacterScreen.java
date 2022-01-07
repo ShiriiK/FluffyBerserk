@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public final class CreateCharacterScreen extends BaseScreen {
+public final class CreateCharacterScreen extends Screen {
 
     private final SlotForm form = new SlotForm();
 
@@ -192,5 +192,11 @@ public final class CreateCharacterScreen extends BaseScreen {
         if (!Main.app.isUserLoggedIn()) {
             throw new RuntimeException("User must be logged in to enter slot screen!");
         }
+        System.out.println("Entered create character screen");
+    }
+
+    @Override
+    public void onLeave() {
+        System.out.println("Left create character screen");
     }
 }

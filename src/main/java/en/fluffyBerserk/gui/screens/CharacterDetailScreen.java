@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-public final class CharacterDetailScreen extends BaseScreen {
+public final class CharacterDetailScreen extends Screen {
 
     @NotNull
     private final Character character;
@@ -104,5 +104,11 @@ public final class CharacterDetailScreen extends BaseScreen {
         if (!Main.app.isUserLoggedIn()) {
             throw new RuntimeException("User must be logged in to enter character detail screen!");
         }
+        System.out.println("Entered character detail screen");
+    }
+
+    @Override
+    public void onLeave() {
+        System.out.println("Left character detail screen");
     }
 }

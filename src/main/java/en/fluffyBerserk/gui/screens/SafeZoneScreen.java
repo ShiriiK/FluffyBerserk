@@ -1,8 +1,10 @@
 package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
+import en.fluffyBerserk.gui.Tile.TileManager;
 import en.fluffyBerserk.gui.animations.MovableEntityAnimations;
 import en.fluffyBerserk.gui.popups.PopUpMenu;
+import en.fluffyBerserk.gui.utils.AttachCSS;
 import en.fluffyBerserk.invariables.Invariables;
 import en.fluffyBerserk.logic.objects.creatures.player.Player;
 import javafx.animation.AnimationTimer;
@@ -11,51 +13,44 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Popup;
 
+import java.io.IOException;
 
 /**
  * BaseScreen extension class that displays safe-zone screen.
  */
 
-public class SafeZoneScreen extends BaseScreen {
-    private static Player player = new Player();
-    private final Canvas canvas = new Canvas(Invariables.SCREEN_WIDTH, Invariables.SCREEN_HEIGHT);
-    private final GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
+public class SafeZoneScreen extends Screen {
+    private static final Player player = new Player();
+    private final Canvas layer1 = new Canvas(Invariables.SCREEN_WIDTH, Invariables.SCREEN_HEIGHT);
+    private final Canvas layer2 = new Canvas(Invariables.SCREEN_WIDTH, Invariables.SCREEN_HEIGHT);
+    private final GraphicsContext graphicsContext1 = layer1.getGraphicsContext2D();
+    private final GraphicsContext graphicsContext2 = layer2.getGraphicsContext2D();
     private boolean UP, DOWN, LEFT, RIGHT;
+    private TileManager tileManager = new TileManager();
     private int imgNumber = 1;
     private int counter = 0;
-    private int speed = 3;
+    private int speed = 6;
     private int dx = 0;
     private int dy = 0;
+
+    public SafeZoneScreen() throws IOException {
+    }
 
 
     @Override
     protected Scene buildScene() {
         BorderPane root = new BorderPane();
 
-
-        root.getChildren().add(canvas);
+        root.getChildren().addAll(layer1, layer2);
+        layer2.toBack();
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("fluf.css");
-
+        AttachCSS.attachCSS(scene);
 
         PopUpMenu popUpMenu = new PopUpMenu();
-        Popup menuPopUp = popUpMenu.getPopUp();
-
-        // Attach event on scene for displaying menu
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode() == KeyCode.ESCAPE) {
-                    Main.app.showPopUp(popUpMenu);
-                }
-            }
-        });
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -75,6 +70,9 @@ public class SafeZoneScreen extends BaseScreen {
                         break;
                     case SHIFT:
                         speed = 6;
+                    case ESCAPE:
+                        Main.app.showPopUp(popUpMenu);
+                        break;
                 }
             }
         });
@@ -122,7 +120,8 @@ public class SafeZoneScreen extends BaseScreen {
                 }
 
                 movePlayerTo(dx, dy);
-                renderPlayer(graphicsContext, dx, dy);
+                tileManager.render(graphicsContext2);
+                renderPlayer(graphicsContext1, dx, dy);
             }
 
         };
@@ -186,7 +185,7 @@ public class SafeZoneScreen extends BaseScreen {
                 image = playerAnimations.getMoveRight().get(2);
             }
         }
-        graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        graphicsContext.clearRect(0, 0, layer1.getWidth(), layer1.getHeight());
         graphicsContext.drawImage(image, dx, dy, Invariables.TILE_SIZE, Invariables.TILE_SIZE);
     }
 

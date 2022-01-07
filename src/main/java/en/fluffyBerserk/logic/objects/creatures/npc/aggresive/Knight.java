@@ -1,7 +1,5 @@
 package en.fluffyBerserk.logic.objects.creatures.npc.aggresive;
 
-import en.fluffyBerserk.invariables.Direction;
-
 public class Knight extends AggressiveNpc {
 
     @Override
@@ -15,7 +13,7 @@ public class Knight extends AggressiveNpc {
     }
 
     @Override
-    public void move(int steps, Direction direction) {
+    public void move(int steps) {
 
     }
 }

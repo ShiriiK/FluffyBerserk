@@ -1,18 +1,25 @@
 package en.fluffyBerserk.gui.screens;
 
-import javafx.geometry.Insets;
+import en.fluffyBerserk.Main;
+import en.fluffyBerserk.gui.animations.SpriteImage;
+import en.fluffyBerserk.gui.utils.AttachCSS;
+import en.fluffyBerserk.gui.animations.SpritesFactory;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelReader;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import en.fluffyBerserk.Main;
 
-public final class HomeScreen extends BaseScreen {
+import java.io.IOException;
+
+/**
+ * Screen representing Home screen
+ */
+
+public final class HomeScreen extends Screen {
+
 
     @Override
     protected Scene buildScene() {
@@ -20,7 +27,7 @@ public final class HomeScreen extends BaseScreen {
         VBox buttons = new VBox();
 
         // Login screen
-        final Button loginButton = new Button("Login");
+        Button loginButton = new Button("Login");
         loginButton.setOnAction(event -> Main.app.changeScreen(new LoginScreen()));
 
         // Register screen
@@ -28,7 +35,14 @@ public final class HomeScreen extends BaseScreen {
         registerButton.setOnAction(event -> Main.app.changeScreen(new RegisterScreen()));
 
         // Safe-zone screen
-        final Button guestButton = new Button("Continue as guest");
+        Button guestButton = new Button("Continue as guest");
+        guestButton.setOnAction(event -> {
+            try {
+                Main.app.changeScreen(new SafeZoneScreen());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         // TODO guest button
 
@@ -36,12 +50,12 @@ public final class HomeScreen extends BaseScreen {
         buttons.setAlignment(Pos.CENTER);
         buttons.setSpacing(5);
 
-        // Temporary creating of image
-        final Image image = new Image("player/fluf1.png");
-        final PixelReader reader = image.getPixelReader();
-        final ImageView kitty = new ImageView(new WritableImage(reader, 32, 0, 32, 32));
-        kitty.setFitHeight(200);
-        kitty.setFitWidth(200);
+        // Kitty picture randomizer
+        int index = getIndex();
+        Image image = new SpriteImage(SpritesFactory.getImages()[index], 32, 0, 32, 32).getFrame();
+        ImageView kitty = new ImageView(image);
+        kitty.setFitWidth(300);
+        kitty.setFitHeight(300);
 
         final VBox pic = new VBox();
         pic.getChildren().add(kitty);
@@ -51,7 +65,7 @@ public final class HomeScreen extends BaseScreen {
         root.setCenter(pic);
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("fluf.css");
+        AttachCSS.attachCSS(scene);
 
         return scene;
     }
@@ -67,5 +81,9 @@ public final class HomeScreen extends BaseScreen {
     @Override
     public void onLeave() {
         System.out.println("Left home screen");
+    }
+
+    private int getIndex() {
+        return (int) ((Math.random() * (SpritesFactory.getImages().length - 1)) + 1);
     }
 }

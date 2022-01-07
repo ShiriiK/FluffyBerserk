@@ -1,8 +1,8 @@
 package en.fluffyBerserk;
 
+import en.fluffyBerserk.base.Application;
 import en.fluffyBerserk.gui.screens.HomeScreen;
 import javafx.stage.Stage;
-import en.fluffyBerserk.base.Application;
 
 public final class Main extends javafx.application.Application {
 

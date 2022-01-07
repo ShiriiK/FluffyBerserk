@@ -1,15 +1,19 @@
 package en.fluffyBerserk.gui.screens;
-
 import javafx.scene.Scene;
-import org.jetbrains.annotations.NotNull;
 
-public interface Screen {
+/**
+ * This class serves as an abstract base class for all screens
+ */
+public abstract class Screen {
 
-    @NotNull Scene getScene();
+     public Scene getScene() {
+         return buildScene();
+    }
 
-    // Message for console
-    void onEnter();
+    // Abstract methods used in classes extending this class
+    protected abstract Scene buildScene();
 
-    // Message for console
-    void onLeave();
+    public abstract void onEnter();
+
+    public abstract void onLeave();
 }

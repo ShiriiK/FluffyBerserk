@@ -1,13 +1,11 @@
 package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
-import en.fluffyBerserk.Main;
+import en.fluffyBerserk.gui.utils.AttachCSS;
 import en.fluffyBerserk.persistence.DeleteTask;
 import en.fluffyBerserk.persistence.SelectTask;
 import en.fluffyBerserk.persistence.models.Character;
 import en.fluffyBerserk.persistence.models.User;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -15,11 +13,12 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
 import org.jetbrains.annotations.Nullable;
+
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
-public final class SaveSlotsScreen extends BaseScreen {
+public final class SaveSlotsScreen extends Screen {
 
     @Override
     protected Scene buildScene() {
@@ -90,23 +89,22 @@ public final class SaveSlotsScreen extends BaseScreen {
 
         root.getChildren().addAll(deleteAccount, logOutButton);
 
-        return new Scene(root);
+        Scene scene = new Scene(root);
+        AttachCSS.attachCSS(scene);
+
+        return scene;
     }
 
     @Override
     public void onEnter() {
-        {
-            if (!Main.app.isUserLoggedIn()) {
-                throw new RuntimeException("User must be logged in to enter save slot screen!");
-            }
-            System.out.println("Entered save slot screen");
+        if (!Main.app.isUserLoggedIn()) {
+            throw new RuntimeException("User must be logged in to enter save slot screen!");
         }
+        System.out.println("Entered save slot screen");
     }
 
     @Override
     public void onLeave() {
-        {
-            System.out.println("Left save slot screen");
-        }
+        System.out.println("Left save slot screen");
     }
 }
