@@ -1,21 +1,19 @@
 package en.fluffyBerserk.gui.popups;
 
+import en.fluffyBerserk.Main;
+import en.fluffyBerserk.gui.screens.EditScreen;
+import en.fluffyBerserk.gui.screens.LoginScreen;
 import en.fluffyBerserk.gui.screens.SaveSlotsScreen;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
 import javafx.scene.paint.Color;
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.gui.screens.LoginScreen;
 
 public final class PopUpMenu extends BasePopUp {
-
-    @Override
-    protected String getPopUpTitle() {
-        return "Menu";
-    }
 
     @Override
     protected void initPopUpStage() {
@@ -29,6 +27,9 @@ public final class PopUpMenu extends BasePopUp {
 
         loadButton.setOnAction(event -> Main.app.changeScreen(new SaveSlotsScreen()));
 
+        Button editButton = new Button("Edit character");
+        editButton.setOnAction(event -> Main.app.changeScreen(new EditScreen()));
+
         Button helpButton = new Button("Help");
         helpButton.setOnAction(event -> Main.app.showPopUp(new PopUpHelp()));
 
@@ -39,13 +40,11 @@ public final class PopUpMenu extends BasePopUp {
         Button deleteAccountButton = new Button("Delete account");
 
         buttons.getChildren().addAll(resumeButton,saveButton,loadButton,helpButton,logoutButton,deleteSaveButton,deleteAccountButton);
-        buttons.setAlignment(Pos.CENTER);
-        buttons.setSpacing(20);
+        buttons.getChildren().addAll(resumeButton, saveButton, loadButton, editButton, helpButton, logoutButton, deleteSaveButton, deleteAccountButton);
+        buttons.getStyleClass().add("vbox");
 
-        BorderPane root = new BorderPane();
-        root.setCenter(buttons);
 
-        popUpStage.setScene(new Scene(root, Color.TRANSPARENT));
+        popUpStage.setScene(new Scene(buttons));
     }
 
     @Override

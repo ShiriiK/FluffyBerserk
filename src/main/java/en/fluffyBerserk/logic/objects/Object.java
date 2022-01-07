@@ -9,7 +9,7 @@ public interface Object {
 
     void setX(float x);
 
-   void setY(float y);
+    void setY(float y);
 
     float getX();
 

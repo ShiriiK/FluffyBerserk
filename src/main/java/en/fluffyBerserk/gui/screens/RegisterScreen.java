@@ -5,7 +5,6 @@ import en.fluffyBerserk.form.RegisterForm;
 import en.fluffyBerserk.persistence.InsertTask;
 import en.fluffyBerserk.persistence.SelectTask;
 import en.fluffyBerserk.persistence.models.User;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -29,9 +28,6 @@ public final class RegisterScreen extends BaseScreen {
     @Override
     protected Scene buildScene() {
         final VBox root = new VBox();
-        root.setPadding(new Insets(15, 15, 15, 15));
-        root.setSpacing(10.0);
-        root.setAlignment(Pos.CENTER);
 
         final TextField usernameField = new TextField(form.getUsername());
         usernameField.setPromptText("Enter username");
@@ -133,8 +129,11 @@ public final class RegisterScreen extends BaseScreen {
 
     @Override
     public void onEnter() {
-        if (Main.app.isUserLoggedIn()) {
-            throw new RuntimeException("Logged in user cannot go to register screen!");
-        }
+        System.out.println("Entered register screen");
+    }
+
+    @Override
+    public void onLeave() {
+        System.out.println("Left register screen");
     }
 }

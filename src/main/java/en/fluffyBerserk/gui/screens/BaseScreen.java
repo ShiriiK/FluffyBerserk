@@ -1,15 +1,22 @@
 package en.fluffyBerserk.gui.screens;
 
 import javafx.scene.Scene;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * This class serves as an abstract base class for all screens
  */
 public abstract class BaseScreen implements Screen {
 
+    protected final Scene scene;
+
+    // Structure of BaseScreen
+    public BaseScreen() {
+        // Defines scene
+        scene = buildScene();
+    }
+
     @Override
-    public @NotNull Scene getScene() {
+    public Scene getScene() {
         return buildScene();
     }
 

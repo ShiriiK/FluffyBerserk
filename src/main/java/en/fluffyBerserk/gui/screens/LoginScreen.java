@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
@@ -26,12 +27,10 @@ public final class LoginScreen extends BaseScreen {
 
     @Override
     protected Scene buildScene() {
-        final VBox root = new VBox();
-        root.setPadding(new Insets(15, 15, 15, 15));
-        root.setSpacing(5.0);
-        root.setAlignment(Pos.CENTER);
+        VBox root = new VBox();
 
-        final TextField usernameField = new TextField(form.getUsername());
+
+        TextField usernameField = new TextField(form.getUsername());
         usernameField.setPromptText("Enter username");
         usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
             form.setUsername(newValue);
@@ -102,8 +101,6 @@ public final class LoginScreen extends BaseScreen {
         backButton.setOnAction(event -> Main.app.changeScreen(new HomeScreen()));
 
         final FlowPane buttonPane = new FlowPane();
-        buttonPane.setHgap(5.0);
-        buttonPane.setAlignment(Pos.CENTER);
         buttonPane.getChildren().add(backButton);
         buttonPane.getChildren().add(loginButton);
 
@@ -117,5 +114,11 @@ public final class LoginScreen extends BaseScreen {
         if (Main.app.isUserLoggedIn()) {
             throw new RuntimeException("Logged in user cannot go to login screen!");
         }
+        System.out.println("Entered login screen");
+    }
+
+    @Override
+    public void onLeave() {
+        System.out.println("Left login screen");
     }
 }

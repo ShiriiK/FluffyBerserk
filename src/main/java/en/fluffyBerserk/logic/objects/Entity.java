@@ -6,11 +6,11 @@ package en.fluffyBerserk.logic.objects;
 
 public abstract class Entity implements Object, HasName {
 
-    private String name;
+    protected String name;
 
-    private float x;
+    protected float x;
 
-    private float y;
+    protected float y;
 
     public Entity(){
         name = getName();

@@ -17,8 +17,6 @@ public final class HomeScreen extends BaseScreen {
     @Override
     protected Scene buildScene() {
         final BorderPane root = new BorderPane();
-        root.setPadding(new Insets(15, 15, 15, 15));
-
         VBox buttons = new VBox();
 
         // Login screen
@@ -36,7 +34,7 @@ public final class HomeScreen extends BaseScreen {
 
         buttons.getChildren().addAll(loginButton, registerButton, guestButton);
         buttons.setAlignment(Pos.CENTER);
-        buttons.setSpacing(10.0);
+        buttons.setSpacing(5);
 
         // Temporary creating of image
         final Image image = new Image("player/fluf1.png");
@@ -52,7 +50,10 @@ public final class HomeScreen extends BaseScreen {
         root.setLeft(buttons);
         root.setCenter(pic);
 
-        return new Scene(root);
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("fluf.css");
+
+        return scene;
     }
 
     @Override
@@ -60,5 +61,11 @@ public final class HomeScreen extends BaseScreen {
         if (Main.app.isUserLoggedIn()) {
             throw new RuntimeException("Logged in user cannot go to home screen!");
         }
+        System.out.println("Entered home screen");
+    }
+
+    @Override
+    public void onLeave() {
+        System.out.println("Left home screen");
     }
 }

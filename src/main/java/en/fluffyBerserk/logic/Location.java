@@ -1,9 +1,5 @@
 package en.fluffyBerserk.logic;
 
-import en.fluffyBerserk.gui.utils.Observer;
-import en.fluffyBerserk.gui.utils.SubjectOfChange;
-import en.fluffyBerserk.logic.objects.Entity;
-import en.fluffyBerserk.logic.objects.MovableEntity;
 import en.fluffyBerserk.logic.objects.creatures.Creature;
 import en.fluffyBerserk.logic.objects.items.Item;
 
@@ -15,13 +11,12 @@ import java.util.Set;
  * Instances of this class represent particular locations.
  */
 
-public class Location implements SubjectOfChange{
+public class Location{
     private final String name;
     private final Set<Location> exits;
     private final Set<Item> items;
     private final Set<Creature> npcs;
     private final int phase;
-    private static Set<Observer> observers = new HashSet<>();
 
     // Constructor
     public Location(String name, int phase){
@@ -73,7 +68,6 @@ public class Location implements SubjectOfChange{
         for(Creature current : npcs){
             if(current.getName().equals(npcName)){
                 npcs.remove(current);
-                notifyObservers();
                 break;
             }
         }
@@ -106,7 +100,6 @@ public class Location implements SubjectOfChange{
      */
     public void addItems(Collection<Item> items) {
         items.addAll(items);
-        notifyObservers();
     }
 
     /**
@@ -130,7 +123,6 @@ public class Location implements SubjectOfChange{
         for (Item current : items) {
             if (current.getName().equals(itemName)) { //TODO - prevent the removal of items that are not pickable
                 items.remove(current);
-                notifyObservers();
                 break;
             }
         }
@@ -155,23 +147,6 @@ public class Location implements SubjectOfChange{
      */
     public Set<Item> getItems() {
         return new HashSet<>(items);
-    }
-
-    @Override
-    public void registerObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void unregisterObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (Observer observer : observers) {
-            observer.update();
-        }
     }
 
 }

@@ -1,7 +1,5 @@
 package en.fluffyBerserk.logic;
 
-import en.fluffyBerserk.gui.utils.Observer;
-import en.fluffyBerserk.gui.utils.SubjectOfChange;
 import en.fluffyBerserk.logic.objects.items.Item;
 import en.fluffyBerserk.logic.objects.items.PickableItem;
 
@@ -14,9 +12,8 @@ import java.util.Set;
  * Class representing the player inventory and implementing the SubjectOfChange interface
  */
 
-public class Inventory implements SubjectOfChange {
+public class Inventory {
     private final Map<String, Item> content;
-    private final Set<Observer> observers = new HashSet<>();
 
     // Constructor
     public Inventory() {
@@ -38,7 +35,6 @@ public class Inventory implements SubjectOfChange {
     public void addItem(Item item) {
         if (item instanceof PickableItem) {
             content.put(item.getName(), item);
-            notifyObservers();
         }
     }
 
@@ -55,24 +51,6 @@ public class Inventory implements SubjectOfChange {
     public void removeItem(String name) {
         if (content.containsKey(name)) {
             content.remove(name);
-            notifyObservers();
-        }
-    }
-
-    @Override
-    public void registerObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void unregisterObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (Observer observer : observers) {
-            observer.update();
         }
     }
 }

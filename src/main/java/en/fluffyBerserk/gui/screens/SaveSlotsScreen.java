@@ -1,6 +1,7 @@
 package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
+import en.fluffyBerserk.Main;
 import en.fluffyBerserk.persistence.DeleteTask;
 import en.fluffyBerserk.persistence.SelectTask;
 import en.fluffyBerserk.persistence.models.Character;
@@ -14,7 +15,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
 import org.jetbrains.annotations.Nullable;
-
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
@@ -25,11 +25,8 @@ public final class SaveSlotsScreen extends BaseScreen {
     protected Scene buildScene() {
         final User user = Main.app.getUser();
         assert user != null;
+        VBox root = new VBox();
 
-        final VBox root = new VBox();
-        root.setPadding(new Insets(15, 15, 15, 15));
-        root.setSpacing(10.0);
-        root.setAlignment(Pos.CENTER);
 
         final List<Character> characters = new SelectTask<Character>().multiNamedQuery(manager -> {
             TypedQuery<Character> query = manager.createNamedQuery("Character.byUserId", Character.class);
@@ -89,6 +86,8 @@ public final class SaveSlotsScreen extends BaseScreen {
             Main.app.changeScreen(new HomeScreen());
         });
 
+        final Button deleteSave = new Button("Delete Save"); // TODO
+
         root.getChildren().addAll(deleteAccount, logOutButton);
 
         return new Scene(root);
@@ -96,8 +95,18 @@ public final class SaveSlotsScreen extends BaseScreen {
 
     @Override
     public void onEnter() {
-        if (!Main.app.isUserLoggedIn()) {
-            throw new RuntimeException("User must be logged in to enter save slot screen!");
+        {
+            if (!Main.app.isUserLoggedIn()) {
+                throw new RuntimeException("User must be logged in to enter save slot screen!");
+            }
+            System.out.println("Entered save slot screen");
+        }
+    }
+
+    @Override
+    public void onLeave() {
+        {
+            System.out.println("Left save slot screen");
         }
     }
 }

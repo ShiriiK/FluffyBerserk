@@ -1,8 +1,8 @@
 package en.fluffyBerserk.gui.utils;
 
+import en.fluffyBerserk.Main;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import en.fluffyBerserk.Main;
 import javafx.stage.StageStyle;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,6 +16,7 @@ public final class PopUpStageBuilder {
 
         popupStage.initOwner(Main.app.getPrimaryStage());
         popupStage.initModality(Modality.WINDOW_MODAL);
+        popupStage.initStyle(StageStyle.UNDECORATED);
 
         return popupStage;
     }

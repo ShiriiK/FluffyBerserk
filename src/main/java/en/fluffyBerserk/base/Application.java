@@ -2,6 +2,8 @@ package en.fluffyBerserk.base;
 
 import en.fluffyBerserk.persistence.DatabaseSession;
 import en.fluffyBerserk.persistence.models.User;
+import en.fluffyBerserk.logic.Game;
+import en.fluffyBerserk.persistence.models.User;
 import javafx.scene.effect.GaussianBlur;
 import javafx.stage.*;
 import en.fluffyBerserk.gui.popups.PopUp;
@@ -10,8 +12,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public final class Application {
-
-    private static final String APP_NAME = "Fluffy Berserk";
 
     @NotNull
     private final Stage primaryStage;
@@ -31,7 +31,7 @@ public final class Application {
     }
 
     public void init() {
-        primaryStage.setTitle(APP_NAME);
+        primaryStage.setTitle("Fluffy Berserk");
         primaryStage.setHeight(500.0);
         primaryStage.setWidth(500.0);
         primaryStage.setOnCloseRequest(event -> {
@@ -78,7 +78,6 @@ public final class Application {
         }
 
         popUp.onShow();
-
         setCurrentPopUp(popUp);
 
         popUp.getPopUpStage().show();

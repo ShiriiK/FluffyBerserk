@@ -6,6 +6,12 @@ package en.fluffyBerserk.logic.objects;
 
 public abstract class MovableEntity extends Entity implements MovableObject {
 
+
+    protected String direction;
+    protected int speed;
+    public int counter;
+    public int imgNumber;
+
     private float moveX;
 
     private float moveY;
