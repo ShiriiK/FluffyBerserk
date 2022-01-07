@@ -52,7 +52,7 @@ public class Inventory implements SubjectOfChange {
     // Equips selected item and applies it's stats
     //TODO item slots
     public void equip(Item item){
-        if (item instanceof Armor){
+        if (item instanceof Armor && content.containsValue(item)){
             ((Armor) item).setEquiped(true);
             int str = ((Armor) item).getStr();
             int armor = ((Armor) item).getArmor();
@@ -70,6 +70,10 @@ public class Inventory implements SubjectOfChange {
             player.setArmor(newArmor);
             player.setStamina(newStamina);
             player.setIntelllect(newIntellect);
+            notifyObservers();
+        }
+        else {
+            System.out.println("Something went wrong here");
         }
     }
 
@@ -93,6 +97,7 @@ public class Inventory implements SubjectOfChange {
             player.setArmor(newArmor);
             player.setStamina(newStamina);
             player.setIntelllect(newIntellect);
+            notifyObservers();
         }
     }
 

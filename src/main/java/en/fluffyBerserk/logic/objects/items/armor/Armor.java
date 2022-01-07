@@ -2,25 +2,14 @@ package en.fluffyBerserk.logic.objects.items.armor;
 
 import en.fluffyBerserk.logic.objects.items.WearableItem;
 
-public class Armor extends WearableItem {
+public abstract class Armor extends WearableItem {
 
-    private int str;
-    private int armor;
-    private int stamina;
-    private int intelllect;
-    private boolean isEquiped;
-    private String armorType;
-
-    public Armor(int str, int armor, int stamina, int intelllect, boolean isEquiped,String armorType) {
-
-        this.str = str;
-        this.armor = armor;
-        this.stamina = stamina;
-        this.intelllect = intelllect;
-        this.isEquiped = isEquiped;
-        this.armorType = armorType;
-    }
-
+    public String name;
+    public int str;
+    public int armor;
+    public int stamina;
+    public int intelllect;
+    public boolean isEquiped;
 
     public void setStr(int str) {
         this.str = str;
@@ -40,15 +29,6 @@ public class Armor extends WearableItem {
 
     public void setEquiped(boolean equiped) {
         isEquiped = equiped;
-    }
-
-
-    public String getArmorType() {
-        return armorType;
-    }
-
-    public void setArmorType(String armorType) {
-        this.armorType = armorType;
     }
 
     public int getStr() {
@@ -71,14 +51,4 @@ public class Armor extends WearableItem {
         return isEquiped;
     }
 
-
-    @Override
-    public String getName() {
-        return null;
-    }
-
-    @Override
-    public String getImagePath() {
-        return null;
-    }
 }

@@ -4,6 +4,8 @@ import en.fluffyBerserk.gui.utils.Observer;
 import en.fluffyBerserk.gui.utils.SubjectOfChange;
 import en.fluffyBerserk.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.logic.objects.items.armor.Armor;
+import en.fluffyBerserk.logic.objects.items.armor.BodyArmor;
+import en.fluffyBerserk.logic.objects.items.armor.Pants;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -40,10 +42,20 @@ public class GameState implements SubjectOfChange {
         level3.addExits(Arrays.asList(safeLocation, endlessModeLocation, level1, level2));
 
         //For testing
-        Armor head = new Armor(7,4,2,3,false,armorType[3]);
-        Armor boots = new Armor(1,2,3,6,false,armorType[0]);
-        Armor body = new Armor(8,6,9,6,false,armorType[2]);
+//        Armor head = new Armor(7,4,2,3,false,armorType[3]);
+//        Armor boots = new Armor(1,2,3,6,false,armorType[0]);
+//        Armor body = new Armor(8,6,9,6,false,armorType[2]);
+        BodyArmor bodyArmor = new BodyArmor("dgfdsg",7,4,2,3);
+        Pants pants = new Pants("ssfgs",1,2,3,4);
 
+        inventory.addItem(pants);
+        inventory.equip(pants);
+        inventory.addItem(bodyArmor);
+        inventory.equip(bodyArmor);
+
+        System.out.println(player.getStr());//28
+        inventory.unEquip(bodyArmor);
+        System.out.println(player.getStr());//21
 
 
     }
