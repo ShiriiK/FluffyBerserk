@@ -23,7 +23,10 @@ public class SpritesFactory {
 
     public static LocateImage grass = new LocateImage("tiles/grass.png",13);
 
-    public static LocateImage[] skin = new LocateImage[13];
+
+    public static LocateImage enemy1 = new LocateImage("npcs/enemy1.png",30);
+
+    public static LocateImage[] skin = new LocateImage[14];
     public static LocateImage[] getImages() {
         skin[0] = fluf1;
         skin[1] = fluf2;
@@ -38,6 +41,7 @@ public class SpritesFactory {
         skin[10] = fluf11;
         skin[11] = fluf12;
         skin[12] = fluf13;
+        skin[13] = enemy1;
         return skin;
     }
 }

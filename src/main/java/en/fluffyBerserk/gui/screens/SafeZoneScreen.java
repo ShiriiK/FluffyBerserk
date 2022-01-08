@@ -6,6 +6,8 @@ import en.fluffyBerserk.gui.animations.MovableEntityAnimations;
 import en.fluffyBerserk.gui.popups.PopUpMenu;
 import en.fluffyBerserk.gui.utils.AttachCSS;
 import en.fluffyBerserk.invariables.Invariables;
+import en.fluffyBerserk.logic.objects.creatures.Creature;
+import en.fluffyBerserk.logic.objects.creatures.npc.aggresive.ZombieCatto;
 import en.fluffyBerserk.logic.objects.creatures.player.Player;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -17,6 +19,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * BaseScreen extension class that displays safe-zone screen.
@@ -32,7 +37,8 @@ public class SafeZoneScreen extends Screen {
     private TileManager tileManager = new TileManager();
     private int imgNumber = 1;
     private int counter = 0;
-    private int speed = 6;
+    private int player_speed = 6;
+    private int npc_speed = 3;
     private int dx = 0;
     private int dy = 0;
 
@@ -42,6 +48,7 @@ public class SafeZoneScreen extends Screen {
 
     @Override
     protected Scene buildScene() {
+        List<ZombieCatto> npc_list = addNpcs(150);
         BorderPane root = new BorderPane();
 
         root.getChildren().addAll(layer1, layer2);
@@ -69,7 +76,7 @@ public class SafeZoneScreen extends Screen {
                         RIGHT = true;
                         break;
                     case SHIFT:
-                        speed = 6;
+                        player_speed = 6;
                     case ESCAPE:
                         Main.app.showPopUp(popUpMenu);
                         break;
@@ -94,18 +101,17 @@ public class SafeZoneScreen extends Screen {
                         RIGHT = false;
                         break;
                     case SHIFT:
-                        speed = 3;
+                        player_speed = 3;
                 }
             }
         });
-
         AnimationTimer playerTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                if (UP) dy -= speed;
-                if (DOWN) dy += speed;
-                if (LEFT) dx -= speed;
-                if (RIGHT) dx += speed;
+                if (UP) dy -= player_speed;
+                if (DOWN) dy += player_speed;
+                if (LEFT) dx -= player_speed;
+                if (RIGHT) dx += player_speed;
 
                 counter++;
                 if (counter > 10) {
@@ -120,13 +126,33 @@ public class SafeZoneScreen extends Screen {
                 }
 
                 movePlayerTo(dx, dy);
+                graphicsContext1.clearRect(0, 0, layer1.getWidth(), layer1.getHeight());
                 tileManager.render(graphicsContext2);
                 renderPlayer(graphicsContext1, dx, dy);
+                renderNpcs(npc_list);
             }
 
         };
         playerTimer.start();
         return scene;
+    }
+
+
+    public List<ZombieCatto> addNpcs(int npc_count) {
+        List<ZombieCatto> npc_list = new ArrayList<>();
+        for (int i = 0; i < npc_count; i++) {
+            ZombieCatto idk = new ZombieCatto();
+            npc_list.add(idk);
+        }
+        return npc_list;
+    }
+
+
+    public void renderNpcs(List<ZombieCatto> npc_list) {
+        for (ZombieCatto c : npc_list) {
+            c.renderNpc(graphicsContext1);
+            c.npcMovement(dx, dy);
+        }
     }
 
     private void movePlayerTo(int dx, int dy) {
@@ -135,11 +161,11 @@ public class SafeZoneScreen extends Screen {
         }
         player.setX(dx);
         player.setY(dy);
-
     }
 
     private void renderPlayer(GraphicsContext graphicsContext, int dx, int dy) {
-        MovableEntityAnimations playerAnimations = player.getPlayerAnimations();
+        MovableEntityAnimations playerAnimations = Player.getPlayerAnimations();
+
         Image image = playerAnimations.getMoveDown().get(1);
         if (UP) {
             if (imgNumber == 1) {
@@ -185,7 +211,6 @@ public class SafeZoneScreen extends Screen {
                 image = playerAnimations.getMoveRight().get(2);
             }
         }
-        graphicsContext.clearRect(0, 0, layer1.getWidth(), layer1.getHeight());
         graphicsContext.drawImage(image, dx, dy, Invariables.TILE_SIZE, Invariables.TILE_SIZE);
     }
 
