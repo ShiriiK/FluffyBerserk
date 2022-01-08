@@ -7,6 +7,7 @@ import en.fluffyBerserk.gui.animations.SpriteImage;
 import en.fluffyBerserk.gui.animations.SpritesFactory;
 import en.fluffyBerserk.gui.utils.LocateImage;
 import en.fluffyBerserk.invariables.Constant;
+import en.fluffyBerserk.logic.objects.bullets.Bullet;
 import en.fluffyBerserk.logic.objects.creatures.CanAttack;
 import en.fluffyBerserk.logic.objects.creatures.CanDie;
 import en.fluffyBerserk.logic.objects.creatures.CanShoot;
@@ -183,7 +184,7 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie {
 
     @Override
     public void shoot() {
-        // TODO
+
     }
 
 

@@ -5,6 +5,7 @@ import en.fluffyBerserk.gui.utils.GameCamera;
 import en.fluffyBerserk.gui.tile.TileManager;
 import en.fluffyBerserk.gui.utils.AttachCSS;
 import en.fluffyBerserk.invariables.Constant;
+import en.fluffyBerserk.logic.objects.bullets.Bullet;
 import en.fluffyBerserk.logic.objects.creatures.player.Player;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
@@ -27,6 +28,7 @@ public class SafeZoneScreen extends Screen {
     private final Canvas layer3 = new Canvas(Constant.SCREEN_WIDTH, Constant.SCREEN_HEIGHT);
 
     private final Image image = new Image("maps/map1.png", 1080, 1080, false, false);
+    private final Image bulletImg = new Image("bullets/flufball_basic.png");
     private final GraphicsContext graphicsContext1 = layer1.getGraphicsContext2D();
     private final GraphicsContext graphicsContext2 = layer2.getGraphicsContext2D();
     private final GraphicsContext graphicsContext3 = layer3.getGraphicsContext2D();
@@ -34,6 +36,9 @@ public class SafeZoneScreen extends Screen {
     private GameCamera gameCamera = new GameCamera(0, 0);
     private int dx = 0;
     private int dy = 0;
+
+    private int counterShoot = 50;
+    public Bullet playerBullet;
 
     public SafeZoneScreen() throws IOException {
 
@@ -62,6 +67,14 @@ public class SafeZoneScreen extends Screen {
                 if (KeyManager.DOWN) dy += player.speed;
                 if (KeyManager.LEFT) dx -= player.speed;
                 if (KeyManager.RIGHT) dx += player.speed;
+
+
+                if(KeyManager.SHOOT && counterShoot >= 50) { // Bullets cooldown
+                    counterShoot = 0;
+                    newBullet();
+                } else {
+                    counterShoot++;
+                }
 
                 player.counter++;
                 if (player.counter > 10) {
@@ -98,10 +111,26 @@ public class SafeZoneScreen extends Screen {
         return scene;
     }
 
+
+    private void newBullet() {
+        int direction = 4;
+        if(KeyManager.RIGHT) direction = 2;
+        if(KeyManager.LEFT) direction = 6;
+        if(KeyManager.UP) direction = 0;
+        if(KeyManager.DOWN && KeyManager.RIGHT) direction = 3;
+        if(KeyManager.DOWN && KeyManager.LEFT) direction = 5;
+        if(KeyManager.UP && KeyManager.RIGHT) direction = 1;
+        if(KeyManager.UP && KeyManager.LEFT) direction = 7;
+
+
+        Bullet bullet = new Bullet(direction, player, player.getWorldX(), player.getWorldY(), graphicsContext1);
+    }
+
     private void renderMap(GraphicsContext graphicsContext) {
         graphicsContext.clearRect(0, 0, layer2.getWidth(), layer2.getHeight());
         graphicsContext.drawImage(image, layer2.getWidth() / 2 - player.getWorldX(), layer2.getHeight() / 2 - player.getWorldY(), Constant.WORLD_WIDTH, Constant.WORLD_HEIGHT);
     }
+
 
     @Override
     public void onEnter() {

@@ -27,6 +27,9 @@ public class KeyManager extends Handler {
                     case ESCAPE:
                         Main.app.showPopUp(popUpMenu);
                         break;
+                    case SPACE:
+                        SHOOT = true;
+                        break;
                 }
             }
         });
@@ -45,6 +48,9 @@ public class KeyManager extends Handler {
                         break;
                     case D:
                         RIGHT = false;
+                        break;
+                    case SPACE:
+                        SHOOT = false;
                         break;
                 }
             }
