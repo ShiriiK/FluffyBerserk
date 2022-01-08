@@ -4,7 +4,7 @@ package en.fluffyBerserk.invariables;
  * Class containing invariable elements for their easier management
  */
 
-public class Invariables {
+public class Constant {
 
     public static final String GAME_NAME = "Fulffy Berserk";
 
@@ -17,5 +17,11 @@ public class Invariables {
 
     public static final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL;
     public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW;
+
+    public static final int MAX_WORLD_COL = 20;
+    public static final int MAX_WORLD_ROW = 20;
+
+    public static final int WORLD_WIDTH = TILE_SIZE * MAX_WORLD_COL;
+    public static final int WORLD_HEIGHT = TILE_SIZE * MAX_WORLD_ROW;
 
 }

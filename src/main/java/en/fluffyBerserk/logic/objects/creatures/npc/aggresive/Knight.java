@@ -13,7 +13,7 @@ public class Knight extends AggressiveNpc {
     }
 
     @Override
-    public void move(int steps) {
+    public void move() {
 
     }
 }

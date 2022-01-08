@@ -3,8 +3,7 @@ package en.fluffyBerserk.base;
 import en.fluffyBerserk.gui.popups.PopUp;
 import en.fluffyBerserk.gui.screens.Screen;
 import en.fluffyBerserk.gui.utils.PopUpBuilder;
-import en.fluffyBerserk.invariables.Invariables;
-import en.fluffyBerserk.persistence.DatabaseSession;
+import en.fluffyBerserk.invariables.Constant;
 import en.fluffyBerserk.persistence.models.User;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
@@ -35,13 +34,13 @@ public final class Application {
     }
 
     public void init() {
-        primaryStage.setTitle(Invariables.GAME_NAME);
-        primaryStage.setHeight(Invariables.SCREEN_HEIGHT);
-        primaryStage.setWidth(Invariables.SCREEN_WIDTH);
+        primaryStage.setTitle(Constant.GAME_NAME);
+        primaryStage.setHeight(Constant.SCREEN_HEIGHT);
+        primaryStage.setWidth(Constant.SCREEN_WIDTH);
     }
 
     public void start(Screen defaultScreen) {
-        DatabaseSession.startSession();
+       // DatabaseSession.startSession();
         this.changeScreen(defaultScreen);
         primaryStage.show();
     }

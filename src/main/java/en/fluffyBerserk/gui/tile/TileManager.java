@@ -1,6 +1,7 @@
-package en.fluffyBerserk.gui.Tile;
+package en.fluffyBerserk.gui.tile;
 
-import en.fluffyBerserk.invariables.Invariables;
+import en.fluffyBerserk.invariables.Constant;
+import en.fluffyBerserk.logic.objects.creatures.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.io.BufferedReader;
@@ -12,17 +13,18 @@ import java.io.InputStreamReader;
  * Class where loading and rendering of map takes place
  */
 public class TileManager {
-    private static final int cols = Invariables.MAX_SCREEN_COL;
-    private static final int rows = Invariables.MAX_SCREEN_ROW;
-    private static final int scale = Invariables.TILE_SIZE;
+    private static final int cols = Constant.MAX_WORLD_COL;
+    private static final int rows = Constant.MAX_WORLD_ROW;
+    private static final int scale = Constant.TILE_SIZE;
     private Tile[] tile;
     private int tileNumber[][];
+    private TileFactory tileFactory = new TileFactory();
 
     public TileManager() throws IOException {
         tile = new Tile[20];
         tileNumber = new int[cols][rows];
 
-        TileFactory.buildTiles(tile);
+        tileFactory.buildTiles(tile);
         loadMap("/maps/map1.txt");
     }
 
@@ -46,6 +48,7 @@ public class TileManager {
                     String numbers[] = line.split(" ");
                     int num = Integer.parseInt(numbers[col]);
 
+
                     tileNumber[col][row] = num;
                     col++;
                 }
@@ -66,23 +69,29 @@ public class TileManager {
      * Renders information given by loadMap method
      * @param graphicsContext gc to which map will be rendered to, in this case its gc for canvas that is in bottom of other canvases
      */
-    public void render(GraphicsContext graphicsContext) {
+    public void render(GraphicsContext graphicsContext, Player player) {
         int col = 0;
         int row = 0;
-        int x = 0;
-        int y = 0;
 
         while (col < cols && row < rows) {
             int tileNum = tileNumber[col][row];
-            graphicsContext.drawImage(tile[tileNum].image, x, y, scale, scale);
+            if(tileNum != 8){
+                int worldX = col * Constant.TILE_SIZE;
+                int worldY = row * Constant.TILE_SIZE;
+                int screenX = (int) (worldX - player.getWorldX() + Player.screenX +30);
+                int screenY = (int) (worldY - player.getWorldY() + Player.screenY +28);
+
+                if(!(screenX < -Constant.TILE_SIZE) && !(screenY < -Constant.TILE_SIZE)){
+                    graphicsContext.drawImage(tile[tileNum].image, screenX, screenY, scale, scale);
+                }
+
+
+            }
             col++;
-            x += TileManager.scale;
 
             if (col == cols) {
                 col = 0;
-                x = 0;
                 row++;
-                y += TileManager.scale;
             }
         }
     }

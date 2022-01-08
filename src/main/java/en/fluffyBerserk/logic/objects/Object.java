@@ -1,5 +1,7 @@
 package en.fluffyBerserk.logic.objects;
 
+import javafx.scene.shape.Rectangle;
+
 /**
  * Interface for static objects
  */
@@ -7,13 +9,14 @@ package en.fluffyBerserk.logic.objects;
 
 public interface Object {
 
-    void setX(float x);
+    void setWorldX(float worldX);
 
-    void setY(float y);
+    void setWorldY(float worldY);
 
-    float getX();
+    float getWorldX();
 
-    float getY();
+    float getWorldY();
 
     String getImagePath();
+
 }

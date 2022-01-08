@@ -21,7 +21,6 @@ public class SpritesFactory {
     public static LocateImage fluf12 = new LocateImage("player/fluf12.png",11);
     public static LocateImage fluf13 = new LocateImage("player/fluf13.png",12);
 
-    public static LocateImage grass = new LocateImage("tiles/grass.png",13);
 
     public static LocateImage[] skin = new LocateImage[13];
     public static LocateImage[] getImages() {

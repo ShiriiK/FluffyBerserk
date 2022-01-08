@@ -7,7 +7,6 @@ package en.fluffyBerserk.logic.objects;
 
 public interface MovableObject {
 
-    void move(int steps);
 
     void setMoveX(float moveX);
 

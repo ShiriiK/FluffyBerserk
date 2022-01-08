@@ -9,8 +9,6 @@ public abstract class MovableEntity extends Entity implements MovableObject {
 
     protected String direction;
     protected int speed;
-    public int counter;
-    public int imgNumber;
 
     private float moveX;
 
@@ -38,7 +36,7 @@ public abstract class MovableEntity extends Entity implements MovableObject {
 
     @Override
     public void move() {
-        setX(getX() + moveX);
-        setY(getY() + moveY);
+        setWorldX(getWorldX() + moveX);
+        setWorldY(getWorldY() + moveY);
     }
 }
