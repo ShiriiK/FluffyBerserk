@@ -54,7 +54,7 @@ public final class PopUpMenu extends PopUp {
         Button deleteAccountButton = new Button("Delete account");
 
         buttons.getChildren().addAll(resumeButton, saveButton, loadButton, editButton, helpButton, logoutButton, deleteSaveButton, deleteAccountButton);
-        buttons.getStyleClass().add("vbox");
+        buttons.getStyleClass().add("pop-up-menu");
 
 
         Scene scene = new Scene(buttons);

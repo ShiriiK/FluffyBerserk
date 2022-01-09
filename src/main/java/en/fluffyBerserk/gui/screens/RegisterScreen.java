@@ -28,6 +28,7 @@ public final class RegisterScreen extends Screen {
     @Override
     protected Scene buildScene() {
         final VBox root = new VBox();
+        root.getStyleClass().addAll("vbox", "log-in");
 
         final TextField usernameField = new TextField(form.getUsername());
         usernameField.setPromptText("Enter username");
@@ -115,12 +116,9 @@ public final class RegisterScreen extends Screen {
 
         final Button backButton = new Button("Back");
         backButton.setOnAction(event -> Main.app.changeScreen(new HomeScreen()));
+        backButton.getStyleClass().add("back-button");
 
-        final FlowPane buttonPane = new FlowPane();
-        buttonPane.getChildren().add(backButton);
-        buttonPane.getChildren().add(registerButton);
-
-        root.getChildren().add(buttonPane);
+        root.getChildren().addAll(registerButton, backButton);
 
         Scene scene = new Scene(root);
         AttachCSS.attachCSS(scene);

@@ -25,6 +25,7 @@ public final class HomeScreen extends Screen {
     protected Scene buildScene() {
         final BorderPane root = new BorderPane();
         VBox buttons = new VBox();
+        buttons.getStyleClass().add("vbox");
 
         // Login screen
         Button loginButton = new Button("Login");
@@ -47,8 +48,6 @@ public final class HomeScreen extends Screen {
         // TODO guest button
 
         buttons.getChildren().addAll(loginButton, registerButton, guestButton);
-        buttons.setAlignment(Pos.CENTER);
-        buttons.setSpacing(5);
 
         // Kitty picture randomizer
         int index = getIndex();

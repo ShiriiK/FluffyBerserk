@@ -26,6 +26,7 @@ public final class LoginScreen extends Screen {
     @Override
     protected Scene buildScene() {
         VBox root = new VBox();
+        root.getStyleClass().addAll("vbox", "log-in");
 
 
         TextField usernameField = new TextField(form.getUsername());
@@ -33,6 +34,7 @@ public final class LoginScreen extends Screen {
         usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
             form.setUsername(newValue);
         });
+
 
         root.getChildren().add(new Label("Username"));
         root.getChildren().add(usernameField);
@@ -97,12 +99,10 @@ public final class LoginScreen extends Screen {
         // Home screen
         final Button backButton = new Button("Back");
         backButton.setOnAction(event -> Main.app.changeScreen(new HomeScreen()));
+        backButton.getStyleClass().add("back-button");
 
-        final FlowPane buttonPane = new FlowPane();
-        buttonPane.getChildren().add(backButton);
-        buttonPane.getChildren().add(loginButton);
 
-        root.getChildren().add(buttonPane);
+        root.getChildren().addAll(loginButton, backButton);
 
         Scene scene = new Scene(root);
         AttachCSS.attachCSS(scene);
