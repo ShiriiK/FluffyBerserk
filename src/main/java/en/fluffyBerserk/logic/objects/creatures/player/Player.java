@@ -62,6 +62,7 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie {
         hitBox.setWidth(Constant.TILE_SIZE / 10 * 3);
         hitBox.setHeight(Constant.TILE_SIZE / 3);
 
+        // screenHitBox is drawn on screen for better understanding how to make it better
         screenHitBox.setX(screenX + Constant.TILE_SIZE / 10 * 4);
         screenHitBox.setY(screenY + Constant.TILE_SIZE / 2);
         screenHitBox.setWidth(Constant.TILE_SIZE / 10 * 3);
@@ -70,7 +71,14 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie {
         speed = 6;
     }
 
+    /**
+     * Method for changing player global coordinates
+     *
+     * @param dx how many pixels on x-axis will be added to players global position
+     * @param dy how many pixels on y-axis will be added to players global position
+     */
     public void move(int dx, int dy) throws IOException {
+        // Firstly ensuring that player is not trying to step outside of map boundaries
         if (getWorldX() < Constant.TILE_SIZE / 2 && dx < 0) {
             dx = 0;
         }
@@ -84,10 +92,13 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie {
             dy = 0;
         }
 
+        // Do not continue if there will be no changes in coordinates
         if (dx == 0 && dy == 0) {
             return;
         }
 
+        // Checking for collision detection and if there is none that allow to change
+        // players global coordinates as well as the hit-box coordinates
         collisionOn = false;
         checkCollision();
         if (!collisionOn) {
@@ -100,7 +111,8 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie {
     }
 
     /**
-     * Method for checking players collision hit box with tiles on map
+     * Method for checking players collision hit-box with tiles on map
+     * Currently not working very well
      */
     private void checkCollision() throws IOException {
         TileManager tileManager = new TileManager();
@@ -118,7 +130,7 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie {
         int tileNum1, tileNum2;
         switch (direction) {
             case UP:
-                topRow = (int) ((topWorldY - speed - hitBox.getHeight()) / Constant.TILE_SIZE );
+                topRow = (int) ((topWorldY - speed - hitBox.getHeight()) / Constant.TILE_SIZE);
                 tileNum1 = tileManager.tileNumber[leftCol][topRow];
                 tileNum2 = tileManager.tileNumber[rightCol][topRow];
                 if (tileManager.tile[tileNum1].collision || tileManager.tile[tileNum2].collision) {
@@ -152,6 +164,15 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie {
         }
     }
 
+    /**
+     * Method for rendering player on screen
+     * and doing the animation magic using imgNumber and counter
+     * values of imgNumber and counter are managed in players animation timer
+     * player will be always rendered in the center of the screen
+     *
+     * @param graphicsContext used for drawing players image on canvas
+     * @param gameCamera      used for actually centering player on the screen
+     */
     public void renderPlayer(GraphicsContext graphicsContext, GameCamera gameCamera) {
         Image image = playerAnimations.getMoveDown().get(1);
         if (KeyManager.UP) {
@@ -206,9 +227,9 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie {
         graphicsContext.drawImage(image, x, y, Constant.TILE_SIZE, Constant.TILE_SIZE);
         gameCamera.centrOnEntity(this);
     }
+
     /**
      * Changes sprite, which player animations are taken from (fluf1, fluf2, fluf3,...)
-     * as well as currentSkin
      */
     public static void changeAnimationsSprite(LocateImage image) {
         playerAnimations = new MovableEntityAnimations(image);
@@ -237,7 +258,6 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie {
     public void shoot() {
 
     }
-
 
     @Override
     public void die() {

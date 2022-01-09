@@ -56,8 +56,12 @@ public class SafeZoneScreen extends Screen {
 
         graphicsContext2.drawImage(image, 0, 0, Constant.WORLD_WIDTH, Constant.WORLD_HEIGHT);
 
-        KeyManager.attachHandlers(scene); //////////
+        // Handles player input
+        KeyManager.attachHandlers(scene);
 
+        /**
+         * Loop for updating the player
+         */
         AnimationTimer playerTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -87,6 +91,7 @@ public class SafeZoneScreen extends Screen {
                     counterShoot++;
                 }
 
+                // Used for animations in render() method in player
                 player.counter++;
                 if (player.counter > 10) {
                     if (player.imgNumber == 1) {
@@ -106,17 +111,17 @@ public class SafeZoneScreen extends Screen {
                 }
 
                 player.renderPlayer(graphicsContext1, gameCamera);
-
                 // Collision rect
                 graphicsContext1.fillRect(player.screenHitBox.getX(), player.screenHitBox.getY(), player.screenHitBox.getWidth(), player.screenHitBox.getHeight());
                 graphicsContext1.setFill(Color.RED);
-
-
             }
 
         };
         playerTimer.start();
 
+        /**
+         * Loop for updating background such as map and background tiles
+         */
         AnimationTimer backgroundTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -145,6 +150,10 @@ public class SafeZoneScreen extends Screen {
         Bullet bullet = new Bullet(direction, player, player.getWorldX(), player.getWorldY(), graphicsContext1);
     }
 
+    /**
+     * Renders map
+     * @param graphicsContext bottom canvas
+     */
     private void renderMap(GraphicsContext graphicsContext) {
         graphicsContext.clearRect(0, 0, layer2.getWidth(), layer2.getHeight());
         graphicsContext.drawImage(image, layer2.getWidth() / 2 - player.getWorldX(), layer2.getHeight() / 2 - player.getWorldY(), Constant.WORLD_WIDTH, Constant.WORLD_HEIGHT);

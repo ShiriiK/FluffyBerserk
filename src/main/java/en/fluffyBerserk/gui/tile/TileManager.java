@@ -65,12 +65,11 @@ public class TileManager {
         } catch (Exception e) {
 
         }
-
     }
 
     /**
-     * Renders information given by loadMap method
-     * @param graphicsContext gc to which map will be rendered to, in this case its gc for canvas that is in bottom of other canvases
+     * Renders tiles on screen
+     * @param graphicsContext gc to which tiles will be drawn to
      */
     public void render(GraphicsContext graphicsContext, Player player) {
         int col = 0;
@@ -88,11 +87,8 @@ public class TileManager {
                 if(!(screenX < -Constant.TILE_SIZE) && !(screenY < -Constant.TILE_SIZE)){
                     graphicsContext.drawImage(tile[tileNum].image, screenX, screenY, scale, scale);
                     //graphicsContext.fillRect(screenX, screenY, scale, scale)
-                    graphicsContext.fillRect(screenX, screenY,scale, scale);
                     rectangleArrayList.add(new Rectangle(screenX, screenY, scale, scale));
                 }
-
-
             }
             col++;
 
