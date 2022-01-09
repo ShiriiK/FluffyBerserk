@@ -1,7 +1,5 @@
 package en.fluffyBerserk.logic.objects;
 
-import javafx.scene.shape.Rectangle;
-
 /**
  * Interface for static objects
  */

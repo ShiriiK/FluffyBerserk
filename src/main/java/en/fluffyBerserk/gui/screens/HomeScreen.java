@@ -2,8 +2,8 @@ package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.gui.animations.SpriteImage;
-import en.fluffyBerserk.gui.utils.AttachCSS;
 import en.fluffyBerserk.gui.animations.SpritesFactory;
+import en.fluffyBerserk.gui.utils.AttachCSS;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

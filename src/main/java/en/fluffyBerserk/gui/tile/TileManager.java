@@ -3,11 +3,13 @@ package en.fluffyBerserk.gui.tile;
 import en.fluffyBerserk.invariables.Constant;
 import en.fluffyBerserk.logic.objects.creatures.player.Player;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.shape.Rectangle;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 /**
  * Class where loading and rendering of map takes place
@@ -16,9 +18,10 @@ public class TileManager {
     private static final int cols = Constant.MAX_WORLD_COL;
     private static final int rows = Constant.MAX_WORLD_ROW;
     private static final int scale = Constant.TILE_SIZE;
-    private Tile[] tile;
-    private int tileNumber[][];
+    public Tile[] tile;
+    public int tileNumber[][];
     private TileFactory tileFactory = new TileFactory();
+    public ArrayList<Rectangle> rectangleArrayList = new ArrayList<>(400);
 
     public TileManager() throws IOException {
         tile = new Tile[20];
@@ -72,17 +75,21 @@ public class TileManager {
     public void render(GraphicsContext graphicsContext, Player player) {
         int col = 0;
         int row = 0;
+        rectangleArrayList.clear();
 
         while (col < cols && row < rows) {
             int tileNum = tileNumber[col][row];
             if(tileNum != 8){
                 int worldX = col * Constant.TILE_SIZE;
                 int worldY = row * Constant.TILE_SIZE;
-                int screenX = (int) (worldX - player.getWorldX() + Player.screenX +30);
-                int screenY = (int) (worldY - player.getWorldY() + Player.screenY +28);
+                int screenX = (int) (worldX - player.getWorldX() + Player.screenX);
+                int screenY = (int) (worldY - player.getWorldY() + Player.screenY);
 
                 if(!(screenX < -Constant.TILE_SIZE) && !(screenY < -Constant.TILE_SIZE)){
                     graphicsContext.drawImage(tile[tileNum].image, screenX, screenY, scale, scale);
+                    //graphicsContext.fillRect(screenX, screenY, scale, scale)
+                    graphicsContext.fillRect(screenX, screenY,scale, scale);
+                    rectangleArrayList.add(new Rectangle(screenX, screenY, scale, scale));
                 }
 
 

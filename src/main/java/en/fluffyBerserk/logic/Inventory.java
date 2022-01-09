@@ -4,7 +4,6 @@ import en.fluffyBerserk.logic.objects.items.Item;
 import en.fluffyBerserk.logic.objects.items.PickableItem;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 

@@ -1,6 +1,5 @@
 package en.fluffyBerserk.logic;
 
-import en.fluffyBerserk.logic.objects.creatures.player.Player;
 import java.util.Arrays;
 
 public class GameState  {

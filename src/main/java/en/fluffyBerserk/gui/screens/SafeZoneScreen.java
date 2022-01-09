@@ -1,10 +1,11 @@
 package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.gamecontrol.KeyManager;
-import en.fluffyBerserk.gui.utils.GameCamera;
 import en.fluffyBerserk.gui.tile.TileManager;
 import en.fluffyBerserk.gui.utils.AttachCSS;
+import en.fluffyBerserk.gui.utils.GameCamera;
 import en.fluffyBerserk.invariables.Constant;
+import en.fluffyBerserk.invariables.Direction;
 import en.fluffyBerserk.logic.objects.bullets.Bullet;
 import en.fluffyBerserk.logic.objects.creatures.player.Player;
 import javafx.animation.AnimationTimer;
@@ -22,23 +23,21 @@ import java.io.IOException;
  */
 
 public class SafeZoneScreen extends Screen {
-    private static final Player player = new Player();
+    private final Player player = new Player();
     private final Canvas layer1 = new Canvas(Constant.SCREEN_WIDTH, Constant.SCREEN_HEIGHT);
     private final Canvas layer2 = new Canvas(Constant.SCREEN_WIDTH, Constant.SCREEN_HEIGHT);
     private final Canvas layer3 = new Canvas(Constant.SCREEN_WIDTH, Constant.SCREEN_HEIGHT);
-
     private final Image image = new Image("maps/map1.png", 1080, 1080, false, false);
     private final Image bulletImg = new Image("bullets/flufball_basic.png");
     private final GraphicsContext graphicsContext1 = layer1.getGraphicsContext2D();
     private final GraphicsContext graphicsContext2 = layer2.getGraphicsContext2D();
     private final GraphicsContext graphicsContext3 = layer3.getGraphicsContext2D();
+    public Bullet playerBullet;
     private TileManager tileManager = new TileManager();
     private GameCamera gameCamera = new GameCamera(0, 0);
     private int dx = 0;
     private int dy = 0;
-
     private int counterShoot = 50;
-    public Bullet playerBullet;
 
     public SafeZoneScreen() throws IOException {
 
@@ -50,6 +49,7 @@ public class SafeZoneScreen extends Screen {
 
         root.getChildren().addAll(layer1, layer2, layer3);
         layer2.toBack();
+        layer1.toFront();
 
         Scene scene = new Scene(root);
         AttachCSS.attachCSS(scene);
@@ -63,13 +63,24 @@ public class SafeZoneScreen extends Screen {
             public void handle(long now) {
                 dx = 0;
                 dy = 0;
-                if (KeyManager.UP) dy -= player.speed;
-                if (KeyManager.DOWN) dy += player.speed;
-                if (KeyManager.LEFT) dx -= player.speed;
-                if (KeyManager.RIGHT) dx += player.speed;
 
-
-                if(KeyManager.SHOOT && counterShoot >= 50) { // Bullets cooldown
+                if (KeyManager.UP) {
+                    dy -= player.speed;
+                    player.direction = Direction.UP;
+                }
+                if (KeyManager.DOWN) {
+                    dy += player.speed;
+                    player.direction = Direction.DOWN;
+                }
+                if (KeyManager.LEFT) {
+                    dx -= player.speed;
+                    player.direction = Direction.LEFT;
+                }
+                if (KeyManager.RIGHT) {
+                    dx += player.speed;
+                    player.direction = Direction.RIGHT;
+                }
+                if (KeyManager.SHOOT && counterShoot >= 50) { // Bullets cooldown
                     counterShoot = 0;
                     newBullet();
                 } else {
@@ -88,11 +99,19 @@ public class SafeZoneScreen extends Screen {
                     player.counter = 0;
                 }
 
-                player.move(dx,dy);
+                try {
+                    player.move(dx, dy);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
                 player.renderPlayer(graphicsContext1, gameCamera);
+
                 // Collision rect
-                graphicsContext1.fillRect(player.getSolidArea().getX(), player.getSolidArea().getY(), player.getSolidArea().getWidth(), player.getSolidArea().getHeight());
+                graphicsContext1.fillRect(player.screenHitBox.getX(), player.screenHitBox.getY(), player.screenHitBox.getWidth(), player.screenHitBox.getHeight());
                 graphicsContext1.setFill(Color.RED);
+
+
             }
 
         };
@@ -114,13 +133,13 @@ public class SafeZoneScreen extends Screen {
 
     private void newBullet() {
         int direction = 4;
-        if(KeyManager.RIGHT) direction = 2;
-        if(KeyManager.LEFT) direction = 6;
-        if(KeyManager.UP) direction = 0;
-        if(KeyManager.DOWN && KeyManager.RIGHT) direction = 3;
-        if(KeyManager.DOWN && KeyManager.LEFT) direction = 5;
-        if(KeyManager.UP && KeyManager.RIGHT) direction = 1;
-        if(KeyManager.UP && KeyManager.LEFT) direction = 7;
+        if (KeyManager.RIGHT) direction = 2;
+        if (KeyManager.LEFT) direction = 6;
+        if (KeyManager.UP) direction = 0;
+        if (KeyManager.DOWN && KeyManager.RIGHT) direction = 3;
+        if (KeyManager.DOWN && KeyManager.LEFT) direction = 5;
+        if (KeyManager.UP && KeyManager.RIGHT) direction = 1;
+        if (KeyManager.UP && KeyManager.LEFT) direction = 7;
 
 
         Bullet bullet = new Bullet(direction, player, player.getWorldX(), player.getWorldY(), graphicsContext1);

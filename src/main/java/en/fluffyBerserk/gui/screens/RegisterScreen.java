@@ -6,7 +6,6 @@ import en.fluffyBerserk.gui.utils.AttachCSS;
 import en.fluffyBerserk.persistence.InsertTask;
 import en.fluffyBerserk.persistence.SelectTask;
 import en.fluffyBerserk.persistence.models.User;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
