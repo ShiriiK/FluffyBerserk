@@ -12,10 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
-
-public final class HomeScreen extends Screen {
-
+public final class HomeScreen extends BaseScreen {
 
     @Override
     protected Scene buildScene() {
@@ -31,17 +28,11 @@ public final class HomeScreen extends Screen {
         final Button registerButton = new Button("Register");
         registerButton.setOnAction(event -> Main.app.changeScreen(new RegisterScreen()));
 
-        // Safe-zone screen
+        // Guest button
         Button guestButton = new Button("Continue as guest");
         guestButton.setOnAction(event -> {
-            try {
-                Main.app.changeScreen(new SafeZoneScreen());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Main.app.changeScreen(new CharacterEditScreen(null));
         });
-
-        // TODO guest button
 
         buttons.getChildren().addAll(loginButton, registerButton, guestButton);
 
@@ -69,15 +60,5 @@ public final class HomeScreen extends Screen {
         if (Main.app.isUserLoggedIn()) {
             throw new RuntimeException("Logged in user cannot go to home screen!");
         }
-        System.out.println("Entered home screen");
-    }
-
-    @Override
-    public void onLeave() {
-        System.out.println("Left home screen");
-    }
-
-    private int getIndex() {
-        return (int) ((Math.random() * (SpritesFactory.getImages().length - 1)) + 1);
     }
 }

@@ -18,7 +18,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
-public final class SaveSlotsScreen extends Screen {
+public final class SaveSlotsScreen extends BaseScreen {
 
     @Override
     protected Scene buildScene() {
@@ -98,11 +98,5 @@ public final class SaveSlotsScreen extends Screen {
         if (!Main.app.isUserLoggedIn()) {
             throw new RuntimeException("User must be logged in to enter save slot screen!");
         }
-        System.out.println("Entered save slot screen");
-    }
-
-    @Override
-    public void onLeave() {
-        System.out.println("Left save slot screen");
     }
 }

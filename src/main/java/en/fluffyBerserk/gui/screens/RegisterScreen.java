@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -21,7 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.persistence.TypedQuery;
 import java.security.SecureRandom;
 
-public final class RegisterScreen extends Screen {
+public final class RegisterScreen extends BaseScreen {
 
     private final RegisterForm form = new RegisterForm();
 
@@ -130,11 +129,5 @@ public final class RegisterScreen extends Screen {
         if (Main.app.isUserLoggedIn()) {
             throw new RuntimeException("Logged in user cannot go to register screen!");
         }
-        System.out.println("Entered register screen");
-    }
-
-    @Override
-    public void onLeave() {
-        System.out.println("Left register screen");
     }
 }

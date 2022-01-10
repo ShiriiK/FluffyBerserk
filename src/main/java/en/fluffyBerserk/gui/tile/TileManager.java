@@ -1,7 +1,7 @@
 package en.fluffyBerserk.gui.tile;
 
 import en.fluffyBerserk.invariables.Constant;
-import en.fluffyBerserk.logic.objects.creatures.player.Player;
+import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Rectangle;
 

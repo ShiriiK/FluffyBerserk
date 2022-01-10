@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public final class CharacterEditScreen extends Screen {
+public final class CharacterEditScreen extends BaseScreen {
 
     private final CharacterForm form;
 
@@ -216,14 +216,16 @@ public final class CharacterEditScreen extends Screen {
             pointsLeftLabel.setText(String.format("Points left: %d", form.getPointsLeft()));
         });
 
-        final Button saveButton;
-        if (character != null) {
-            saveButton = new Button("Save");
+        final Button continueButton;
+        if (!Main.app.isUserLoggedIn()) {
+            continueButton = new Button("Play");
+        } else if (character != null) {
+            continueButton = new Button("Save");
         } else {
-            saveButton = new Button("Create");
+            continueButton = new Button("Create");
         }
 
-        saveButton.setOnAction(event -> {
+        continueButton.setOnAction(event -> {
             form.clearErrors();
 
             if (!form.validate()) {
@@ -231,39 +233,46 @@ public final class CharacterEditScreen extends Screen {
                 return;
             }
 
-            Character characterToSave;
+            Character newCharacter;
             if (character == null) {
-                characterToSave = new Character();
+                newCharacter = new Character();
             } else {
-                characterToSave = character;
+                newCharacter = character;
             }
 
-            characterToSave.setName(form.getName());
-            characterToSave.setArmor(form.getArmor());
-            characterToSave.setIntellect(form.getIntellect());
-            characterToSave.setStamina(form.getStamina());
-            characterToSave.setStrength(form.getStrength());
-            characterToSave.setSpriteIndex(form.getSprite().getIndex());
-            characterToSave.setUser(user);
+            newCharacter.setName(form.getName());
+            newCharacter.setArmor(form.getArmor());
+            newCharacter.setIntellect(form.getIntellect());
+            newCharacter.setStamina(form.getStamina());
+            newCharacter.setStrength(form.getStrength());
+            newCharacter.setSpriteIndex(form.getSprite().getIndex());
 
-            if (character == null) {
-                new InsertTask<Character>().insert(characterToSave);
-            } else {
-                new UpdateTask<Character>().update(characterToSave);
+            if (!Main.app.isUserLoggedIn()) {
+                Main.app.changeScreen(new GameScreen(newCharacter));
+                return;
             }
 
-            Main.app.changeScreen(new SaveSlotsScreen());
-        });
+            newCharacter.setUser(user);
 
-        final Button backButton = new Button("Back to profile");
-        backButton.setOnAction(event -> {
+            if (character == null) {
+                new InsertTask<Character>().insert(newCharacter);
+            } else {
+                new UpdateTask<Character>().update(newCharacter);
+            }
+
             Main.app.changeScreen(new SaveSlotsScreen());
         });
 
         final FlowPane buttonPane = new FlowPane();
         buttonPane.setHgap(5.0);
         buttonPane.setAlignment(Pos.CENTER);
-        buttonPane.getChildren().add(backButton);
+
+        if (Main.app.isUserLoggedIn()) {
+            final Button backButton = new Button("Back to profile");
+            backButton.setOnAction(event -> {
+                Main.app.changeScreen(new SaveSlotsScreen());
+            });
+        }
 
         if (character != null) {
             final Button deleteButton = new Button("Delete character");
@@ -285,23 +294,10 @@ public final class CharacterEditScreen extends Screen {
             buttonPane.getChildren().add(deleteButton);
         }
 
-        buttonPane.getChildren().add(saveButton);
+        buttonPane.getChildren().add(continueButton);
 
         root.getChildren().add(buttonPane);
 
         return new Scene(root);
-    }
-
-    @Override
-    public void onEnter() {
-        if (!Main.app.isUserLoggedIn()) {
-            throw new RuntimeException("User must be logged in to enter slot screen!");
-        }
-        System.out.println("Entered create character screen");
-    }
-
-    @Override
-    public void onLeave() {
-        System.out.println("Left create character screen");
     }
 }

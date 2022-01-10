@@ -1,7 +1,7 @@
 package en.fluffyBerserk.gui.utils;
 
 import en.fluffyBerserk.invariables.Constant;
-import en.fluffyBerserk.logic.objects.Entity;
+import en.fluffyBerserk.game.logic.objects.Entity;
 
 public class GameCamera {
     private float xOffset, yOffset;

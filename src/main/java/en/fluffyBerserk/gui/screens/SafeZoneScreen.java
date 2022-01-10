@@ -22,7 +22,7 @@ import java.io.IOException;
  * BaseScreen extension class that displays safe-zone screen.
  */
 
-public class SafeZoneScreen extends Screen {
+public class SafeZoneScreen extends BaseScreen {
     private final Player player = new Player();
     private final Canvas layer1 = new Canvas(Constant.SCREEN_WIDTH, Constant.SCREEN_HEIGHT);
     private final Canvas layer2 = new Canvas(Constant.SCREEN_WIDTH, Constant.SCREEN_HEIGHT);
@@ -158,16 +158,4 @@ public class SafeZoneScreen extends Screen {
         graphicsContext.clearRect(0, 0, layer2.getWidth(), layer2.getHeight());
         graphicsContext.drawImage(image, layer2.getWidth() / 2 - player.getWorldX(), layer2.getHeight() / 2 - player.getWorldY(), Constant.WORLD_WIDTH, Constant.WORLD_HEIGHT);
     }
-
-
-    @Override
-    public void onEnter() {
-        System.out.println("Entered safe-zone screen");
-    }
-
-    @Override
-    public void onLeave() {
-        System.out.println("Left safe-zone screen");
-    }
-
 }
