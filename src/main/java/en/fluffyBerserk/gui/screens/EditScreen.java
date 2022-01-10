@@ -3,9 +3,9 @@ package en.fluffyBerserk.gui.screens;
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.gui.animations.MovableEntityAnimations;
 import en.fluffyBerserk.gui.animations.SpriteImage;
+import en.fluffyBerserk.gui.animations.SpritesFactory;
 import en.fluffyBerserk.gui.utils.AttachCSS;
 import en.fluffyBerserk.gui.utils.LocateImage;
-import en.fluffyBerserk.gui.animations.SpritesFactory;
 import en.fluffyBerserk.logic.objects.creatures.player.Player;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -96,7 +96,13 @@ public class EditScreen extends Screen {
 
         // Save slots
         Button cancel = new Button("Cancel");
-        cancel.setOnAction(event -> Main.app.changeScreen(new SaveSlotsScreen()));
+        cancel.setOnAction(event -> {
+            try {
+                Main.app.changeScreen(new SafeZoneScreen());
+            } catch (IOException e) {
+
+            }
+        });
 
         root.setAlignment(Pos.CENTER);
         root.getChildren().addAll(label1, name, hBox, saveCharacter, cancel);

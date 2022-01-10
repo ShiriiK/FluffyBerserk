@@ -22,9 +22,7 @@ public class Player extends Creature implements CanShoot, CanAttack, CanDie{
 
     // Constructor
     public Player(){
-
         this.isAlive = true;
-
         init();
     }
 

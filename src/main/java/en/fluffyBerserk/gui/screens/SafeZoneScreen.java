@@ -48,7 +48,7 @@ public class SafeZoneScreen extends Screen {
 
     @Override
     protected Scene buildScene() {
-        List<ZombieCatto> npc_list = addNpcs(150);
+        List<ZombieCatto> npc_list = addNpcs(5);
         BorderPane root = new BorderPane();
 
         root.getChildren().addAll(layer1, layer2);
@@ -150,8 +150,7 @@ public class SafeZoneScreen extends Screen {
 
     public void renderNpcs(List<ZombieCatto> npc_list) {
         for (ZombieCatto c : npc_list) {
-            c.renderNpc(graphicsContext1);
-            c.npcMovement(dx, dy);
+            c.renderNpc(graphicsContext1, dx, dy);
         }
     }
 

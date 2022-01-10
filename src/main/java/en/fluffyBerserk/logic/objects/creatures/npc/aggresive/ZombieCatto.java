@@ -11,6 +11,8 @@ import java.util.Random;
 public class ZombieCatto extends AggressiveNpc {
     private boolean isAlive;
     private static MovableEntityAnimations npcAnimations;
+    private Image image;
+
 
     public ZombieCatto() {
         this.isAlive = true;
@@ -19,15 +21,16 @@ public class ZombieCatto extends AggressiveNpc {
 
     public void init() {
         Random rand = new Random();
-        int upperbound = 500;
-        setY(rand.nextInt(upperbound));
-        setX(rand.nextInt(upperbound));
+        int world_upperbound = 500;
+        setY(rand.nextInt(world_upperbound));
+        setX(rand.nextInt(world_upperbound));
         setHp(20);
         setStr(5);
         direction = "down";
         counter = 0;
         imgNumber = 1;
         npcAnimations = new MovableEntityAnimations(SpritesFactory.getImages()[13]);
+        image = npcAnimations.getMoveDown().get(1);
     }
 
     public static MovableEntityAnimations getPlayerAnimations() {
@@ -49,26 +52,49 @@ public class ZombieCatto extends AggressiveNpc {
 
     }
 
-    public void renderNpc(GraphicsContext graphicsContext) {
-        MovableEntityAnimations npcAnimations = ZombieCatto.getPlayerAnimations();
-        Image image = npcAnimations.getMoveDown().get(1);
+    public void renderNpc(GraphicsContext graphicsContext, float player_x, float player_y) {
         graphicsContext.drawImage(image, x, y, Invariables.TILE_SIZE, Invariables.TILE_SIZE);
-
+        npcMovement(player_x, player_y);
     }
 
     public void npcMovement(float player_x, float player_y) {
-        if (player_x > x) {
+        boolean right = false;
+        boolean left = false;
+        counter++;
+        if (counter > 10) {
+            if (imgNumber == 1) {
+                imgNumber = 2;
+            } else if (imgNumber == 2) {
+                imgNumber = 3;
+            } else if (imgNumber == 3) {
+                imgNumber = 1;
+            }
+            counter = 0;
+        }
 
+        if (player_x > x) {
+            right = true;
+            image = npcAnimations.getMoveRight().get(imgNumber-1);
             this.setX(x + npc_speed);
         }
         if (player_x < x) {
+            left = true;
+            image = npcAnimations.getMoveLeft().get(imgNumber-1);
             this.setX(x - npc_speed);
         }
         if (player_y > y) {
+            if (right && !left) {
+                image = npcAnimations.getMoveDown().get(imgNumber-1);
+            }
             this.setY(y + npc_speed);
         }
         if (player_y < y) {
+            if (!right && left) {
+                image = npcAnimations.getMoveUp().get(imgNumber-1);
+
+            }
             this.setY(y - npc_speed);
+
         }
     }
 }
