@@ -267,13 +267,6 @@ public final class CharacterEditScreen extends BaseScreen {
         buttonPane.setHgap(5.0);
         buttonPane.setAlignment(Pos.CENTER);
 
-        if (Main.app.isUserLoggedIn()) {
-            final Button backButton = new Button("Back to profile");
-            backButton.setOnAction(event -> {
-                Main.app.changeScreen(new SaveSlotsScreen());
-            });
-        }
-
         if (character != null) {
             final Button deleteButton = new Button("Delete character");
             deleteButton.setOnAction(event -> {
@@ -295,6 +288,15 @@ public final class CharacterEditScreen extends BaseScreen {
         }
 
         buttonPane.getChildren().add(continueButton);
+
+        if (Main.app.isUserLoggedIn()) {
+            final Button playButton = new Button("Play");
+            playButton.setOnAction(event -> {
+                assert character != null;
+                Main.app.changeScreen(new GameScreen(character));
+            });
+            buttonPane.getChildren().add((playButton));
+        }
 
         root.getChildren().add(buttonPane);
 
