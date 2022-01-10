@@ -1,8 +1,12 @@
 package en.fluffyBerserk.form;
 
+import en.fluffyBerserk.gui.animations.SpritesFactory;
+import en.fluffyBerserk.gui.utils.LocateImage;
+import en.fluffyBerserk.persistence.models.Character;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public final class SlotForm extends Form {
+public final class CharacterForm extends Form {
 
     private int pointsLeft = 20;
 
@@ -16,6 +20,28 @@ public final class SlotForm extends Form {
     private int intellect = 0;
 
     private int armor = 0;
+
+    @NotNull
+    private LocateImage sprite;
+
+    public CharacterForm(@Nullable Character character) {
+        if (character == null) {
+            sprite = SpritesFactory.getRandomSprite();
+            return;
+        }
+
+        pointsLeft = 0;
+        name = character.getName();
+        stamina = character.getStamina();
+        strength = character.getStrength();
+        intellect = character.getIntellect();
+        armor = character.getArmor();
+
+        final LocateImage sprite = SpritesFactory.getSpriteByNumber(character.getSpriteIndex());
+        assert sprite != null;
+
+        this.sprite = sprite;
+    }
 
     public @Nullable String getName() {
         return name;
@@ -83,6 +109,14 @@ public final class SlotForm extends Form {
 
     public void decrementArmor() {
         armor--;
+    }
+
+    public @NotNull LocateImage getSprite() {
+        return sprite;
+    }
+
+    public void setSprite(@NotNull LocateImage sprite) {
+        this.sprite = sprite;
     }
 
     public boolean validate() {

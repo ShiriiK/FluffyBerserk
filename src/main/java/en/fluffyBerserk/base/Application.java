@@ -4,6 +4,7 @@ import en.fluffyBerserk.gui.popups.PopUp;
 import en.fluffyBerserk.gui.screens.Screen;
 import en.fluffyBerserk.gui.utils.PopUpBuilder;
 import en.fluffyBerserk.invariables.Constant;
+import en.fluffyBerserk.persistence.DatabaseSession;
 import en.fluffyBerserk.persistence.models.User;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +41,7 @@ public final class Application {
     }
 
     public void start(Screen defaultScreen) {
-       // DatabaseSession.startSession();
+        DatabaseSession.startSession();
         this.changeScreen(defaultScreen);
         primaryStage.show();
     }
@@ -102,10 +103,6 @@ public final class Application {
         popUp.getPopUpStage().show();
         PopUpBuilder.alignPopUp(popUp.getPopUpStage());
         setCurrentPopUp(popUp);
-
-        /**if (currentScreen != null) { // Add gaussian blur effect
-         currentScreen.getScene().getRoot().setEffect(new GaussianBlur());
-         }*/
     }
 
     /**
@@ -119,10 +116,6 @@ public final class Application {
         currentPopUp.onHide();
         currentPopUp.getPopUpStage().hide();
         setCurrentPopUp(null);
-
-        /**if (currentScreen != null) { // Remove gaussian blur effect
-         currentScreen.getScene().getRoot().setEffect(null);
-         }*/
     }
 
 

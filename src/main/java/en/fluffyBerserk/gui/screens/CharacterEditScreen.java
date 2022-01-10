@@ -1,22 +1,45 @@
 package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
-import en.fluffyBerserk.form.SlotForm;
+import en.fluffyBerserk.form.CharacterForm;
+import en.fluffyBerserk.gui.animations.SpriteImage;
+import en.fluffyBerserk.gui.animations.SpritesFactory;
+import en.fluffyBerserk.gui.utils.LocateImage;
+import en.fluffyBerserk.persistence.DeleteTask;
 import en.fluffyBerserk.persistence.InsertTask;
+import en.fluffyBerserk.persistence.UpdateTask;
 import en.fluffyBerserk.persistence.models.Character;
 import en.fluffyBerserk.persistence.models.User;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import org.jetbrains.annotations.Nullable;
 
-public final class CreateCharacterScreen extends Screen {
+import java.util.Optional;
 
-    private final SlotForm form = new SlotForm();
+public final class CharacterEditScreen extends Screen {
+
+    private final CharacterForm form;
+
+    @Nullable
+    private final Character character;
+
+    public CharacterEditScreen(@Nullable Character character) {
+        if (character == null) {
+            form = new CharacterForm(null);
+        } else {
+            form = new CharacterForm(character);
+        }
+
+        this.character = character;
+    }
 
     @Override
     protected Scene buildScene() {
@@ -45,6 +68,50 @@ public final class CreateCharacterScreen extends Screen {
             errorText.setFill(Color.RED);
             root.getChildren().add(errorText);
         }
+
+        final HBox characterBox = new HBox();
+        characterBox.setAlignment(Pos.CENTER);
+
+        final ImageView characterView = new ImageView(new SpriteImage(form.getSprite(), 32, 0, 32, 32).getFrame());
+        characterView.setFitHeight(128);
+        characterView.setFitWidth(128);
+
+        final Button buttonPrevious = new Button("<<<");
+        buttonPrevious.getStyleClass().add("button-edit");
+        buttonPrevious.setOnAction(event -> {
+            int newIndex = form.getSprite().getIndex() - 1;
+
+            if (!SpritesFactory.indexExists(newIndex)) {
+                return;
+            }
+
+            final LocateImage newSprite = SpritesFactory.getSpriteByNumber(newIndex);
+            assert newSprite != null;
+
+            form.setSprite(newSprite);
+
+            characterView.setImage(new SpriteImage(form.getSprite(), 32, 0, 32, 32).getFrame());
+        });
+
+        final Button buttonNext = new Button(">>>");
+        buttonNext.getStyleClass().add("button-edit");
+        buttonNext.setOnAction(event -> {
+            int newIndex = form.getSprite().getIndex() + 1;
+
+            if (!SpritesFactory.indexExists(newIndex)) {
+                return;
+            }
+
+            final LocateImage newSprite = SpritesFactory.getSpriteByNumber(newIndex);
+            assert newSprite != null;
+
+            form.setSprite(newSprite);
+
+            characterView.setImage(new SpriteImage(form.getSprite(), 32, 0, 32, 32).getFrame());
+        });
+
+        characterBox.getChildren().addAll(buttonPrevious, characterView, buttonNext);
+        root.getChildren().add(characterBox);
 
         final Label pointsLeftLabel = new Label(String.format("Points left: %d", form.getPointsLeft()));
 
@@ -149,8 +216,14 @@ public final class CreateCharacterScreen extends Screen {
             pointsLeftLabel.setText(String.format("Points left: %d", form.getPointsLeft()));
         });
 
-        final Button createButton = new Button("Create");
-        createButton.setOnAction(event -> {
+        final Button saveButton;
+        if (character != null) {
+            saveButton = new Button("Save");
+        } else {
+            saveButton = new Button("Create");
+        }
+
+        saveButton.setOnAction(event -> {
             form.clearErrors();
 
             if (!form.validate()) {
@@ -158,17 +231,28 @@ public final class CreateCharacterScreen extends Screen {
                 return;
             }
 
-            Character character = new Character();
-            character.setName(form.getName());
-            character.setArmor(form.getArmor());
-            character.setIntellect(form.getIntellect());
-            character.setStamina(form.getStamina());
-            character.setStrength(form.getStrength());
-            character.setUser(user);
+            Character characterToSave;
+            if (character == null) {
+                characterToSave = new Character();
+            } else {
+                characterToSave = character;
+            }
 
-            character = new InsertTask<Character>().insert(character);
+            characterToSave.setName(form.getName());
+            characterToSave.setArmor(form.getArmor());
+            characterToSave.setIntellect(form.getIntellect());
+            characterToSave.setStamina(form.getStamina());
+            characterToSave.setStrength(form.getStrength());
+            characterToSave.setSpriteIndex(form.getSprite().getIndex());
+            characterToSave.setUser(user);
 
-            Main.app.changeScreen(new CharacterDetailScreen(character));
+            if (character == null) {
+                new InsertTask<Character>().insert(characterToSave);
+            } else {
+                new UpdateTask<Character>().update(characterToSave);
+            }
+
+            Main.app.changeScreen(new SaveSlotsScreen());
         });
 
         final Button backButton = new Button("Back to profile");
@@ -180,7 +264,28 @@ public final class CreateCharacterScreen extends Screen {
         buttonPane.setHgap(5.0);
         buttonPane.setAlignment(Pos.CENTER);
         buttonPane.getChildren().add(backButton);
-        buttonPane.getChildren().add(createButton);
+
+        if (character != null) {
+            final Button deleteButton = new Button("Delete character");
+            deleteButton.setOnAction(event -> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirm deleting your character");
+                alert.setHeaderText("Are you sure you want to delete your character?");
+                alert.setContentText("If the character will be deleted, you will lose your progress in the game.");
+
+                ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Delete");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    if (new DeleteTask<Character>().delete(character)) {
+                        Main.app.changeScreen(new SaveSlotsScreen());
+                    }
+                }
+            });
+            buttonPane.getChildren().add(deleteButton);
+        }
+
+        buttonPane.getChildren().add(saveButton);
 
         root.getChildren().add(buttonPane);
 

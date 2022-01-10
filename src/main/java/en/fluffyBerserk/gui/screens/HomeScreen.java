@@ -14,10 +14,6 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-/**
- * Screen representing Home screen
- */
-
 public final class HomeScreen extends Screen {
 
 
@@ -50,8 +46,7 @@ public final class HomeScreen extends Screen {
         buttons.getChildren().addAll(loginButton, registerButton, guestButton);
 
         // Kitty picture randomizer
-        int index = getIndex();
-        Image image = new SpriteImage(SpritesFactory.getImages()[index], 32, 0, 32, 32).getFrame();
+        Image image = new SpriteImage(SpritesFactory.getRandomSprite(), 32, 0, 32, 32).getFrame();
         ImageView kitty = new ImageView(image);
         kitty.setFitWidth(300);
         kitty.setFitHeight(300);

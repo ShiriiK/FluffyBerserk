@@ -48,13 +48,13 @@ public final class SaveSlotsScreen extends Screen {
             if (character == null) {
                 button.setText("New slot");
                 button.setOnAction(event -> {
-                    Main.app.changeScreen(new CreateCharacterScreen());
+                    Main.app.changeScreen(new CharacterEditScreen(null));
                 });
             } else {
                 button.setText(character.getName());
                 button.setTooltip(new Tooltip(character.getName()));
                 button.setOnAction(event -> {
-                    Main.app.changeScreen(new CharacterDetailScreen(character));
+                    Main.app.changeScreen(new CharacterEditScreen(character));
                 });
             }
 
@@ -84,8 +84,6 @@ public final class SaveSlotsScreen extends Screen {
             Main.app.logout();
             Main.app.changeScreen(new HomeScreen());
         });
-
-        final Button deleteSave = new Button("Delete Save"); // TODO
 
         root.getChildren().addAll(deleteAccount, logOutButton);
 

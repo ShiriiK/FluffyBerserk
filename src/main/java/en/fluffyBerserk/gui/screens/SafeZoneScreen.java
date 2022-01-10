@@ -1,13 +1,13 @@
 package en.fluffyBerserk.gui.screens;
 
-import en.fluffyBerserk.gamecontrol.KeyManager;
+import en.fluffyBerserk.game.control.KeyManager;
 import en.fluffyBerserk.gui.tile.TileManager;
 import en.fluffyBerserk.gui.utils.AttachCSS;
 import en.fluffyBerserk.gui.utils.GameCamera;
 import en.fluffyBerserk.invariables.Constant;
 import en.fluffyBerserk.invariables.Direction;
-import en.fluffyBerserk.logic.objects.bullets.Bullet;
-import en.fluffyBerserk.logic.objects.creatures.player.Player;
+import en.fluffyBerserk.game.logic.objects.bullets.Bullet;
+import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1
--- Vytvořeno: Ned 02. led 2022, 21:25
+-- Vytvořeno: Pon 10. led 2022, 21:42
 -- Verze serveru: 10.4.21-MariaDB
 -- Verze PHP: 8.0.11
 
@@ -36,6 +36,7 @@ CREATE TABLE `character` (
   `strength` int(11) NOT NULL DEFAULT 0,
   `intellect` int(11) NOT NULL DEFAULT 0,
   `armor` int(11) NOT NULL DEFAULT 0,
+  `sprite_index` tinyint(4) NOT NULL,
   `save_file_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `saved_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL
@@ -79,13 +80,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pro tabulku `character`
 --
 ALTER TABLE `character`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pro tabulku `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Omezení pro exportované tabulky
