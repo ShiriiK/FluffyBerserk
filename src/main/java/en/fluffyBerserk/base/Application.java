@@ -17,6 +17,8 @@ import org.jetbrains.annotations.Nullable;
  */
 public final class Application {
 
+    public static final String APP_NAME = "Fulffy Berserk";
+
     @NotNull
     private final Stage primaryStage;
 
@@ -35,7 +37,7 @@ public final class Application {
     }
 
     public void init() {
-        primaryStage.setTitle(Constant.GAME_NAME);
+        primaryStage.setTitle(APP_NAME);
         primaryStage.setHeight(Constant.SCREEN_HEIGHT);
         primaryStage.setWidth(Constant.SCREEN_WIDTH);
     }

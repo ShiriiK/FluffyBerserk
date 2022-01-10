@@ -6,8 +6,6 @@ package en.fluffyBerserk.invariables;
 
 public class Constant {
 
-    public static final String GAME_NAME = "Fulffy Berserk";
-
     public static final int DEF_TILE_SIZE = 32;
     public static final int SCALE = 2;
     public static final int TILE_SIZE = DEF_TILE_SIZE * SCALE;
