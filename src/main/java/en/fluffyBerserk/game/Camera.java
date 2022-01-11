@@ -14,8 +14,8 @@ public class Camera {
 // This does not work yet, I don't know why, it looks cool but when the player comes to the bottom or left side, there is a slight bug in offset
 //        if (offset <= 0F) {
 //            offset = 0F;
-//        } else if (offset > (GameConstants.WORLD_WIDTH - GameConstants.SCREEN_WIDTH)) {
-//            offset = GameConstants.WORLD_WIDTH - GameConstants.SCREEN_WIDTH;
+//        } else if (offset > (Constants.WORLD_WIDTH - Constants.SCREEN_WIDTH)) {
+//            offset = Constants.WORLD_WIDTH - Constants.SCREEN_WIDTH;
 //        }
 
         return x - offset;
@@ -27,8 +27,8 @@ public class Camera {
 // This does not work yet, I don't know why, it looks cool but when the player comes to the bottom or left side, there is a slight bug in offset
 //        if (offset < 0F) {
 //            offset = 0F;
-//        } else if (offset > (GameConstants.WORLD_HEIGHT - GameConstants.SCREEN_HEIGHT)) {
-//            offset = GameConstants.WORLD_HEIGHT - GameConstants.SCREEN_HEIGHT;
+//        } else if (offset > (Constants.WORLD_HEIGHT - Constants.SCREEN_HEIGHT)) {
+//            offset = Constants.WORLD_HEIGHT - Constants.SCREEN_HEIGHT;
 //        }
 
         return y - offset;
