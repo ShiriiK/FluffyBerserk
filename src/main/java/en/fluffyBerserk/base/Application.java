@@ -40,6 +40,7 @@ public final class Application {
         primaryStage.setTitle(APP_NAME);
         primaryStage.setHeight(Constant.SCREEN_HEIGHT);
         primaryStage.setWidth(Constant.SCREEN_WIDTH);
+        primaryStage.setResizable(false);
     }
 
     public void start(Screen defaultScreen) {

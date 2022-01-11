@@ -2,8 +2,8 @@ package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.form.CharacterForm;
-import en.fluffyBerserk.gui.animations.SpriteImage;
-import en.fluffyBerserk.gui.animations.SpritesFactory;
+import en.fluffyBerserk.game.animations.SpriteImage;
+import en.fluffyBerserk.game.animations.SpritesFactory;
 import en.fluffyBerserk.gui.utils.LocateImage;
 import en.fluffyBerserk.persistence.DeleteTask;
 import en.fluffyBerserk.persistence.InsertTask;
@@ -20,12 +20,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
 public final class CharacterEditScreen extends BaseScreen {
 
+    @NotNull
     private final CharacterForm form;
 
     @Nullable
@@ -37,7 +39,6 @@ public final class CharacterEditScreen extends BaseScreen {
         } else {
             form = new CharacterForm(character);
         }
-
         this.character = character;
     }
 

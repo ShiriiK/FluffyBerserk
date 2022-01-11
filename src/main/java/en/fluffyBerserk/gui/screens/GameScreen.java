@@ -1,12 +1,9 @@
 package en.fluffyBerserk.gui.screens;
 
-import en.fluffyBerserk.Main;
-import en.fluffyBerserk.game2.Game;
-import en.fluffyBerserk.gui.popups.PopUpMenu;
+import en.fluffyBerserk.game.Game;
+import en.fluffyBerserk.game.graphics.GameSceneBuilder;
 import en.fluffyBerserk.persistence.models.Character;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.BorderPane;
 import org.jetbrains.annotations.NotNull;
 
 public final class GameScreen extends BaseScreen {
@@ -15,22 +12,11 @@ public final class GameScreen extends BaseScreen {
     private final Game game;
 
     public GameScreen(@NotNull final Character character) {
-        game = new Game(character);
+        (game = new Game(character)).getGameLoop().start();
     }
 
     @Override
     protected Scene buildScene() {
-        final BorderPane root = new BorderPane();
-
-        final Scene scene = new Scene(root);
-
-        // Attach event on scene for displaying menu
-        scene.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ESCAPE) {
-                Main.app.showPopUp(new PopUpMenu());
-            }
-        });
-
-        return scene;
+        return GameSceneBuilder.buildScene(game);
     }
 }
