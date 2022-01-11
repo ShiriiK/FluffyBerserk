@@ -30,12 +30,18 @@ public final class TileLoader {
                 Vector<TileObject> colMatrix = new Vector<>(Constants.MAX_WORLD_COL);
 
                 while (col < Constants.MAX_WORLD_COL) {
-                    TileObject tileObject = new TileObject(Integer.parseInt(tiles[col]));
+                    int tileNumber = Integer.parseInt(tiles[col]);
 
-                    tileObject.setX(col * tileObject.getWidth());
-                    tileObject.setY(row * tileObject.getHeight());
+                    if (tileNumber != TileFactory.TILE_BLANK) {
+                        TileObject tileObject = new TileObject(Integer.parseInt(tiles[col]));
 
-                    colMatrix.add(tileObject);
+                        tileObject.setX(col * tileObject.getWidth());
+                        tileObject.setY(row * tileObject.getHeight());
+
+                        colMatrix.add(tileObject);
+                    } else {
+                        colMatrix.add(null);
+                    }
                     col++;
                 }
 

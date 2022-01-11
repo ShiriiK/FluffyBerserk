@@ -4,7 +4,6 @@ import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
 import en.fluffyBerserk.game.logic.Collision;
 import en.fluffyBerserk.game.logic.objects.TileObject;
-import en.fluffyBerserk.game.graphics.tiles.TileFactory;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
@@ -63,7 +62,7 @@ public final class GameLoop {
 
         for (Vector<TileObject> tileObjects : tiles) {
             for (TileObject tile : tileObjects) {
-                if (tile.getTileIndex() == TileFactory.TILE_BLANK) {
+                if (tile == null) { // blank tile
                     continue;
                 }
 
@@ -100,7 +99,7 @@ public final class GameLoop {
             outerFor:
             for (Vector<TileObject> tileObjects : tiles) {
                 for (TileObject tile : tileObjects) {
-                    if (tile.getTileIndex() == TileFactory.TILE_BLANK) {
+                    if (tile == null) { // blank tile
                         continue;
                     }
 
@@ -112,9 +111,10 @@ public final class GameLoop {
                 }
             }
 
-            // Check collision with other entities (bullets, monsters, npc etc.)
+            // Check collision with other entities (bullets, monsters, npc, items etc.)
         }
 
+        // This will render all entities on the map (npcs, bullets, player, items, chests, portals etc.)
         for (Entity entity : game.getEntityManager().getEntities()) {
             canvas.getGraphicsContext2D().drawImage(
                     entity.getImage(),

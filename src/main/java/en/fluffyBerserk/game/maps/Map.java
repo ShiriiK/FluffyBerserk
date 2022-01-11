@@ -7,7 +7,6 @@ import java.util.Vector;
 
 public abstract class Map {
 
-    // Tiles object 2D vector
     private final Vector<Vector<TileObject>> tiles = TileLoader.loadTiles(getTilePath());
 
     public Vector<Vector<TileObject>> getTiles() {
