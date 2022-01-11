@@ -53,8 +53,8 @@ public final class Game {
         entityManager.addEntity(player);
 
         // Spawn player in the center of current map
-        player.setX((Constants.WORLD_WIDTH / 2) - (Constants.TILE_SIZE / 2));
-        player.setY((Constants.WORLD_HEIGHT / 2) - (Constants.TILE_SIZE / 2));
+        player.setX(((float)Constants.WORLD_WIDTH / 2) - ((float)Constants.TILE_SIZE / 2));
+        player.setY(((float)Constants.WORLD_HEIGHT / 2) - ((float)Constants.TILE_SIZE / 2));
 
         currentMap = new SaveZoneMap();
     }
