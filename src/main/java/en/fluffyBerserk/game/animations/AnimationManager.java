@@ -74,6 +74,7 @@ public class AnimationManager {
     }
 
     public Image getImage() {
+        // Entity is not moving, always return index 1 => standing
         if (!entity.isMoving()) {
             return getAnimationList().get(1);
         }

@@ -44,10 +44,6 @@ public class MovableEntityAnimations {
         moveUp.add(2, new SpriteImage(sprite, w * 2, h * 3, w, h).getFrame());
     }
 
-    public LocateImage getUsedSprite() {
-        return usedSprite;
-    }
-
     public ArrayList<Image> getMoveDown() {
         return moveDown;
     }
