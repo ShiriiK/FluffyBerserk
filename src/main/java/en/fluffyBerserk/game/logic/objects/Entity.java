@@ -33,12 +33,12 @@ public abstract class Entity implements Object {
     }
 
     @Override
-    public float getHeight() {
+    public int getHeight() {
         return Constants.ENTITIES_SIZE;
     }
 
     @Override
-    public float getWidth() {
+    public int getWidth() {
         return Constants.ENTITIES_SIZE;
     }
 

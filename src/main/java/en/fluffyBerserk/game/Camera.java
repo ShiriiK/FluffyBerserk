@@ -9,7 +9,7 @@ public class Camera {
     }
 
     public float processX(float x) {
-        float offset = game.getPlayer().getX() - (Constants.SCREEN_WIDTH / 2) + (Constants.TILE_SIZE / 2);
+        float offset = game.getPlayer().getX() - ((float)Constants.SCREEN_WIDTH / 2) + ((float)Constants.TILE_SIZE / 2);
 
 //        if (offset <= 0F) {
 //            offset = 0F;
@@ -21,7 +21,7 @@ public class Camera {
     }
 
     public float processY(float y) {
-        float offset = game.getPlayer().getY() - (Constants.SCREEN_HEIGHT / 2) + (Constants.TILE_SIZE / 2);
+        float offset = game.getPlayer().getY() - ((float)Constants.SCREEN_HEIGHT / 2) + ((float)Constants.TILE_SIZE / 2);
 
 //        if (offset < 0F) {
 //            offset = 0F;

@@ -12,9 +12,9 @@ public interface Object {
 
     float getY();
 
-    float getHeight();
+    int getHeight();
 
-    float getWidth();
+    int getWidth();
 
     Image getImage();
 }

@@ -1,7 +1,7 @@
 package en.fluffyBerserk.game.animations;
 
+import en.fluffyBerserk.game.Constants;
 import en.fluffyBerserk.gui.utils.LocateImage;
-import en.fluffyBerserk.invariables.Constant;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -23,8 +23,8 @@ public class MovableEntityAnimations {
      */
     public MovableEntityAnimations(LocateImage sprite) {
         usedSprite = new LocateImage(sprite.getPath(), sprite.getIndex());
-        int w = Constant.DEF_TILE_SIZE;
-        int h = Constant.DEF_TILE_SIZE;
+        int w = Constants.BASE_TILE_SIZE;
+        int h = Constants.BASE_TILE_SIZE;
         moveDown = new ArrayList<>(3);
         moveLeft = new ArrayList<>(3);
         moveRight = new ArrayList<>(3);

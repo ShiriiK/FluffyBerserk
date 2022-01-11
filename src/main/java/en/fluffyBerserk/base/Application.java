@@ -1,9 +1,9 @@
 package en.fluffyBerserk.base;
 
+import en.fluffyBerserk.game.Constants;
 import en.fluffyBerserk.gui.popups.PopUp;
 import en.fluffyBerserk.gui.screens.Screen;
 import en.fluffyBerserk.gui.utils.PopUpBuilder;
-import en.fluffyBerserk.invariables.Constant;
 import en.fluffyBerserk.persistence.DatabaseSession;
 import en.fluffyBerserk.persistence.models.User;
 import javafx.stage.Stage;
@@ -38,8 +38,8 @@ public final class Application {
 
     public void init() {
         primaryStage.setTitle(APP_NAME);
-        primaryStage.setHeight(Constant.SCREEN_HEIGHT);
-        primaryStage.setWidth(Constant.SCREEN_WIDTH);
+        primaryStage.setHeight(Constants.SCREEN_HEIGHT);
+        primaryStage.setWidth(Constants.SCREEN_WIDTH);
         primaryStage.setResizable(false);
     }
 

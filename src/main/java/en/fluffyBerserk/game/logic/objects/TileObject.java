@@ -18,12 +18,12 @@ public class TileObject extends Entity {
     }
 
     @Override
-    public float getWidth() {
+    public int getWidth() {
         return Constants.TILE_SIZE;
     }
 
     @Override
-    public float getHeight() {
+    public int getHeight() {
         return Constants.TILE_SIZE;
     }
 
