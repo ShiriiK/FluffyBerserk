@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public final class CharacterEditScreen extends BaseScreen {
+public final class CharacterScreen extends BaseScreen {
 
     @NotNull
     private final CharacterForm form;
@@ -33,7 +33,7 @@ public final class CharacterEditScreen extends BaseScreen {
     @Nullable
     private final Character character;
 
-    public CharacterEditScreen(@Nullable Character character) {
+    public CharacterScreen(@Nullable Character character) {
         if (character == null) {
             form = new CharacterForm(null);
         } else {

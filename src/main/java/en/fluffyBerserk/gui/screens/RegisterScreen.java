@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -121,6 +122,14 @@ public final class RegisterScreen extends BaseScreen {
 
         Scene scene = new Scene(root);
         AttachCSS.attachCSS(scene);
+
+        // Attach enter key to submit form
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                registerButton.fire();
+            }
+        });
+
         return scene;
     }
 

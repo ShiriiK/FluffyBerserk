@@ -31,7 +31,7 @@ public final class HomeScreen extends BaseScreen {
         // Guest button
         Button guestButton = new Button("Continue as guest");
         guestButton.setOnAction(event -> {
-            Main.app.changeScreen(new CharacterEditScreen(null));
+            Main.app.changeScreen(new CharacterScreen(null));
         });
 
         buttons.getChildren().addAll(loginButton, registerButton, guestButton);

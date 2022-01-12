@@ -48,13 +48,13 @@ public final class SaveSlotsScreen extends BaseScreen {
             if (character == null) {
                 button.setText("New slot");
                 button.setOnAction(event -> {
-                    Main.app.changeScreen(new CharacterEditScreen(null));
+                    Main.app.changeScreen(new CharacterScreen(null));
                 });
             } else {
                 button.setText(character.getName());
                 button.setTooltip(new Tooltip(character.getName()));
                 button.setOnAction(event -> {
-                    Main.app.changeScreen(new CharacterEditScreen(character));
+                    Main.app.changeScreen(new CharacterScreen(character));
                 });
             }
 
