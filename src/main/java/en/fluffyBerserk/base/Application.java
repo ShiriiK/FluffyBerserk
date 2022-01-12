@@ -1,9 +1,9 @@
 package en.fluffyBerserk.base;
 
+import en.fluffyBerserk.game.Constants;
 import en.fluffyBerserk.gui.popups.PopUp;
 import en.fluffyBerserk.gui.screens.Screen;
 import en.fluffyBerserk.gui.utils.PopUpBuilder;
-import en.fluffyBerserk.invariables.Invariables;
 import en.fluffyBerserk.persistence.DatabaseSession;
 import en.fluffyBerserk.persistence.models.User;
 import javafx.stage.Stage;
@@ -16,6 +16,8 @@ import org.jetbrains.annotations.Nullable;
  * as well as pop-ups are being displayed and hidden.
  */
 public final class Application {
+
+    public static final String APP_NAME = "Fluffy Berserk";
 
     @NotNull
     private final Stage primaryStage;
@@ -35,9 +37,10 @@ public final class Application {
     }
 
     public void init() {
-        primaryStage.setTitle(Invariables.GAME_NAME);
-        primaryStage.setHeight(Invariables.SCREEN_HEIGHT);
-        primaryStage.setWidth(Invariables.SCREEN_WIDTH);
+        primaryStage.setTitle(APP_NAME);
+        primaryStage.setHeight(Constants.SCREEN_HEIGHT);
+        primaryStage.setWidth(Constants.SCREEN_WIDTH);
+        primaryStage.setResizable(false);
     }
 
     public void start(Screen defaultScreen) {
@@ -103,10 +106,6 @@ public final class Application {
         popUp.getPopUpStage().show();
         PopUpBuilder.alignPopUp(popUp.getPopUpStage());
         setCurrentPopUp(popUp);
-
-        /**if (currentScreen != null) { // Add gaussian blur effect
-         currentScreen.getScene().getRoot().setEffect(new GaussianBlur());
-         }*/
     }
 
     /**
@@ -120,10 +119,6 @@ public final class Application {
         currentPopUp.onHide();
         currentPopUp.getPopUpStage().hide();
         setCurrentPopUp(null);
-
-        /**if (currentScreen != null) { // Remove gaussian blur effect
-         currentScreen.getScene().getRoot().setEffect(null);
-         }*/
     }
 
 
