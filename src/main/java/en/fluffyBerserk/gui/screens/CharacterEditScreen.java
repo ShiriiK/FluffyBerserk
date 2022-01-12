@@ -217,58 +217,102 @@ public final class CharacterEditScreen extends BaseScreen {
             pointsLeftLabel.setText(String.format("Points left: %d", form.getPointsLeft()));
         });
 
-        final Button continueButton;
-        if (!Main.app.isUserLoggedIn()) {
-            continueButton = new Button("Play");
-        } else if (character != null) {
-            continueButton = new Button("Save");
-        } else {
-            continueButton = new Button("Create");
-        }
-
-        continueButton.setOnAction(event -> {
-            form.clearErrors();
-
-            if (!form.validate()) {
-                Main.app.redrawScene();
-                return;
-            }
-
-            Character newCharacter;
-            if (character == null) {
-                newCharacter = new Character();
-            } else {
-                newCharacter = character;
-            }
-
-            newCharacter.setName(form.getName());
-            newCharacter.setArmor(form.getArmor());
-            newCharacter.setIntellect(form.getIntellect());
-            newCharacter.setStamina(form.getStamina());
-            newCharacter.setStrength(form.getStrength());
-            newCharacter.setSpriteIndex(form.getSprite().getIndex());
-
-            if (!Main.app.isUserLoggedIn()) {
-                Main.app.changeScreen(new GameScreen(newCharacter));
-                return;
-            }
-
-            newCharacter.setUser(user);
-
-            if (character == null) {
-                new InsertTask<Character>().insert(newCharacter);
-            } else {
-                new UpdateTask<Character>().update(newCharacter);
-            }
-
-            Main.app.changeScreen(new SaveSlotsScreen());
-        });
+        // Buttons
 
         final FlowPane buttonPane = new FlowPane();
         buttonPane.setHgap(5.0);
         buttonPane.setAlignment(Pos.CENTER);
 
-        if (character != null) {
+        if (!Main.app.isUserLoggedIn()) { // guest account
+            final Button backToHomeButton = new Button("Back");
+            backToHomeButton.setOnAction(event -> {
+                Main.app.changeScreen(new HomeScreen());
+            });
+
+            final Button guestPlayButton = new Button("Play");
+            guestPlayButton.setOnAction(event -> {
+                form.clearErrors();
+
+                if (!form.validate()) {
+                    Main.app.redrawScene();
+                    return;
+                }
+
+                final Character newCharacter = new Character();
+                newCharacter.setName(form.getName());
+                newCharacter.setArmor(form.getArmor());
+                newCharacter.setIntellect(form.getIntellect());
+                newCharacter.setStamina(form.getStamina());
+                newCharacter.setStrength(form.getStrength());
+                newCharacter.setSpriteIndex(form.getSprite().getIndex());
+
+                Main.app.changeScreen(new GameScreen(newCharacter));
+            });
+
+            buttonPane.getChildren().addAll(
+                    backToHomeButton,
+                    guestPlayButton
+            );
+        } else if (character == null) { // logged user is creating character
+            final Button backToProfileButton = new Button("Back");
+            backToProfileButton.setOnAction(event -> {
+                Main.app.changeScreen(new SaveSlotsScreen());
+            });
+
+            final Button createButton = new Button("Create");
+            createButton.setOnAction(event -> {
+                form.clearErrors();
+
+                if (!form.validate()) {
+                    Main.app.redrawScene();
+                    return;
+                }
+
+                Character newCharacter = new Character();
+                newCharacter.setName(form.getName());
+                newCharacter.setArmor(form.getArmor());
+                newCharacter.setIntellect(form.getIntellect());
+                newCharacter.setStamina(form.getStamina());
+                newCharacter.setStrength(form.getStrength());
+                newCharacter.setSpriteIndex(form.getSprite().getIndex());
+                newCharacter.setUser(user);
+
+                new InsertTask<Character>().insert(newCharacter);
+
+                Main.app.changeScreen(new SaveSlotsScreen());
+            });
+
+            buttonPane.getChildren().addAll(
+                    backToProfileButton,
+                    createButton
+            );
+        } else { // logged user is viewing detail of existing character
+            final Button backToProfileButton = new Button("Back");
+            backToProfileButton.setOnAction(event -> {
+                Main.app.changeScreen(new SaveSlotsScreen());
+            });
+
+            final Button saveButton = new Button("Save");
+            saveButton.setOnAction(event -> {
+                form.clearErrors();
+
+                if (!form.validate()) {
+                    Main.app.redrawScene();
+                    return;
+                }
+
+                character.setName(form.getName());
+                character.setArmor(form.getArmor());
+                character.setIntellect(form.getIntellect());
+                character.setStamina(form.getStamina());
+                character.setStrength(form.getStrength());
+                character.setSpriteIndex(form.getSprite().getIndex());
+
+                new UpdateTask<Character>().update(character);
+
+                Main.app.changeScreen(new SaveSlotsScreen());
+            });
+
             final Button deleteButton = new Button("Delete character");
             deleteButton.setOnAction(event -> {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -285,18 +329,18 @@ public final class CharacterEditScreen extends BaseScreen {
                     }
                 }
             });
-            buttonPane.getChildren().add(deleteButton);
-        }
 
-        buttonPane.getChildren().add(continueButton);
-
-        if (Main.app.isUserLoggedIn()) {
             final Button playButton = new Button("Play");
             playButton.setOnAction(event -> {
-                assert character != null;
                 Main.app.changeScreen(new GameScreen(character));
             });
-            buttonPane.getChildren().add((playButton));
+
+            buttonPane.getChildren().addAll(
+                    backToProfileButton,
+                    deleteButton,
+                    saveButton,
+                    playButton
+            );
         }
 
         root.getChildren().add(buttonPane);
