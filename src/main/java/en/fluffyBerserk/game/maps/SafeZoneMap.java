@@ -1,6 +1,6 @@
 package en.fluffyBerserk.game.maps;
 
-public final class SaveZoneMap extends Map {
+public final class SafeZoneMap extends Map {
 
     @Override
     public String getName() {

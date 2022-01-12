@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public final class Application {
 
-    public static final String APP_NAME = "Fulffy Berserk";
+    public static final String APP_NAME = "Fluffy Berserk";
 
     @NotNull
     private final Stage primaryStage;
