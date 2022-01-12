@@ -18,7 +18,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
-public final class SaveSlotsScreen extends Screen {
+public final class SaveSlotsScreen extends BaseScreen {
 
     @Override
     protected Scene buildScene() {
@@ -48,13 +48,13 @@ public final class SaveSlotsScreen extends Screen {
             if (character == null) {
                 button.setText("New slot");
                 button.setOnAction(event -> {
-                    Main.app.changeScreen(new CreateCharacterScreen());
+                    Main.app.changeScreen(new CharacterScreen(null));
                 });
             } else {
                 button.setText(character.getName());
                 button.setTooltip(new Tooltip(character.getName()));
                 button.setOnAction(event -> {
-                    Main.app.changeScreen(new CharacterDetailScreen(character));
+                    Main.app.changeScreen(new CharacterScreen(character));
                 });
             }
 
@@ -85,8 +85,6 @@ public final class SaveSlotsScreen extends Screen {
             Main.app.changeScreen(new HomeScreen());
         });
 
-        final Button deleteSave = new Button("Delete Save"); // TODO
-
         root.getChildren().addAll(deleteAccount, logOutButton);
 
         Scene scene = new Scene(root);
@@ -100,11 +98,5 @@ public final class SaveSlotsScreen extends Screen {
         if (!Main.app.isUserLoggedIn()) {
             throw new RuntimeException("User must be logged in to enter save slot screen!");
         }
-        System.out.println("Entered save slot screen");
-    }
-
-    @Override
-    public void onLeave() {
-        System.out.println("Left save slot screen");
     }
 }

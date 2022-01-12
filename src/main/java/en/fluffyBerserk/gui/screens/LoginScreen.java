@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -19,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.TypedQuery;
 
-public final class LoginScreen extends Screen {
+public final class LoginScreen extends BaseScreen {
 
     private final LoginForm form = new LoginForm();
 
@@ -106,6 +106,14 @@ public final class LoginScreen extends Screen {
 
         Scene scene = new Scene(root);
         AttachCSS.attachCSS(scene);
+
+        // Attach enter key to submit form
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                loginButton.fire();
+            }
+        });
+
         return scene;
     }
 
@@ -114,11 +122,5 @@ public final class LoginScreen extends Screen {
         if (Main.app.isUserLoggedIn()) {
             throw new RuntimeException("Logged in user cannot go to login screen!");
         }
-        System.out.println("Entered login screen");
-    }
-
-    @Override
-    public void onLeave() {
-        System.out.println("Left login screen");
     }
 }
