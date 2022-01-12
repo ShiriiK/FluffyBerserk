@@ -114,6 +114,17 @@ public final class CharacterEditScreen extends BaseScreen {
         characterBox.getChildren().addAll(buttonPrevious, characterView, buttonNext);
         root.getChildren().add(characterBox);
 
+        final Button randomSpriteButton = new Button("Random character");
+        randomSpriteButton.setOnAction(event -> {
+            final LocateImage randomSprite = SpritesFactory.getRandomSprite();
+
+            form.setSprite(randomSprite);
+
+            characterView.setImage(new SpriteImage(randomSprite, 32, 0, 32, 32).getFrame());
+        });
+
+        root.getChildren().add(randomSpriteButton);
+
         final Label pointsLeftLabel = new Label(String.format("Points left: %d", form.getPointsLeft()));
 
         root.getChildren().add(pointsLeftLabel);
