@@ -5,6 +5,7 @@ import en.fluffyBerserk.game.control.KeyHandler;
 import en.fluffyBerserk.gui.utils.AttachCSS;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 
 public final class GameSceneBuilder {
 

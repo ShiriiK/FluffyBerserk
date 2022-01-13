@@ -21,18 +21,51 @@ import java.util.Optional;
 
 public final class SaveSlotsScreen extends BaseScreen {
 
+    private Scene scene;
+    private VBox bottomButtons, topButtons;
+
     @Override
     protected Scene buildScene() {
+
         final User user = Main.app.getUser();
         assert user != null;
-        VBox root = new VBox();
-        VBox topButtons = new VBox();
-        root.getStyleClass().add("vbox");
-        topButtons.getStyleClass().add("vbox");
-        VBox bottomButtons = new VBox();
-        bottomButtons.getStyleClass().add("vbox-bottom");
 
+        init();
+        loadSaveSlots(user);
+        prepareButtons(user);
 
+        return scene;
+    }
+
+    private void prepareButtons(User user) {
+        final Button deleteAccount = new Button("Delete Account");
+        deleteAccount.setOnAction(event -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm deleting your account");
+            alert.setHeaderText("Are you sure you want to delete your account?");
+            alert.setContentText("If the account will be deleted, you will lose your progress in the game.");
+
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Delete");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                Main.app.logout();
+                if (new DeleteTask<User>().delete(user)) {
+                    Main.app.changeScreen(new HomeScreen());
+                }
+            }
+        });
+
+        final Button logOutButton = new Button("Log out");
+        logOutButton.setOnAction(event -> {
+            Main.app.logout();
+            Main.app.changeScreen(new HomeScreen());
+        });
+
+        bottomButtons.getChildren().addAll(deleteAccount, logOutButton);
+    }
+
+    private void loadSaveSlots(User user) {
         final List<Character> characters = new SelectTask<Character>().multiNamedQuery(manager -> {
             TypedQuery<Character> query = manager.createNamedQuery("Character.byUserId", Character.class);
             query.setParameter(1, user.getId());
@@ -69,39 +102,22 @@ public final class SaveSlotsScreen extends BaseScreen {
 
             topButtons.getChildren().add(button);
         }
+    }
 
-        final Button deleteAccount = new Button("Delete Account");
-        deleteAccount.setOnAction(event -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirm deleting your account");
-            alert.setHeaderText("Are you sure you want to delete your account?");
-            alert.setContentText("If the account will be deleted, you will lose your progress in the game.");
+    private void init(){
+        VBox root = new VBox();
+        root.getStyleClass().add("vbox");
 
-            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Delete");
+        topButtons = new VBox();
+        topButtons.getStyleClass().add("vbox");
 
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                Main.app.logout();
-                if (new DeleteTask<User>().delete(user)) {
-                    Main.app.changeScreen(new HomeScreen());
-                }
-            }
-        });
-
-        final Button logOutButton = new Button("Log out");
-        logOutButton.setOnAction(event -> {
-            Main.app.logout();
-            Main.app.changeScreen(new HomeScreen());
-        });
-
-        bottomButtons.getChildren().addAll(deleteAccount, logOutButton);
+        bottomButtons = new VBox();
+        bottomButtons.getStyleClass().add("vbox-bottom");
 
         root.getChildren().addAll(topButtons, bottomButtons);
 
-        Scene scene = new Scene(root);
+        scene = new Scene(root);
         AttachCSS.attachCSS(scene);
-
-        return scene;
     }
 
     @Override
