@@ -25,6 +25,10 @@ public abstract class MovableAnimatedEntity extends MovableEntity implements Mov
     @Override
     public void move() {
         super.move();
+        increaseTick();
+    }
+
+    protected void increaseTick(){
         animationManager.increaseTick();
     }
 

@@ -27,22 +27,29 @@ public class SpritesFactory {
         put(10, new LocateImage("player/fluf11.png", 10));
         put(11, new LocateImage("player/fluf12.png", 11));
         put(12, new LocateImage("player/fluf13.png", 12));
+        put(13, new LocateImage("npcs/melee1.png", 13));
+        put(14, new LocateImage("npcs/melee2.png", 14));
+        put(15, new LocateImage("npcs/ranged1.png", 15));
+
     }};
 
     public static boolean indexExists(Integer key) {
         return map.containsKey(key);
     }
 
-    public static @NotNull Map<Integer, LocateImage> getMap() {
+    public static @NotNull
+    Map<Integer, LocateImage> getMap() {
         return map;
     }
 
-    public static @NotNull LocateImage getRandomSprite() {
+    public static @NotNull
+    LocateImage getRandomSprite() {
         Random random = new Random();
         return map.get(random.nextInt(map.size()));
     }
 
-    public static @Nullable LocateImage getSpriteByNumber(Integer key) {
+    public static @Nullable
+    LocateImage getSpriteByNumber(Integer key) {
         return map.get(key);
     }
 }

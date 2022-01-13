@@ -10,6 +10,8 @@ public abstract class Entity implements Object {
     private float y;
     private float previousY;
 
+    private int dmg = 0;
+
     @Override
     public void setX(float x) {
         previousX = this.x;
@@ -49,4 +51,7 @@ public abstract class Entity implements Object {
     public float getPreviousY() {
         return previousY;
     }
+
+    public int getDmg(){return this.dmg;}
+    public void setDmg(int dmg){this.dmg = dmg;}
 }
