@@ -6,13 +6,12 @@ import en.fluffyBerserk.gui.utils.AttachCSS;
 import en.fluffyBerserk.persistence.InsertTask;
 import en.fluffyBerserk.persistence.SelectTask;
 import en.fluffyBerserk.persistence.models.User;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -22,13 +21,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.persistence.TypedQuery;
 import java.security.SecureRandom;
 
-public final class RegisterScreen extends Screen {
+public final class RegisterScreen extends BaseScreen {
 
     private final RegisterForm form = new RegisterForm();
 
     @Override
     protected Scene buildScene() {
         final VBox root = new VBox();
+        root.getStyleClass().addAll("vbox", "log-in");
 
         final TextField usernameField = new TextField(form.getUsername());
         usernameField.setPromptText("Enter username");
@@ -116,15 +116,20 @@ public final class RegisterScreen extends Screen {
 
         final Button backButton = new Button("Back");
         backButton.setOnAction(event -> Main.app.changeScreen(new HomeScreen()));
+        backButton.getStyleClass().add("back-button");
 
-        final FlowPane buttonPane = new FlowPane();
-        buttonPane.getChildren().add(backButton);
-        buttonPane.getChildren().add(registerButton);
-
-        root.getChildren().add(buttonPane);
+        root.getChildren().addAll(registerButton, backButton);
 
         Scene scene = new Scene(root);
         AttachCSS.attachCSS(scene);
+
+        // Attach enter key to submit form
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                registerButton.fire();
+            }
+        });
+
         return scene;
     }
 
@@ -133,11 +138,5 @@ public final class RegisterScreen extends Screen {
         if (Main.app.isUserLoggedIn()) {
             throw new RuntimeException("Logged in user cannot go to register screen!");
         }
-        System.out.println("Entered register screen");
-    }
-
-    @Override
-    public void onLeave() {
-        System.out.println("Left register screen");
     }
 }

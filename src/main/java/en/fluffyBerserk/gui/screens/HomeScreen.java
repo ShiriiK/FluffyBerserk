@@ -1,9 +1,9 @@
 package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
-import en.fluffyBerserk.gui.animations.SpriteImage;
+import en.fluffyBerserk.game.animations.SpriteImage;
+import en.fluffyBerserk.game.animations.SpritesFactory;
 import en.fluffyBerserk.gui.utils.AttachCSS;
-import en.fluffyBerserk.gui.animations.SpritesFactory;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,19 +12,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
-
-/**
- * Screen representing Home screen
- */
-
-public final class HomeScreen extends Screen {
-
+public final class HomeScreen extends BaseScreen {
 
     @Override
     protected Scene buildScene() {
         final BorderPane root = new BorderPane();
         VBox buttons = new VBox();
+        buttons.getStyleClass().add("vbox");
 
         // Login screen
         Button loginButton = new Button("Login");
@@ -34,25 +28,16 @@ public final class HomeScreen extends Screen {
         final Button registerButton = new Button("Register");
         registerButton.setOnAction(event -> Main.app.changeScreen(new RegisterScreen()));
 
-        // Safe-zone screen
+        // Guest button
         Button guestButton = new Button("Continue as guest");
         guestButton.setOnAction(event -> {
-            try {
-                Main.app.changeScreen(new SafeZoneScreen());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Main.app.changeScreen(new CharacterScreen(null));
         });
 
-        // TODO guest button
-
         buttons.getChildren().addAll(loginButton, registerButton, guestButton);
-        buttons.setAlignment(Pos.CENTER);
-        buttons.setSpacing(5);
 
         // Kitty picture randomizer
-        int index = getIndex();
-        Image image = new SpriteImage(SpritesFactory.getImages()[index], 32, 0, 32, 32).getFrame();
+        Image image = new SpriteImage(SpritesFactory.getRandomSprite(), 32, 0, 32, 32).getFrame();
         ImageView kitty = new ImageView(image);
         kitty.setFitWidth(300);
         kitty.setFitHeight(300);
@@ -75,15 +60,5 @@ public final class HomeScreen extends Screen {
         if (Main.app.isUserLoggedIn()) {
             throw new RuntimeException("Logged in user cannot go to home screen!");
         }
-        System.out.println("Entered home screen");
-    }
-
-    @Override
-    public void onLeave() {
-        System.out.println("Left home screen");
-    }
-
-    private int getIndex() {
-        return (int) ((Math.random() * (SpritesFactory.getImages().length - 1)) + 1);
     }
 }

@@ -1,7 +1,6 @@
 package en.fluffyBerserk.gui.popups;
 
 import en.fluffyBerserk.Main;
-import en.fluffyBerserk.gui.screens.EditScreen;
 import en.fluffyBerserk.gui.screens.LoginScreen;
 import en.fluffyBerserk.gui.screens.SaveSlotsScreen;
 import en.fluffyBerserk.gui.utils.AttachCSS;
@@ -29,12 +28,6 @@ public final class PopUpMenu extends PopUp {
             Main.app.changeScreen(new SaveSlotsScreen());
         });
 
-        // Edit button
-        Button editButton = new Button("Edit character");
-        editButton.setOnAction(event -> {
-            Main.app.changeScreen(new EditScreen());
-        });
-
         // Help button
         Button helpButton = new Button("Help");
 
@@ -53,8 +46,8 @@ public final class PopUpMenu extends PopUp {
         // Delete account button
         Button deleteAccountButton = new Button("Delete account");
 
-        buttons.getChildren().addAll(resumeButton, saveButton, loadButton, editButton, helpButton, logoutButton, deleteSaveButton, deleteAccountButton);
-        buttons.getStyleClass().add("vbox");
+        buttons.getChildren().addAll(resumeButton, saveButton, loadButton, helpButton, logoutButton, deleteSaveButton, deleteAccountButton);
+        buttons.getStyleClass().add("pop-up-menu");
 
 
         Scene scene = new Scene(buttons);
