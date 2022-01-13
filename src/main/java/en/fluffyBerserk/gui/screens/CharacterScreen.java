@@ -4,6 +4,7 @@ import en.fluffyBerserk.Main;
 import en.fluffyBerserk.form.CharacterForm;
 import en.fluffyBerserk.game.animations.SpriteImage;
 import en.fluffyBerserk.game.animations.SpritesFactory;
+import en.fluffyBerserk.gui.utils.AttachCSS;
 import en.fluffyBerserk.gui.utils.LocateImage;
 import en.fluffyBerserk.persistence.DeleteTask;
 import en.fluffyBerserk.persistence.InsertTask;
@@ -48,9 +49,7 @@ public final class CharacterScreen extends BaseScreen {
         assert user != null;
 
         final VBox root = new VBox();
-        root.setPadding(new Insets(15, 15, 15, 15));
-        root.setSpacing(10.0);
-        root.setAlignment(Pos.CENTER);
+        root.getStyleClass().add("vbox");
 
         final Label nameLabel = new Label("Character name");
         final TextField nameField = new TextField();
@@ -356,6 +355,9 @@ public final class CharacterScreen extends BaseScreen {
 
         root.getChildren().add(buttonPane);
 
-        return new Scene(root);
+        Scene scene = new Scene(root);
+        AttachCSS.attachCSS(scene);
+
+        return scene;
     }
 }

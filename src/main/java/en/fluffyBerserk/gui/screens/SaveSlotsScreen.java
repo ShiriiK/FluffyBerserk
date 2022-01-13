@@ -1,16 +1,17 @@
 package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
+import en.fluffyBerserk.game.animations.SpriteImage;
+import en.fluffyBerserk.game.animations.SpritesFactory;
 import en.fluffyBerserk.gui.utils.AttachCSS;
 import en.fluffyBerserk.persistence.DeleteTask;
 import en.fluffyBerserk.persistence.SelectTask;
 import en.fluffyBerserk.persistence.models.Character;
 import en.fluffyBerserk.persistence.models.User;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,6 +26,11 @@ public final class SaveSlotsScreen extends BaseScreen {
         final User user = Main.app.getUser();
         assert user != null;
         VBox root = new VBox();
+        VBox topButtons = new VBox();
+        root.getStyleClass().add("vbox");
+        topButtons.getStyleClass().add("vbox");
+        VBox bottomButtons = new VBox();
+        bottomButtons.getStyleClass().add("vbox-bottom");
 
 
         final List<Character> characters = new SelectTask<Character>().multiNamedQuery(manager -> {
@@ -56,9 +62,12 @@ public final class SaveSlotsScreen extends BaseScreen {
                 button.setOnAction(event -> {
                     Main.app.changeScreen(new CharacterScreen(character));
                 });
+                Image image = new SpriteImage(SpritesFactory.getSpriteByNumber(character.getSpriteIndex()), 32, 0, 32, 32).getFrame();
+                button.setGraphic(new ImageView(image));
+                button.setContentDisplay(ContentDisplay.LEFT);
             }
 
-            root.getChildren().add(button);
+            topButtons.getChildren().add(button);
         }
 
         final Button deleteAccount = new Button("Delete Account");
@@ -85,7 +94,9 @@ public final class SaveSlotsScreen extends BaseScreen {
             Main.app.changeScreen(new HomeScreen());
         });
 
-        root.getChildren().addAll(deleteAccount, logOutButton);
+        bottomButtons.getChildren().addAll(deleteAccount, logOutButton);
+
+        root.getChildren().addAll(topButtons, bottomButtons);
 
         Scene scene = new Scene(root);
         AttachCSS.attachCSS(scene);
