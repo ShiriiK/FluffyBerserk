@@ -8,5 +8,5 @@ public interface SelectTaskQuery<T> {
     /**
      * Builds named query for specific generic type
      */
-    TypedQuery<T> getQuery(EntityManager manager);
+    TypedQuery<T> getQuery(final EntityManager manager);
 }

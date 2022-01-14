@@ -1,60 +1,58 @@
 package en.fluffyBerserk.gui.screens;
 
-import javafx.geometry.Insets;
+import en.fluffyBerserk.Main;
+import en.fluffyBerserk.game.animations.SpriteImage;
+import en.fluffyBerserk.game.animations.SpritesFactory;
+import en.fluffyBerserk.gui.utils.AttachCSS;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelReader;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import en.fluffyBerserk.Main;
-
-/**
- * BaseScreen extension class that displays home screen.
- */
 
 public final class HomeScreen extends BaseScreen {
 
     @Override
     protected Scene buildScene() {
-        BorderPane root = new BorderPane();
-        root.setPadding(new Insets(15, 15, 15, 15));
+        final BorderPane root = new BorderPane();
         VBox buttons = new VBox();
+        buttons.getStyleClass().add("vbox");
 
         // Login screen
         Button loginButton = new Button("Login");
         loginButton.setOnAction(event -> Main.app.changeScreen(new LoginScreen()));
 
         // Register screen
-        Button registerButton = new Button("Register");
+        final Button registerButton = new Button("Register");
         registerButton.setOnAction(event -> Main.app.changeScreen(new RegisterScreen()));
 
-        // Safe-zone screen
+        // Guest button
         Button guestButton = new Button("Continue as guest");
-        guestButton.setOnAction(event -> Main.app.changeScreen(new SafeZoneScreen()));
+        guestButton.setOnAction(event -> {
+            Main.app.changeScreen(new CharacterScreen(null));
+        });
 
-        buttons.getChildren().addAll(loginButton,registerButton,guestButton);
-        buttons.setAlignment(Pos.CENTER);
-        buttons.setSpacing(5);
+        buttons.getChildren().addAll(loginButton, registerButton, guestButton);
 
-        // Temporary creating of image
-        Image image = new Image("player/fluf1.png");
-        PixelReader reader = image.getPixelReader();
-        ImageView kitty = new ImageView(new WritableImage(reader,32,0, 32, 32));
-        kitty.setFitHeight(200);
-        kitty.setFitWidth(200);
+        // Kitty picture randomizer
+        Image image = new SpriteImage(SpritesFactory.getRandomSprite(), 32, 0, 32, 32).getFrame();
+        ImageView kitty = new ImageView(image);
+        kitty.setFitWidth(300);
+        kitty.setFitHeight(300);
 
-        VBox pic = new VBox();
+        final VBox pic = new VBox();
         pic.getChildren().add(kitty);
         pic.setAlignment(Pos.CENTER);
 
         root.setLeft(buttons);
         root.setCenter(pic);
 
-        return new Scene(root);
+        Scene scene = new Scene(root);
+        AttachCSS.attachCSS(scene);
+
+        return scene;
     }
 
     @Override

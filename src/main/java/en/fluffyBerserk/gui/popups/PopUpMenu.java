@@ -1,60 +1,60 @@
 package en.fluffyBerserk.gui.popups;
 
-import en.fluffyBerserk.gui.screens.EditScreen;
-import en.fluffyBerserk.gui.screens.SaveSlotsScreen;
-import en.fluffyBerserk.logic.Game;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.gui.screens.LoginScreen;
+import en.fluffyBerserk.gui.screens.SaveSlotsScreen;
+import en.fluffyBerserk.gui.utils.AttachCSS;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
-/**
- * BasePopUp extension class that displays menu.
- */
-
-public final class PopUpMenu extends BasePopUp {
-
-    @Override
-    protected String getPopUpTitle() {
-        return "Menu";
-    }
+public final class PopUpMenu extends PopUp {
 
     @Override
     protected void initPopUpStage() {
         VBox buttons = new VBox();
 
+        // Resume button
         Button resumeButton = new Button("Resume");
         resumeButton.setOnAction(event -> Main.app.hidePopUp());
 
+        // Save button
         Button saveButton = new Button("Save game");
+
+        // Load button
         Button loadButton = new Button("Load game");
+        loadButton.setOnAction(event -> {
+            Main.app.changeScreen(new SaveSlotsScreen());
+        });
 
-        loadButton.setOnAction(event -> Main.app.changeScreen(new SaveSlotsScreen()));
-
-        Button editButton = new Button("Edit character");
-        editButton.setOnAction(event -> Main.app.changeScreen(new EditScreen(new Game())));
-
+        // Help button
         Button helpButton = new Button("Help");
-        helpButton.setOnAction(event -> Main.app.showPopUp(new PopUpHelp()));
 
+        PopUpHelp popUpHelp = new PopUpHelp();
+        helpButton.setOnAction(event -> {
+            Main.app.showPopUp(popUpHelp);
+        });
+
+        // Logout button
         Button logoutButton = new Button("Logout");
         logoutButton.setOnAction(event -> Main.app.changeScreen(new LoginScreen()));
 
+        // Delete save button
         Button deleteSaveButton = new Button("Delete save");
+
+        // Delete account button
         Button deleteAccountButton = new Button("Delete account");
 
-        buttons.getChildren().addAll(resumeButton,saveButton,loadButton,editButton,helpButton,logoutButton,deleteSaveButton,deleteAccountButton);
-        buttons.setAlignment(Pos.CENTER);
-        buttons.setSpacing(20);
+        buttons.getChildren().addAll(resumeButton, saveButton, loadButton, helpButton, logoutButton, deleteSaveButton, deleteAccountButton);
+        buttons.getStyleClass().add("pop-up-menu");
 
-        BorderPane root = new BorderPane();
-        root.setCenter(buttons);
 
-        popUpStage.setScene(new Scene(root, Color.TRANSPARENT));
+        Scene scene = new Scene(buttons);
+        scene.setFill(Color.TRANSPARENT);
+        AttachCSS.attachCSS(scene);
+
+        popUpStage.setScene(scene);
     }
 
     @Override

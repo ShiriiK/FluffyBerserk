@@ -1,8 +1,8 @@
 package en.fluffyBerserk.gui.utils;
 
+import en.fluffyBerserk.Main;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import en.fluffyBerserk.Main;
 import javafx.stage.StageStyle;
 import org.jetbrains.annotations.NotNull;
 

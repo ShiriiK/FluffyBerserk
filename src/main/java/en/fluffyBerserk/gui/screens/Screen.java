@@ -1,19 +1,12 @@
 package en.fluffyBerserk.gui.screens;
 
-import en.fluffyBerserk.logic.objects.creatures.player.Player;
 import javafx.scene.Scene;
-
-/**
- * Interface for screens implemented by BaseScreen
- */
 
 public interface Screen {
 
-    Scene getScene();
+    public Scene getScene();
 
-    // Message for console
-    void onEnter();
+    public void onEnter();
 
-    // Message for console
-    void onLeave();
+    public void onLeave();
 }

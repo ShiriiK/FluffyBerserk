@@ -1,7 +1,6 @@
 package en.fluffyBerserk.persistence;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import java.util.List;
@@ -19,9 +18,8 @@ public class SelectTask<T> {
      *
      * @param builder lambda which builds the named query
      */
-    public T singleNamedQuery(SelectTaskQuery<T> builder) {
-        EntityManagerFactory factory = en.fluffyBerserk.persistence.EntityManagerFactory.getFactory();
-        EntityManager manager = factory.createEntityManager();
+    public T singleNamedQuery(final SelectTaskQuery<T> builder) {
+        EntityManager manager = DatabaseSession.getSession();
         EntityTransaction transaction = manager.getTransaction();
 
         T result = null;
@@ -40,8 +38,6 @@ public class SelectTask<T> {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            manager.close();
-            factory.close();
         }
 
         return result;
@@ -53,9 +49,8 @@ public class SelectTask<T> {
      *
      * @param builder lambda which builds the named query
      */
-    public List<T> multiNamedQuery(SelectTaskQuery<T> builder) {
-        EntityManagerFactory factory = en.fluffyBerserk.persistence.EntityManagerFactory.getFactory();
-        EntityManager manager = factory.createEntityManager();
+    public List<T> multiNamedQuery(final SelectTaskQuery<T> builder) {
+        EntityManager manager = DatabaseSession.getSession();
         EntityTransaction transaction = manager.getTransaction();
 
         List<T> result = null;
@@ -74,8 +69,6 @@ public class SelectTask<T> {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            manager.close();
-            factory.close();
         }
 
         return result;

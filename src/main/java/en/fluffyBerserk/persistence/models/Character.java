@@ -15,6 +15,7 @@ public class Character {
     private int strength;
     private int intellect;
     private int armor;
+    private int spriteIndex;
     private String saveFilePath;
     private Timestamp savedAt;
     private Timestamp createdAt;
@@ -99,6 +100,16 @@ public class Character {
 
     public void setArmor(int armor) {
         this.armor = armor;
+    }
+
+    @Basic
+    @Column(name = "sprite_index")
+    public int getSpriteIndex() {
+        return spriteIndex;
+    }
+
+    public void setSpriteIndex(int spriteIndex) {
+        this.spriteIndex = spriteIndex;
     }
 
     @Basic

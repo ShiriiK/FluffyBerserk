@@ -1,7 +1,6 @@
 package en.fluffyBerserk.persistence;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
 /**
@@ -17,9 +16,8 @@ public class InsertTask<T> {
      *
      * @param object object to be inserted
      */
-    public T insert(T object) {
-        EntityManagerFactory factory = en.fluffyBerserk.persistence.EntityManagerFactory.getFactory();
-        EntityManager manager = factory.createEntityManager();
+    public T insert(final T object) {
+        EntityManager manager = DatabaseSession.getSession();
         EntityTransaction transaction = manager.getTransaction();
 
         try {
@@ -33,8 +31,6 @@ public class InsertTask<T> {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            manager.close();
-            factory.close();
         }
 
         return object;
