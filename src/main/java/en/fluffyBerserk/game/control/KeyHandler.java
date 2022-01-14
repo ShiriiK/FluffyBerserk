@@ -1,7 +1,10 @@
 package en.fluffyBerserk.game.control;
 
+import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.Game;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
+import en.fluffyBerserk.gui.popups.PopUp;
+import en.fluffyBerserk.gui.popups.PopUpMenu;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import org.jetbrains.annotations.Nullable;
@@ -13,6 +16,8 @@ public class KeyHandler {
 
     // Reference to the key currently handling moving on axis X
     private static @Nullable KeyCode moveX = null;
+
+    private static PopUp popUpMenu = new PopUpMenu();
 
     public static void attachHandlers(Game game, Scene scene) {
         scene.setOnKeyPressed(event -> {
@@ -32,6 +37,11 @@ public class KeyHandler {
                 case D:
                     game.getPlayer().setMoveX(Player.PLAYER_SPEED);
                     moveX = KeyCode.D;
+                    break;
+                case ESCAPE:
+                    Main.app.showPopUp(popUpMenu);
+                    game.getPlayer().setMoveY(0F);
+                    game.getPlayer().setMoveX(0F);
                     break;
             }
         });

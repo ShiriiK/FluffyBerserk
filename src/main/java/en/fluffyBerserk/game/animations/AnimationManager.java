@@ -1,7 +1,6 @@
 package en.fluffyBerserk.game.animations;
 
-import en.fluffyBerserk.game.logic.objects.Entity;
-import en.fluffyBerserk.gui.utils.LocateImage;
+import en.fluffyBerserk.game.logic.AnimatedEntity;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -10,17 +9,14 @@ public class AnimationManager {
     private static final int CHANGE_ANIMATION_NUMBER = 5;
     private int ticks = 0;
     private int animationNumber = 0;
-    private final PortalAnimations portalAnimations;
-    private final Entity entity;
+    private final AnimationsFactory animationsFactory;
 
-
-    public AnimationManager(LocateImage sprite, Entity entity) {
-        this.entity = entity;
-        portalAnimations = new PortalAnimations(sprite);
+    public AnimationManager(ArrayList<Image> animations, AnimatedEntity entity) {
+        animationsFactory = new AnimationsFactory();
     }
 
     private ArrayList<Image> getAnimationList(){
-        return portalAnimations.getPortalAnimations();
+        return animationsFactory.getPortalAnimations();
     }
 
     public Image getImage(){

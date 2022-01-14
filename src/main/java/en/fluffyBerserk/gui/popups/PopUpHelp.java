@@ -1,5 +1,6 @@
 package en.fluffyBerserk.gui.popups;
 
+import en.fluffyBerserk.game.Game;
 import en.fluffyBerserk.gui.utils.AttachCSS;
 import javafx.scene.Scene;
 import javafx.scene.web.WebView;

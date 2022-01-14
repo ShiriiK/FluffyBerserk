@@ -13,10 +13,6 @@ import java.util.Random;
  */
 public class SpritesFactory {
 
-    private static final Map<Integer, LocateImage> objects = new HashMap<Integer, LocateImage>(){{
-        put(0, new LocateImage("objects/GreenPortal.png", 0));
-        put(1, new LocateImage("objects/PurplePortal.png", 1));
-    }};
 
     private static final Map<Integer, LocateImage> skins = new HashMap<Integer, LocateImage>() {{
         put(0, new LocateImage("player/fluf1.png", 0));
@@ -40,10 +36,6 @@ public class SpritesFactory {
 
     public static @NotNull Map<Integer, LocateImage> getSkins() {
         return skins;
-    }
-
-    public static @Nullable LocateImage getObjectSpriteByNumber(Integer key) {
-        return objects.get(key);
     }
 
     public static @NotNull LocateImage getRandomSprite() {

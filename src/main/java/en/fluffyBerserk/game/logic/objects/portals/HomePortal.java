@@ -1,18 +1,20 @@
 package en.fluffyBerserk.game.logic.objects.portals;
 
-import en.fluffyBerserk.game.animations.SpritesFactory;
+import en.fluffyBerserk.game.animations.AnimationsFactory;
+import javafx.scene.image.Image;
+
+import java.util.ArrayList;
 
 public class HomePortal extends Portal {
-
-
-    public HomePortal() {
-        super(SpritesFactory.getObjectSpriteByNumber(0));
-    }
 
     @Override
     public String getName() {
         return "Home portal";
     }
 
-
+    @Override
+    protected ArrayList<Image> setAnimations() {
+        return AnimationsFactory.portalAnimations();
+    }
 }
+

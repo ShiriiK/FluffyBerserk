@@ -5,6 +5,8 @@ import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.portals.HomePortal;
 import en.fluffyBerserk.game.maps.Map;
 import en.fluffyBerserk.game.maps.SafeZoneMap;
+import en.fluffyBerserk.gui.popups.PopUp;
+import en.fluffyBerserk.gui.popups.PopUpPortal;
 import en.fluffyBerserk.persistence.models.Character;
 
 public final class Game {
@@ -19,11 +21,18 @@ public final class Game {
 
     private final Camera camera = new Camera(this);
 
+    private PopUp portal;
+
+
     private Map currentMap;
 
     public Game(Character character) {
         player = new Player(character);
         bootDefaultState();
+    }
+
+    public PopUp getPortal() {
+        return portal;
     }
 
     public Camera getCamera() {
@@ -46,6 +55,10 @@ public final class Game {
         return currentMap;
     }
 
+    public void setCurrentMap(Map map){
+        currentMap = map;
+    }
+
     public GameLoop getGameLoop() {
         return gameLoop;
     }
@@ -59,5 +72,6 @@ public final class Game {
 
 
         currentMap = new SafeZoneMap();
+        portal = new PopUpPortal(this);
     }
 }

@@ -1,11 +1,14 @@
 package en.fluffyBerserk.game;
 
+import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.logic.AnimatedEntity;
+import en.fluffyBerserk.game.logic.Collision;
+import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
-import en.fluffyBerserk.game.logic.Collision;
 import en.fluffyBerserk.game.logic.objects.TileObject;
-import en.fluffyBerserk.game.logic.objects.portals.HomePortal;
+import en.fluffyBerserk.gui.popups.PopUp;
+import en.fluffyBerserk.gui.popups.PopUpPortal;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
@@ -17,7 +20,7 @@ public final class GameLoop {
 
     @NotNull
     private final Game game;
-
+    private PopUpPortal portal;
     @NotNull
     private final AnimationTimer timer = new AnimationTimer() {
         @Override
@@ -90,21 +93,33 @@ public final class GameLoop {
         }
     }
 
-    private void drawObjects(Canvas canvas){
+    private void drawObjects(Canvas canvas) {
         AnimatedEntity[] objects = game.getCurrentMap().getObjects();
 
-        for(int i = 0; i < objects.length; i++){
-            if(objects[i] != null){
-                canvas.getGraphicsContext2D().drawImage(
-                        objects[i].getImage(),
-                        game.getCamera().processX(objects[i].getX()),
-                        game.getCamera().processY(objects[i].getY()),
-                        objects[i].getWidth(),
-                        objects[i].getHeight()
-                );
-                objects[i].getAnimationManager().increaseTick();
+        if (objects != null) {
+            for (int i = 0; i < objects.length; i++) {
+                if (objects[i] != null) {
+                    canvas.getGraphicsContext2D().drawImage(
+                            objects[i].getImage(),
+                            game.getCamera().processX(objects[i].getX()),
+                            game.getCamera().processY(objects[i].getY()),
+                            objects[i].getWidth(),
+                            objects[i].getHeight()
+                    );
+                    objects[i].getAnimationManager().increaseTick();
+
+                    if (Constants.SHOW_HIT_BOX) {
+                        canvas.getGraphicsContext2D().strokeRect(
+                                game.getCamera().processX(objects[i].getHitBoxX()),
+                                game.getCamera().processY(objects[i].getHitBoxY()),
+                                objects[i].getHitBoxWidth(),
+                                objects[i].getHitBoxHeight()
+                        );
+                    }
+                }
             }
         }
+
     }
 
     private void drawEntities(Canvas canvas) {
@@ -132,8 +147,31 @@ public final class GameLoop {
                 }
             }
 
-            // Check collision with other entities (bullets, monsters, npc, items etc.)
+            // Check collision with objects
+            AnimatedEntity[] objects = game.getCurrentMap().getObjects();
+            outerFor:
+            if (objects != null) {
+                for (int i = 0; i < objects.length; i++) {
+                    if (objects[i] == null) {
+                        continue;
+                    }
+
+                    if (Collision.objectsCollide(objects[i], entity)) {
+                        entity.setX(entity.getPreviousX());
+                        entity.setY(entity.getPreviousY());
+                        if (objects[i].getType().equals(ObjectType.PORTAL)) {
+                            portal = new PopUpPortal(game);
+                            Main.app.showPopUp(portal);
+                            game.getPlayer().setMoveY(0F);
+                            game.getPlayer().setMoveX(0F);
+                        }
+                        break outerFor;
+                    }
+                }
+            }
         }
+
+        // Check collision with other entities (bullets, monsters, npc, items etc.)
 
         // This will render all entities on the map (npcs, bullets, player, items, chests, portals etc.)
         for (Entity entity : game.getEntityManager().getEntities()) {

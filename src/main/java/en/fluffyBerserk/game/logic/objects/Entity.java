@@ -52,6 +52,16 @@ public abstract class Entity implements Object {
         return Constants.ENTITIES_SIZE;
     }
 
+    @Override
+    public int getHitBoxX(){
+        return (int) (getX());
+    }
+
+    @Override
+    public int getHitBoxY(){
+        return (int) (getY());
+    }
+
     public float getPreviousX() {
         return previousX;
     }

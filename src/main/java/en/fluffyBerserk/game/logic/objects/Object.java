@@ -20,5 +20,9 @@ public interface Object {
 
     int getHitBoxWidth();
 
+    int getHitBoxX();
+
+    int getHitBoxY();
+
     Image getImage();
 }
