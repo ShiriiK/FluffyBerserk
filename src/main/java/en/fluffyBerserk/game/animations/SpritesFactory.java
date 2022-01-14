@@ -13,7 +13,12 @@ import java.util.Random;
  */
 public class SpritesFactory {
 
-    private static final Map<Integer, LocateImage> map = new HashMap<Integer, LocateImage>() {{
+    private static final Map<Integer, LocateImage> objects = new HashMap<Integer, LocateImage>(){{
+        put(0, new LocateImage("objects/GreenPortal.png", 0));
+        put(1, new LocateImage("objects/PurplePortal.png", 1));
+    }};
+
+    private static final Map<Integer, LocateImage> skins = new HashMap<Integer, LocateImage>() {{
         put(0, new LocateImage("player/fluf1.png", 0));
         put(1, new LocateImage("player/fluf2.png", 1));
         put(2, new LocateImage("player/fluf3.png", 2));
@@ -30,19 +35,23 @@ public class SpritesFactory {
     }};
 
     public static boolean indexExists(Integer key) {
-        return map.containsKey(key);
+        return skins.containsKey(key);
     }
 
-    public static @NotNull Map<Integer, LocateImage> getMap() {
-        return map;
+    public static @NotNull Map<Integer, LocateImage> getSkins() {
+        return skins;
+    }
+
+    public static @Nullable LocateImage getObjectSpriteByNumber(Integer key) {
+        return objects.get(key);
     }
 
     public static @NotNull LocateImage getRandomSprite() {
         Random random = new Random();
-        return map.get(random.nextInt(map.size()));
+        return skins.get(random.nextInt(skins.size()));
     }
 
     public static @Nullable LocateImage getSpriteByNumber(Integer key) {
-        return map.get(key);
+        return skins.get(key);
     }
 }

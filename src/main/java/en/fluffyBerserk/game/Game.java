@@ -2,6 +2,7 @@ package en.fluffyBerserk.game;
 
 import en.fluffyBerserk.game.graphics.GameGraphics;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
+import en.fluffyBerserk.game.logic.objects.portals.HomePortal;
 import en.fluffyBerserk.game.maps.Map;
 import en.fluffyBerserk.game.maps.SafeZoneMap;
 import en.fluffyBerserk.persistence.models.Character;
@@ -55,6 +56,7 @@ public final class Game {
         // Spawn player in the center of current map
         player.setX(((float)Constants.WORLD_WIDTH / 2) - ((float)Constants.TILE_SIZE / 2));
         player.setY(((float)Constants.WORLD_HEIGHT / 2) - ((float)Constants.TILE_SIZE / 2));
+
 
         currentMap = new SafeZoneMap();
     }

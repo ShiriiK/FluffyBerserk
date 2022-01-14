@@ -1,5 +1,6 @@
 package en.fluffyBerserk.game.logic.objects.creatures.player;
 
+import en.fluffyBerserk.game.Constants;
 import en.fluffyBerserk.game.logic.HasName;
 import en.fluffyBerserk.game.logic.objects.MovableAnimatedEntity;
 import en.fluffyBerserk.game.animations.SpritesFactory;
@@ -19,5 +20,15 @@ public final class Player extends MovableAnimatedEntity implements HasName {
     @Override
     public String getName() {
         return character.getName();
+    }
+
+    @Override
+    public int getHitBoxHeight(){
+        return Constants.ENTITIES_SIZE-10;
+    }
+
+    @Override
+    public int getHitBoxWidth(){
+        return Constants.ENTITIES_SIZE-10;
     }
 }

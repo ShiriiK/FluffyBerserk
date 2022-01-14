@@ -16,5 +16,9 @@ public interface Object {
 
     int getWidth();
 
+    int getHitBoxHeight();
+
+    int getHitBoxWidth();
+
     Image getImage();
 }

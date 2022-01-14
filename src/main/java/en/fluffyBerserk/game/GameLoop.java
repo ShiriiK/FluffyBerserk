@@ -1,9 +1,11 @@
 package en.fluffyBerserk.game;
 
+import en.fluffyBerserk.game.logic.AnimatedEntity;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
 import en.fluffyBerserk.game.logic.Collision;
 import en.fluffyBerserk.game.logic.objects.TileObject;
+import en.fluffyBerserk.game.logic.objects.portals.HomePortal;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
@@ -41,6 +43,8 @@ public final class GameLoop {
         drawMap(gameCanvas);
 
         drawTiles(gameCanvas);
+
+        drawObjects(gameCanvas);
 
         drawEntities(gameCanvas);
     }
@@ -82,6 +86,23 @@ public final class GameLoop {
                             tile.getHeight()
                     );
                 }
+            }
+        }
+    }
+
+    private void drawObjects(Canvas canvas){
+        AnimatedEntity[] objects = game.getCurrentMap().getObjects();
+
+        for(int i = 0; i < objects.length; i++){
+            if(objects[i] != null){
+                canvas.getGraphicsContext2D().drawImage(
+                        objects[i].getImage(),
+                        game.getCamera().processX(objects[i].getX()),
+                        game.getCamera().processY(objects[i].getY()),
+                        objects[i].getWidth(),
+                        objects[i].getHeight()
+                );
+                objects[i].getAnimationManager().increaseTick();
             }
         }
     }
