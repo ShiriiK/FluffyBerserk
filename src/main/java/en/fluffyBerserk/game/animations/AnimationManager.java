@@ -1,6 +1,6 @@
 package en.fluffyBerserk.game.animations;
 
-import en.fluffyBerserk.game.logic.AnimatedEntity;
+import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;

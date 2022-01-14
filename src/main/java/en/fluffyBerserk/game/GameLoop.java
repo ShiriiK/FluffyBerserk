@@ -1,13 +1,12 @@
 package en.fluffyBerserk.game;
 
 import en.fluffyBerserk.Main;
-import en.fluffyBerserk.game.logic.AnimatedEntity;
+import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
 import en.fluffyBerserk.game.logic.Collision;
 import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
 import en.fluffyBerserk.game.logic.objects.TileObject;
-import en.fluffyBerserk.gui.popups.PopUp;
 import en.fluffyBerserk.gui.popups.PopUpPortal;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;

@@ -1,7 +1,6 @@
 package en.fluffyBerserk.gui.popups;
 
 import en.fluffyBerserk.Main;
-import en.fluffyBerserk.game.Game;
 import en.fluffyBerserk.gui.screens.LoginScreen;
 import en.fluffyBerserk.gui.screens.SaveSlotsScreen;
 import en.fluffyBerserk.gui.utils.AttachCSS;

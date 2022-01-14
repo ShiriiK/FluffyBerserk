@@ -1,8 +1,6 @@
 package en.fluffyBerserk.game.graphics.tiles;
 
 import en.fluffyBerserk.game.Constants;
-import en.fluffyBerserk.game.animations.SpriteImage;
-import en.fluffyBerserk.game.animations.SpritesFactory;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 

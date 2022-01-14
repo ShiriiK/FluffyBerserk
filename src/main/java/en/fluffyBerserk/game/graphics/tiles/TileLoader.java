@@ -3,7 +3,10 @@ package en.fluffyBerserk.game.graphics.tiles;
 import en.fluffyBerserk.game.Constants;
 import en.fluffyBerserk.game.logic.objects.TileObject;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Vector;
 
 public final class TileLoader {

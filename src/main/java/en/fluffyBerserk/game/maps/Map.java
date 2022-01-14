@@ -1,7 +1,7 @@
 package en.fluffyBerserk.game.maps;
 
 import en.fluffyBerserk.game.graphics.tiles.TileLoader;
-import en.fluffyBerserk.game.logic.AnimatedEntity;
+import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
 import en.fluffyBerserk.game.logic.objects.TileObject;
 
 import java.util.Vector;

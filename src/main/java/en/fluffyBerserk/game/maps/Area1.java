@@ -1,10 +1,9 @@
 package en.fluffyBerserk.game.maps;
 
 import en.fluffyBerserk.game.graphics.objects.ObjectsInArea1;
-import en.fluffyBerserk.game.graphics.objects.ObjectsInSafeZone;
-import en.fluffyBerserk.game.logic.AnimatedEntity;
+import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
 
-public class Area1 extends Map{
+public final class Area1 extends Map{
     AnimatedEntity[] objects = ObjectsInArea1.loadObjects();
 
     @Override

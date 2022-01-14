@@ -6,7 +6,6 @@ import en.fluffyBerserk.gui.screens.Screen;
 import en.fluffyBerserk.gui.utils.PopUpBuilder;
 import en.fluffyBerserk.persistence.DatabaseSession;
 import en.fluffyBerserk.persistence.models.User;
-import javafx.scene.effect.GaussianBlur;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

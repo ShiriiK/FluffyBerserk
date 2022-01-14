@@ -1,6 +1,5 @@
 package en.fluffyBerserk.gui.popups;
 
-import en.fluffyBerserk.game.Game;
 import en.fluffyBerserk.gui.utils.PopUpBuilder;
 import javafx.stage.Stage;
 

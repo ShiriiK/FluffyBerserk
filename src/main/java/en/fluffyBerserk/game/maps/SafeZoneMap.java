@@ -1,7 +1,7 @@
 package en.fluffyBerserk.game.maps;
 
 import en.fluffyBerserk.game.graphics.objects.ObjectsInSafeZone;
-import en.fluffyBerserk.game.logic.AnimatedEntity;
+import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
 
 public final class SafeZoneMap extends Map {
     AnimatedEntity[] objects = ObjectsInSafeZone.loadObjects();

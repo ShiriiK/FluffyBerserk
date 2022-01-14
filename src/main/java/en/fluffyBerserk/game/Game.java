@@ -2,7 +2,6 @@ package en.fluffyBerserk.game;
 
 import en.fluffyBerserk.game.graphics.GameGraphics;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
-import en.fluffyBerserk.game.logic.objects.portals.HomePortal;
 import en.fluffyBerserk.game.maps.Map;
 import en.fluffyBerserk.game.maps.SafeZoneMap;
 import en.fluffyBerserk.gui.popups.PopUp;
