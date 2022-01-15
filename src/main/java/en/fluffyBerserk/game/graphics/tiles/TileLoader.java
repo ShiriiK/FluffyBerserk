@@ -1,6 +1,7 @@
 package en.fluffyBerserk.game.graphics.tiles;
 
 import en.fluffyBerserk.game.Constants;
+import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.objects.TileObject;
 
 import java.io.BufferedReader;
@@ -36,7 +37,7 @@ public final class TileLoader {
                     int tileNumber = Integer.parseInt(tiles[col]);
 
                     if (tileNumber != TileFactory.TILE_BLANK) {
-                        TileObject tileObject = new TileObject(Integer.parseInt(tiles[col]));
+                        TileObject tileObject = new TileObject(Integer.parseInt(tiles[col]), ObjectType.TILE);
 
                         tileObject.setX(col * tileObject.getWidth());
                         tileObject.setY(row * tileObject.getHeight());

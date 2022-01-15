@@ -30,8 +30,8 @@ public class ObjectsInArea1 {
                 return getWidth();
             }
         };
-        objects[0].setX(18 * Constants.TILE_SIZE);
-        objects[0].setY((float) (6.25 * Constants.TILE_SIZE));
+        objects[0].setX(17 * Constants.TILE_SIZE);
+        objects[0].setY((float) (6.5 * Constants.TILE_SIZE));
 
         return objects;
     }

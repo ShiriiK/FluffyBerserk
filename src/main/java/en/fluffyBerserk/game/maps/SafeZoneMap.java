@@ -2,9 +2,10 @@ package en.fluffyBerserk.game.maps;
 
 import en.fluffyBerserk.game.graphics.objects.ObjectsInSafeZone;
 import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
+import en.fluffyBerserk.game.logic.objects.Entity;
 
 public final class SafeZoneMap extends Map {
-    AnimatedEntity[] objects = ObjectsInSafeZone.loadObjects();
+    Entity[] objects = ObjectsInSafeZone.loadObjects();
 
     @Override
     public String getName() {
@@ -13,7 +14,7 @@ public final class SafeZoneMap extends Map {
 
 
     @Override
-    public AnimatedEntity[] getObjects() {
+    public Entity[] getObjects() {
         return objects;
     }
 

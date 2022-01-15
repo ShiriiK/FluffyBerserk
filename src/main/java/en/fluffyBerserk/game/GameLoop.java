@@ -93,7 +93,7 @@ public final class GameLoop {
     }
 
     private void drawObjects(Canvas canvas) {
-        AnimatedEntity[] objects = game.getCurrentMap().getObjects();
+        Entity[] objects = game.getCurrentMap().getObjects();
 
         if (objects != null) {
             for (int i = 0; i < objects.length; i++) {
@@ -105,7 +105,10 @@ public final class GameLoop {
                             objects[i].getWidth(),
                             objects[i].getHeight()
                     );
-                    objects[i].getAnimationManager().increaseTick();
+                    if(objects[i] instanceof AnimatedEntity){
+                        ((AnimatedEntity) objects[i]).getAnimationManager().increaseTick();
+                    }
+
 
                     if (Constants.SHOW_HIT_BOX) {
                         canvas.getGraphicsContext2D().strokeRect(
@@ -147,7 +150,7 @@ public final class GameLoop {
             }
 
             // Check collision with objects
-            AnimatedEntity[] objects = game.getCurrentMap().getObjects();
+            Entity[] objects = game.getCurrentMap().getObjects();
             outerFor:
             if (objects != null) {
                 for (int i = 0; i < objects.length; i++) {

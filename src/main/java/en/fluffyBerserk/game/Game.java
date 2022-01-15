@@ -66,8 +66,8 @@ public final class Game {
         entityManager.addEntity(player);
 
         // Spawn player in the center of current map
-        player.setX(((float)Constants.WORLD_WIDTH / 2) - ((float)Constants.TILE_SIZE / 2));
-        player.setY(((float)Constants.WORLD_HEIGHT / 2) - ((float)Constants.TILE_SIZE / 2));
+        player.setX(((float)13* Constants.TILE_SIZE));
+        player.setY(((float)7*Constants.TILE_SIZE));
 
 
         currentMap = new SafeZoneMap();

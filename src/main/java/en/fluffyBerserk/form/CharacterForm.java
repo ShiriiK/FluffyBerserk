@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 
 public final class CharacterForm extends Form {
 
-    private int pointsLeft = 20;
+    private int pointsLeft = 0;
 
     @Nullable
     private String name = null;

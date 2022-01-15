@@ -11,10 +11,9 @@ public abstract class AnimatedEntity extends Entity {
 
     protected final AnimationManager animationManager;
     protected final ArrayList<Image> animations;
-    protected final ObjectType type;
 
     public AnimatedEntity(ObjectType type) {
-        this.type = type;
+        super(type);
         animations = setAnimations();
         animationManager = new AnimationManager(animations, this);
     }
@@ -24,7 +23,4 @@ public abstract class AnimatedEntity extends Entity {
     }
     protected abstract ArrayList<Image> setAnimations();
 
-    public ObjectType getType() {
-        return type;
-    }
 }

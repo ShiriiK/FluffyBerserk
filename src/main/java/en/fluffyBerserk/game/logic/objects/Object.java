@@ -20,9 +20,13 @@ public interface Object {
 
     int getHitBoxWidth();
 
-    int getHitBoxX();
+    float getHitBoxX();
 
-    int getHitBoxY();
+    float getHitBoxY();
+
+    void setHitBoxX(float x);
+
+    void setHitBoxY(float y);
 
     Image getImage();
 }

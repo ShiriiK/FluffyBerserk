@@ -1,6 +1,7 @@
 package en.fluffyBerserk.game.logic.objects;
 
 import en.fluffyBerserk.game.Constants;
+import en.fluffyBerserk.game.logic.ObjectType;
 
 public abstract class Entity implements Object {
 
@@ -9,6 +10,15 @@ public abstract class Entity implements Object {
 
     private float y;
     private float previousY;
+
+    private float hitBoxX;
+    private float hitBoxY;
+
+    protected final ObjectType type;
+
+    public Entity(ObjectType type) {
+        this.type = type;
+    }
 
     @Override
     public void setX(float x) {
@@ -21,6 +31,7 @@ public abstract class Entity implements Object {
         previousY = this.y;
         this.y = y;
     }
+
 
     @Override
     public float getX() {
@@ -53,13 +64,23 @@ public abstract class Entity implements Object {
     }
 
     @Override
-    public int getHitBoxX(){
-        return (int) (getX());
+    public void setHitBoxX(float x){
+        hitBoxX = x;
     }
 
     @Override
-    public int getHitBoxY(){
-        return (int) (getY());
+    public void setHitBoxY( float x){
+        hitBoxY = y;
+    }
+
+    @Override
+    public float getHitBoxX(){
+        return getX();
+    }
+
+    @Override
+    public float getHitBoxY(){
+        return getY();
     }
 
     public float getPreviousX() {
@@ -68,5 +89,9 @@ public abstract class Entity implements Object {
 
     public float getPreviousY() {
         return previousY;
+    }
+
+    public ObjectType getType() {
+        return type;
     }
 }

@@ -1,6 +1,7 @@
 package en.fluffyBerserk.game.logic.objects;
 
 import en.fluffyBerserk.game.animations.MovableEntityAnimationManager;
+import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.gui.utils.LocateImage;
 import javafx.scene.image.Image;
 
@@ -8,7 +9,8 @@ public abstract class MovableAnimatedEntity extends MovableEntity {
 
     private final MovableEntityAnimationManager animationManager;
 
-    public MovableAnimatedEntity(LocateImage sprite) {
+    public MovableAnimatedEntity(LocateImage sprite, ObjectType type) {
+        super(type);
         animationManager = new MovableEntityAnimationManager(sprite, this);
     }
 
