@@ -1,6 +1,7 @@
 package en.fluffyBerserk.game.control;
 
 import en.fluffyBerserk.Main;
+import en.fluffyBerserk.game.Constants;
 import en.fluffyBerserk.game.Game;
 import en.fluffyBerserk.game.logic.Direction;
 import en.fluffyBerserk.game.logic.ObjectType;
@@ -62,6 +63,8 @@ public class KeyHandler {
                             bullet.setMoveX(-Bullet.SPEED);
                             break;
                 }
+                    bullet.setX(game.getPlayer().getX() + game.getPlayer().getWidth()/4);
+                    bullet.setY(game.getPlayer().getY() + game.getPlayer().getHeight()/4);
                     game.getEntityManager().addEntity(bullet);
                     break;
             }

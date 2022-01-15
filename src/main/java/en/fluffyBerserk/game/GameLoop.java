@@ -48,6 +48,8 @@ public final class GameLoop {
 
         drawObjects(gameCanvas);
 
+        removeUnnecessaryEntities(gameCanvas);
+
         drawEntities(gameCanvas);
     }
 
@@ -132,42 +134,47 @@ public final class GameLoop {
 
             ((MovableEntity) entity).move();
 
-            // Check collision with tiles
-            Vector<Vector<TileObject>> tiles = game.getCurrentMap().getTiles();
-            outerFor:
-            for (Vector<TileObject> tileObjects : tiles) {
-                for (TileObject tile : tileObjects) {
-                    if (tile == null) { // blank tile
-                        continue;
-                    }
+            // Don't check collision for bullets X tiles or objects (structures)
+            if (!(entity.getType().equals(ObjectType.BULLET))) {
 
-                    if (Collision.objectsCollide(tile, entity)) {
-                        entity.setX(entity.getPreviousX());
-                        entity.setY(entity.getPreviousY());
-                        break outerFor;
+                // Check collision with tiles
+                Vector<Vector<TileObject>> tiles = game.getCurrentMap().getTiles();
+                outerFor:
+                for (Vector<TileObject> tileObjects : tiles) {
+                    for (TileObject tile : tileObjects) {
+                        if (tile == null) { // blank tile
+                            continue;
+                        }
+
+                        if (Collision.objectsCollide(tile, entity)) {
+                            entity.setX(entity.getPreviousX());
+                            entity.setY(entity.getPreviousY());
+                            break outerFor;
+                        }
                     }
                 }
-            }
 
-            // Check collision with objects
-            Entity[] objects = game.getCurrentMap().getObjects();
-            outerFor:
-            if (objects != null) {
-                for (int i = 0; i < objects.length; i++) {
-                    if (objects[i] == null) {
-                        continue;
-                    }
 
-                    if (Collision.objectsCollide(objects[i], entity)) {
-                        entity.setX(entity.getPreviousX());
-                        entity.setY(entity.getPreviousY());
-                        if (objects[i].getType().equals(ObjectType.PORTAL)) {
-                            portal = new PopUpPortal(game);
-                            Main.app.showPopUp(portal);
-                            game.getPlayer().setMoveY(0F);
-                            game.getPlayer().setMoveX(0F);
+                // Check collision with objects
+                Entity[] objects = game.getCurrentMap().getObjects();
+                outerFor:
+                if (objects != null) {
+                    for (int i = 0; i < objects.length; i++) {
+                        if (objects[i] == null) {
+                            continue;
                         }
-                        break outerFor;
+
+                        if (Collision.objectsCollide(objects[i], entity)) {
+                            entity.setX(entity.getPreviousX());
+                            entity.setY(entity.getPreviousY());
+                            if (objects[i].getType().equals(ObjectType.PORTAL)) {
+                                portal = new PopUpPortal(game);
+                                Main.app.showPopUp(portal);
+                                game.getPlayer().setMoveY(0F);
+                                game.getPlayer().setMoveX(0F);
+                            }
+                            break outerFor;
+                        }
                     }
                 }
             }
@@ -192,6 +199,18 @@ public final class GameLoop {
                         entity.getWidth(),
                         entity.getHeight()
                 );
+            }
+        }
+    }
+
+    private void removeUnnecessaryEntities(Canvas gameCanvas) {
+
+        for(Entity entity : game.getEntityManager().getEntities()){
+            if(entity.getX() < -Constants.SCREEN_WIDTH/2
+            || entity.getX() > Constants.WORLD_WIDTH + Constants.SCREEN_WIDTH/2
+            || entity.getY() < -Constants.SCREEN_HEIGHT/2
+            || entity.getY() > Constants.WORLD_HEIGHT + Constants.SCREEN_HEIGHT/2) {
+                game.getEntityManager().removeEntity(entity);
             }
         }
     }
