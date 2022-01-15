@@ -11,22 +11,6 @@ public abstract class Armor extends WearableItem {
     public int intelllect;
     public boolean isEquiped;
 
-    public void setStr(int str) {
-        this.str = str;
-    }
-
-    public void setArmor(int armor) {
-        this.armor = armor;
-    }
-
-    public void setStamina(int stamina) {
-        this.stamina = stamina;
-    }
-
-    public void setIntelllect(int intelllect) {
-        this.intelllect = intelllect;
-    }
-
     public void setEquiped(boolean equiped) {
         isEquiped = equiped;
     }

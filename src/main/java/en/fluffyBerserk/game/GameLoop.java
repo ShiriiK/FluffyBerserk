@@ -4,11 +4,15 @@ import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
 import en.fluffyBerserk.game.logic.Collision;
 import en.fluffyBerserk.game.logic.objects.TileObject;
+import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
+import en.fluffyBerserk.game.logic.objects.items.Item;
+import en.fluffyBerserk.game.logic.objects.items.PickableItem;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 public final class GameLoop {
@@ -87,6 +91,8 @@ public final class GameLoop {
     }
 
     private void drawEntities(Canvas canvas) {
+        ArrayList<Entity> itemsToRemoveFromMap = new ArrayList<>();
+
         for (Entity entity : game.getEntityManager().getEntities()) {
             if (!(entity instanceof MovableEntity)) {
                 continue;
@@ -111,7 +117,13 @@ public final class GameLoop {
                 }
             }
 
-            // Check collision with other entities (bullets, monsters, npc, items etc.)
+            // Check collision of player and pickableitem
+            for (Entity entity1 : game.getEntityManager().getEntities())
+                if (entity1 instanceof PickableItem && entity instanceof Player && Collision.objectsCollide(entity,entity1)){
+                    game.getInventory().addItem((PickableItem) entity1);
+                    itemsToRemoveFromMap.add(entity1);
+                    break;
+                }
         }
 
         // This will render all entities on the map (npcs, bullets, player, items, chests, portals etc.)
@@ -132,6 +144,10 @@ public final class GameLoop {
                         entity.getHeight()
                 );
             }
+        }
+        if(itemsToRemoveFromMap.size()==1){
+            game.getEntityManager().removeEntity(itemsToRemoveFromMap.get(0));
+            itemsToRemoveFromMap.clear();
         }
     }
 }

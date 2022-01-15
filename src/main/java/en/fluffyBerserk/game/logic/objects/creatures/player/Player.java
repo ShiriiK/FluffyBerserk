@@ -20,4 +20,8 @@ public final class Player extends MovableAnimatedEntity implements HasName {
     public String getName() {
         return character.getName();
     }
+
+    public Character getCharacter() {
+        return character;
+    }
 }

@@ -1,10 +1,10 @@
 package en.fluffyBerserk.game.logic.objects.items.inventory;
 
 
-import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.Item;
 import en.fluffyBerserk.game.logic.objects.items.PickableItem;
-import en.fluffyBerserk.logic.objects.items.armor.Armor;
+import en.fluffyBerserk.game.logic.objects.items.armor.Armor;
+import en.fluffyBerserk.persistence.models.Character;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,16 +16,20 @@ import java.util.Set;
  */
 
 public class Inventory {
-    private final Map<String, Item> content;
+    private final Map<String, PickableItem> content;
+
+    private final Character character;
+
 
     // Constructor
-    public Inventory() {
+    public Inventory(Character character) {
+        this.character = character;
         content = new HashMap<>();
     }
 
 
     // Returns the content of the inventory
-    public Map<String, Item> getContent() {
+    public Map<String, PickableItem> getContent() {
         return content;
     }
 
@@ -35,33 +39,34 @@ public class Inventory {
     }
 
     // Inserts the item into the inventory
-    public void addItem(Item item) {
-        if (item instanceof PickableItem) {
+    public void addItem(PickableItem item) {
             content.put(item.getName(), item);
-        }
+    }
+
+    //removes the item from inventory
+    public void removeItem(String name) {
+        content.remove(name);
     }
 
     // Equips selected item and applies it's stats
-    //TODO item slots
-    public void equip(Item item){
-        if (item instanceof Armor && content.containsValue(item)){
+    public void equip (Item item){
+        if (item instanceof Armor && content.containsValue(item) && !((Armor) item).isEquiped){
             ((Armor) item).setEquiped(true);
+
             int str = ((Armor) item).getStr();
             int armor = ((Armor) item).getArmor();
             int stamina = ((Armor) item).getStamina();
             int intellect = ((Armor) item).getIntelllect();
 
-            Player player = GameState.player;
+            int newStr = str + character.getStrength();
+            int newArmor = armor + character.getArmor();
+            int newStamina = stamina + character.getStamina();
+            int newIntellect = intellect + character.getIntellect();
 
-            int newStr = str + player.getStr();
-            int newArmor = armor + player.getArmor();
-            int newStamina = stamina + player.getStamina();
-            int newIntellect = intellect + player.getIntelllect();
-
-            player.setStr(newStr);
-            player.setArmor(newArmor);
-            player.setStamina(newStamina);
-            player.setIntelllect(newIntellect);
+            character.setStrength(newStr);
+            character.setArmor(newArmor);
+            character.setStamina(newStamina);
+            character.setIntellect(newIntellect);
         }
         else {
             System.out.println("Something went wrong here");
@@ -72,22 +77,20 @@ public class Inventory {
     public void unEquip(Item item){
         if (item instanceof Armor && ((Armor) item).isEquiped()){
             ((Armor) item).setEquiped(false);
-            Player player = GameState.player;
-
             int str = ((Armor) item).getStr();
             int armor = ((Armor) item).getArmor();
             int stamina = ((Armor) item).getStamina();
             int intellect = ((Armor) item).getIntelllect();
 
-            int newStr = player.getStr() - str;
-            int newArmor = player.getArmor() - armor;
-            int newStamina = player.getStamina() - stamina;
-            int newIntellect = player.getIntelllect() - intellect;
+            int newStr = character.getStrength() - str;
+            int newArmor = character.getArmor() - armor;
+            int newStamina = character.getStamina() - stamina;
+            int newIntellect = character.getIntellect() - intellect;
 
-            player.setStr(newStr);
-            player.setArmor(newArmor);
-            player.setStamina(newStamina);
-            player.setIntelllect(newIntellect);
+            character.setStrength(newStr);
+            character.setArmor(newArmor);
+            character.setStamina(newStamina);
+            character.setIntellect(newIntellect);
         }
     }
 
@@ -98,13 +101,6 @@ public class Inventory {
             item = content.get(name);
         }
         return item;
-    }
-
-    //removes the item from inventory
-    public void removeItem(String name) {
-        if (content.containsKey(name)) {
-            content.remove(name);
-        }
     }
 
 }
