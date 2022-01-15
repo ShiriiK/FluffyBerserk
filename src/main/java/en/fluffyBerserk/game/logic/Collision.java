@@ -11,7 +11,5 @@ public class Collision {
                 obj1.getHitBoxHeight() + obj1.getHitBoxY() > obj2.getHitBoxY();
     }
 
-    public static boolean objectsCollide2(Object obj1, Object obj2){
-        return true;
-    }
+
 }

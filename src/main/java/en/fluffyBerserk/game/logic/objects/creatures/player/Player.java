@@ -19,6 +19,8 @@ public final class Player extends MovableAnimatedEntity implements HasName {
         this.character = character;
     }
 
+
+
     @Override
     public String getName() {
         return character.getName();
@@ -26,11 +28,21 @@ public final class Player extends MovableAnimatedEntity implements HasName {
 
     @Override
     public int getHitBoxHeight(){
-        return Constants.ENTITIES_SIZE-10;
+        return Constants.ENTITIES_SIZE/3;
     }
 
     @Override
     public int getHitBoxWidth(){
-        return Constants.ENTITIES_SIZE-10;
+        return Constants.ENTITIES_SIZE/3;
+    }
+
+    @Override
+    public float getHitBoxX(){
+        return hitBoxX;
+    }
+
+    @Override
+    public float getHitBoxY(){
+        return hitBoxY;
     }
 }

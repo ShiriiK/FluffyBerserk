@@ -11,8 +11,11 @@ public abstract class Entity implements Object {
     private float y;
     private float previousY;
 
-    private float hitBoxX;
-    private float hitBoxY;
+    protected float hitBoxX;
+    protected float previousHitBoxX;
+
+    protected float hitBoxY;
+    protected float previousHitBoxY;
 
     protected final ObjectType type;
 
@@ -65,11 +68,13 @@ public abstract class Entity implements Object {
 
     @Override
     public void setHitBoxX(float x){
+        previousHitBoxX = this.hitBoxX;
         hitBoxX = x;
     }
 
     @Override
-    public void setHitBoxY( float x){
+    public void setHitBoxY( float y){
+        previousHitBoxY = this.hitBoxY;
         hitBoxY = y;
     }
 
@@ -90,6 +95,15 @@ public abstract class Entity implements Object {
     public float getPreviousY() {
         return previousY;
     }
+
+    public float getPreviousHitBoxX() {
+        return previousHitBoxX;
+    }
+
+    public float getPreviousHitBoxY() {
+        return previousHitBoxY;
+    }
+
 
     public ObjectType getType() {
         return type;

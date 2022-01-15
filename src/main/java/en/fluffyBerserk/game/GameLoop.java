@@ -7,6 +7,7 @@ import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
 import en.fluffyBerserk.game.logic.objects.TileObject;
+import en.fluffyBerserk.game.maps.Home;
 import en.fluffyBerserk.gui.popups.PopUpPortal;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
@@ -54,15 +55,25 @@ public final class GameLoop {
     }
 
     private void drawMap(Canvas canvas) {
-        Image mapImage = new Image(game.getCurrentMap().getImagePath(), Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT, false, false);
+        Image mapImage = new Image(game.getCurrentMap().getImagePath());
 
-        canvas.getGraphicsContext2D().drawImage(
-                mapImage,
-                game.getCamera().processX(0),
-                game.getCamera().processY(0),
-                Constants.WORLD_WIDTH,
-                Constants.WORLD_HEIGHT
-        );
+        if(!game.getCurrentMap().getName().equals("map5")) {
+            canvas.getGraphicsContext2D().drawImage(
+                    mapImage,
+                    game.getCamera().processX(0),
+                    game.getCamera().processY(0),
+                    Constants.WORLD_WIDTH,
+                    Constants.WORLD_HEIGHT
+            );
+        } else {
+            canvas.getGraphicsContext2D().drawImage(
+                    mapImage,
+                    game.getCamera().processX(0),
+                    game.getCamera().processY(0),
+                    Constants.WORLD_WIDTH/2,
+                    Constants.WORLD_HEIGHT/2
+            );
+        }
     }
 
     private void drawTiles(Canvas canvas) {
@@ -146,11 +157,12 @@ public final class GameLoop {
                             continue;
                         }
 
-                        if (Collision.objectsCollide(tile, entity)) {
-                            entity.setX(entity.getPreviousX());
-                            entity.setY(entity.getPreviousY());
-                            break outerFor;
-                        }
+                    if (Collision.objectsCollide(tile, entity)) {
+                        entity.setX(entity.getPreviousX());
+                        entity.setY(entity.getPreviousY());
+                        entity.setHitBoxX(entity.getPreviousHitBoxX());
+                        entity.setHitBoxY(entity.getPreviousHitBoxY());
+                        break outerFor;
                     }
                 }
 
@@ -175,6 +187,15 @@ public final class GameLoop {
                             }
                             break outerFor;
                         }
+                        if (objects[i].getType().equals(ObjectType.HOME)){
+                            game.setCurrentMap(new Home());
+                            game.getPlayer().setX(Constants.TILE_SIZE*5);
+                            game.getPlayer().setY(Constants.TILE_SIZE*5);
+                            game.getPlayer().setHitBoxX(game.getPlayer().getX()+20);
+                            game.getPlayer().setHitBoxY(game.getPlayer().getY()+30);
+
+                        }
+                        break outerFor;
                     }
                 }
             }
@@ -194,10 +215,10 @@ public final class GameLoop {
 
             if (Constants.SHOW_HIT_BOX) {
                 canvas.getGraphicsContext2D().strokeRect(
-                        game.getCamera().processX(entity.getX()),
-                        game.getCamera().processY(entity.getY()),
-                        entity.getWidth(),
-                        entity.getHeight()
+                        game.getCamera().processX(entity.getHitBoxX()),
+                        game.getCamera().processY(entity.getHitBoxY()),
+                        entity.getHitBoxWidth(),
+                        entity.getHitBoxHeight()
                 );
             }
         }
