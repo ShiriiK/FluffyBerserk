@@ -18,8 +18,10 @@ public final class TileLoader {
      * @param path to the file of the tiles
      * @return 2D vector containing objects which identify tiles
      */
-    public static Vector<Vector<TileObject>> loadTiles(String path) {
-        Vector<Vector<TileObject>> matrix = new Vector<>(Constants.MAX_WORLD_ROW);
+    public static Vector<Vector<TileObject>> loadTiles(String path, int width, int height) {
+        int maxRow = height/Constants.TILE_SIZE;
+        int maxCol = width/Constants.TILE_SIZE;
+        Vector<Vector<TileObject>> matrix = new Vector<>(maxRow);
 
         try {
             InputStream inputStream = TileLoader.class.getClassLoader().getResourceAsStream(path);
@@ -27,13 +29,13 @@ public final class TileLoader {
 
             int row = 0;
 
-            while (row < Constants.MAX_WORLD_ROW) {
+            while (row < maxRow) {
                 String[] tiles = reader.readLine().split(" ");
                 int col = 0;
 
-                Vector<TileObject> colMatrix = new Vector<>(Constants.MAX_WORLD_COL);
+                Vector<TileObject> colMatrix = new Vector<>(maxCol);
 
-                while (col < Constants.MAX_WORLD_COL) {
+                while (col < maxCol) {
                     int tileNumber = Integer.parseInt(tiles[col]);
 
                     if (tileNumber != TileFactory.TILE_BLANK) {

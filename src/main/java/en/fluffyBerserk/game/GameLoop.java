@@ -66,8 +66,8 @@ public final class GameLoop {
         } else {
             canvas.getGraphicsContext2D().drawImage(
                     mapImage,
-                    game.getCamera().processX(Constants.TILE_SIZE*5),
-                    game.getCamera().processY(Constants.TILE_SIZE*5),
+                    game.getCamera().processX(0),
+                    game.getCamera().processY(0),
                     Constants.WORLD_WIDTH/2,
                     Constants.WORLD_HEIGHT/2
             );
@@ -182,8 +182,10 @@ public final class GameLoop {
                         }
                         if (objects[i].getType().equals(ObjectType.HOME)){
                             game.setCurrentMap(new Home());
-                            game.getPlayer().setX(Constants.TILE_SIZE*10);
-                            game.getPlayer().setY(Constants.TILE_SIZE*10);
+                            game.getPlayer().setX(Constants.TILE_SIZE*5);
+                            game.getPlayer().setY(Constants.TILE_SIZE*5);
+                            game.getPlayer().setHitBoxX(game.getPlayer().getX()+20);
+                            game.getPlayer().setHitBoxY(game.getPlayer().getY()+30);
 
                         }
                         break outerFor;

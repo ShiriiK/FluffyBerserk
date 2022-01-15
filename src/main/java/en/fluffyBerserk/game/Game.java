@@ -22,7 +22,6 @@ public final class Game {
 
     private PopUp portal;
 
-
     private Map currentMap;
 
     public Game(Character character) {
@@ -70,7 +69,6 @@ public final class Game {
         player.setY(((float)7*Constants.TILE_SIZE));
         player.setHitBoxX(player.getX()+20);
         player.setHitBoxY(player.getY()+30);
-
 
         currentMap = new SafeZoneMap();
         portal = new PopUpPortal(this);

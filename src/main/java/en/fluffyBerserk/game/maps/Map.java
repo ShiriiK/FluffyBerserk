@@ -9,7 +9,7 @@ import java.util.Vector;
 
 public abstract class Map {
 
-    private final Vector<Vector<TileObject>> tiles = TileLoader.loadTiles(getTilePath());
+    private final Vector<Vector<TileObject>> tiles = TileLoader.loadTiles(getTilePath(), getWidth(), getHeight());
 
     public Vector<Vector<TileObject>> getTiles() {
         return tiles;
@@ -24,6 +24,10 @@ public abstract class Map {
     }
 
     public abstract String getName();
+
+    public abstract int getWidth();
+
+    public abstract int getHeight();
 
     public abstract Entity[] getObjects();
 }
