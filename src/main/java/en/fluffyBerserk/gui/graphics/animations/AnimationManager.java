@@ -1,4 +1,4 @@
-package en.fluffyBerserk.game.animations;
+package en.fluffyBerserk.gui.graphics.animations;
 
 import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
 import javafx.scene.image.Image;

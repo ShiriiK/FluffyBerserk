@@ -1,4 +1,4 @@
-package en.fluffyBerserk.game.animations;
+package en.fluffyBerserk.gui.graphics.animations;
 
 import en.fluffyBerserk.game.logic.Direction;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;

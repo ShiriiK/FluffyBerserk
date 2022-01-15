@@ -1,6 +1,6 @@
-package en.fluffyBerserk.game.graphics;
+package en.fluffyBerserk.gui.utils;
 
-import en.fluffyBerserk.game.Constants;
+import en.fluffyBerserk.Constants;
 import javafx.scene.canvas.Canvas;
 
 public final class GameGraphics {

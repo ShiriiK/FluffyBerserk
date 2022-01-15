@@ -1,9 +1,9 @@
 package en.fluffyBerserk.gui.popups;
 
 import en.fluffyBerserk.Main;
-import en.fluffyBerserk.game.Game;
-import en.fluffyBerserk.game.maps.Area1;
-import en.fluffyBerserk.game.maps.SafeZoneMap;
+import en.fluffyBerserk.game.gamecontrolls.Game;
+import en.fluffyBerserk.game.logic.maps.Area1;
+import en.fluffyBerserk.game.logic.maps.SafeZoneMap;
 import en.fluffyBerserk.gui.utils.AttachCSS;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

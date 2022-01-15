@@ -1,6 +1,6 @@
 package en.fluffyBerserk.game.logic.objects.bullets;
 
-import en.fluffyBerserk.game.Constants;
+import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
 import javafx.scene.image.Image;

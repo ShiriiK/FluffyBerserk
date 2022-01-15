@@ -1,6 +1,6 @@
 package en.fluffyBerserk.game.logic.objects.portals;
 
-import en.fluffyBerserk.game.animations.AnimationsFactory;
+import en.fluffyBerserk.gui.graphics.animations.AnimationsFactory;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;

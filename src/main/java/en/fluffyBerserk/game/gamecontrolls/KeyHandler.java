@@ -1,7 +1,6 @@
-package en.fluffyBerserk.game.control;
+package en.fluffyBerserk.game.gamecontrolls;
 
 import en.fluffyBerserk.Main;
-import en.fluffyBerserk.game.Game;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.gui.popups.PopUp;
 import en.fluffyBerserk.gui.popups.PopUpMenu;

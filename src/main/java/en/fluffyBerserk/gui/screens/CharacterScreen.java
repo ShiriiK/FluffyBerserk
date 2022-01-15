@@ -2,8 +2,8 @@ package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.form.CharacterForm;
-import en.fluffyBerserk.game.animations.SpriteImage;
-import en.fluffyBerserk.game.animations.SpritesFactory;
+import en.fluffyBerserk.gui.graphics.sprites.SpriteImage;
+import en.fluffyBerserk.gui.graphics.sprites.SpritesFactory;
 import en.fluffyBerserk.gui.utils.AttachCSS;
 import en.fluffyBerserk.gui.utils.LocateImage;
 import en.fluffyBerserk.persistence.DeleteTask;

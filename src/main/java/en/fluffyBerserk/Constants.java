@@ -1,4 +1,4 @@
-package en.fluffyBerserk.game;
+package en.fluffyBerserk;
 
 public class Constants {
 

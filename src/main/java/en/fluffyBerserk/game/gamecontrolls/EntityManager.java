@@ -1,4 +1,4 @@
-package en.fluffyBerserk.game;
+package en.fluffyBerserk.game.gamecontrolls;
 
 import en.fluffyBerserk.game.logic.objects.Entity;
 

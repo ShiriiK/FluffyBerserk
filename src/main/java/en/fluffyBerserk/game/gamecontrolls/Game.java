@@ -1,11 +1,11 @@
-package en.fluffyBerserk.game;
+package en.fluffyBerserk.game.gamecontrolls;
 
-import en.fluffyBerserk.game.graphics.GameGraphics;
+import en.fluffyBerserk.Constants;
+import en.fluffyBerserk.game.logic.maps.Map;
+import en.fluffyBerserk.game.logic.maps.SafeZoneMap;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
-import en.fluffyBerserk.game.maps.Map;
-import en.fluffyBerserk.game.maps.SafeZoneMap;
-import en.fluffyBerserk.gui.popups.PopUp;
-import en.fluffyBerserk.gui.popups.PopUpPortal;
+import en.fluffyBerserk.gui.utils.Camera;
+import en.fluffyBerserk.gui.utils.GameGraphics;
 import en.fluffyBerserk.persistence.models.Character;
 
 public final class Game {
@@ -20,17 +20,11 @@ public final class Game {
 
     private final Camera camera = new Camera(this);
 
-    private PopUp portal;
-
     private Map currentMap;
 
     public Game(Character character) {
         player = new Player(character);
         bootDefaultState();
-    }
-
-    public PopUp getPortal() {
-        return portal;
     }
 
     public Camera getCamera() {
@@ -53,7 +47,7 @@ public final class Game {
         return currentMap;
     }
 
-    public void setCurrentMap(Map map){
+    public void setCurrentMap(Map map) {
         currentMap = map;
     }
 
@@ -65,12 +59,11 @@ public final class Game {
         entityManager.addEntity(player);
 
         // Spawn player in the center of current map
-        player.setX(((float)13* Constants.TILE_SIZE));
-        player.setY(((float)7*Constants.TILE_SIZE));
-        player.setHitBoxX(player.getX()+20);
-        player.setHitBoxY(player.getY()+30);
+        player.setX(((float) 13 * Constants.TILE_SIZE));
+        player.setY(((float) 7 * Constants.TILE_SIZE));
+        player.setHitBoxX(player.getX() + 20);
+        player.setHitBoxY(player.getY() + 30);
 
         currentMap = new SafeZoneMap();
-        portal = new PopUpPortal(this);
     }
 }

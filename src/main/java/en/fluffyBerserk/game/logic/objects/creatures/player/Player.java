@@ -1,7 +1,7 @@
 package en.fluffyBerserk.game.logic.objects.creatures.player;
 
-import en.fluffyBerserk.game.Constants;
-import en.fluffyBerserk.game.animations.SpritesFactory;
+import en.fluffyBerserk.Constants;
+import en.fluffyBerserk.gui.graphics.sprites.SpritesFactory;
 import en.fluffyBerserk.game.logic.HasName;
 import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.objects.MovableAnimatedEntity;

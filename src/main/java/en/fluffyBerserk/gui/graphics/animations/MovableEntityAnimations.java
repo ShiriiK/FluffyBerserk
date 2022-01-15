@@ -1,6 +1,7 @@
-package en.fluffyBerserk.game.animations;
+package en.fluffyBerserk.gui.graphics.animations;
 
-import en.fluffyBerserk.game.Constants;
+import en.fluffyBerserk.Constants;
+import en.fluffyBerserk.gui.graphics.sprites.SpriteImage;
 import en.fluffyBerserk.gui.utils.LocateImage;
 import javafx.scene.image.Image;
 

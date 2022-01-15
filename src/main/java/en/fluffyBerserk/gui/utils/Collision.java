@@ -1,4 +1,4 @@
-package en.fluffyBerserk.game.logic;
+package en.fluffyBerserk.gui.utils;
 
 import en.fluffyBerserk.game.logic.objects.Object;
 

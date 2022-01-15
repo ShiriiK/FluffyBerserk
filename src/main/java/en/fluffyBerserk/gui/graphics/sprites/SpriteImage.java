@@ -1,4 +1,4 @@
-package en.fluffyBerserk.game.animations;
+package en.fluffyBerserk.gui.graphics.sprites;
 
 import en.fluffyBerserk.gui.utils.ImageBuilder;
 import en.fluffyBerserk.gui.utils.LocateImage;

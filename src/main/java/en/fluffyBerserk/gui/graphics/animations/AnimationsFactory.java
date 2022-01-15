@@ -1,6 +1,6 @@
-package en.fluffyBerserk.game.animations;
+package en.fluffyBerserk.gui.graphics.animations;
 
-import en.fluffyBerserk.game.Constants;
+import en.fluffyBerserk.Constants;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;

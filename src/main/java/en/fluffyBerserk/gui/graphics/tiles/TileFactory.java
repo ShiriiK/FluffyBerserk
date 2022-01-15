@@ -1,6 +1,6 @@
-package en.fluffyBerserk.game.graphics.tiles;
+package en.fluffyBerserk.gui.graphics.tiles;
 
-import en.fluffyBerserk.game.Constants;
+import en.fluffyBerserk.Constants;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 

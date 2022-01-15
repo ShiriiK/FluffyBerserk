@@ -1,6 +1,6 @@
 package en.fluffyBerserk.base;
 
-import en.fluffyBerserk.game.Constants;
+import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.gui.popups.PopUp;
 import en.fluffyBerserk.gui.screens.Screen;
 import en.fluffyBerserk.gui.utils.PopUpBuilder;

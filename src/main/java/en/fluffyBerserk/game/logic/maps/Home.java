@@ -1,7 +1,7 @@
-package en.fluffyBerserk.game.maps;
+package en.fluffyBerserk.game.logic.maps;
 
-import en.fluffyBerserk.game.Constants;
-import en.fluffyBerserk.game.graphics.objects.ObjectsAtHome;
+import en.fluffyBerserk.Constants;
+import en.fluffyBerserk.gui.graphics.objects.ObjectsAtHome;
 import en.fluffyBerserk.game.logic.objects.Entity;
 
 public class Home extends Map{

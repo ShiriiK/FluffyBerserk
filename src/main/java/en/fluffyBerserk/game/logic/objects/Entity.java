@@ -1,6 +1,6 @@
 package en.fluffyBerserk.game.logic.objects;
 
-import en.fluffyBerserk.game.Constants;
+import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.ObjectType;
 
 public abstract class Entity implements Object {

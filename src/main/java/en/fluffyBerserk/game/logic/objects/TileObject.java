@@ -1,7 +1,7 @@
 package en.fluffyBerserk.game.logic.objects;
 
-import en.fluffyBerserk.game.Constants;
-import en.fluffyBerserk.game.graphics.tiles.TileFactory;
+import en.fluffyBerserk.Constants;
+import en.fluffyBerserk.gui.graphics.tiles.TileFactory;
 import en.fluffyBerserk.game.logic.ObjectType;
 import javafx.scene.image.Image;
 

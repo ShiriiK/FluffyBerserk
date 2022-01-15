@@ -1,6 +1,6 @@
 package en.fluffyBerserk.form;
 
-import en.fluffyBerserk.game.animations.SpritesFactory;
+import en.fluffyBerserk.gui.graphics.sprites.SpritesFactory;
 import en.fluffyBerserk.gui.utils.LocateImage;
 import en.fluffyBerserk.persistence.models.Character;
 import org.jetbrains.annotations.NotNull;

@@ -1,8 +1,7 @@
-package en.fluffyBerserk.game.maps;
+package en.fluffyBerserk.game.logic.maps;
 
-import en.fluffyBerserk.game.Constants;
-import en.fluffyBerserk.game.graphics.objects.ObjectsInSafeZone;
-import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
+import en.fluffyBerserk.Constants;
+import en.fluffyBerserk.gui.graphics.objects.ObjectsInSafeZone;
 import en.fluffyBerserk.game.logic.objects.Entity;
 
 public final class SafeZoneMap extends Map {

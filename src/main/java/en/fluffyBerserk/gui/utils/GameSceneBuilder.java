@@ -1,8 +1,7 @@
-package en.fluffyBerserk.game.graphics;
+package en.fluffyBerserk.gui.utils;
 
-import en.fluffyBerserk.game.Game;
-import en.fluffyBerserk.game.control.KeyHandler;
-import en.fluffyBerserk.gui.utils.AttachCSS;
+import en.fluffyBerserk.game.gamecontrolls.Game;
+import en.fluffyBerserk.game.gamecontrolls.KeyHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 

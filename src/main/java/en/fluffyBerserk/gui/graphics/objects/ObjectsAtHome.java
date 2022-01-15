@@ -1,6 +1,6 @@
-package en.fluffyBerserk.game.graphics.objects;
+package en.fluffyBerserk.gui.graphics.objects;
 
-import en.fluffyBerserk.game.Constants;
+import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import javafx.scene.image.Image;
@@ -12,12 +12,6 @@ public class ObjectsAtHome {
 
         prepareCarpet(object);
         prepareBed(object);
-        object[2] = new Entity() {
-            @Override
-            public Image getImage() {
-                return null;
-            }
-        }
 
         return object;
     }

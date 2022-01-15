@@ -1,7 +1,6 @@
-package en.fluffyBerserk.game.maps;
+package en.fluffyBerserk.game.logic.maps;
 
-import en.fluffyBerserk.game.graphics.tiles.TileLoader;
-import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
+import en.fluffyBerserk.gui.graphics.tiles.TileLoader;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.TileObject;
 

@@ -1,8 +1,7 @@
-package en.fluffyBerserk.game.graphics.objects;
+package en.fluffyBerserk.gui.graphics.objects;
 
-import en.fluffyBerserk.game.Constants;
+import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.ObjectType;
-import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.portals.HomePortal;
 import javafx.scene.image.Image;
