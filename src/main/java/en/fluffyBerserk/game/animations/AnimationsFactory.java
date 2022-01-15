@@ -25,5 +25,4 @@ public class AnimationsFactory {
     public ArrayList<Image> getPortalAnimations() {
         return portal;
     }
-
 }

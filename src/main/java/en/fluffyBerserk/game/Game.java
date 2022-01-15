@@ -68,6 +68,8 @@ public final class Game {
         // Spawn player in the center of current map
         player.setX(((float)13* Constants.TILE_SIZE));
         player.setY(((float)7*Constants.TILE_SIZE));
+        player.setHitBoxX(player.getX()+20);
+        player.setHitBoxY(player.getY()+30);
 
 
         currentMap = new SafeZoneMap();

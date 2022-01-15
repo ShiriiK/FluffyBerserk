@@ -21,29 +21,30 @@ public class KeyHandler {
 
     public static void attachHandlers(Game game, Scene scene) {
         scene.setOnKeyPressed(event -> {
-            switch (event.getCode()) {
-                case W:
-                    game.getPlayer().setMoveY(-Player.PLAYER_SPEED);
-                    moveY = KeyCode.W;
-                    break;
-                case S:
-                    game.getPlayer().setMoveY(Player.PLAYER_SPEED);
-                    moveY = KeyCode.S;
-                    break;
-                case A:
-                    game.getPlayer().setMoveX(-Player.PLAYER_SPEED);
-                    moveX = KeyCode.A;
-                    break;
-                case D:
-                    game.getPlayer().setMoveX(Player.PLAYER_SPEED);
-                    moveX = KeyCode.D;
-                    break;
-                case ESCAPE:
-                    Main.app.showPopUp(popUpMenu);
-                    game.getPlayer().setMoveY(0F);
-                    game.getPlayer().setMoveX(0F);
-                    break;
-            }
+                switch (event.getCode()) {
+                    case W:
+                        game.getPlayer().setMoveY(-Player.PLAYER_SPEED);
+                        moveY = KeyCode.W;
+                        break;
+                    case S:
+                        game.getPlayer().setMoveY(Player.PLAYER_SPEED);
+                        moveY = KeyCode.S;
+                        break;
+                    case A:
+                        game.getPlayer().setMoveX(-Player.PLAYER_SPEED);
+                        moveX = KeyCode.A;
+                        break;
+                    case D:
+                        game.getPlayer().setMoveX(Player.PLAYER_SPEED);
+                        moveX = KeyCode.D;
+                        break;
+                    case ESCAPE:
+                        Main.app.showPopUp(popUpMenu);
+                        game.getPlayer().setMoveY(0F);
+                        game.getPlayer().setMoveX(0F);
+                        break;
+                }
+
         });
 
         scene.setOnKeyReleased(event -> {
