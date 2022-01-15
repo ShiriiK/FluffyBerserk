@@ -2,10 +2,14 @@ package en.fluffyBerserk.game.logic.objects.bullets;
 
 import en.fluffyBerserk.game.Constants;
 import en.fluffyBerserk.game.logic.ObjectType;
+import en.fluffyBerserk.game.logic.objects.MovableAnimatedEntity;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
+import en.fluffyBerserk.gui.utils.LocateImage;
 import javafx.scene.image.Image;
 
 public class Bullet extends MovableEntity {
+
+    public static final float SPEED = 12F;
 
     public Bullet(ObjectType type) {
         super(type);

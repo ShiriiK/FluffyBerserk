@@ -2,6 +2,9 @@ package en.fluffyBerserk.game.control;
 
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.Game;
+import en.fluffyBerserk.game.logic.Direction;
+import en.fluffyBerserk.game.logic.ObjectType;
+import en.fluffyBerserk.game.logic.objects.bullets.Bullet;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.gui.popups.PopUp;
 import en.fluffyBerserk.gui.popups.PopUpMenu;
@@ -42,6 +45,24 @@ public class KeyHandler {
                     Main.app.showPopUp(popUpMenu);
                     game.getPlayer().setMoveY(0F);
                     game.getPlayer().setMoveX(0F);
+                    break;
+                case SPACE:
+                    Bullet bullet = new Bullet(ObjectType.BULLET);
+                    switch(game.getPlayer().getDirection()) {
+                        case UP:
+                            bullet.setMoveY(-Bullet.SPEED);
+                            break;
+                        case DOWN:
+                            bullet.setMoveY(Bullet.SPEED);
+                            break;
+                        case RIGHT:
+                            bullet.setMoveX(Bullet.SPEED);
+                            break;
+                        case LEFT:
+                            bullet.setMoveX(-Bullet.SPEED);
+                            break;
+                }
+                    game.getEntityManager().addEntity(bullet);
                     break;
             }
         });

@@ -5,5 +5,6 @@ public enum ObjectType {
     PORTAL,
     HOME,
     ITEM,
-    PLAYER
+    PLAYER,
+    BULLET
 }

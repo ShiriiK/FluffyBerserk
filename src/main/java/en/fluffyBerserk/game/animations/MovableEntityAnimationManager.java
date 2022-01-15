@@ -11,7 +11,7 @@ public class MovableEntityAnimationManager {
 
     private static final int CHANGE_ANIMATION_NUMBER = 10;
 
-    private Direction direction = Direction.DOWN;
+    public Direction direction = Direction.DOWN;
 
     private int ticks = 0;
 
