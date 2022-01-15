@@ -8,6 +8,7 @@ import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
 import en.fluffyBerserk.game.logic.objects.TileObject;
 import en.fluffyBerserk.game.maps.Home;
+import en.fluffyBerserk.game.maps.SafeZoneMap;
 import en.fluffyBerserk.gui.popups.PopUpPortal;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
@@ -174,19 +175,29 @@ public final class GameLoop {
                     if (Collision.objectsCollide(objects[i], entity)) {
                         entity.setX(entity.getPreviousX());
                         entity.setY(entity.getPreviousY());
+                        entity.setHitBoxX(entity.getPreviousHitBoxX());
+                        entity.setHitBoxY(entity.getPreviousHitBoxY());
+
                         if (objects[i].getType().equals(ObjectType.PORTAL)) {
                             portal = new PopUpPortal(game);
-                            Main.app.showPopUp(portal);
                             game.getPlayer().setMoveY(0F);
                             game.getPlayer().setMoveX(0F);
+                            Main.app.showPopUp(portal);
                         }
                         if (objects[i].getType().equals(ObjectType.HOME)){
                             game.setCurrentMap(new Home());
-                            game.getPlayer().setX(Constants.TILE_SIZE*5);
-                            game.getPlayer().setY(Constants.TILE_SIZE*5);
+                            game.getPlayer().setX((float) (Constants.TILE_SIZE*4.5));
+                            game.getPlayer().setY(Constants.TILE_SIZE*7);
                             game.getPlayer().setHitBoxX(game.getPlayer().getX()+20);
                             game.getPlayer().setHitBoxY(game.getPlayer().getY()+30);
 
+                        }
+                        if (objects[i].getType().equals(ObjectType.CARPET)){
+                            game.setCurrentMap(new SafeZoneMap());
+                            game.getPlayer().setX((float) (Constants.TILE_SIZE*5));
+                            game.getPlayer().setY(Constants.TILE_SIZE*3);
+                            game.getPlayer().setHitBoxX(game.getPlayer().getX()+20);
+                            game.getPlayer().setHitBoxY(game.getPlayer().getY()+30);
                         }
                         break outerFor;
                     }

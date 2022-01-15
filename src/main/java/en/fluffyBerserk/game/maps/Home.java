@@ -1,9 +1,12 @@
 package en.fluffyBerserk.game.maps;
 
 import en.fluffyBerserk.game.Constants;
+import en.fluffyBerserk.game.graphics.objects.ObjectsAtHome;
 import en.fluffyBerserk.game.logic.objects.Entity;
 
 public class Home extends Map{
+    Entity[] objects = ObjectsAtHome.loadObjects();
+
     @Override
     public String getName() {
         return "map5";
@@ -19,8 +22,9 @@ public class Home extends Map{
         return Constants.WORLD_HEIGHT/2;
     }
 
+
     @Override
     public Entity[] getObjects() {
-        return null;
+        return objects;
     }
 }

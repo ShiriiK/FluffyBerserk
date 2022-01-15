@@ -14,6 +14,7 @@ public class TileFactory {
             TILE_TREE1 = 0,
             TILE_TREE2 = 1,
             TILE_TREE3 = 2,
+
             TILE_FENCE1 = 3,
             TILE_FENCE2 = 4,
             TILE_FENCE3 = 5,
@@ -22,6 +23,18 @@ public class TileFactory {
             TILE_FENCE6 = 9,
             TILE_FENCE7 = 10,
             TILE_FENCE8 = 11,
+
+            /**TILE_BED = 13,
+            TILE_PLANT1 = 14,
+            TILE_PLANT2 = 15,
+            TILE_PLANT3 = 16,
+            TILE_POTIONS = 17,
+            TILE_HERBS = 18,
+            TILE_FIREPLACE = 19,
+            TILE_CLOSET1 = 20,
+            TILE_CLOSET2 = 21,
+            TILE_CLOSET3 = 22,
+            TILE_CABINET = 23,*/
 
             TILE_BLANK = 8,
             TILE_BLANK_WITH_COLLISION = 12;
@@ -39,6 +52,17 @@ public class TileFactory {
         put(TILE_FENCE7, new Image("/tiles/f7.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
         put(TILE_FENCE8, new Image("/tiles/f8.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
         put(TILE_BLANK_WITH_COLLISION, new Image("/tiles/blank.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
+        /**put(TILE_BED, new Image("/tiles/bed.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
+        put(TILE_PLANT1, new Image("/tiles/plant1.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
+        put(TILE_PLANT2, new Image("/tiles/plant2.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
+        put(TILE_PLANT3, new Image("/tiles/plant3.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
+        put(TILE_POTIONS, new Image("/tiles/potions.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
+        put(TILE_HERBS, new Image("/tiles/herbs.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
+        put(TILE_FIREPLACE, new Image("/tiles/fireplace.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
+        put(TILE_CLOSET1, new Image("/tiles/closet1.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
+        put(TILE_CLOSET2, new Image("/tiles/closet2.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
+        put(TILE_CLOSET3, new Image("/tiles/closet3.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
+        put(TILE_CABINET, new Image("/tiles/cabinet.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));*/
 
     }};
 

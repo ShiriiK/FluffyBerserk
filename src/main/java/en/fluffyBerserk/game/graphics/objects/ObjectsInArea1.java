@@ -7,9 +7,9 @@ import en.fluffyBerserk.game.logic.objects.portals.HomePortal;
 public class ObjectsInArea1 {
 
     public static AnimatedEntity[] loadObjects() {
-        AnimatedEntity objects[] = new AnimatedEntity[1];
+        AnimatedEntity object[] = new AnimatedEntity[1];
 
-        objects[0] = new HomePortal() {
+        object[0] = new HomePortal() {
             @Override
             public int getHeight() {
                 return Constants.TILE_SIZE * 2;
@@ -30,9 +30,9 @@ public class ObjectsInArea1 {
                 return getWidth();
             }
         };
-        objects[0].setX(17 * Constants.TILE_SIZE);
-        objects[0].setY((float) (6.5 * Constants.TILE_SIZE));
+        object[0].setX(17 * Constants.TILE_SIZE);
+        object[0].setY((float) (6.5 * Constants.TILE_SIZE));
 
-        return objects;
+        return object;
     }
 }
