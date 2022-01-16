@@ -9,5 +9,6 @@ public enum ObjectType {
     PLAYER, // TODO
     BED, // TODO healing or something
     BULLET,
-    CLOSET
+    CLOSET,
+    WEARABLE
 }

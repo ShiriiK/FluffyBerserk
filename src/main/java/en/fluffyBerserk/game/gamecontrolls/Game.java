@@ -1,16 +1,23 @@
 package en.fluffyBerserk.game.gamecontrolls;
 
 import en.fluffyBerserk.Constants;
+import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.maps.Map;
 import en.fluffyBerserk.game.logic.maps.SafeZoneMap;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
+import en.fluffyBerserk.game.logic.objects.items.armor.BodyArmor;
+import en.fluffyBerserk.game.logic.objects.items.armor.Head;
+import en.fluffyBerserk.game.logic.objects.items.inventory.Inventory;
 import en.fluffyBerserk.gui.utils.Camera;
 import en.fluffyBerserk.gui.utils.GameGraphics;
 import en.fluffyBerserk.persistence.models.Character;
 
+
 public final class Game {
 
     private final Player player;
+
+    private final Inventory inventory;
 
     private final EntityManager entityManager = new EntityManager();
 
@@ -24,6 +31,7 @@ public final class Game {
 
     public Game(Character character) {
         player = new Player(character);
+        inventory = new Inventory(character);
         bootDefaultState();
     }
 
@@ -55,8 +63,30 @@ public final class Game {
         return gameLoop;
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
+
     private void bootDefaultState() {
         entityManager.addEntity(player);
+
+
+        BodyArmor bodyArmor1 = new BodyArmor("bodyArmor1", 2, 2, 2, 2, ObjectType.WEARABLE);
+        Head head1 = new Head("head1", 2, 2, 2, 2, ObjectType.WEARABLE);
+        Head head2 = new Head("head1", 4, 2, 2, 2, ObjectType.WEARABLE);
+
+        entityManager.addEntity(bodyArmor1);
+        entityManager.addEntity(head1);
+        entityManager.addEntity(head2);
+
+        bodyArmor1.setX(200);
+        bodyArmor1.setY(200);
+
+        head1.setX(300);
+        head1.setY(300);
+
+        head2.setX(350);
+        head2.setY(350);
 
         // Spawn player in the center of current map
         player.setX(((float) 13 * Constants.TILE_SIZE));
