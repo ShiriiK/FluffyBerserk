@@ -1,9 +1,9 @@
 package en.fluffyBerserk.game;
 
 import en.fluffyBerserk.Main;
-import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
 import en.fluffyBerserk.game.logic.Collision;
 import en.fluffyBerserk.game.logic.ObjectType;
+import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
 import en.fluffyBerserk.game.logic.objects.TileObject;
@@ -49,7 +49,7 @@ public final class GameLoop {
 
         drawObjects(gameCanvas);
 
-        removeUnnecessaryEntities(gameCanvas);
+        removeUnnecessaryEntities();
 
         drawEntities(gameCanvas);
     }
@@ -57,7 +57,7 @@ public final class GameLoop {
     private void drawMap(Canvas canvas) {
         Image mapImage = new Image(game.getCurrentMap().getImagePath());
 
-        if(!game.getCurrentMap().getName().equals("map5")) {
+        if (!game.getCurrentMap().getName().equals("map5")) {
             canvas.getGraphicsContext2D().drawImage(
                     mapImage,
                     game.getCamera().processX(0),
@@ -70,8 +70,8 @@ public final class GameLoop {
                     mapImage,
                     game.getCamera().processX(0),
                     game.getCamera().processY(0),
-                    Constants.WORLD_WIDTH/2,
-                    Constants.WORLD_HEIGHT/2
+                    Constants.WORLD_WIDTH / 2,
+                    Constants.WORLD_HEIGHT / 2
             );
         }
     }
@@ -118,7 +118,7 @@ public final class GameLoop {
                             objects[i].getWidth(),
                             objects[i].getHeight()
                     );
-                    if(objects[i] instanceof AnimatedEntity){
+                    if (objects[i] instanceof AnimatedEntity) {
                         ((AnimatedEntity) objects[i]).getAnimationManager().increaseTick();
                     }
 
@@ -157,15 +157,15 @@ public final class GameLoop {
                             continue;
                         }
 
-                    if (Collision.objectsCollide(tile, entity)) {
-                        entity.setX(entity.getPreviousX());
-                        entity.setY(entity.getPreviousY());
-                        entity.setHitBoxX(entity.getPreviousHitBoxX());
-                        entity.setHitBoxY(entity.getPreviousHitBoxY());
-                        break outerFor;
+                        if (Collision.objectsCollide(tile, entity)) {
+                            entity.setX(entity.getPreviousX());
+                            entity.setY(entity.getPreviousY());
+                            entity.setHitBoxX(entity.getPreviousHitBoxX());
+                            entity.setHitBoxY(entity.getPreviousHitBoxY());
+                            break outerFor;
+                        }
                     }
                 }
-
 
                 // Check collision with objects
                 Entity[] objects = game.getCurrentMap().getObjects();
@@ -187,12 +187,12 @@ public final class GameLoop {
                             }
                             break outerFor;
                         }
-                        if (objects[i].getType().equals(ObjectType.HOME)){
+                        if (objects[i].getType().equals(ObjectType.HOME)) {
                             game.setCurrentMap(new Home());
-                            game.getPlayer().setX(Constants.TILE_SIZE*5);
-                            game.getPlayer().setY(Constants.TILE_SIZE*5);
-                            game.getPlayer().setHitBoxX(game.getPlayer().getX()+20);
-                            game.getPlayer().setHitBoxY(game.getPlayer().getY()+30);
+                            game.getPlayer().setX(Constants.TILE_SIZE * 5);
+                            game.getPlayer().setY(Constants.TILE_SIZE * 5);
+                            game.getPlayer().setHitBoxX(game.getPlayer().getX() + 20);
+                            game.getPlayer().setHitBoxY(game.getPlayer().getY() + 30);
 
                         }
                         break outerFor;
@@ -224,15 +224,15 @@ public final class GameLoop {
         }
     }
 
-    private void removeUnnecessaryEntities(Canvas gameCanvas) {
-
-        for(Entity entity : game.getEntityManager().getEntities()){
-            if(entity.getX() < -Constants.SCREEN_WIDTH/2
-            || entity.getX() > Constants.WORLD_WIDTH + Constants.SCREEN_WIDTH/2
-            || entity.getY() < -Constants.SCREEN_HEIGHT/2
-            || entity.getY() > Constants.WORLD_HEIGHT + Constants.SCREEN_HEIGHT/2) {
+    private void removeUnnecessaryEntities() {
+        for (Entity entity : game.getEntityManager().getEntities()) {
+            if (entity.getX() < -Constants.SCREEN_WIDTH / 2
+                    || entity.getX() > Constants.WORLD_WIDTH + Constants.SCREEN_WIDTH / 2
+                    || entity.getY() < -Constants.SCREEN_HEIGHT / 2
+                    || entity.getY() > Constants.WORLD_HEIGHT + Constants.SCREEN_HEIGHT / 2) {
                 game.getEntityManager().removeEntity(entity);
             }
         }
     }
 }
+
