@@ -14,7 +14,7 @@
     -fx-max-width: 400;
 }
 .button:hover{
-    -fx-background-color: rgba(65, 74, 77,0.6);
+    -fx-background-color: rgba(65, 74, 77, 0.6);
     -fx-background-radius: 25px 25px 25px 25px;
     -fx-border-radius: 25px 25px 25px 25px;
     -fx-background-insets: 0,1,2,0;
@@ -32,6 +32,13 @@
     -fx-alignment: center;
     -fx-background-color: transparent;
     -fx-padding: 20px 20px 20px 20px;
+}
+.pop-up-menu .button {
+    -fx-background-color: rgba(65, 74, 77, 0.8);
+    -fx-text-fill: white;
+}
+.pop-up-menu .button:hover{
+    -fx-background-color: rgba(191, 191, 191, 0.8);
 }
 .vbox{
     -fx-alignment: center;

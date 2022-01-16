@@ -2,10 +2,11 @@ package en.fluffyBerserk.game.logic.maps;
 
 import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
-import en.fluffyBerserk.gui.graphics.objects.ObjectsInArea1;
+import en.fluffyBerserk.game.logic.objects.Entity;
+import en.fluffyBerserk.gui.graphics.objects.ObjectsOnMap2;
 
-public final class Area1 extends Map{
-    AnimatedEntity[] objects = ObjectsInArea1.loadObjects();
+public final class Map2 extends Map{
+    Entity[] objects = ObjectsOnMap2.loadObjects();
 
     @Override
     public String getName() {
@@ -23,7 +24,7 @@ public final class Area1 extends Map{
     }
 
     @Override
-    public AnimatedEntity[] getObjects() {
+    public Entity[] getObjects() {
         return objects;
     }
 }

@@ -279,4 +279,72 @@ public class EntityFactory {
             return Constants.TILE_SIZE / 2;
         }
     };
+
+    public static final Entity catStatueFront = new Entity(ObjectType.TILE){
+        @Override
+        public Image getImage() {
+            return new Image("/objects/catStatueFront.png");
+        }
+
+        @Override
+        public int getHeight() {
+            return (int) (Constants.TILE_SIZE * 1.5);
+        }
+
+        @Override
+        public int getWidth() {
+            return Constants.TILE_SIZE / 4 * 3;
+        }
+    };
+
+    public static final Entity catStatueBack = new Entity(ObjectType.TILE){
+        @Override
+        public Image getImage() {
+            return new Image("objects/catStatueBack.png");
+        }
+
+        @Override
+        public int getHeight() {
+            return (int) (Constants.TILE_SIZE * 1.5);
+        }
+
+        @Override
+        public int getWidth() {
+            return Constants.TILE_SIZE / 4 * 3;
+        }
+    };
+
+    public static final Entity catStatueLeft = new Entity(ObjectType.TILE){
+        @Override
+        public Image getImage() {
+            return new Image("objects/catStatueLeft.png");
+        }
+
+        @Override
+        public int getHeight() {
+            return (int) (Constants.TILE_SIZE * 1.5);
+        }
+
+        @Override
+        public int getWidth() {
+            return Constants.TILE_SIZE / 4 * 3;
+        }
+    };
+
+    public static final Entity catStatueRight = new Entity(ObjectType.TILE){
+        @Override
+        public Image getImage() {
+            return new Image("objects/catStatueRight.png");
+        }
+
+        @Override
+        public int getHeight() {
+            return (int) (Constants.TILE_SIZE * 1.5);
+        }
+
+        @Override
+        public int getWidth() {
+            return Constants.TILE_SIZE / 4 * 3;
+        }
+    };
 }
