@@ -61,4 +61,8 @@ public final class Player extends MovableAnimatedEntity implements HasName, CanA
     public void resetCooldown() {
         attackCd = 0;
     }
+
+    public Character getCharacter() {
+        return character;
+    }
 }

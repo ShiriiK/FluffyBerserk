@@ -22,7 +22,6 @@ public class Home extends Map{
         return Constants.WORLD_HEIGHT/2;
     }
 
-
     @Override
     public Entity[] getObjects() {
         return objects;

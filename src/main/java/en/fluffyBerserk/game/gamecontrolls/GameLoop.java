@@ -10,6 +10,7 @@ import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
 import en.fluffyBerserk.game.logic.objects.TileObject;
 import en.fluffyBerserk.gui.popups.PopUpPortal;
+import en.fluffyBerserk.gui.screens.CharacterScreen;
 import en.fluffyBerserk.gui.utils.Collision;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
@@ -22,7 +23,7 @@ public final class GameLoop {
 
     @NotNull
     private final Game game;
-    private PopUpPortal portal;
+
     @NotNull
     private final AnimationTimer timer = new AnimationTimer() {
         @Override
@@ -175,12 +176,6 @@ public final class GameLoop {
                             entity.setHitBoxX(entity.getPreviousHitBoxX());
                             entity.setHitBoxY(entity.getPreviousHitBoxY());
 
-                            if (objects[i].getType().equals(ObjectType.PORTAL)) {
-                                portal = new PopUpPortal(game);
-                                Main.app.showPopUp(portal);
-                                game.getPlayer().setMoveY(0F);
-                                game.getPlayer().setMoveX(0F);
-                            }
                             if (objects[i].getType().equals(ObjectType.HOME)) {
                                 game.setCurrentMap(new Home());
                                 game.getPlayer().setX((float) (Constants.TILE_SIZE * 4.5));

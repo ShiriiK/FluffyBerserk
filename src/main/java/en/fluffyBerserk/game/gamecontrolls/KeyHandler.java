@@ -2,10 +2,14 @@ package en.fluffyBerserk.game.gamecontrolls;
 
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.logic.ObjectType;
+import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.bullets.Bullet;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.gui.popups.PopUp;
 import en.fluffyBerserk.gui.popups.PopUpMenu;
+import en.fluffyBerserk.gui.popups.PopUpPortal;
+import en.fluffyBerserk.gui.screens.CharacterScreen;
+import en.fluffyBerserk.gui.utils.Collision;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import org.jetbrains.annotations.Nullable;
@@ -45,7 +49,7 @@ public class KeyHandler {
                     game.getPlayer().setMoveX(0F);
                     break;
                 case SPACE:
-                    if(game.getPlayer().canAttack()) {
+                    if (game.getPlayer().canAttack()) {
                         Bullet bullet = new Bullet(ObjectType.BULLET);
                         switch (game.getPlayer().getDirection()) {
                             case UP:
@@ -65,6 +69,22 @@ public class KeyHandler {
                         bullet.setY(game.getPlayer().getY() + game.getPlayer().getHeight() / 4);
                         game.getEntityManager().addEntity(bullet);
                         game.getPlayer().resetCooldown();
+                    }
+                    break;
+                case E:
+                    for (Entity object : game.getCurrentMap().getObjects()) {
+                        if (Collision.objectsCollide2(object, game.getPlayer())) {
+                            if (object.getType().equals(ObjectType.CLOSET)) {
+                                Main.app.changeScreen(new CharacterScreen(game.getPlayer().getCharacter()));
+                                game.getPlayer().setMoveY(0F);
+                                game.getPlayer().setMoveX(0F);
+                            } else if (object.getType().equals(ObjectType.PORTAL)) {
+                                PopUpPortal portal = new PopUpPortal(game);
+                                Main.app.showPopUp(portal);
+                                game.getPlayer().setMoveY(0F);
+                                game.getPlayer().setMoveX(0F);
+                            }
+                        }
                     }
                     break;
             }
