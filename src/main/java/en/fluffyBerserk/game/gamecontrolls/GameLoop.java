@@ -9,6 +9,8 @@ import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
 import en.fluffyBerserk.game.logic.objects.TileObject;
+import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
+import en.fluffyBerserk.game.logic.objects.items.PickableItem;
 import en.fluffyBerserk.gui.popups.PopUpPortal;
 import en.fluffyBerserk.gui.screens.CharacterScreen;
 import en.fluffyBerserk.gui.utils.Collision;
@@ -17,6 +19,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 public final class GameLoop {
@@ -132,10 +135,19 @@ public final class GameLoop {
     }
 
     private void drawEntities(Canvas canvas) {
+        ArrayList<Entity> itemsToRemoveFromMap = new ArrayList<>();
+
         for (Entity entity : game.getEntityManager().getEntities()) {
             if (!(entity instanceof MovableEntity)) {
                 continue;
             }
+
+            for (Entity entity1 : game.getEntityManager().getEntities())
+                if (entity1 instanceof PickableItem && entity instanceof Player && Collision.objectsCollide(entity,entity1)){
+                    game.getInventory().addItem((PickableItem) entity1);
+                    itemsToRemoveFromMap.add(entity1);
+                    break;
+                }
 
             ((MovableEntity) entity).move();
 
@@ -197,6 +209,12 @@ public final class GameLoop {
                 }
             }
         }
+
+        if(itemsToRemoveFromMap.size() == 1){
+            game.getEntityManager().removeEntity(itemsToRemoveFromMap.get(0));
+            itemsToRemoveFromMap.clear();
+        }
+
 
         // Check collision with other entities (bullets, monsters, npc, items etc.)
 
