@@ -1,10 +1,10 @@
 package en.fluffyBerserk.game.logic.objects.creatures.player;
 
 import en.fluffyBerserk.Constants;
-import en.fluffyBerserk.gui.graphics.sprites.SpritesFactory;
 import en.fluffyBerserk.game.logic.HasName;
 import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.objects.MovableAnimatedEntity;
+import en.fluffyBerserk.gui.graphics.sprites.SpritesFactory;
 import en.fluffyBerserk.persistence.models.Character;
 
 public final class Player extends MovableAnimatedEntity implements HasName {

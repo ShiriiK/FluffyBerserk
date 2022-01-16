@@ -1,8 +1,8 @@
 package en.fluffyBerserk.game.logic.objects.portals;
 
-import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
 import en.fluffyBerserk.game.logic.HasName;
 import en.fluffyBerserk.game.logic.ObjectType;
+import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
 import en.fluffyBerserk.game.logic.objects.portals.destinations.Destination;
 import javafx.scene.image.Image;
 

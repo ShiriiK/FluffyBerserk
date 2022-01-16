@@ -1,8 +1,8 @@
 package en.fluffyBerserk.game.logic.maps;
 
 import en.fluffyBerserk.Constants;
-import en.fluffyBerserk.gui.graphics.objects.ObjectsAtHome;
 import en.fluffyBerserk.game.logic.objects.Entity;
+import en.fluffyBerserk.gui.graphics.objects.ObjectsAtHome;
 
 public class Home extends Map{
     Entity[] objects = ObjectsAtHome.loadObjects();

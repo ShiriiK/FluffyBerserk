@@ -1,7 +1,7 @@
 package en.fluffyBerserk.game.logic.objects;
 
-import en.fluffyBerserk.gui.graphics.animations.AnimationManager;
 import en.fluffyBerserk.game.logic.ObjectType;
+import en.fluffyBerserk.gui.graphics.animations.AnimationManager;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;

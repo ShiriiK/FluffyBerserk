@@ -1,16 +1,16 @@
 package en.fluffyBerserk.game.gamecontrolls;
 
-import en.fluffyBerserk.Main;
 import en.fluffyBerserk.Constants;
-import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
-import en.fluffyBerserk.gui.utils.Collision;
+import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.logic.ObjectType;
+import en.fluffyBerserk.game.logic.maps.Home;
+import en.fluffyBerserk.game.logic.maps.SafeZoneMap;
+import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
 import en.fluffyBerserk.game.logic.objects.TileObject;
-import en.fluffyBerserk.game.logic.maps.Home;
-import en.fluffyBerserk.game.logic.maps.SafeZoneMap;
 import en.fluffyBerserk.gui.popups.PopUpPortal;
+import en.fluffyBerserk.gui.utils.Collision;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
@@ -56,24 +56,13 @@ public final class GameLoop {
 
     private void drawMap(Canvas canvas) {
         Image mapImage = new Image(game.getCurrentMap().getImagePath());
-
-        if(!game.getCurrentMap().getName().equals("map5")) {
-            canvas.getGraphicsContext2D().drawImage(
-                    mapImage,
-                    game.getCamera().processX(0),
-                    game.getCamera().processY(0),
-                    Constants.WORLD_WIDTH,
-                    Constants.WORLD_HEIGHT
-            );
-        } else {
-            canvas.getGraphicsContext2D().drawImage(
-                    mapImage,
-                    game.getCamera().processX(0),
-                    game.getCamera().processY(0),
-                    Constants.WORLD_WIDTH/2,
-                    Constants.WORLD_HEIGHT/2
-            );
-        }
+        canvas.getGraphicsContext2D().drawImage(
+                mapImage,
+                game.getCamera().processX(0),
+                game.getCamera().processY(0),
+                game.getCurrentMap().getWidth(),
+                game.getCurrentMap().getHeight()
+        );
     }
 
     private void drawTiles(Canvas canvas) {
@@ -195,8 +184,8 @@ public final class GameLoop {
                         }
                         if (objects[i].getType().equals(ObjectType.CARPET)){
                             game.setCurrentMap(new SafeZoneMap());
-                            game.getPlayer().setX((float) (Constants.TILE_SIZE*5));
-                            game.getPlayer().setY(Constants.TILE_SIZE*3);
+                            game.getPlayer().setX((float) (Constants.TILE_SIZE*5.5));
+                            game.getPlayer().setY((float) (Constants.TILE_SIZE*2.5));
                             game.getPlayer().setHitBoxX(game.getPlayer().getX()+20);
                             game.getPlayer().setHitBoxY(game.getPlayer().getY()+30);
                         }

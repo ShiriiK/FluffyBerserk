@@ -1,7 +1,7 @@
 package en.fluffyBerserk.game.logic.objects;
 
-import en.fluffyBerserk.gui.graphics.animations.MovableEntityAnimationManager;
 import en.fluffyBerserk.game.logic.ObjectType;
+import en.fluffyBerserk.gui.graphics.animations.MovableEntityAnimationManager;
 import en.fluffyBerserk.gui.utils.LocateImage;
 import javafx.scene.image.Image;
 

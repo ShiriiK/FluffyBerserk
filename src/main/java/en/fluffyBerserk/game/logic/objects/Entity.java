@@ -58,12 +58,12 @@ public abstract class Entity implements Object {
 
     @Override
     public int getHitBoxHeight(){
-        return Constants.ENTITIES_SIZE;
+        return getHeight();
     }
 
     @Override
     public int getHitBoxWidth(){
-        return Constants.ENTITIES_SIZE;
+        return getWidth();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package en.fluffyBerserk.game.logic.objects.portals;
 
+import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.gui.graphics.animations.AnimationsFactory;
 import javafx.scene.image.Image;
 
@@ -15,6 +16,16 @@ public class HomePortal extends Portal {
     @Override
     protected ArrayList<Image> setAnimations() {
         return AnimationsFactory.portalAnimations();
+    }
+
+    @Override
+    public int getHeight() {
+        return Constants.TILE_SIZE * 2;
+    }
+
+    @Override
+    public int getWidth() {
+        return Constants.TILE_SIZE;
     }
 }
 
