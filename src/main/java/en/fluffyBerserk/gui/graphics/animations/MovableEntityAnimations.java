@@ -15,7 +15,6 @@ public class MovableEntityAnimations {
     public ArrayList<Image> moveLeft;
     public ArrayList<Image> moveRight;
     public ArrayList<Image> moveUp;
-    public LocateImage usedSprite;
 
     /**
      * Creates animations for entity based on chosen sprite
@@ -23,7 +22,6 @@ public class MovableEntityAnimations {
      * @param sprite image in resources folder that contains multiple images of given entity
      */
     public MovableEntityAnimations(LocateImage sprite) {
-        usedSprite = new LocateImage(sprite.getPath(), sprite.getIndex());
         int w = Constants.BASE_TILE_SIZE;
         int h = Constants.BASE_TILE_SIZE;
         moveDown = new ArrayList<>(3);

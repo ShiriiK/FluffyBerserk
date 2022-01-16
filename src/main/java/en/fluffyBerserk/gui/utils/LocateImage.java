@@ -7,7 +7,12 @@ import javafx.scene.image.Image;
  */
 public class LocateImage extends Image {
     private final String path;
-    private final int index;
+    private int index;
+
+    public LocateImage(String p){
+        super(p);
+        this.path = p;
+    }
 
     public LocateImage(String p, int i) {
         super(p);

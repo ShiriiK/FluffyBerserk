@@ -14,12 +14,17 @@ public abstract class AnimatedEntity extends Entity {
     public AnimatedEntity(ObjectType type) {
         super(type);
         animations = setAnimations();
-        animationManager = new AnimationManager(animations, this);
+        animationManager = new AnimationManager(this);
+    }
+
+    public ArrayList<Image> getAnimations() {
+        return animations;
     }
 
     public AnimationManager getAnimationManager() {
         return animationManager;
     }
+
     protected abstract ArrayList<Image> setAnimations();
 
 }
