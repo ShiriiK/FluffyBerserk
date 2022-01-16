@@ -46,8 +46,7 @@ public class SpritesFactory {
         return map.get(random.nextInt(map.size()));
     }
 
-    public static @Nullable
-    LocateImage getSpriteByNumber(Integer key) {
+    public static @Nullable LocateImage getSpriteByNumber(Integer key) {
         return map.get(key);
     }
 }
