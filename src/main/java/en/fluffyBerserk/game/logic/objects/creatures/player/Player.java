@@ -14,7 +14,7 @@ public final class Player extends MovableAnimatedEntity implements HasName, CanA
 
     private final Character character;
 
-    private int attackCd = 50; //
+    private int attackCd = 20; //
 
     public Player(Character character) {
         super(SpritesFactory.getSpriteByNumber(character.getSpriteIndex()), ObjectType.PLAYER);
@@ -49,12 +49,12 @@ public final class Player extends MovableAnimatedEntity implements HasName, CanA
 
     @Override
     public boolean canAttack() {
-        return attackCd == 50;
+        return attackCd == Constants.PLAYER_CD;
     }
 
     @Override
     public void reduceCooldown() {
-        if(attackCd != 50) ++attackCd;
+        if(attackCd != Constants.PLAYER_CD) ++attackCd;
     }
 
     @Override
