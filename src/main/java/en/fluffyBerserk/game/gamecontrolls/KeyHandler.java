@@ -45,24 +45,27 @@ public class KeyHandler {
                     game.getPlayer().setMoveX(0F);
                     break;
                 case SPACE:
-                    Bullet bullet = new Bullet(ObjectType.BULLET);
-                    switch (game.getPlayer().getDirection()) {
-                        case UP:
-                            bullet.setMoveY(-Bullet.SPEED);
-                            break;
-                        case DOWN:
-                            bullet.setMoveY(Bullet.SPEED);
-                            break;
-                        case RIGHT:
-                            bullet.setMoveX(Bullet.SPEED);
-                            break;
-                        case LEFT:
-                            bullet.setMoveX(-Bullet.SPEED);
-                            break;
+                    if(game.getPlayer().canAttack()) {
+                        Bullet bullet = new Bullet(ObjectType.BULLET);
+                        switch (game.getPlayer().getDirection()) {
+                            case UP:
+                                bullet.setMoveY(-Bullet.SPEED);
+                                break;
+                            case DOWN:
+                                bullet.setMoveY(Bullet.SPEED);
+                                break;
+                            case RIGHT:
+                                bullet.setMoveX(Bullet.SPEED);
+                                break;
+                            case LEFT:
+                                bullet.setMoveX(-Bullet.SPEED);
+                                break;
+                        }
+                        bullet.setX(game.getPlayer().getX() + game.getPlayer().getWidth() / 4);
+                        bullet.setY(game.getPlayer().getY() + game.getPlayer().getHeight() / 4);
+                        game.getEntityManager().addEntity(bullet);
+                        game.getPlayer().resetCooldown();
                     }
-                    bullet.setX(game.getPlayer().getX() + game.getPlayer().getWidth() / 4);
-                    bullet.setY(game.getPlayer().getY() + game.getPlayer().getHeight() / 4);
-                    game.getEntityManager().addEntity(bullet);
                     break;
             }
         });

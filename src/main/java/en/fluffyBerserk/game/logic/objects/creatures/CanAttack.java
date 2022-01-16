@@ -6,5 +6,9 @@ package en.fluffyBerserk.game.logic.objects.creatures;
 
 public interface CanAttack {
 
-    void attack(Creature creature);
+    boolean canAttack();
+
+    void reduceCooldown();
+
+    void resetCooldown();
 }

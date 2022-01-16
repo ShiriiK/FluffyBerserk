@@ -4,14 +4,17 @@ import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.HasName;
 import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.objects.MovableAnimatedEntity;
+import en.fluffyBerserk.game.logic.objects.creatures.CanAttack;
 import en.fluffyBerserk.gui.graphics.sprites.SpritesFactory;
 import en.fluffyBerserk.persistence.models.Character;
 
-public final class Player extends MovableAnimatedEntity implements HasName {
+public final class Player extends MovableAnimatedEntity implements HasName, CanAttack {
 
     public static final float PLAYER_SPEED = 8F;
 
     private final Character character;
+
+    private int attackCd = 50; //
 
     public Player(Character character) {
         super(SpritesFactory.getSpriteByNumber(character.getSpriteIndex()), ObjectType.PLAYER);
@@ -42,5 +45,20 @@ public final class Player extends MovableAnimatedEntity implements HasName {
     @Override
     public float getHitBoxY() {
         return hitBoxY;
+    }
+
+    @Override
+    public boolean canAttack() {
+        return attackCd == 50;
+    }
+
+    @Override
+    public void reduceCooldown() {
+        if(attackCd != 50) ++attackCd;
+    }
+
+    @Override
+    public void resetCooldown() {
+        attackCd = 0;
     }
 }

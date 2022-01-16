@@ -54,6 +54,8 @@ public final class GameLoop {
         removeUnnecessaryEntities();
 
         drawEntities(gameCanvas);
+
+        game.getPlayer().reduceCooldown();
     }
 
     private void drawMap(Canvas canvas) {
