@@ -37,13 +37,11 @@ public class SpritesFactory {
         return map.containsKey(key);
     }
 
-    public static @NotNull
-    Map<Integer, LocateImage> getMap() {
+    public static @NotNull Map<Integer, LocateImage> getMap() {
         return map;
     }
 
-    public static @NotNull
-    LocateImage getRandomSprite() {
+    public static @NotNull LocateImage getRandomSprite() {
         Random random = new Random();
         return map.get(random.nextInt(map.size()));
     }
