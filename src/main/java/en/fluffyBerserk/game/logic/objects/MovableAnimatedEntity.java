@@ -1,5 +1,6 @@
 package en.fluffyBerserk.game.logic.objects;
 
+import en.fluffyBerserk.game.logic.Direction;
 import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.gui.graphics.animations.MovableEntityAnimationManager;
 import en.fluffyBerserk.gui.utils.LocateImage;
@@ -33,5 +34,9 @@ public abstract class MovableAnimatedEntity extends MovableEntity {
     @Override
     public Image getImage() {
         return animationManager.getImage();
+    }
+
+    public Direction getDirection() {
+        return animationManager.direction;
     }
 }

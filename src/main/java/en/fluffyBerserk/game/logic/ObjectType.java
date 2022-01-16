@@ -7,5 +7,6 @@ public enum ObjectType {
     ITEM, // TODO
     CARPET, // changes map to safe zone
     PLAYER, // TODO
-    BED; // TODO healing or something
+    BED, // TODO healing or something
+    BULLET
 }

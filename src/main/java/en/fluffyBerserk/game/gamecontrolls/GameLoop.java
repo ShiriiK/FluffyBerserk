@@ -51,6 +51,8 @@ public final class GameLoop {
 
         drawObjects(gameCanvas);
 
+        removeUnnecessaryEntities();
+
         drawEntities(gameCanvas);
     }
 
@@ -107,7 +109,7 @@ public final class GameLoop {
                             objects[i].getWidth(),
                             objects[i].getHeight()
                     );
-                    if(objects[i] instanceof AnimatedEntity){
+                    if (objects[i] instanceof AnimatedEntity) {
                         ((AnimatedEntity) objects[i]).getAnimationManager().increaseTick();
                     }
 
@@ -134,62 +136,66 @@ public final class GameLoop {
 
             ((MovableEntity) entity).move();
 
-            // Check collision with tiles
-            Vector<Vector<TileObject>> tiles = game.getCurrentMap().getTiles();
-            outerFor:
-            for (Vector<TileObject> tileObjects : tiles) {
-                for (TileObject tile : tileObjects) {
-                    if (tile == null) { // blank tile
-                        continue;
-                    }
+            // Don't check collision for bullets X tiles or objects (structures)
+            if (!(entity.getType().equals(ObjectType.BULLET))) {
 
-                    if (Collision.objectsCollide(tile, entity)) {
-                        entity.setX(entity.getPreviousX());
-                        entity.setY(entity.getPreviousY());
-                        entity.setHitBoxX(entity.getPreviousHitBoxX());
-                        entity.setHitBoxY(entity.getPreviousHitBoxY());
-                        break outerFor;
+                // Check collision with tiles
+                Vector<Vector<TileObject>> tiles = game.getCurrentMap().getTiles();
+                outerFor:
+                for (Vector<TileObject> tileObjects : tiles) {
+                    for (TileObject tile : tileObjects) {
+                        if (tile == null) { // blank tile
+                            continue;
+                        }
+
+                        if (Collision.objectsCollide(tile, entity)) {
+                            entity.setX(entity.getPreviousX());
+                            entity.setY(entity.getPreviousY());
+                            entity.setHitBoxX(entity.getPreviousHitBoxX());
+                            entity.setHitBoxY(entity.getPreviousHitBoxY());
+                            break outerFor;
+                        }
                     }
                 }
-            }
 
-            // Check collision with objects
-            Entity[] objects = game.getCurrentMap().getObjects();
-            outerFor:
-            if (objects != null) {
-                for (int i = 0; i < objects.length; i++) {
-                    if (objects[i] == null) {
-                        continue;
-                    }
-
-                    if (Collision.objectsCollide(objects[i], entity)) {
-                        entity.setX(entity.getPreviousX());
-                        entity.setY(entity.getPreviousY());
-                        entity.setHitBoxX(entity.getPreviousHitBoxX());
-                        entity.setHitBoxY(entity.getPreviousHitBoxY());
-
-                        if (objects[i].getType().equals(ObjectType.PORTAL)) {
-                            portal = new PopUpPortal(game);
-                            game.getPlayer().setMoveY(0F);
-                            game.getPlayer().setMoveX(0F);
-                            Main.app.showPopUp(portal);
+                // Check collision with objects
+                Entity[] objects = game.getCurrentMap().getObjects();
+                outerFor:
+                if (objects != null) {
+                    for (int i = 0; i < objects.length; i++) {
+                        if (objects[i] == null) {
+                            continue;
                         }
-                        if (objects[i].getType().equals(ObjectType.HOME)){
-                            game.setCurrentMap(new Home());
-                            game.getPlayer().setX((float) (Constants.TILE_SIZE*4.5));
-                            game.getPlayer().setY(Constants.TILE_SIZE*7);
-                            game.getPlayer().setHitBoxX(game.getPlayer().getX()+20);
-                            game.getPlayer().setHitBoxY(game.getPlayer().getY()+30);
 
+                        if (Collision.objectsCollide(objects[i], entity)) {
+                            entity.setX(entity.getPreviousX());
+                            entity.setY(entity.getPreviousY());
+                            entity.setHitBoxX(entity.getPreviousHitBoxX());
+                            entity.setHitBoxY(entity.getPreviousHitBoxY());
+
+                            if (objects[i].getType().equals(ObjectType.PORTAL)) {
+                                portal = new PopUpPortal(game);
+                                Main.app.showPopUp(portal);
+                                game.getPlayer().setMoveY(0F);
+                                game.getPlayer().setMoveX(0F);
+                            }
+                            if (objects[i].getType().equals(ObjectType.HOME)) {
+                                game.setCurrentMap(new Home());
+                                game.getPlayer().setX((float) (Constants.TILE_SIZE * 4.5));
+                                game.getPlayer().setY(Constants.TILE_SIZE * 7);
+                                game.getPlayer().setHitBoxX(game.getPlayer().getX() + 20);
+                                game.getPlayer().setHitBoxY(game.getPlayer().getY() + 30);
+
+                            }
+                            if (objects[i].getType().equals(ObjectType.CARPET)) {
+                                game.setCurrentMap(new SafeZoneMap());
+                                game.getPlayer().setX((float) (Constants.TILE_SIZE * 5.5));
+                                game.getPlayer().setY((float) (Constants.TILE_SIZE * 2.5));
+                                game.getPlayer().setHitBoxX(game.getPlayer().getX() + 20);
+                                game.getPlayer().setHitBoxY(game.getPlayer().getY() + 30);
+                            }
+                            break outerFor;
                         }
-                        if (objects[i].getType().equals(ObjectType.CARPET)){
-                            game.setCurrentMap(new SafeZoneMap());
-                            game.getPlayer().setX((float) (Constants.TILE_SIZE*5.5));
-                            game.getPlayer().setY((float) (Constants.TILE_SIZE*2.5));
-                            game.getPlayer().setHitBoxX(game.getPlayer().getX()+20);
-                            game.getPlayer().setHitBoxY(game.getPlayer().getY()+30);
-                        }
-                        break outerFor;
                     }
                 }
             }
@@ -214,6 +220,17 @@ public final class GameLoop {
                         entity.getHitBoxWidth(),
                         entity.getHitBoxHeight()
                 );
+            }
+        }
+    }
+
+    private void removeUnnecessaryEntities() {
+        for (Entity entity : game.getEntityManager().getEntities()) {
+            if (entity.getX() < -Constants.SCREEN_WIDTH / 2
+                    || entity.getX() > Constants.WORLD_WIDTH + Constants.SCREEN_WIDTH / 2
+                    || entity.getY() < -Constants.SCREEN_HEIGHT / 2
+                    || entity.getY() > Constants.WORLD_HEIGHT + Constants.SCREEN_HEIGHT / 2) {
+                game.getEntityManager().removeEntity(entity);
             }
         }
     }
