@@ -31,7 +31,6 @@ public class PopUpPortal extends PopUp {
         });
 
         Button area1 = new Button("Area 1");
-
         area1.setOnAction(event -> {
             if (!game.getCurrentMap().getName().equals("map2")) {
                 game.setCurrentMap(new Area1());
@@ -46,7 +45,13 @@ public class PopUpPortal extends PopUp {
 
         Button area4 = new Button("Area 4");
 
-        buttons.getChildren().addAll(safeZone, area1, area2, area3, area4);
+
+        Button cancel = new Button("Cancel");
+        cancel.setOnAction(event -> {
+            Main.app.hidePopUp();
+        });
+
+        buttons.getChildren().addAll(safeZone, area1, area2, area3, area4, cancel);
         buttons.getStyleClass().add("pop-up-menu");
 
         Scene scene = new Scene(buttons);
