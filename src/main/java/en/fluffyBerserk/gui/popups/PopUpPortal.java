@@ -2,7 +2,7 @@ package en.fluffyBerserk.gui.popups;
 
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.gamecontrolls.Game;
-import en.fluffyBerserk.game.logic.maps.Area1;
+import en.fluffyBerserk.game.logic.maps.Map2;
 import en.fluffyBerserk.game.logic.maps.SafeZoneMap;
 import en.fluffyBerserk.gui.utils.AttachCSS;
 import javafx.scene.Scene;
@@ -33,7 +33,7 @@ public class PopUpPortal extends PopUp {
         Button area1 = new Button("Area 1");
         area1.setOnAction(event -> {
             if (!game.getCurrentMap().getName().equals("map2")) {
-                game.setCurrentMap(new Area1());
+                game.setCurrentMap(new Map2());
                 Main.app.hidePopUp();
             }
         });
