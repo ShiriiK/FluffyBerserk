@@ -1,6 +1,7 @@
 package en.fluffyBerserk.gui.popups;
 
 import en.fluffyBerserk.Main;
+import en.fluffyBerserk.gui.screens.HomeScreen;
 import en.fluffyBerserk.gui.screens.LoginScreen;
 import en.fluffyBerserk.gui.screens.SaveSlotsScreen;
 import en.fluffyBerserk.gui.utils.AttachCSS;
@@ -38,7 +39,10 @@ public final class PopUpMenu extends PopUp {
 
         // Logout button
         Button logoutButton = new Button("Logout");
-        logoutButton.setOnAction(event -> Main.app.changeScreen(new LoginScreen()));
+        logoutButton.setOnAction(event -> {
+            Main.app.logout();
+            Main.app.changeScreen(new HomeScreen());
+        });
 
         // Delete save button
         Button deleteSaveButton = new Button("Delete save");
