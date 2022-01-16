@@ -24,7 +24,7 @@ public class DatabaseSession {
     }
 
     public static void startSession() {
-        //manager = Persistence.createEntityManagerFactory(UNIT_NAME).createEntityManager();
+        manager = Persistence.createEntityManagerFactory(UNIT_NAME).createEntityManager();
     }
 
     public static void closeSession() {

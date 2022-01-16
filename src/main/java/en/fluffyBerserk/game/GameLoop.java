@@ -114,14 +114,6 @@ public final class GameLoop {
 
 
             // Check collision with other entities (bullets, monsters, npc, items etc.)
-            for (Entity e : game.getEntityManager().getEntities()) {
-                if (Collision.objectsCollide(e, game.getPlayer()) && e != game.getPlayer()) {
-                    //TODO Timer that makes attack only once per sec or sth.
-                    game.getPlayer().setHp(game.getPlayer().getHP() - e.getDmg());
-                    System.out.println("Player took dmg " + e.getDmg() + " his health is at " + game.getPlayer().getHP());
-                }
-            }
-
         }
 
 

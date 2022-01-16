@@ -1,23 +1,20 @@
 package en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive;
 
-import en.fluffyBerserk.game.Constants;
 import en.fluffyBerserk.game.Game;
 import en.fluffyBerserk.game.animations.SpritesFactory;
 import en.fluffyBerserk.game.logic.HasName;
+import en.fluffyBerserk.game.logic.objects.bullets.Bullet;
 import en.fluffyBerserk.game.logic.objects.creatures.Creature;
-
-import java.util.Random;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.NpcFactory;
 
 public class ZombieArcher extends Creature implements HasName {
-    private boolean isAlive;
     private Game game;
-    private static final float attack_range = 10F;
+    private static final float attackRange = 10F;
 
     public ZombieArcher(Game game) {
         super(SpritesFactory.getSpriteByNumber(15));
-        this.isAlive = true;
         this.game = game;
-        init();
+        NpcFactory.init(this);
     }
 
     @Override
@@ -25,24 +22,13 @@ public class ZombieArcher extends Creature implements HasName {
         return "ZombieArcher";
     }
 
-    public void init() {
-        Random rand = new Random();
-        int world_upperbound = Constants.WORLD_HEIGHT - 100;
-        setY(rand.nextInt(world_upperbound));
-        setX(rand.nextInt(world_upperbound));
-        setHp(20);
-        setStr(5);
-        setNpcSpeed(3F);
-        setMoveX(getNpcSpeed());
-        setMoveY(getNpcSpeed());
-    }
-
     @Override
     public void move() {
+        //TODO
         boolean move_left = false;
         boolean move_right = false;
 
-        if(game.getPlayer().getX() - this.getX() > attack_range || this.getX() - game.getPlayer().getX() < attack_range){
+        if (game.getPlayer().getX() - this.getX() > attackRange || this.getX() - game.getPlayer().getX() < attackRange) {
             if (game.getPlayer().getX() > this.getX()) {
                 setMoveX(+getNpcSpeed());
                 setX(this.getX() + getMoveX());
@@ -55,7 +41,7 @@ public class ZombieArcher extends Creature implements HasName {
             }
         }
 
-        if(game.getPlayer().getY() - this.getY() > attack_range || this.getY() - game.getPlayer().getY() < attack_range){
+        if (game.getPlayer().getY() - this.getY() > attackRange || this.getY() - game.getPlayer().getY() < attackRange) {
             if (game.getPlayer().getY() > this.getY()) {
                 if (move_left || move_right) {
                     setMoveY(getNpcSpeed());
@@ -69,6 +55,31 @@ public class ZombieArcher extends Creature implements HasName {
                 setY(this.getY() + getMoveY());
             }
         }
-        super.increaseTick();
     }
+
+    public void shoot() {
+        //TODO every now and then shoot at the player kekw
+        new Bullet();
+    }
+
+    private Bullet newBullet() {
+        int direction = 4;
+        if (game.getPlayer().getX() - this.getX() > attackRange || this.getX() - game.getPlayer().getX() < attackRange) {
+            if (game.getPlayer().getX() > this.getX()) {
+                direction = 1;
+            }
+            if (game.getPlayer().getX() < this.getX()) {
+                direction = 4;
+            }
+
+            if (game.getPlayer().getY() > this.getY()) {
+                direction = 7;
+            }
+            if (game.getPlayer().getY() < this.getY()) {
+                direction = 8;
+            }
+        }
+        return new Bullet();
+    }
+
 }
