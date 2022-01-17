@@ -1,7 +1,6 @@
 package en.fluffyBerserk.gui.graphics.objects;
 
 import en.fluffyBerserk.Constants;
-import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.portals.HomePortal;
 

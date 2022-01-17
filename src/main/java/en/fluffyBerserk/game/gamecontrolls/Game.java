@@ -7,10 +7,12 @@ import en.fluffyBerserk.game.logic.maps.SafeZoneMap;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.armor.BodyArmor;
 import en.fluffyBerserk.game.logic.objects.items.armor.Head;
+import en.fluffyBerserk.game.logic.objects.items.armor.Pants;
 import en.fluffyBerserk.game.logic.objects.items.inventory.Inventory;
 import en.fluffyBerserk.gui.utils.Camera;
 import en.fluffyBerserk.gui.utils.GameGraphics;
 import en.fluffyBerserk.persistence.models.Character;
+import org.springframework.security.core.parameters.P;
 
 
 public final class Game {
@@ -72,21 +74,21 @@ public final class Game {
 
 
         BodyArmor bodyArmor1 = new BodyArmor("bodyArmor1", 2, 2, 2, 2, ObjectType.WEARABLE);
-        Head head1 = new Head("head1", 2, 2, 2, 2, ObjectType.WEARABLE);
-        Head head2 = new Head("head1", 4, 2, 2, 2, ObjectType.WEARABLE);
+        Head head1 = new Head("head1", 4, 2, 2, 2, ObjectType.WEARABLE);
+        Pants pants1 = new Pants("pants1",1,2,4,1,ObjectType.WEARABLE);
 
         entityManager.addEntity(bodyArmor1);
         entityManager.addEntity(head1);
-        entityManager.addEntity(head2);
+        entityManager.addEntity(pants1);
 
-        bodyArmor1.setX(200);
-        bodyArmor1.setY(200);
+        bodyArmor1.setX(500);
+        bodyArmor1.setY(500);
 
-        head1.setX(300);
-        head1.setY(300);
+        head1.setX(350);
+        head1.setY(350);
 
-        head2.setX(350);
-        head2.setY(350);
+        pants1.setX(800);
+        pants1.setY(800);
 
         // Spawn player in the center of current map
         player.setX(((float) 13 * Constants.TILE_SIZE));

@@ -23,6 +23,6 @@ public class BodyArmor extends Armor{
 
     @Override
     public Image getImage() {
-        return null;
+        return ArmorImages.getByIndex(ArmorImages.BODY1);
     }
 }

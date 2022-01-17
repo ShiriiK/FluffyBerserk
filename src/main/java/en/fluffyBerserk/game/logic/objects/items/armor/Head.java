@@ -23,6 +23,6 @@ public class Head extends Armor{
 
     @Override
     public Image getImage() {
-        return null;
+        return ArmorImages.getByIndex(ArmorImages.HEAD1);
     }
 }

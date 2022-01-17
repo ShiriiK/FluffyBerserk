@@ -9,6 +9,7 @@ import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
 import en.fluffyBerserk.game.logic.objects.TileObject;
+import en.fluffyBerserk.game.logic.objects.bullets.Bullet;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.PickableItem;
 import en.fluffyBerserk.gui.popups.PopUpPortal;
@@ -146,6 +147,7 @@ public final class GameLoop {
                 if (entity1 instanceof PickableItem && entity instanceof Player && Collision.objectsCollide(entity,entity1)){
                     game.getInventory().addItem((PickableItem) entity1);
                     itemsToRemoveFromMap.add(entity1);
+                    System.out.println("Item picked");
                     break;
                 }
 

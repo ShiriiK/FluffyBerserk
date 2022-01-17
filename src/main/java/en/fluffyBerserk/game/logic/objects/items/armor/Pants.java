@@ -22,6 +22,6 @@ public class Pants extends Armor{
 
     @Override
     public Image getImage() {
-        return null;
+        return ArmorImages.getByIndex(ArmorImages.PANTS1);
     }
 }
