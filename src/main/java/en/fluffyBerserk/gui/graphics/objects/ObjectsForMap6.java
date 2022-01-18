@@ -3,7 +3,7 @@ package en.fluffyBerserk.gui.graphics.objects;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.portals.HomePortal;
 
-public class ObjectsForMap7 {
+public class ObjectsForMap6 {
 
     public static Entity[] loadObjects() {
         Entity object[] = new Entity[1];

@@ -240,9 +240,9 @@ public final class GameLoop {
     private void removeUnnecessaryEntities() {
         for (Entity entity : game.getEntityManager().getEntities()) {
             if (entity.getX() < -Constants.SCREEN_WIDTH / 2
-                    || entity.getX() > Constants.WORLD_WIDTH + Constants.SCREEN_WIDTH / 2
+                    || entity.getX() > game.getCurrentMap().getWidth() + Constants.SCREEN_WIDTH / 2
                     || entity.getY() < -Constants.SCREEN_HEIGHT / 2
-                    || entity.getY() > Constants.WORLD_HEIGHT + Constants.SCREEN_HEIGHT / 2) {
+                    || entity.getY() > game.getCurrentMap().getHeight() + Constants.SCREEN_HEIGHT / 2) {
                 game.getEntityManager().removeEntity(entity);
             }
         }

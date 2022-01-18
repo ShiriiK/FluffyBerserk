@@ -3,7 +3,7 @@ package en.fluffyBerserk.gui.popups;
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.gamecontrolls.Game;
 import en.fluffyBerserk.game.logic.maps.Map3;
-import en.fluffyBerserk.game.logic.maps.Map7;
+import en.fluffyBerserk.game.logic.maps.Map6;
 import en.fluffyBerserk.game.logic.maps.Map1;
 import en.fluffyBerserk.gui.utils.AttachCSS;
 import javafx.scene.Scene;
@@ -47,7 +47,7 @@ public class PopUpPortal extends PopUp {
         Button area4 = new Button("Area 4");
         area4.setOnAction(event -> {
             if (!game.getCurrentMap().getName().equals("map7")) {
-                game.setCurrentMap(new Map7());
+                game.setCurrentMap(new Map6());
                 Main.app.hidePopUp();
             }
         });
@@ -60,6 +60,8 @@ public class PopUpPortal extends PopUp {
 
         buttons.getChildren().addAll(safeZone, area1, area2, area3, area4, cancel);
         buttons.getStyleClass().add("pop-up-menu");
+
+
 
         Scene scene = new Scene(buttons);
         scene.setFill(Color.TRANSPARENT);
