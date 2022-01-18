@@ -1,8 +1,13 @@
 package en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive;
 
+import en.fluffyBerserk.gui.utils.LocateImage;
 import javafx.scene.image.Image;
 
 public class Knight extends AggressiveNpc {
+
+    public Knight(LocateImage sprite) {
+        super(sprite);
+    }
 
     @Override
     public String getName() {

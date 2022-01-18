@@ -14,10 +14,13 @@ public final class Player extends MovableAnimatedEntity implements HasName {
     public Player(Character character) {
         super(SpritesFactory.getSpriteByNumber(character.getSpriteIndex()));
         this.character = character;
+
     }
 
     @Override
     public String getName() {
         return character.getName();
     }
+
+
 }

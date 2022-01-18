@@ -49,4 +49,5 @@ public abstract class Entity implements Object {
     public float getPreviousY() {
         return previousY;
     }
+
 }

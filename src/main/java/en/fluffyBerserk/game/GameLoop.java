@@ -9,6 +9,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Timer;
 import java.util.Vector;
 
 public final class GameLoop {
@@ -111,8 +112,10 @@ public final class GameLoop {
                 }
             }
 
+
             // Check collision with other entities (bullets, monsters, npc, items etc.)
         }
+
 
         // This will render all entities on the map (npcs, bullets, player, items, chests, portals etc.)
         for (Entity entity : game.getEntityManager().getEntities()) {
