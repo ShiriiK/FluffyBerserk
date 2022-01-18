@@ -27,6 +27,7 @@ public class PopUpPortal extends PopUp {
 
         safeZone.setOnAction(event -> {
             if (!game.getCurrentMap().getName().equals("map1")) {
+                game.playerSpawner.spawnOnMap(1);
                 game.setCurrentMap(game.map1); //TODO creating new safe zone map not returning to old one
                 Main.app.hidePopUp();
                 Main.app.getGame().getGameLoop().start();
@@ -36,6 +37,7 @@ public class PopUpPortal extends PopUp {
         Button area1 = new Button("Area 1");
         area1.setOnAction(event -> {
             if (!game.getCurrentMap().getName().equals("map3")) {
+                game.playerSpawner.spawnOnMap(3);
                 game.setCurrentMap(new Map3());
                 Main.app.hidePopUp();
                 Main.app.getGame().getGameLoop().start();
@@ -46,6 +48,7 @@ public class PopUpPortal extends PopUp {
         Button area2 = new Button("Area 2");
         area2.setOnAction(event -> {
             if (!game.getCurrentMap().getName().equals("map4")) {
+                game.playerSpawner.spawnOnMap(4);
                 game.setCurrentMap(new Map4());
                 Main.app.hidePopUp();
                 Main.app.getGame().getGameLoop().start();
@@ -55,6 +58,7 @@ public class PopUpPortal extends PopUp {
         Button area3 = new Button("Area 3");
         area3.setOnAction(event -> {
             if (!game.getCurrentMap().getName().equals("map5")) {
+                game.playerSpawner.spawnOnMap(6);
                 game.setCurrentMap(new Map6()); // TODO
                 Main.app.hidePopUp();
                 Main.app.getGame().getGameLoop().start();
@@ -64,6 +68,7 @@ public class PopUpPortal extends PopUp {
         Button area4 = new Button("Area 4");
         area4.setOnAction(event -> {
             if (!game.getCurrentMap().getName().equals("map6")) {
+                game.playerSpawner.spawnOnMap(6);
                 game.setCurrentMap(new Map6());
                 Main.app.hidePopUp();
                 Main.app.getGame().getGameLoop().start();
