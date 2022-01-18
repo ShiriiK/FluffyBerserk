@@ -9,8 +9,8 @@ public class ObjectsForMap6 {
         Entity object[] = new Entity[1];
 
         object[0] = new HomePortal();
-        object[0].setX(140);
-        object[0].setY(675);
+        object[0].setX(950);
+        object[0].setY(1300);
 
 
         return object;
