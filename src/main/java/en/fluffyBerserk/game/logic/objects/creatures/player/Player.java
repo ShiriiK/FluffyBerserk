@@ -64,4 +64,8 @@ public final class Player extends MovableAnimatedEntity implements HasName, CanA
     public Character getCharacter() {
         return character;
     }
+
+    public void refreshSprite(){
+        updateSpriteForMAE(SpritesFactory.getSpriteByNumber(character.getSpriteIndex()));
+    }
 }

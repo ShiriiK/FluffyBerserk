@@ -16,7 +16,7 @@ public final class PopUpMenu extends PopUp {
     protected void initPopUpStage() {
         VBox buttons = new VBox();
 
-        // Resume button
+        // Resume button ✔
         Button resumeButton = new Button("Resume");
         resumeButton.setOnAction(event ->{
             Main.app.hidePopUp();
@@ -24,15 +24,15 @@ public final class PopUpMenu extends PopUp {
         });
 
         // Save button
-        Button saveButton = new Button("Save game");
+        Button saveButton = new Button("Save game"); //TODO
 
-        // Load button
+        // Load button ✔
         Button loadButton = new Button("Load game");
         loadButton.setOnAction(event -> {
             Main.app.changeScreen(new SaveSlotsScreen());
         });
 
-        // Help button
+        // Help button ✔
         Button helpButton = new Button("Help");
 
         PopUpHelp popUpHelp = new PopUpHelp();
@@ -40,28 +40,24 @@ public final class PopUpMenu extends PopUp {
             Main.app.showPopUp(popUpHelp);
         });
 
-        // Logout button
-        Button logoutButton = new Button("Logout");
-        logoutButton.setOnAction(event -> {
-            Main.app.logout();
-            Main.app.changeScreen(new HomeScreen());
-        });
+        // Logout button ✔
+        Button logoutButton = factory.getLogOutButton();
 
-        // Delete save button
-        Button deleteSaveButton = new Button("Delete save");
+        // Delete save button ✔
+        Button deleteCharacterButton = factory.getDeleteCharacterButton(Main.app.getGame().getPlayer().getCharacter());
 
-        // Delete account button
-        Button deleteAccountButton = new Button("Delete account");
+        // Delete account button ✔
+        Button deleteAccountButton = factory.getDeleteAccountButton(Main.app.getUser());
 
         if (!Main.app.isUserLoggedIn()){
             saveButton.setDisable(true);
             loadButton.setDisable(true);
-            deleteSaveButton.setDisable(true);
+            deleteCharacterButton.setDisable(true);
             deleteAccountButton.setDisable(true);
             logoutButton.setText("Leave game");
         }
 
-        buttons.getChildren().addAll(resumeButton, saveButton, loadButton, helpButton, logoutButton, deleteSaveButton, deleteAccountButton);
+        buttons.getChildren().addAll(resumeButton, saveButton, loadButton, helpButton, logoutButton, deleteCharacterButton, deleteAccountButton);
         buttons.getStyleClass().add("pop-up-menu");
 
 
