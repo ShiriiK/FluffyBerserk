@@ -1,6 +1,7 @@
 package en.fluffyBerserk.game.logic.objects;
 
 import en.fluffyBerserk.game.logic.ObjectType;
+import javafx.scene.image.Image;
 
 public abstract class MovableEntity extends Entity implements MovableObject {
 

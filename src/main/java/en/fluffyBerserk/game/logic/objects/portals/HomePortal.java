@@ -14,11 +14,6 @@ public class HomePortal extends Portal {
     }
 
     @Override
-    protected ArrayList<Image> setAnimations() {
-        return AnimationsFactory.portalAnimations();
-    }
-
-    @Override
     public int getHeight() {
         return Constants.TILE_SIZE * 2;
     }

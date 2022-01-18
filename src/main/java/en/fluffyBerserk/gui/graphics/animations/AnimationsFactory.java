@@ -26,12 +26,13 @@ public class AnimationsFactory {
 
     public static ArrayList<Image> bulletAnimations() {
         LocateImage sprite = new LocateImage("bullets/flufball_basic_sprite.png");
+        bullets = new ArrayList<>(4);
 
-        bullets.add(new SpriteImage(sprite, 0,0, Constants.TILE_SIZE, Constants.TILE_SIZE).getFrame());
-        bullets.add(new SpriteImage(sprite, Constants.TILE_SIZE,0, Constants.TILE_SIZE, Constants.TILE_SIZE).getFrame());
-        bullets.add(new SpriteImage(sprite, 0,Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE).getFrame());
-        bullets.add(new SpriteImage(sprite, Constants.TILE_SIZE,Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE).getFrame());
+        bullets.add(0, new SpriteImage(sprite, 0,0, Constants.TILE_SIZE, Constants.TILE_SIZE).getFrame());
+        bullets.add(1, new SpriteImage(sprite, Constants.TILE_SIZE,0, Constants.TILE_SIZE, Constants.TILE_SIZE).getFrame());
+        bullets.add(2, new SpriteImage(sprite, 0,Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE).getFrame());
+        bullets.add(3, new SpriteImage(sprite, Constants.TILE_SIZE,Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE).getFrame());
 
-        return null;
+        return bullets;
     }
 }

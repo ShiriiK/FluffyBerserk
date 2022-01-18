@@ -11,9 +11,4 @@ public class OuterPortal extends Portal {
     public String getName() {
         return "Outer portal";
     }
-
-    @Override
-    protected ArrayList<Image> setAnimations() {
-        return AnimationsFactory.portalAnimations();
-    }
 }

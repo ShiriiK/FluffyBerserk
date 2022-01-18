@@ -1,8 +1,6 @@
 package en.fluffyBerserk.gui.graphics.animations;
 
-import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
-import en.fluffyBerserk.game.logic.objects.Entity;
-import en.fluffyBerserk.game.logic.objects.MovableEntity;
+import en.fluffyBerserk.game.logic.Animated;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -11,11 +9,9 @@ public class AnimationManager {
     private static final int CHANGE_ANIMATION_NUMBER = 5;
     private int ticks = 0;
     private int animationNumber = 0;
-    private final AnimatedEntity entity;
     private final ArrayList<Image> animations;
 
-    public AnimationManager(AnimatedEntity entity) {
-        this.entity = entity;
+    public AnimationManager(Animated entity) {
         this.animations = entity.getAnimations();
     }
 

@@ -1,18 +1,25 @@
 package en.fluffyBerserk.game.logic.objects.bullets;
 
 import en.fluffyBerserk.Constants;
+import en.fluffyBerserk.game.logic.Animated;
 import en.fluffyBerserk.game.logic.ObjectType;
-import en.fluffyBerserk.game.logic.objects.MovableAnimatedEntity;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
-import en.fluffyBerserk.gui.utils.LocateImage;
+import en.fluffyBerserk.gui.graphics.animations.AnimationManager;
+import en.fluffyBerserk.gui.graphics.animations.AnimationsFactory;
 import javafx.scene.image.Image;
 
-public class Bullet extends MovableEntity {
+import java.util.ArrayList;
 
+public class Bullet extends MovableEntity implements Animated {
+
+    protected final AnimationManager animationManager;
+    protected final ArrayList<Image> animations;
     public static final float SPEED = 12F;
 
-    public Bullet(ObjectType type) {
-        super(type);
+    public Bullet() {
+        super(ObjectType.BULLET);
+        animations = AnimationsFactory.bulletAnimations();
+        animationManager = new AnimationManager(this);
     }
 
     @Override
@@ -27,6 +34,16 @@ public class Bullet extends MovableEntity {
 
     @Override
     public Image getImage() {
-        return BulletImages.getByIndex(BulletImages.BULLET_BASIC);
+        return animationManager.getImage();
+    }
+
+    @Override
+    public ArrayList<Image> getAnimations() {
+        return animations;
+    }
+
+    @Override
+    public AnimationManager getAnimationManager() {
+        return animationManager;
     }
 }

@@ -50,7 +50,7 @@ public class KeyHandler {
                     break;
                 case SPACE:
                     if (game.getPlayer().canAttack()) {
-                        Bullet bullet = new Bullet(ObjectType.BULLET);
+                        Bullet bullet = new Bullet();
                         switch (game.getPlayer().getDirection()) {
                             case UP:
                                 bullet.setMoveY(-Bullet.SPEED);

@@ -1,10 +1,10 @@
 package en.fluffyBerserk.game.gamecontrolls;
 
 import en.fluffyBerserk.Constants;
+import en.fluffyBerserk.game.logic.Animated;
 import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.maps.Map2;
 import en.fluffyBerserk.game.logic.maps.Map1;
-import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
 import en.fluffyBerserk.game.logic.objects.TileObject;
@@ -112,8 +112,8 @@ public final class GameLoop {
                             objects[i].getWidth(),
                             objects[i].getHeight()
                     );
-                    if (objects[i] instanceof AnimatedEntity) {
-                        ((AnimatedEntity) objects[i]).getAnimationManager().increaseTick();
+                    if (objects[i] instanceof Animated) {
+                        ((Animated) objects[i]).getAnimationManager().increaseTick();
                     }
 
 
@@ -148,6 +148,9 @@ public final class GameLoop {
                 }
 
             ((MovableEntity) entity).move();
+            if (entity instanceof Animated) {
+                ((Animated) entity).getAnimationManager().increaseTick();
+            }
 
             // Don't check collision for bullets X tiles or objects (structures)
             if (!(entity.getType().equals(ObjectType.BULLET))) {
