@@ -4,6 +4,8 @@ import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.maps.Map;
 import en.fluffyBerserk.game.logic.maps.Map1;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ZombieArcher;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ZombieCatto;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.armor.BodyArmor;
 import en.fluffyBerserk.game.logic.objects.items.armor.Head;
@@ -78,6 +80,7 @@ public final class Game {
     private void bootDefaultState() {
         entityManager.addEntity(player);
 
+        addNpcs(5, 5, this);
 
         BodyArmor bodyArmor1 = new BodyArmor("bodyArmor1", 2, 2, 2, 2, ObjectType.WEARABLE);
         Head head1 = new Head("head1", 4, 2, 2, 2, ObjectType.WEARABLE);
@@ -105,5 +108,17 @@ public final class Game {
         map1 = new Map1();
         currentMap = map1;
 
+    }
+
+    private void addNpcs(int melee_count, int ranged_count, Game game) {
+        for (int i = 0; i < melee_count; i++) {
+            ZombieCatto idk = new ZombieCatto(this);
+            entityManager.addEntity(idk);
+        }
+
+        for(int i = 0; i < ranged_count; i++){
+            ZombieArcher idk = new ZombieArcher(this);
+            entityManager.addEntity(idk);
+        }
     }
 }

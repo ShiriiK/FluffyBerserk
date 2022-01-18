@@ -2,9 +2,10 @@ package en.fluffyBerserk.game.logic.objects.creatures;
 
 import en.fluffyBerserk.game.logic.HasName;
 import en.fluffyBerserk.game.logic.ObjectType;
-import en.fluffyBerserk.game.logic.objects.MovableEntity;
+import en.fluffyBerserk.game.logic.objects.MovableAnimatedEntity;
+import en.fluffyBerserk.gui.utils.LocateImage;
 
-public abstract class Creature extends MovableEntity implements HasName {
+public abstract class Creature extends MovableAnimatedEntity implements HasName {
 
     private int hp;
     private int str;
@@ -12,14 +13,13 @@ public abstract class Creature extends MovableEntity implements HasName {
     private int stamina;
     private int intelllect;
     private int level;
+    private float npcSpeed;
+    private int dmg;
 
-    public Creature(ObjectType type) {
-        super(type);
+    public Creature(LocateImage sprite, ObjectType type) {
+        super(sprite, type);
     }
 
-    public void setStr(int str) {
-        this.str = str;
-    }
 
     public int getArmor() {
         return armor;
@@ -49,19 +49,39 @@ public abstract class Creature extends MovableEntity implements HasName {
         return str;
     }
 
-    public void setHp(int hp) {
-        this.hp = hp;
+    public void setStr(int str) {
+        this.str = str;
     }
 
     public int getHp() {
         return hp;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 
     public int getLevel() {
         return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public float getNpcSpeed() {
+        return npcSpeed;
+    }
+
+    public void setNpcSpeed(float npcSpeed) {
+        this.npcSpeed = npcSpeed;
+    }
+
+    public int getDmg() {
+        return this.dmg;
+    }
+
+    public void setDmg(int dmg) {
+        this.dmg = dmg;
     }
 }

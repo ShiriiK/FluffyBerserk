@@ -5,22 +5,23 @@ import en.fluffyBerserk.game.logic.ObjectType;
 
 public abstract class Entity implements Object {
 
+    protected final ObjectType type;
+    protected float hitBoxX;
+    protected float previousHitBoxX;
+    protected float hitBoxY;
+    protected float previousHitBoxY;
     private float x;
     private float previousX;
-
     private float y;
     private float previousY;
 
-    protected float hitBoxX;
-    protected float previousHitBoxX;
-
-    protected float hitBoxY;
-    protected float previousHitBoxY;
-
-    protected final ObjectType type;
-
     public Entity(ObjectType type) {
         this.type = type;
+    }
+
+    @Override
+    public float getX() {
+        return x;
     }
 
     @Override
@@ -30,20 +31,14 @@ public abstract class Entity implements Object {
     }
 
     @Override
+    public float getY() {
+        return y;
+    }
+
+    @Override
     public void setY(float y) {
         previousY = this.y;
         this.y = y;
-    }
-
-
-    @Override
-    public float getX() {
-        return x;
-    }
-
-    @Override
-    public float getY() {
-        return y;
     }
 
     @Override
@@ -57,35 +52,35 @@ public abstract class Entity implements Object {
     }
 
     @Override
-    public int getHitBoxHeight(){
+    public int getHitBoxHeight() {
         return getHeight();
     }
 
     @Override
-    public int getHitBoxWidth(){
+    public int getHitBoxWidth() {
         return getWidth();
     }
 
     @Override
-    public void setHitBoxX(float x){
+    public float getHitBoxX() {
+        return getX();
+    }
+
+    @Override
+    public void setHitBoxX(float x) {
         previousHitBoxX = this.hitBoxX;
         hitBoxX = x;
     }
 
     @Override
-    public void setHitBoxY( float y){
+    public float getHitBoxY() {
+        return getY();
+    }
+
+    @Override
+    public void setHitBoxY(float y) {
         previousHitBoxY = this.hitBoxY;
         hitBoxY = y;
-    }
-
-    @Override
-    public float getHitBoxX(){
-        return getX();
-    }
-
-    @Override
-    public float getHitBoxY(){
-        return getY();
     }
 
     public float getPreviousX() {

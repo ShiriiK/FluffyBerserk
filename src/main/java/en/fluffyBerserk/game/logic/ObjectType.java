@@ -10,5 +10,6 @@ public enum ObjectType {
     BED, // TODO healing or something
     BULLET,
     CLOSET,
-    WEARABLE
+    WEARABLE,
+    ENEMY
 }

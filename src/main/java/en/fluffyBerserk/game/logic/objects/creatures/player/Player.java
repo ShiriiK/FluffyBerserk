@@ -21,7 +21,6 @@ public final class Player extends MovableAnimatedEntity implements HasName, CanA
         this.character = character;
     }
 
-
     @Override
     public String getName() {
         return character.getName();
@@ -54,7 +53,7 @@ public final class Player extends MovableAnimatedEntity implements HasName, CanA
 
     @Override
     public void reduceCooldown() {
-        if(attackCd != Constants.PLAYER_CD) ++attackCd;
+        if (attackCd != Constants.PLAYER_CD) ++attackCd;
     }
 
     @Override
