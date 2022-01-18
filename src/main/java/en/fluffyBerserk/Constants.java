@@ -22,7 +22,7 @@ public class Constants {
     public static final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL;
     public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW;
 
-    public static final int PLAYER_CD = 20;
+    public static final int PLAYER_CD = 50;
 
     public static boolean SHOW_HIT_BOX = false;
 }
