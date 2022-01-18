@@ -262,7 +262,7 @@ public final class CharacterScreen extends BaseScreen {
         buttonPrevious.setOnAction(event -> {
             int newIndex = form.getSprite().getIndex() - 1;
 
-            if (!SpritesFactory.indexExists(newIndex)) {
+            if (!SpritesFactory.indexExists(newIndex) && newIndex > 13) {
                 return;
             }
 
@@ -279,7 +279,7 @@ public final class CharacterScreen extends BaseScreen {
         buttonNext.setOnAction(event -> {
             int newIndex = form.getSprite().getIndex() + 1;
 
-            if (!SpritesFactory.indexExists(newIndex)) {
+            if (!SpritesFactory.indexExists(newIndex) && newIndex > 13) {
                 return;
             }
 

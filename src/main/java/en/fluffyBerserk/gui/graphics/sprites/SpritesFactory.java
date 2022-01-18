@@ -44,7 +44,7 @@ public class SpritesFactory {
 
     public static @NotNull LocateImage getRandomSprite() {
         Random random = new Random();
-        return skins.get(random.nextInt(skins.size()));
+        return skins.get(random.nextInt(skins.size() - 3));
     }
 
     public static @Nullable LocateImage getSpriteByNumber(Integer key) {
