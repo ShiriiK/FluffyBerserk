@@ -14,7 +14,7 @@ public final class Player extends MovableAnimatedEntity implements HasName, CanA
 
     private final Character character;
 
-    private int attackCd = 20; //
+    private int attackCd = 50; //
 
     public Player(Character character) {
         super(SpritesFactory.getSpriteByNumber(character.getSpriteIndex()), ObjectType.PLAYER);

@@ -4,6 +4,7 @@ import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.maps.Map;
 import en.fluffyBerserk.game.logic.maps.Map1;
+import en.fluffyBerserk.game.logic.maps.PlayerSpawnManager;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ZombieArcher;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ZombieCatto;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
@@ -35,6 +36,8 @@ public final class Game {
 
     public Map map1, map2, map3, map4, map5, map6;
 
+    public PlayerSpawnManager playerSpawner;
+
     public GameScreen gameScreen;
 
     public boolean running = false;
@@ -42,6 +45,7 @@ public final class Game {
     public Game(Character character) {
         player = new Player(character);
         inventory = new Inventory(character);
+        playerSpawner = new PlayerSpawnManager(this);
         bootDefaultState();
     }
 

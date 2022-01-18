@@ -25,13 +25,17 @@ public class AnimationsFactory {
     }
 
     public static ArrayList<Image> bulletAnimations() {
-        LocateImage sprite = new LocateImage("bullets/flufball_basic_sprite.png");
-        bullets = new ArrayList<>(4);
+        LocateImage sprite = new LocateImage("bullets/flufball_basic_sprite_8.png");
+        bullets = new ArrayList<>(8);
 
         bullets.add(0, new SpriteImage(sprite, 0,0, Constants.TILE_SIZE, Constants.TILE_SIZE).getFrame());
         bullets.add(1, new SpriteImage(sprite, Constants.TILE_SIZE,0, Constants.TILE_SIZE, Constants.TILE_SIZE).getFrame());
-        bullets.add(2, new SpriteImage(sprite, 0,Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE).getFrame());
-        bullets.add(3, new SpriteImage(sprite, Constants.TILE_SIZE,Constants.TILE_SIZE, Constants.TILE_SIZE, Constants.TILE_SIZE).getFrame());
+        bullets.add(2, new SpriteImage(sprite, Constants.TILE_SIZE * 2, 0, Constants.TILE_SIZE, Constants.TILE_SIZE).getFrame());
+        bullets.add(3, new SpriteImage(sprite, Constants.TILE_SIZE * 3,0, Constants.TILE_SIZE, Constants.TILE_SIZE).getFrame());
+        bullets.add(4, new SpriteImage(sprite, Constants.TILE_SIZE * 4,0, Constants.TILE_SIZE, Constants.TILE_SIZE).getFrame());
+        bullets.add(5, new SpriteImage(sprite, Constants.TILE_SIZE * 5,0, Constants.TILE_SIZE, Constants.TILE_SIZE).getFrame());
+        bullets.add(6, new SpriteImage(sprite, Constants.TILE_SIZE * 6,0, Constants.TILE_SIZE, Constants.TILE_SIZE).getFrame());
+        bullets.add(7, new SpriteImage(sprite, Constants.TILE_SIZE * 7,0, Constants.TILE_SIZE, Constants.TILE_SIZE).getFrame());
 
         return bullets;
     }
