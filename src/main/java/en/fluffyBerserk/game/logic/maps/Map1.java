@@ -2,28 +2,39 @@ package en.fluffyBerserk.game.logic.maps;
 
 import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.objects.Entity;
-import en.fluffyBerserk.gui.graphics.objects.ObjectsAtHome;
+import en.fluffyBerserk.gui.graphics.objects.ObjectsForMap1;
 
-public class Home extends Map{
-    Entity[] objects = ObjectsAtHome.loadObjects();
+
+/**
+ * Safe zone
+ */
+public final class Map1 extends Map {
+
+    Entity[] objects = ObjectsForMap1.loadObjects();
 
     @Override
     public String getName() {
-        return "map5";
+        return "map1";
     }
 
     @Override
     public int getWidth() {
-        return Constants.WORLD_WIDTH/2;
+        return Constants.WORLD_WIDTH;
     }
 
     @Override
     public int getHeight() {
-        return Constants.WORLD_HEIGHT/2;
+        return Constants.WORLD_HEIGHT;
+    }
+
+    @Override
+    public boolean isLocked() {
+        return false;
     }
 
     @Override
     public Entity[] getObjects() {
         return objects;
     }
+
 }

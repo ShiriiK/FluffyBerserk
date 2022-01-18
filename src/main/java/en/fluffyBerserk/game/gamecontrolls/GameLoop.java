@@ -1,19 +1,15 @@
 package en.fluffyBerserk.game.gamecontrolls;
 
 import en.fluffyBerserk.Constants;
-import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.logic.ObjectType;
-import en.fluffyBerserk.game.logic.maps.Home;
-import en.fluffyBerserk.game.logic.maps.SafeZoneMap;
+import en.fluffyBerserk.game.logic.maps.Map2;
+import en.fluffyBerserk.game.logic.maps.Map1;
 import en.fluffyBerserk.game.logic.objects.AnimatedEntity;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
 import en.fluffyBerserk.game.logic.objects.TileObject;
-import en.fluffyBerserk.game.logic.objects.bullets.Bullet;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.PickableItem;
-import en.fluffyBerserk.gui.popups.PopUpPortal;
-import en.fluffyBerserk.gui.screens.CharacterScreen;
 import en.fluffyBerserk.gui.utils.Collision;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
@@ -191,7 +187,7 @@ public final class GameLoop {
                             entity.setHitBoxY(entity.getPreviousHitBoxY());
 
                             if (objects[i].getType().equals(ObjectType.HOME)) {
-                                game.setCurrentMap(new Home());
+                                game.setCurrentMap(new Map2());
                                 game.getPlayer().setX((float) (Constants.TILE_SIZE * 4.5));
                                 game.getPlayer().setY(Constants.TILE_SIZE * 7);
                                 game.getPlayer().setHitBoxX(game.getPlayer().getX() + 20);
@@ -199,7 +195,7 @@ public final class GameLoop {
 
                             }
                             if (objects[i].getType().equals(ObjectType.CARPET)) {
-                                game.setCurrentMap(new SafeZoneMap());
+                                game.setCurrentMap(new Map1());
                                 game.getPlayer().setX((float) (Constants.TILE_SIZE * 5.5));
                                 game.getPlayer().setY((float) (Constants.TILE_SIZE * 2.5));
                                 game.getPlayer().setHitBoxX(game.getPlayer().getX() + 20);

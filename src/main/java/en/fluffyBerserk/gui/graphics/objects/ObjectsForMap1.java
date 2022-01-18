@@ -4,7 +4,7 @@ import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.portals.HomePortal;
 
-public class ObjectsInSafeZone {
+public class ObjectsForMap1 {
 
     public static Entity[] loadObjects() {
         Entity object[] = new Entity[2];

@@ -3,7 +3,7 @@ package en.fluffyBerserk.gui.graphics.objects;
 import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.objects.Entity;
 
-public class ObjectsAtHome {
+public class ObjectsForMap2 {
 
     public static Entity[] loadObjects() {
         Entity object[] = new Entity[14];

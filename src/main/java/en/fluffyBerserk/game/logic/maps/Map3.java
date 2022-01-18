@@ -2,14 +2,17 @@ package en.fluffyBerserk.game.logic.maps;
 
 import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.objects.Entity;
-import en.fluffyBerserk.gui.graphics.objects.ObjectsInSafeZone;
+import en.fluffyBerserk.gui.graphics.objects.ObjectsForMap3;
 
-public final class SafeZoneMap extends Map {
-    Entity[] objects = ObjectsInSafeZone.loadObjects();
+/**
+ * Area1
+ */
+public final class Map3 extends Map{
+    Entity[] objects = ObjectsForMap3.loadObjects();
 
     @Override
     public String getName() {
-        return "map1";
+        return "map3";
     }
 
     @Override
@@ -23,8 +26,17 @@ public final class SafeZoneMap extends Map {
     }
 
     @Override
+    public boolean isLocked() {
+        return false;
+    }
+
+    @Override
+    public void setLocked(boolean locked) {
+
+    }
+
+    @Override
     public Entity[] getObjects() {
         return objects;
     }
-
 }

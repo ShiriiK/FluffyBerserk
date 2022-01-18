@@ -3,7 +3,7 @@ package en.fluffyBerserk.game.gamecontrolls;
 import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.maps.Map;
-import en.fluffyBerserk.game.logic.maps.SafeZoneMap;
+import en.fluffyBerserk.game.logic.maps.Map1;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.armor.BodyArmor;
 import en.fluffyBerserk.game.logic.objects.items.armor.Head;
@@ -12,7 +12,6 @@ import en.fluffyBerserk.game.logic.objects.items.inventory.Inventory;
 import en.fluffyBerserk.gui.utils.Camera;
 import en.fluffyBerserk.gui.utils.GameGraphics;
 import en.fluffyBerserk.persistence.models.Character;
-import org.springframework.security.core.parameters.P;
 
 
 public final class Game {
@@ -96,6 +95,6 @@ public final class Game {
         player.setHitBoxX(player.getX() + 20);
         player.setHitBoxY(player.getY() + 30);
 
-        currentMap = new SafeZoneMap();
+        currentMap = new Map1();
     }
 }

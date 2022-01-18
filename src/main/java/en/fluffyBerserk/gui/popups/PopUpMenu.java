@@ -50,6 +50,14 @@ public final class PopUpMenu extends PopUp {
         // Delete account button
         Button deleteAccountButton = new Button("Delete account");
 
+        if (!Main.app.isUserLoggedIn()){
+            saveButton.setDisable(true);
+            loadButton.setDisable(true);
+            deleteSaveButton.setDisable(true);
+            deleteAccountButton.setDisable(true);
+            logoutButton.setText("Leave game");
+        }
+
         buttons.getChildren().addAll(resumeButton, saveButton, loadButton, helpButton, logoutButton, deleteSaveButton, deleteAccountButton);
         buttons.getStyleClass().add("pop-up-menu");
 
