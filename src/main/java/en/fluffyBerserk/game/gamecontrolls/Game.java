@@ -18,7 +18,7 @@ public final class Game {
 
     private final Player player;
 
-    private final Inventory inventory;
+    public static Inventory inventory;
 
     private final EntityManager entityManager = new EntityManager();
 
@@ -72,9 +72,9 @@ public final class Game {
         entityManager.addEntity(player);
 
 
-        BodyArmor bodyArmor1 = new BodyArmor("bodyArmor1", 2, 2, 2, 2, ObjectType.WEARABLE);
-        Head head1 = new Head("head1", 4, 2, 2, 2, ObjectType.WEARABLE);
-        Pants pants1 = new Pants("pants1",1,2,4,1,ObjectType.WEARABLE);
+        BodyArmor bodyArmor1 = new BodyArmor("Body1", 2, 2, 2, 2, ObjectType.WEARABLE);
+        Head head1 = new Head("Head1", 4, 2, 2, 2, ObjectType.WEARABLE);
+        Pants pants1 = new Pants("Pants1",1,2,4,1,ObjectType.WEARABLE);
 
         entityManager.addEntity(bodyArmor1);
         entityManager.addEntity(head1);

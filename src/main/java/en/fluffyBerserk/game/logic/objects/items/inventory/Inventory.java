@@ -59,25 +59,26 @@ public class Inventory {
     // Equips selected item and applies it's stats
     public void equip (Item item){
         if (item instanceof Armor && content.containsValue(item) && !((Armor) item).isEquiped){
-
+            System.out.println(((Armor) item).name + " equiped");
+            ((Armor) item).setEquiped(true);
             if(item instanceof BodyArmor && bodyArmorSlot == 0){
                 bodyArmorSlot = 1;
-                applyStats((Armor) item);
+                applyStats(item);
             }
 
             if(item instanceof Head && headSlot == 0){
                 headSlot = 1;
-                applyStats((Armor) item);
+                applyStats(item);
             }
 
             if(item instanceof Pants && pantsSlot == 0){
                 pantsSlot = 1;
-                applyStats((Armor) item);
+                applyStats(item);
             }
         }
     }
 
-    private void applyStats(Armor item){
+    private void applyStats(Item item){
         ((Armor) item).setEquiped(true);
         int str = ((Armor) item).getStr();
         int armor = ((Armor) item).getArmor();
@@ -98,25 +99,25 @@ public class Inventory {
     //Uneuips selected item and changes player's stats accordingly
     public void unEquip(Item item){
         if (item instanceof Armor && ((Armor) item).isEquiped()){
-
+            ((Armor) item).setEquiped(false);
             if(item instanceof BodyArmor && bodyArmorSlot == 1){
                 bodyArmorSlot = 0;
-                unapplyStats((Armor) item);
+                unapplyStats(item);
             }
 
             if(item instanceof Head && headSlot == 1){
                 headSlot = 0;
-                unapplyStats((Armor) item);
+                unapplyStats(item);
             }
 
             if(item instanceof Pants && pantsSlot == 1){
                 pantsSlot = 0;
-                unapplyStats((Armor) item);
+                unapplyStats(item);
             }
         }
     }
 
-    private void unapplyStats(Armor item){
+    private void unapplyStats(Item item){
         ((Armor) item).setEquiped(false);
         int str = ((Armor) item).getStr();
         int armor = ((Armor) item).getArmor();

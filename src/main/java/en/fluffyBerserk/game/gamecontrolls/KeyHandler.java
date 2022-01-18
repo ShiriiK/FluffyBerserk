@@ -6,6 +6,7 @@ import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.bullets.Bullet;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.gui.popups.PopUp;
+import en.fluffyBerserk.gui.popups.PopUpInventory;
 import en.fluffyBerserk.gui.popups.PopUpMenu;
 import en.fluffyBerserk.gui.popups.PopUpPortal;
 import en.fluffyBerserk.gui.screens.CharacterScreen;
@@ -47,6 +48,9 @@ public class KeyHandler {
                     Main.app.showPopUp(popUpMenu);
                     game.getPlayer().setMoveY(0F);
                     game.getPlayer().setMoveX(0F);
+                    break;
+                case B:
+                    Main.app.showPopUp(new PopUpInventory(game));
                     break;
                 case SPACE:
                     if (game.getPlayer().canAttack()) {
