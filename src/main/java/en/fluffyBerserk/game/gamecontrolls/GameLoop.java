@@ -198,7 +198,14 @@ public final class GameLoop {
                             entity.setHitBoxY(entity.getPreviousHitBoxY());
 
                             if (objects[i].getType().equals(ObjectType.HOME)) {
-                                game.setCurrentMap(new Map2());
+                                if (game.map2 == null){
+                                    game.map2 = new Map2();
+                                    game.setCurrentMap(game.map2);
+                                    System.out.println("new map");
+                                } else {
+                                    game.setCurrentMap(game.map2);
+                                    System.out.println("old map");
+                                }
                                 game.getPlayer().setX((float) (Constants.TILE_SIZE * 4.5));
                                 game.getPlayer().setY(Constants.TILE_SIZE * 7);
                                 game.getPlayer().setHitBoxX(game.getPlayer().getX() + 20);

@@ -27,7 +27,7 @@ public class PopUpPortal extends PopUp {
 
         safeZone.setOnAction(event -> {
             if (!game.getCurrentMap().getName().equals("map1")) {
-                game.setCurrentMap(new Map1()); //TODO creating new safe zone map not returning to old one
+                game.setCurrentMap(game.map1); //TODO creating new safe zone map not returning to old one
                 Main.app.hidePopUp();
                 Main.app.getGame().getGameLoop().start();
             }

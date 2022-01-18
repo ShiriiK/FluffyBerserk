@@ -31,9 +31,11 @@ public final class Game {
 
     private Map currentMap;
 
-    public boolean running = false;
+    public Map map1, map2, map3, map4, map5, map6;
 
     public GameScreen gameScreen;
+
+    public boolean running = false;
 
     public Game(Character character) {
         player = new Player(character);
@@ -79,7 +81,7 @@ public final class Game {
 
         BodyArmor bodyArmor1 = new BodyArmor("bodyArmor1", 2, 2, 2, 2, ObjectType.WEARABLE);
         Head head1 = new Head("head1", 4, 2, 2, 2, ObjectType.WEARABLE);
-        Pants pants1 = new Pants("pants1",1,2,4,1,ObjectType.WEARABLE);
+        Pants pants1 = new Pants("pants1", 1, 2, 4, 1, ObjectType.WEARABLE);
 
         entityManager.addEntity(bodyArmor1);
         entityManager.addEntity(head1);
@@ -100,6 +102,8 @@ public final class Game {
         player.setHitBoxX(player.getX() + 20);
         player.setHitBoxY(player.getY() + 30);
 
-        currentMap = new Map1();
+        map1 = new Map1();
+        currentMap = map1;
+
     }
 }
