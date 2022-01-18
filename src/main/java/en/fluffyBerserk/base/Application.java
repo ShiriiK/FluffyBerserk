@@ -1,6 +1,7 @@
 package en.fluffyBerserk.base;
 
 import en.fluffyBerserk.Constants;
+import en.fluffyBerserk.game.gamecontrolls.Game;
 import en.fluffyBerserk.gui.popups.PopUp;
 import en.fluffyBerserk.gui.screens.Screen;
 import en.fluffyBerserk.gui.utils.PopUpBuilder;
@@ -32,6 +33,8 @@ public final class Application {
 
     @Nullable
     private User user;
+
+    private Game game;
 
     public Application(@NotNull Stage stage) {
         primaryStage = stage;
@@ -139,5 +142,13 @@ public final class Application {
 
     public @Nullable User getUser() {
         return user;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public Game getGame() {
+        return game;
     }
 }

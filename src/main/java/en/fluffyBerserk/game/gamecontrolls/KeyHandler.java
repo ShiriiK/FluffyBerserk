@@ -44,12 +44,16 @@ public class KeyHandler {
                     moveX = KeyCode.D;
                     break;
                 case ESCAPE:
-                    Main.app.showPopUp(popUpMenu);
-                    game.getPlayer().setMoveY(0F);
-                    game.getPlayer().setMoveX(0F);
+                    if(!game.getCurrentMap().isForCombat()) {
+                        Main.app.showPopUp(popUpMenu);
+                        game.getPlayer().setMoveY(0F);
+                        game.getPlayer().setMoveX(0F);
+                        game.getGameLoop().stop();
+                        System.out.println("Game loop stopped");
+                    }
                     break;
                 case SPACE:
-                    if (game.getPlayer().canAttack()) {
+                    if (game.getPlayer().canAttack() && game.getCurrentMap().isForCombat()) {
                         Bullet bullet = new Bullet();
                         switch (game.getPlayer().getDirection()) {
                             case UP:
@@ -74,15 +78,17 @@ public class KeyHandler {
                 case E:
                     for (Entity object : game.getCurrentMap().getObjects()) {
                         if (Collision.objectsCollide2(object, game.getPlayer())) {
-                            if (object.getType().equals(ObjectType.CLOSET)) {
+                            if (object.getType().equals(ObjectType.CLOSET) && Main.app.isUserLoggedIn()) {
                                 Main.app.changeScreen(new CharacterScreen(game.getPlayer().getCharacter()));
                                 game.getPlayer().setMoveY(0F);
                                 game.getPlayer().setMoveX(0F);
+                                Main.app.getGame().getGameLoop().stop();
                             } else if (object.getType().equals(ObjectType.PORTAL)) {
                                 PopUpPortal portal = new PopUpPortal(game);
                                 Main.app.showPopUp(portal);
                                 game.getPlayer().setMoveY(0F);
                                 game.getPlayer().setMoveX(0F);
+                                Main.app.getGame().getGameLoop().stop();
                             }
                         }
                     }

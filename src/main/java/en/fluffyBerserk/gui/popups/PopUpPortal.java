@@ -29,6 +29,7 @@ public class PopUpPortal extends PopUp {
             if (!game.getCurrentMap().getName().equals("map1")) {
                 game.setCurrentMap(new Map1()); //TODO creating new safe zone map not returning to old one
                 Main.app.hidePopUp();
+                Main.app.getGame().getGameLoop().start();
             }
         });
 
@@ -37,6 +38,7 @@ public class PopUpPortal extends PopUp {
             if (!game.getCurrentMap().getName().equals("map3")) {
                 game.setCurrentMap(new Map3());
                 Main.app.hidePopUp();
+                Main.app.getGame().getGameLoop().start();
             }
         });
 
@@ -46,16 +48,25 @@ public class PopUpPortal extends PopUp {
             if (!game.getCurrentMap().getName().equals("map4")) {
                 game.setCurrentMap(new Map4());
                 Main.app.hidePopUp();
+                Main.app.getGame().getGameLoop().start();
             }
         });
 
         Button area3 = new Button("Area 3");
+        area3.setOnAction(event -> {
+            if (!game.getCurrentMap().getName().equals("map5")) {
+                game.setCurrentMap(new Map6()); // TODO
+                Main.app.hidePopUp();
+                Main.app.getGame().getGameLoop().start();
+            }
+        });
 
         Button area4 = new Button("Area 4");
         area4.setOnAction(event -> {
             if (!game.getCurrentMap().getName().equals("map6")) {
                 game.setCurrentMap(new Map6());
                 Main.app.hidePopUp();
+                Main.app.getGame().getGameLoop().start();
             }
         });
 
@@ -63,6 +74,7 @@ public class PopUpPortal extends PopUp {
         Button cancel = new Button("Cancel");
         cancel.setOnAction(event -> {
             Main.app.hidePopUp();
+            Main.app.getGame().getGameLoop().start();
         });
 
         buttons.getChildren().addAll(safeZone, area1, area2, area3, area4, cancel);

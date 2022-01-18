@@ -41,6 +41,7 @@ public abstract class Map {
 
     public abstract boolean isLocked();
 
+    public abstract boolean isForCombat();
 
     public abstract Entity[] getObjects();
 }

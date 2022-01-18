@@ -18,7 +18,10 @@ public final class PopUpMenu extends PopUp {
 
         // Resume button
         Button resumeButton = new Button("Resume");
-        resumeButton.setOnAction(event -> Main.app.hidePopUp());
+        resumeButton.setOnAction(event ->{
+            Main.app.hidePopUp();
+            Main.app.getGame().getGameLoop().start();
+        });
 
         // Save button
         Button saveButton = new Button("Save game");

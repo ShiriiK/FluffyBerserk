@@ -1,6 +1,7 @@
 package en.fluffyBerserk.game.gamecontrolls;
 
 import en.fluffyBerserk.Constants;
+import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.logic.Animated;
 import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.maps.Map2;
@@ -38,6 +39,13 @@ public final class GameLoop {
 
     public void start() {
         timer.start();
+        Main.app.setGame(game);
+        game.running = true;
+        System.out.println("Game loop started");
+    }
+
+    public void stop(){
+        timer.stop();
     }
 
     private void updateGame() {

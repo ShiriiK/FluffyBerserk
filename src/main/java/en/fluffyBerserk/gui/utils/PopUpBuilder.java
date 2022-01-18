@@ -30,9 +30,12 @@ public final class PopUpBuilder {
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ESCAPE)) {
                     Main.app.hidePopUp();
+                    Main.app.getGame().getGameLoop().start();
                 }
             }
         });
+
+
 
         return popUpStage;
     }

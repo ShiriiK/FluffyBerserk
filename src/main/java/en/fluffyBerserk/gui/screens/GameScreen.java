@@ -1,5 +1,6 @@
 package en.fluffyBerserk.gui.screens;
 
+import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.gamecontrolls.Game;
 import en.fluffyBerserk.gui.utils.GameSceneBuilder;
 import en.fluffyBerserk.persistence.models.Character;
@@ -12,6 +13,7 @@ public final class GameScreen extends BaseScreen {
 
     public GameScreen(@NotNull final Character character) {
         (game = new Game(character)).getGameLoop().start();
+        Main.app.getGame().gameScreen = this;
     }
 
     @Override

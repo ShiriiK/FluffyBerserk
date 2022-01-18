@@ -31,8 +31,8 @@ public final class Map4 extends Map{
     }
 
     @Override
-    public void setLocked(boolean locked) {
-
+    public boolean isForCombat() {
+        return true;
     }
 
     @Override

@@ -38,6 +38,11 @@ public final class Map1 extends Map {
     }
 
     @Override
+    public boolean isForCombat() {
+        return false;
+    }
+
+    @Override
     public Entity[] getObjects() {
         return objects;
     }

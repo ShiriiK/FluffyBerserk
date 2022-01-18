@@ -1,8 +1,11 @@
 package en.fluffyBerserk;
 
 import en.fluffyBerserk.base.Application;
+import en.fluffyBerserk.game.gamecontrolls.Game;
 import en.fluffyBerserk.gui.screens.HomeScreen;
 import javafx.stage.Stage;
+
+import java.awt.event.MouseEvent;
 
 public final class Main extends javafx.application.Application {
 
@@ -18,5 +21,6 @@ public final class Main extends javafx.application.Application {
     @Override
     public void start(final Stage primaryStage) {
         (app = new Application(primaryStage)).start(new HomeScreen());
+
     }
 }

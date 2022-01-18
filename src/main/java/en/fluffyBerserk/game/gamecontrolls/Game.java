@@ -9,6 +9,7 @@ import en.fluffyBerserk.game.logic.objects.items.armor.BodyArmor;
 import en.fluffyBerserk.game.logic.objects.items.armor.Head;
 import en.fluffyBerserk.game.logic.objects.items.armor.Pants;
 import en.fluffyBerserk.game.logic.objects.items.inventory.Inventory;
+import en.fluffyBerserk.gui.screens.GameScreen;
 import en.fluffyBerserk.gui.utils.Camera;
 import en.fluffyBerserk.gui.utils.GameGraphics;
 import en.fluffyBerserk.persistence.models.Character;
@@ -29,6 +30,10 @@ public final class Game {
     private final Camera camera = new Camera(this);
 
     private Map currentMap;
+
+    public boolean running = false;
+
+    public GameScreen gameScreen;
 
     public Game(Character character) {
         player = new Player(character);
