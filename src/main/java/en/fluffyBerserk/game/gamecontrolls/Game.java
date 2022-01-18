@@ -115,9 +115,7 @@ public final class Game {
         player.setHitBoxX(player.getX() + 20);
         player.setHitBoxY(player.getY() + 30);
 
-        MapLoader loadMap = new MapLoader();
-        currentMap = loadMap.loadMapById(player.getCharacter().getLastMapId());
-
+        currentMap = MapLoader.loadMapById(player.getCharacter().getLastMapId());
     }
 
     private void addNpcs(int melee_count, int ranged_count, Game game) {

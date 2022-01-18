@@ -61,6 +61,9 @@ public final class Player extends MovableAnimatedEntity implements HasName, CanA
         attackCd = 0;
     }
 
+    public int getDmg() {return character.getStrength();}   // Should return total damage of  player with initial number
+                                                            // plus equipment bonuses in future
+
     public Character getCharacter() {
         return character;
     }

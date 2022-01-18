@@ -1,9 +1,9 @@
 package en.fluffyBerserk.game.logic.maps;
 
 public class MapLoader{
-    public Map mapToLoad = new Map1();
+    public static Map mapToLoad = new Map1();
 
-    public Map loadMapById(int mapId){
+    public static Map loadMapById(int mapId){
         switch (mapId) {
             case 1:
                 mapToLoad = new Map1();

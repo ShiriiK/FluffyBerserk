@@ -1,6 +1,7 @@
 package en.fluffyBerserk.game.logic.objects.bullets;
 
 import en.fluffyBerserk.Constants;
+import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.logic.Animated;
 import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
@@ -15,12 +16,21 @@ public class Bullet extends MovableEntity implements Animated {
     protected final AnimationManager animationManager;
     protected final ArrayList<Image> animations;
     public static final float SPEED = 12F;
+    public int bulletDmg = 0;
+    public int lifeSpan= 2;                     //how many gameLoops will bullet go after dealing damage.
 
     public Bullet() {
-        super(ObjectType.BULLET);
+        super(ObjectType.BULLET_PLAYER);
         animations = AnimationsFactory.bulletAnimations();
         animationManager = new AnimationManager(this);
+        bulletDmg = Main.app.getGame().getPlayer().getDmg();
     }
+
+    public int getDmg() {return bulletDmg;}
+
+    public void setDmg(int dmg){this.bulletDmg = dmg;}
+
+    public void reduceLifeSpan(){this.lifeSpan--;}
 
     @Override
     public int getHeight() {

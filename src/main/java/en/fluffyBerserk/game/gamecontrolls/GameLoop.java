@@ -9,6 +9,8 @@ import en.fluffyBerserk.game.logic.maps.Map1;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
 import en.fluffyBerserk.game.logic.objects.TileObject;
+import en.fluffyBerserk.game.logic.objects.bullets.Bullet;
+import en.fluffyBerserk.game.logic.objects.creatures.Creature;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.PickableItem;
 import en.fluffyBerserk.gui.utils.Collision;
@@ -160,8 +162,13 @@ public final class GameLoop {
                 ((Animated) entity).getAnimationManager().increaseTick();
             }
 
+            //reduce lifeSpan of a used bullet
+            if (entity instanceof Bullet && ((Bullet) entity).bulletDmg <= 0) {
+                ((Bullet) entity).reduceLifeSpan();
+            }
+
             // Don't check collision for bullets X tiles or objects (structures)
-            if (!(entity.getType().equals(ObjectType.BULLET))) {
+            if (!(entity.getType().equals(ObjectType.BULLET_PLAYER))) {
 
                 // Check collision with tiles
                 Vector<Vector<TileObject>> tiles = game.getCurrentMap().getTiles();
@@ -220,13 +227,25 @@ public final class GameLoop {
             }
         }
 
-        if(itemsToRemoveFromMap.size() == 1){
+        if (itemsToRemoveFromMap.size() == 1){
             game.getEntityManager().removeEntity(itemsToRemoveFromMap.get(0));
             itemsToRemoveFromMap.clear();
         }
 
 
         // Check collision with other entities (bullets, monsters, npc, items etc.)
+        for (Entity entity1 : game.getEntityManager().getEntities()){
+            if (entity1.getType().equals(ObjectType.BULLET_PLAYER))
+            for (Entity  entity2 : game.getEntityManager().getEntities()){
+                if (entity2.getType().equals(ObjectType.ENEMY)) {
+                    if (Collision.objectsCollide(entity1, entity2)){
+                        ((Creature) entity2).damaged(((Bullet) entity1).getDmg());
+                        ((Bullet) entity1).setDmg(0);
+                    }
+                }
+            }
+        }
+
 
         // This will render all entities on the map (npcs, bullets, player, items, chests, portals etc.)
         for (Entity entity : game.getEntityManager().getEntities()) {
@@ -251,11 +270,24 @@ public final class GameLoop {
 
     private void removeUnnecessaryEntities() {
         for (Entity entity : game.getEntityManager().getEntities()) {
+
+            //Delete entities that are further than total visible space
             if (entity.getX() < -Constants.SCREEN_WIDTH / 2
                     || entity.getX() > game.getCurrentMap().getWidth() + Constants.SCREEN_WIDTH / 2
                     || entity.getY() < -Constants.SCREEN_HEIGHT / 2
                     || entity.getY() > game.getCurrentMap().getHeight() + Constants.SCREEN_HEIGHT / 2) {
                 game.getEntityManager().removeEntity(entity);
+            }
+
+            //Delete Hostile entities, who have less than 0 hp;
+            if (entity.getType().equals(ObjectType.ENEMY) && ((Creature) entity).getHp() <= 0) {
+                game.getEntityManager().removeEntity(entity);
+            }
+
+            //Delete bullets which lifeSpan is below 0
+            if((entity.getType().equals(ObjectType.BULLET_PLAYER) || entity.getType().equals(ObjectType.BULLET_HOSTILE))
+            && ((Bullet) entity).lifeSpan <= 0) {
+                game.getEntityManager().getEntities().remove(entity);
             }
         }
     }

@@ -84,4 +84,6 @@ public abstract class Creature extends MovableAnimatedEntity implements HasName 
     public void setDmg(int dmg) {
         this.dmg = dmg;
     }
+
+    public void damaged(int incomingDmg) {this.hp -= incomingDmg;}
 }
