@@ -1,10 +1,13 @@
 package en.fluffyBerserk.gui.popups;
 
 import en.fluffyBerserk.Main;
+import en.fluffyBerserk.game.gamecontrolls.Game;
 import en.fluffyBerserk.gui.screens.HomeScreen;
 import en.fluffyBerserk.gui.screens.LoginScreen;
 import en.fluffyBerserk.gui.screens.SaveSlotsScreen;
 import en.fluffyBerserk.gui.utils.AttachCSS;
+import en.fluffyBerserk.persistence.UpdateTask;
+import en.fluffyBerserk.persistence.models.Character;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -16,6 +19,9 @@ public final class PopUpMenu extends PopUp {
     protected void initPopUpStage() {
         VBox buttons = new VBox();
 
+        Game game  = Main.app.getGame();
+        Character character = Main.app.getGame().getPlayer().getCharacter();
+
         // Resume button ✔
         Button resumeButton = new Button("Resume");
         resumeButton.setOnAction(event ->{
@@ -25,6 +31,13 @@ public final class PopUpMenu extends PopUp {
 
         // Save button
         Button saveButton = new Button("Save game"); //TODO
+        saveButton.setOnAction(event ->{
+            character.setGamePhase(6);
+            character.setLastMapId(game.getCurrentMap().getId());
+            character.setLastX(game.getPlayer().getX());
+            character.setLastY(game.getPlayer().getY());
+            new UpdateTask<Character>().update(character);
+        });
 
         // Load button ✔
         Button loadButton = new Button("Load game");

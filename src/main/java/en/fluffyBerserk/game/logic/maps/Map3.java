@@ -39,4 +39,7 @@ public final class Map3 extends Map{
     public Entity[] getObjects() {
         return objects;
     }
+
+    @Override
+    public int getId() { return 3;}
 }

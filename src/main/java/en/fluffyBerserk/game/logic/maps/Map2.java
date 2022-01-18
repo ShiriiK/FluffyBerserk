@@ -40,4 +40,7 @@ public class Map2 extends Map{
     public Entity[] getObjects() {
         return objects;
     }
+
+    @Override
+    public int getId() { return 2;}
 }

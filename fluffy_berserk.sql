@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Počítač: 127.0.0.1
--- Vytvořeno: Pon 10. led 2022, 21:42
--- Verze serveru: 10.4.21-MariaDB
--- Verze PHP: 8.0.11
+-- Host: 127.0.0.1
+-- Generation Time: Jan 18, 2022 at 07:18 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Databáze: `fluffy_berserk`
+-- Database: `fluffy_berserk`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `character`
+-- Table structure for table `character`
 --
 
 CREATE TABLE `character` (
@@ -39,13 +39,17 @@ CREATE TABLE `character` (
   `sprite_index` tinyint(4) NOT NULL,
   `save_file_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `saved_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT NULL,
+  `game_phase` int(11) DEFAULT NULL,
+  `last_map_id` int(11) DEFAULT NULL,
+  `last_x` float DEFAULT NULL,
+  `last_y` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -56,44 +60,44 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Indexy pro exportované tabulky
+-- Indexes for dumped tables
 --
 
 --
--- Indexy pro tabulku `character`
+-- Indexes for table `character`
 --
 ALTER TABLE `character`
   ADD PRIMARY KEY (`id`),
   ADD KEY `character_fk_user_id_foreign` (`fk_user_id`);
 
 --
--- Indexy pro tabulku `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT pro tabulky
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pro tabulku `character`
+-- AUTO_INCREMENT for table `character`
 --
 ALTER TABLE `character`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pro tabulku `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- Omezení pro exportované tabulky
+-- Constraints for dumped tables
 --
 
 --
--- Omezení pro tabulku `character`
+-- Constraints for table `character`
 --
 ALTER TABLE `character`
   ADD CONSTRAINT `character_fk_user_id_foreign` FOREIGN KEY (`fk_user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;

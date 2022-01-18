@@ -20,6 +20,10 @@ public class Character {
     private Timestamp savedAt;
     private Timestamp createdAt;
     private User user;
+    private int gamePhase;
+    private int lastMapId;
+    private float lastX;
+    private float lastY;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -142,16 +146,44 @@ public class Character {
         this.createdAt = createdAt;
     }
 
+    @Basic
+    @Column(name = "game_phase")
+    public int getGamePhase() {return gamePhase;}
+
+    public void setGamePhase(int gamePhase) {this.gamePhase = gamePhase;}
+
+    @Basic
+    @Column(name = "last_map_id")
+    public int getLastMapId() {return lastMapId;}
+
+    public void setLastMapId(int lastMapId) {this.lastMapId = lastMapId;}
+
+    @Basic
+    @Column(name = "last_x")
+    public float getLastX() {return lastX;}
+
+    public void setLastX(float lastX) {this.lastX = lastX;}
+
+    @Basic
+    @Column(name = "last_y")
+    public float getLastY() {return lastY;}
+
+    public void setLastY(float lastY) {this.lastY = lastY;}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Character character = (Character) o;
-        return id == character.id && level == character.level && stamina == character.stamina && strength == character.strength && intellect == character.intellect && armor == character.armor && Objects.equals(name, character.name) && Objects.equals(saveFilePath, character.saveFilePath) && Objects.equals(savedAt, character.savedAt) && Objects.equals(createdAt, character.createdAt);
+        return id == character.id && level == character.level && stamina == character.stamina && strength == character.strength
+                && intellect == character.intellect && armor == character.armor && Objects.equals(name, character.name)
+                && Objects.equals(saveFilePath, character.saveFilePath) && Objects.equals(savedAt, character.savedAt)
+                && Objects.equals(createdAt, character.createdAt) && gamePhase == character.gamePhase && lastMapId == character.lastMapId
+                && lastX == character.lastX && lastY == character.lastY;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, level, stamina, strength, intellect, armor, saveFilePath, savedAt, createdAt);
+        return Objects.hash(id, name, level, stamina, strength, intellect, armor, saveFilePath, savedAt, createdAt, gamePhase, lastMapId, lastX, lastY);
     }
 }
