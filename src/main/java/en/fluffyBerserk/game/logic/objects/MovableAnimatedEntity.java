@@ -1,35 +1,44 @@
 package en.fluffyBerserk.game.logic.objects;
 
-import en.fluffyBerserk.game.animations.AnimationManager;
+import en.fluffyBerserk.game.logic.Direction;
+import en.fluffyBerserk.game.logic.ObjectType;
+import en.fluffyBerserk.gui.graphics.animations.AnimationManager;
+import en.fluffyBerserk.gui.graphics.animations.MovableEntityAnimationManager;
 import en.fluffyBerserk.gui.utils.LocateImage;
 import javafx.scene.image.Image;
 
-public abstract class MovableAnimatedEntity extends MovableEntity implements MovableObject {
+public abstract class MovableAnimatedEntity extends MovableEntity {
 
-    private final AnimationManager animationManager;
+    private MovableEntityAnimationManager movableEntityAnimationManager;
+    private AnimationManager animationManager;
 
-    public MovableAnimatedEntity(LocateImage sprite) {
-        animationManager = new AnimationManager(sprite, this);
+    public MovableAnimatedEntity(LocateImage sprite, ObjectType type) {
+        super(type);
+        movableEntityAnimationManager = new MovableEntityAnimationManager(sprite, this);
     }
 
     public void setMoveX(float moveX) {
         super.setMoveX(moveX);
-        animationManager.moveXUpdated();
+        movableEntityAnimationManager.moveXUpdated();
     }
 
     public void setMoveY(float moveY) {
         super.setMoveY(moveY);
-        animationManager.moveYUpdated();
+        movableEntityAnimationManager.moveYUpdated();
     }
 
     @Override
     public void move() {
         super.move();
-        animationManager.increaseTick();
+        movableEntityAnimationManager.increaseTick();
     }
 
     @Override
     public Image getImage() {
-        return animationManager.getImage();
+        return movableEntityAnimationManager.getImage();
+    }
+
+    public Direction getDirection() {
+        return movableEntityAnimationManager.direction;
     }
 }

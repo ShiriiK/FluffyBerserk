@@ -1,10 +1,17 @@
 package en.fluffyBerserk.game.logic.objects;
 
+import en.fluffyBerserk.game.logic.ObjectType;
+import javafx.scene.image.Image;
+
 public abstract class MovableEntity extends Entity implements MovableObject {
 
     private float moveX = 0F;
 
     private float moveY = 0F;
+
+    public MovableEntity(ObjectType type) {
+        super(type);
+    }
 
     public float getMoveX() {
         return moveX;
@@ -30,5 +37,7 @@ public abstract class MovableEntity extends Entity implements MovableObject {
     public void move() {
         setX(getX() + moveX);
         setY(getY() + moveY);
+        setHitBoxX(getHitBoxX() + moveX);
+        setHitBoxY(getHitBoxY() + moveY);
     }
 }

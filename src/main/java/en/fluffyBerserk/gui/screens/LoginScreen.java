@@ -14,6 +14,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -22,47 +23,43 @@ import javax.persistence.TypedQuery;
 public final class LoginScreen extends BaseScreen {
 
     private final LoginForm form = new LoginForm();
+    private Scene scene;
+    private VBox root;
 
     @Override
     protected Scene buildScene() {
-        VBox root = new VBox();
-        root.getStyleClass().addAll("vbox", "log-in");
 
+        init();
 
-        TextField usernameField = new TextField(form.getUsername());
-        usernameField.setPromptText("Enter username");
-        usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
-            form.setUsername(newValue);
+        setUpUsernameField();
+        setUpPasswordField();
+
+        final Button loginButton = setUpLoginButton();
+        final Button backButton = setUpBackButton();
+
+        root.getChildren().addAll(loginButton, backButton);
+
+        // Attach enter key to submit form
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                loginButton.fire();
+            }
         });
 
+        return scene;
+    }
 
-        root.getChildren().add(new Label("Username"));
-        root.getChildren().add(usernameField);
+    @NotNull
+    private Button setUpBackButton() {
+        // Home screen
+        final Button backButton = new Button("Back");
+        backButton.setOnAction(event -> Main.app.changeScreen(new HomeScreen()));
+        backButton.getStyleClass().add("back-button");
+        return backButton;
+    }
 
-        // Render errors if any
-        for (String error : form.getErrorsForField("username")) {
-            final Text errorText = new Text(error);
-            errorText.setFill(Color.RED);
-            root.getChildren().add(errorText);
-        }
-
-        final PasswordField passwordField = new PasswordField();
-        passwordField.setText(form.getPassword());
-        passwordField.setPromptText("Enter password");
-        passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
-            form.setPassword(newValue);
-        });
-
-        root.getChildren().add(new Label("Password"));
-        root.getChildren().add(passwordField);
-
-        // Render errors if any
-        for (String error : form.getErrorsForField("password")) {
-            final Text errorText = new Text(error);
-            errorText.setFill(Color.RED);
-            root.getChildren().add(errorText);
-        }
-
+    @NotNull
+    private Button setUpLoginButton() {
         final Button loginButton = new Button("Login");
         loginButton.setOnAction(event -> {
             form.clearErrors();
@@ -95,26 +92,54 @@ public final class LoginScreen extends BaseScreen {
             Main.app.login(user);
             Main.app.changeScreen(new SaveSlotsScreen());
         });
+        return loginButton;
+    }
 
-        // Home screen
-        final Button backButton = new Button("Back");
-        backButton.setOnAction(event -> Main.app.changeScreen(new HomeScreen()));
-        backButton.getStyleClass().add("back-button");
-
-
-        root.getChildren().addAll(loginButton, backButton);
-
-        Scene scene = new Scene(root);
-        AttachCSS.attachCSS(scene);
-
-        // Attach enter key to submit form
-        scene.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                loginButton.fire();
-            }
+    private void setUpPasswordField() {
+        final PasswordField passwordField = new PasswordField();
+        passwordField.setText(form.getPassword());
+        passwordField.setPromptText("Enter password");
+        passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
+            form.setPassword(newValue);
         });
 
-        return scene;
+        root.getChildren().add(new Label("Password"));
+        root.getChildren().add(passwordField);
+
+        // Render errors if any
+        for (String error : form.getErrorsForField("password")) {
+            final Text errorText = new Text(error);
+            errorText.setFill(Color.RED);
+            root.getChildren().add(errorText);
+        }
+    }
+
+    private void setUpUsernameField() {
+        TextField usernameField = new TextField(form.getUsername());
+        usernameField.setPromptText("Enter username");
+        usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
+            form.setUsername(newValue);
+        });
+
+        root.getChildren().add(new Label("Username"));
+        root.getChildren().add(usernameField);
+
+        // Render errors if any
+        for (String error : form.getErrorsForField("username")) {
+            final Text errorText = new Text(error);
+            errorText.setFill(Color.RED);
+            root.getChildren().add(errorText);
+        }
+    }
+
+    private void init(){
+        root= new VBox();
+        root.getStyleClass().addAll("vbox","log-in");
+
+        scene= new Scene(root);
+        AttachCSS.attachCSS(scene);
+
+
     }
 
     @Override

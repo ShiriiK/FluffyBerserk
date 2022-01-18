@@ -14,7 +14,7 @@
     -fx-max-width: 400;
 }
 .button:hover{
-    -fx-background-color: rgba(65, 74, 77,0.6);
+    -fx-background-color: rgba(65, 74, 77, 0.6);
     -fx-background-radius: 25px 25px 25px 25px;
     -fx-border-radius: 25px 25px 25px 25px;
     -fx-background-insets: 0,1,2,0;
@@ -23,26 +23,7 @@
     -fx-effect: dropshadow(one-pass-box,gray,20,0.0,15,-2);
     -fx-text-fill: linear-gradient(white, #d0d0d0);
     -fx-font-size: 30;
-    -fx-padding: 10 20 10 20;
-}
-.button-edit{
-    -fx-border-radius: 25px 25px 25px 25px;
-    -fx-background-radius: 25px 25px 25px 25px;;
-    -fx-pref-height: 32;
-    -fx-pref-width: 128;
-    -fx-font-weight: bold;
-}
-.button-edit:hover{
-    -fx-background-color: rgba(65, 74, 77,0.6);
-    -fx-background-radius: 25px 25px 25px 25px;
-    -fx-border-radius: 25px 25px 25px 25px;
-    -fx-background-insets: 0,1,2,0;
-    -fx-text-fill: white;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
-    -fx-effect: dropshadow(one-pass-box,gray,20,0.0,15,-2);
-    -fx-text-fill: linear-gradient(white, #d0d0d0);
-    -fx-font-size: 30;
-    -fx-padding: 10 20 10 20;
+    -fx-padding: 10px 20px 10px 20px;
 }
 .pop-up-menu{
     -fx-pref-width: 300;
@@ -50,28 +31,43 @@
     -fx-spacing: 5;
     -fx-alignment: center;
     -fx-background-color: transparent;
-    -fx-padding: 20,20,20,20;
+    -fx-padding: 20px 20px 20px 20px;
+}
+.pop-up-menu .button {
+    -fx-background-color: rgba(65, 74, 77, 0.8);
+    -fx-text-fill: white;
+}
+.pop-up-menu .button:hover{
+    -fx-background-color: rgba(191, 191, 191, 0.8);
 }
 .vbox{
     -fx-alignment: center;
-    -fx-padding: 20,20,20,20;
+    -fx-padding: 20px 20px 20px 20px;
     -fx-spacing: 15;
     -fx-text-fill: white;
 }
 .vbox .label{
-    -fx-padding: 0 0 -20px 0 ;
+    -fx-padding: 0 0 -15px 0 ;
+}
+.vbox-bottom {
+    -fx-alignment: center;
+    -fx-padding: 40px 20px 20px 20px;
+    -fx-spacing: 15;
+    -fx-text-fill: white;
 }
 .label{
     -fx-text-fill: white;
 }
 .back-button{
-    -fx-padding: -20 0 0 0 ;
+    -fx-padding: -20px 0 0 0 ;
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-text-fill: white;
     -fx-font-size: 20;
+    -fx-pref-width: BOLD;
 }
 .back-button:hover{
+    -fx-padding: -20px 0 0 0 ;
     -fx-border-insets: 0 0 0 0;
     -fx-background-color: transparent;
     -fx-border-color: transparent;
@@ -80,9 +76,19 @@
 }
 .text-field{
     -fx-max-width: 500;
-    -fx-border-radius: 10 10 10 10;
-    -fx-background-radius: 10 10 10 10;
+    -fx-border-radius: 10px 10px 10px 10px;
+    -fx-background-radius: 10px 10px 10px 10px;
 }
 .log-in{
     -fx-spacing: 30;
+}
+.character-screen .text-field{
+    -fx-max-width: 256;
+    -fx-font-size: 30;
+}
+.character-screen .label{
+    -fx-font-size: 30;
+}
+.smaller-button {
+    -fx-max-width: 250;
 }

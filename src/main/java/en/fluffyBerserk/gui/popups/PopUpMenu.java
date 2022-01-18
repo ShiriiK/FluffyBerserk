@@ -1,6 +1,7 @@
 package en.fluffyBerserk.gui.popups;
 
 import en.fluffyBerserk.Main;
+import en.fluffyBerserk.gui.screens.HomeScreen;
 import en.fluffyBerserk.gui.screens.LoginScreen;
 import en.fluffyBerserk.gui.screens.SaveSlotsScreen;
 import en.fluffyBerserk.gui.utils.AttachCSS;
@@ -17,7 +18,10 @@ public final class PopUpMenu extends PopUp {
 
         // Resume button
         Button resumeButton = new Button("Resume");
-        resumeButton.setOnAction(event -> Main.app.hidePopUp());
+        resumeButton.setOnAction(event ->{
+            Main.app.hidePopUp();
+            Main.app.getGame().getGameLoop().start();
+        });
 
         // Save button
         Button saveButton = new Button("Save game");
@@ -38,13 +42,24 @@ public final class PopUpMenu extends PopUp {
 
         // Logout button
         Button logoutButton = new Button("Logout");
-        logoutButton.setOnAction(event -> Main.app.changeScreen(new LoginScreen()));
+        logoutButton.setOnAction(event -> {
+            Main.app.logout();
+            Main.app.changeScreen(new HomeScreen());
+        });
 
         // Delete save button
         Button deleteSaveButton = new Button("Delete save");
 
         // Delete account button
         Button deleteAccountButton = new Button("Delete account");
+
+        if (!Main.app.isUserLoggedIn()){
+            saveButton.setDisable(true);
+            loadButton.setDisable(true);
+            deleteSaveButton.setDisable(true);
+            deleteAccountButton.setDisable(true);
+            logoutButton.setText("Leave game");
+        }
 
         buttons.getChildren().addAll(resumeButton, saveButton, loadButton, helpButton, logoutButton, deleteSaveButton, deleteAccountButton);
         buttons.getStyleClass().add("pop-up-menu");

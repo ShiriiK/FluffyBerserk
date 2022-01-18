@@ -1,6 +1,6 @@
 package en.fluffyBerserk.form;
 
-import en.fluffyBerserk.game.animations.SpritesFactory;
+import en.fluffyBerserk.gui.graphics.sprites.SpritesFactory;
 import en.fluffyBerserk.gui.utils.LocateImage;
 import en.fluffyBerserk.persistence.models.Character;
 import org.jetbrains.annotations.NotNull;
@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 
 public final class CharacterForm extends Form {
 
-    private int pointsLeft = 20;
+    private int pointsLeft = 0;
 
     @Nullable
     private String name = null;

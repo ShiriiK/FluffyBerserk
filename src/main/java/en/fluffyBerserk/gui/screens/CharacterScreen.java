@@ -2,20 +2,20 @@ package en.fluffyBerserk.gui.screens;
 
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.form.CharacterForm;
-import en.fluffyBerserk.game.animations.SpriteImage;
-import en.fluffyBerserk.game.animations.SpritesFactory;
+import en.fluffyBerserk.game.gamecontrolls.Game;
+import en.fluffyBerserk.gui.graphics.sprites.SpriteImage;
+import en.fluffyBerserk.gui.graphics.sprites.SpritesFactory;
+import en.fluffyBerserk.gui.utils.AttachCSS;
 import en.fluffyBerserk.gui.utils.LocateImage;
 import en.fluffyBerserk.persistence.DeleteTask;
 import en.fluffyBerserk.persistence.InsertTask;
 import en.fluffyBerserk.persistence.UpdateTask;
 import en.fluffyBerserk.persistence.models.Character;
 import en.fluffyBerserk.persistence.models.User;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -33,6 +33,10 @@ public final class CharacterScreen extends BaseScreen {
     @Nullable
     private final Character character;
 
+    private Scene scene;
+    private HBox root, box1, box2;
+    private VBox leftBox, rightBox;
+
     public CharacterScreen(@Nullable Character character) {
         if (character == null) {
             form = new CharacterForm(null);
@@ -47,193 +51,18 @@ public final class CharacterScreen extends BaseScreen {
         User user = Main.app.getUser();
         assert user != null;
 
-        final VBox root = new VBox();
-        root.setPadding(new Insets(15, 15, 15, 15));
-        root.setSpacing(10.0);
-        root.setAlignment(Pos.CENTER);
+        init();
 
-        final Label nameLabel = new Label("Character name");
-        final TextField nameField = new TextField();
-        nameField.setText(form.getName());
-        nameField.setPromptText("Enter character name");
-        nameField.textProperty().addListener((observable, oldValue, newValue) -> {
-            form.setName(newValue);
-        });
+        setUpCharacterNameFieldStuff();
+        setUpCharacterImageWithButtons();
+        setUpStatsSettings();
+        setUpButtons(user);
 
-        root.getChildren().add(nameLabel);
-        root.getChildren().add(nameField);
 
-        // Render errors if any
-        for (String error : form.getErrorsForField("name")) {
-            Text errorText = new Text(error);
-            errorText.setFill(Color.RED);
-            root.getChildren().add(errorText);
-        }
+        return scene;
+    }
 
-        final HBox characterBox = new HBox();
-        characterBox.setAlignment(Pos.CENTER);
-
-        final ImageView characterView = new ImageView(new SpriteImage(form.getSprite(), 32, 0, 32, 32).getFrame());
-        characterView.setFitHeight(128);
-        characterView.setFitWidth(128);
-
-        final Button buttonPrevious = new Button("<<<");
-        buttonPrevious.getStyleClass().add("button-edit");
-        buttonPrevious.setOnAction(event -> {
-            int newIndex = form.getSprite().getIndex() - 1;
-
-            if (!SpritesFactory.indexExists(newIndex)) {
-                return;
-            }
-
-            final LocateImage newSprite = SpritesFactory.getSpriteByNumber(newIndex);
-            assert newSprite != null;
-
-            form.setSprite(newSprite);
-
-            characterView.setImage(new SpriteImage(form.getSprite(), 32, 0, 32, 32).getFrame());
-        });
-
-        final Button buttonNext = new Button(">>>");
-        buttonNext.getStyleClass().add("button-edit");
-        buttonNext.setOnAction(event -> {
-            int newIndex = form.getSprite().getIndex() + 1;
-
-            if (!SpritesFactory.indexExists(newIndex)) {
-                return;
-            }
-
-            final LocateImage newSprite = SpritesFactory.getSpriteByNumber(newIndex);
-            assert newSprite != null;
-
-            form.setSprite(newSprite);
-
-            characterView.setImage(new SpriteImage(form.getSprite(), 32, 0, 32, 32).getFrame());
-        });
-
-        characterBox.getChildren().addAll(buttonPrevious, characterView, buttonNext);
-        root.getChildren().add(characterBox);
-
-        final Button randomSpriteButton = new Button("Random character");
-        randomSpriteButton.setOnAction(event -> {
-            final LocateImage randomSprite = SpritesFactory.getRandomSprite();
-
-            form.setSprite(randomSprite);
-
-            characterView.setImage(new SpriteImage(randomSprite, 32, 0, 32, 32).getFrame());
-        });
-
-        root.getChildren().add(randomSpriteButton);
-
-        final Label pointsLeftLabel = new Label(String.format("Points left: %d", form.getPointsLeft()));
-
-        root.getChildren().add(pointsLeftLabel);
-
-        final Label staminaLabel = new Label("Stamina");
-        final Spinner<Integer> staminaSpinner = new Spinner<>();
-        staminaSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, form.getPointsLeft() + form.getStamina(), form.getStamina()));
-
-        root.getChildren().add(staminaLabel);
-        root.getChildren().add(staminaSpinner);
-
-        final Label strengthLabel = new Label("Strength");
-        final Spinner<Integer> strengthSpinner = new Spinner<>();
-        strengthSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, form.getPointsLeft() + form.getStrength(), form.getStrength()));
-
-        root.getChildren().add(strengthLabel);
-        root.getChildren().add(strengthSpinner);
-
-        final Label armorLabel = new Label("Armor");
-        final Spinner<Integer> armorSpinner = new Spinner<>();
-        armorSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, form.getPointsLeft() + form.getArmor(), form.getArmor()));
-
-        root.getChildren().add(armorLabel);
-        root.getChildren().add(armorSpinner);
-
-        final Label intellectLabel = new Label("Intellect");
-        final Spinner<Integer> intellectSpinner = new Spinner<>();
-        intellectSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, form.getPointsLeft() + form.getIntellect(), form.getIntellect()));
-
-        root.getChildren().add(intellectLabel);
-        root.getChildren().add(intellectSpinner);
-
-        // Render errors if any
-        for (String error : form.getErrorsForField("points")) {
-            Text errorText = new Text(error);
-            errorText.setFill(Color.RED);
-            root.getChildren().add(errorText);
-        }
-
-        staminaSpinner.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (oldValue > newValue) {
-                form.decrementStamina();
-                form.incrementPointsLeft();
-            } else {
-                form.incrementStamina();
-                form.decrementPointsLeft();
-            }
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory) intellectSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getIntellect());
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory) armorSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getArmor());
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory) strengthSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getStrength());
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory) staminaSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getStamina());
-
-            pointsLeftLabel.setText(String.format("Points left: %d", form.getPointsLeft()));
-        });
-
-        strengthSpinner.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (oldValue > newValue) {
-                form.decrementStrength();
-                form.incrementPointsLeft();
-            } else {
-                form.incrementStrength();
-                form.decrementPointsLeft();
-            }
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory) intellectSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getIntellect());
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory) armorSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getArmor());
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory) strengthSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getStrength());
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory) staminaSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getStamina());
-
-            pointsLeftLabel.setText(String.format("Points left: %d", form.getPointsLeft()));
-        });
-
-        armorSpinner.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (oldValue > newValue) {
-                form.decrementArmor();
-                form.incrementPointsLeft();
-            } else {
-                form.incrementArmor();
-                form.decrementPointsLeft();
-            }
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory) intellectSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getIntellect());
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory) armorSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getArmor());
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory) strengthSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getStrength());
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory) staminaSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getStamina());
-
-            pointsLeftLabel.setText(String.format("Points left: %d", form.getPointsLeft()));
-        });
-
-        intellectSpinner.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (oldValue > newValue) {
-                form.decrementIntellect();
-                form.incrementPointsLeft();
-            } else {
-                form.incrementIntellect();
-                form.decrementPointsLeft();
-            }
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory) intellectSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getIntellect());
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory) armorSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getArmor());
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory) strengthSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getStrength());
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory) staminaSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getStamina());
-
-            pointsLeftLabel.setText(String.format("Points left: %d", form.getPointsLeft()));
-        });
-
-        // Buttons
-
-        final FlowPane buttonPane = new FlowPane();
-        buttonPane.setHgap(5.0);
-        buttonPane.setAlignment(Pos.CENTER);
-
+    private void setUpButtons(User user) {
         if (!Main.app.isUserLoggedIn()) { // guest account
             final Button backToHomeButton = new Button("Back");
             backToHomeButton.setOnAction(event -> {
@@ -260,7 +89,7 @@ public final class CharacterScreen extends BaseScreen {
                 Main.app.changeScreen(new GameScreen(newCharacter));
             });
 
-            buttonPane.getChildren().addAll(
+            rightBox.getChildren().addAll(
                     backToHomeButton,
                     guestPlayButton
             );
@@ -293,7 +122,7 @@ public final class CharacterScreen extends BaseScreen {
                 Main.app.changeScreen(new SaveSlotsScreen());
             });
 
-            buttonPane.getChildren().addAll(
+            rightBox.getChildren().addAll(
                     backToProfileButton,
                     createButton
             );
@@ -303,7 +132,7 @@ public final class CharacterScreen extends BaseScreen {
                 Main.app.changeScreen(new SaveSlotsScreen());
             });
 
-            final Button saveButton = new Button("Save");
+            final Button saveButton = new Button("Save character");
             saveButton.setOnAction(event -> {
                 form.clearErrors();
 
@@ -343,19 +172,178 @@ public final class CharacterScreen extends BaseScreen {
 
             final Button playButton = new Button("Play");
             playButton.setOnAction(event -> {
-                Main.app.changeScreen(new GameScreen(character));
+
+                if (Main.app.getGame() != null) {
+                    if (Main.app.getGame().running) {
+                        Game game = Main.app.getGame();
+                        Main.app.changeScreen(Main.app.getGame().gameScreen); //TODO now just save this to database
+                        game.setCurrentMap(Main.app.getGame().getCurrentMap());
+                        game.getGameLoop().start();
+                        System.out.println("Back in same game");
+                    }
+
+                } else {
+                    Main.app.changeScreen(new GameScreen(character));
+                }
+
             });
 
-            buttonPane.getChildren().addAll(
-                    backToProfileButton,
-                    deleteButton,
-                    saveButton,
-                    playButton
-            );
+            rightBox.getChildren().addAll(backToProfileButton, playButton);
+            leftBox.getChildren().addAll(deleteButton, saveButton);
+        }
+    }
+
+    private void setUpStatsSettings() {
+        final Label pointsLeftLabel = new Label(String.format("Points left: %d", form.getPointsLeft()));
+
+        rightBox.getChildren().add(pointsLeftLabel);
+
+        final Label staminaLabel = new Label("Stamina");
+        final Spinner<Integer> staminaSpinner = new Spinner<>();
+        staminaSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, form.getPointsLeft() + form.getStamina(), form.getStamina()));
+
+        rightBox.getChildren().add(staminaLabel);
+        rightBox.getChildren().add(staminaSpinner);
+
+        final Label strengthLabel = new Label("Strength");
+        final Spinner<Integer> strengthSpinner = new Spinner<>();
+        strengthSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, form.getPointsLeft() + form.getStrength(), form.getStrength()));
+
+        rightBox.getChildren().add(strengthLabel);
+        rightBox.getChildren().add(strengthSpinner);
+
+        // Render errors if any
+        for (String error : form.getErrorsForField("points")) {
+            Text errorText = new Text(error);
+            errorText.setFill(Color.RED);
+            rightBox.getChildren().add(errorText);
         }
 
-        root.getChildren().add(buttonPane);
+        staminaSpinner.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (oldValue > newValue) {
+                form.decrementStamina();
+                form.incrementPointsLeft();
+            } else {
+                form.incrementStamina();
+                form.decrementPointsLeft();
+            }
+            ((SpinnerValueFactory.IntegerSpinnerValueFactory) strengthSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getStrength());
+            ((SpinnerValueFactory.IntegerSpinnerValueFactory) staminaSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getStamina());
 
-        return new Scene(root);
+            pointsLeftLabel.setText(String.format("Points left: %d", form.getPointsLeft()));
+        });
+
+        strengthSpinner.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (oldValue > newValue) {
+                form.decrementStrength();
+                form.incrementPointsLeft();
+            } else {
+                form.incrementStrength();
+                form.decrementPointsLeft();
+            }
+            ((SpinnerValueFactory.IntegerSpinnerValueFactory) strengthSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getStrength());
+            ((SpinnerValueFactory.IntegerSpinnerValueFactory) staminaSpinner.getValueFactory()).setMax(form.getPointsLeft() + form.getStamina());
+
+            pointsLeftLabel.setText(String.format("Points left: %d", form.getPointsLeft()));
+        });
+
+    }
+
+    private void setUpCharacterImageWithButtons() {
+        final HBox characterBox = new HBox();
+        characterBox.setAlignment(Pos.CENTER);
+
+        final ImageView characterView = new ImageView(new SpriteImage(form.getSprite(), 32, 0, 32, 32).getFrame());
+        characterView.setFitHeight(256);
+        characterView.setFitWidth(256);
+
+        final Button buttonPrevious = new Button("<");
+        buttonPrevious.getStyleClass().add("back-button");
+        buttonPrevious.setOnAction(event -> {
+            int newIndex = form.getSprite().getIndex() - 1;
+
+            if (!SpritesFactory.indexExists(newIndex)) {
+                return;
+            }
+
+            final LocateImage newSprite = SpritesFactory.getSpriteByNumber(newIndex);
+            assert newSprite != null;
+
+            form.setSprite(newSprite);
+
+            characterView.setImage(new SpriteImage(form.getSprite(), 32, 0, 32, 32).getFrame());
+        });
+
+        final Button buttonNext = new Button(">");
+        buttonNext.getStyleClass().add("back-button");
+        buttonNext.setOnAction(event -> {
+            int newIndex = form.getSprite().getIndex() + 1;
+
+            if (!SpritesFactory.indexExists(newIndex)) {
+                return;
+            }
+
+            final LocateImage newSprite = SpritesFactory.getSpriteByNumber(newIndex);
+            assert newSprite != null;
+
+            form.setSprite(newSprite);
+
+            characterView.setImage(new SpriteImage(form.getSprite(), 32, 0, 32, 32).getFrame());
+        });
+
+        characterBox.getChildren().addAll(buttonPrevious, characterView, buttonNext);
+        leftBox.getChildren().add(characterBox);
+
+        final Button randomSpriteButton = new Button("Random character");
+        randomSpriteButton.setOnAction(event -> {
+            final LocateImage randomSprite = SpritesFactory.getRandomSprite();
+
+            form.setSprite(randomSprite);
+
+            characterView.setImage(new SpriteImage(randomSprite, 32, 0, 32, 32).getFrame());
+        });
+
+        leftBox.getChildren().add(randomSpriteButton);
+    }
+
+    private void setUpCharacterNameFieldStuff() {
+        final Label nameLabel = new Label("Character name");
+        final TextField nameField = new TextField();
+        nameField.setText(form.getName());
+        nameField.setPromptText("Enter character name");
+        nameField.textProperty().addListener((observable, oldValue, newValue) -> {
+            form.setName(newValue);
+        });
+
+        leftBox.getChildren().add(nameLabel);
+        leftBox.getChildren().add(nameField);
+
+        // Render errors if any
+        for (String error : form.getErrorsForField("name")) {
+            Text errorText = new Text(error);
+            errorText.setFill(Color.RED);
+            leftBox.getChildren().add(errorText);
+        }
+    }
+
+    private void init() {
+        root = new HBox();
+        root.getStyleClass().add("vbox");
+        root.getStyleClass().add("character-screen");
+
+        leftBox = new VBox();
+        leftBox.getStyleClass().add("vbox");
+
+        rightBox = new VBox();
+        rightBox.getStyleClass().add("vbox");
+
+        box1 = new HBox();
+        box2 = new HBox();
+
+        leftBox.getChildren().addAll(box1, box2);
+        root.getChildren().addAll(leftBox, rightBox);
+
+        scene = new Scene(root);
+        AttachCSS.attachCSS(scene);
     }
 }

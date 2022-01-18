@@ -1,8 +1,13 @@
 package en.fluffyBerserk.game.logic.objects.items;
 
+import en.fluffyBerserk.game.logic.ObjectType;
 import javafx.scene.image.Image;
 
 public class Heart extends PickableItem {
+
+    public Heart(ObjectType type) {
+        super(type);
+    }
 
     @Override
     public String getName() {

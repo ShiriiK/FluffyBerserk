@@ -16,5 +16,17 @@ public interface Object {
 
     int getWidth();
 
+    int getHitBoxHeight();
+
+    int getHitBoxWidth();
+
+    float getHitBoxX();
+
+    float getHitBoxY();
+
+    void setHitBoxX(float x);
+
+    void setHitBoxY(float y);
+
     Image getImage();
 }

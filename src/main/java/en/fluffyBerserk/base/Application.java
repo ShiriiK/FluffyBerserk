@@ -1,11 +1,13 @@
 package en.fluffyBerserk.base;
 
-import en.fluffyBerserk.game.Constants;
+import en.fluffyBerserk.Constants;
+import en.fluffyBerserk.game.gamecontrolls.Game;
 import en.fluffyBerserk.gui.popups.PopUp;
 import en.fluffyBerserk.gui.screens.Screen;
 import en.fluffyBerserk.gui.utils.PopUpBuilder;
 import en.fluffyBerserk.persistence.DatabaseSession;
 import en.fluffyBerserk.persistence.models.User;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -18,6 +20,7 @@ import org.jetbrains.annotations.Nullable;
 public final class Application {
 
     public static final String APP_NAME = "Fluffy Berserk";
+    public static final Image APP_ICON = new Image("/icon/icon.png");
 
     @NotNull
     private final Stage primaryStage;
@@ -31,6 +34,8 @@ public final class Application {
     @Nullable
     private User user;
 
+    private Game game;
+
     public Application(@NotNull Stage stage) {
         primaryStage = stage;
         init();
@@ -38,6 +43,7 @@ public final class Application {
 
     public void init() {
         primaryStage.setTitle(APP_NAME);
+        primaryStage.getIcons().add(APP_ICON);
         primaryStage.setHeight(Constants.SCREEN_HEIGHT);
         primaryStage.setWidth(Constants.SCREEN_WIDTH);
         primaryStage.setResizable(false);
@@ -136,5 +142,13 @@ public final class Application {
 
     public @Nullable User getUser() {
         return user;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public Game getGame() {
+        return game;
     }
 }
