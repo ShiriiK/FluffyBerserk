@@ -2,13 +2,13 @@ package en.fluffyBerserk.game.logic.maps;
 
 import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.objects.Entity;
-import en.fluffyBerserk.gui.graphics.objects.ObjectsForMap2;
+import en.fluffyBerserk.gui.graphics.objects.ObjectsForMap;
 
 /**
  * Home
  */
 public class Map2 extends Map{
-    Entity[] objects = ObjectsForMap2.loadObjects();
+    Entity[] objects = ObjectsForMap.loadObjects(2);
 
 
     @Override

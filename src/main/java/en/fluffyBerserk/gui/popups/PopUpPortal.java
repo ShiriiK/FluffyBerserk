@@ -2,9 +2,10 @@ package en.fluffyBerserk.gui.popups;
 
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.gamecontrolls.Game;
-import en.fluffyBerserk.game.logic.maps.Map3;
-import en.fluffyBerserk.game.logic.maps.Map6;
 import en.fluffyBerserk.game.logic.maps.Map1;
+import en.fluffyBerserk.game.logic.maps.Map3;
+import en.fluffyBerserk.game.logic.maps.Map4;
+import en.fluffyBerserk.game.logic.maps.Map6;
 import en.fluffyBerserk.gui.utils.AttachCSS;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -33,7 +34,7 @@ public class PopUpPortal extends PopUp {
 
         Button area1 = new Button("Area 1");
         area1.setOnAction(event -> {
-            if (!game.getCurrentMap().getName().equals("map2")) {
+            if (!game.getCurrentMap().getName().equals("map3")) {
                 game.setCurrentMap(new Map3());
                 Main.app.hidePopUp();
             }
@@ -41,12 +42,18 @@ public class PopUpPortal extends PopUp {
 
 
         Button area2 = new Button("Area 2");
+        area2.setOnAction(event -> {
+            if (!game.getCurrentMap().getName().equals("map4")) {
+                game.setCurrentMap(new Map4());
+                Main.app.hidePopUp();
+            }
+        });
 
         Button area3 = new Button("Area 3");
 
         Button area4 = new Button("Area 4");
         area4.setOnAction(event -> {
-            if (!game.getCurrentMap().getName().equals("map7")) {
+            if (!game.getCurrentMap().getName().equals("map6")) {
                 game.setCurrentMap(new Map6());
                 Main.app.hidePopUp();
             }

@@ -4,22 +4,15 @@ import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.gui.graphics.objects.ObjectsForMap;
 
-
 /**
- * Safe zone
+ * Area1
  */
-public final class Map1 extends Map {
-    String mapName = "map1";
-    Entity[] objects = ObjectsForMap.loadObjects(1);
-
-    /*public Map1(int currentMapNumber){
-        mapName += "1";
-        objects = ObjectsForMap.loadObjects(currentMapNumber);
-    } */
+public final class Map4 extends Map{
+    Entity[] objects = ObjectsForMap.loadObjects(4);
 
     @Override
     public String getName() {
-        return "map1";
+        return "map4";
     }
 
     @Override
@@ -38,8 +31,12 @@ public final class Map1 extends Map {
     }
 
     @Override
+    public void setLocked(boolean locked) {
+
+    }
+
+    @Override
     public Entity[] getObjects() {
         return objects;
     }
-
 }

@@ -2,11 +2,11 @@ package en.fluffyBerserk.game.logic.maps;
 
 import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.objects.Entity;
-import en.fluffyBerserk.gui.graphics.objects.ObjectsForMap6;
+import en.fluffyBerserk.gui.graphics.objects.ObjectsForMap;
 
 
-    public final class Map6 extends Map{
-        Entity[] objects = ObjectsForMap6.loadObjects();
+public final class Map6 extends Map{
+        Entity[] objects = ObjectsForMap.loadObjects(6);
 
         @Override
         public String getName() {
