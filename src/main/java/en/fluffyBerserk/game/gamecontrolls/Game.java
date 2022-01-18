@@ -4,6 +4,7 @@ import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.maps.Map;
 import en.fluffyBerserk.game.logic.maps.Map1;
+import en.fluffyBerserk.game.logic.maps.MapLoader;
 import en.fluffyBerserk.game.logic.maps.PlayerSpawnManager;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ZombieArcher;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ZombieCatto;
@@ -114,8 +115,8 @@ public final class Game {
         player.setHitBoxX(player.getX() + 20);
         player.setHitBoxY(player.getY() + 30);
 
-        map1 = new Map1();
-        currentMap = map1;
+        MapLoader loadMap = new MapLoader();
+        currentMap = loadMap.loadMapById(player.getCharacter().getLastMapId());
 
     }
 

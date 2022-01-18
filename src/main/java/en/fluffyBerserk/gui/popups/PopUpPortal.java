@@ -74,9 +74,9 @@ public class PopUpPortal extends PopUp {
         });
 
         Button area4 = new Button("Area 4");
-        game.playerSpawner.spawnOnMap(6);
         area4.setOnAction(event -> {
             if (!game.getCurrentMap().getName().equals("map6")) {
+                game.playerSpawner.spawnOnMap(6);
                 if (game.map6 == null){
                     game.map6 = new Map6();
                     game.setCurrentMap(game.map6);
