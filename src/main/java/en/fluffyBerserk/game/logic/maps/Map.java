@@ -1,12 +1,20 @@
 package en.fluffyBerserk.game.logic.maps;
 
+import en.fluffyBerserk.game.gamecontrolls.EntityManager;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.TileObject;
 import en.fluffyBerserk.gui.graphics.tiles.TileLoader;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 public abstract class Map {
+
+    public abstract ArrayList<Entity> getEntities();
+
+    public abstract Entity[] getObjects();
+
+    public abstract int getId();
 
     private final Vector<Vector<TileObject>> tiles = TileLoader.loadTiles(getTilePath(), getWidth(), getHeight());
 
@@ -46,7 +54,4 @@ public abstract class Map {
 
     public abstract boolean isForCombat();
 
-    public abstract Entity[] getObjects();
-
-    public abstract int getId();
 }

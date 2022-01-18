@@ -13,9 +13,8 @@ public class ZombieArcher extends Creature implements HasName {
     private Game game;
     private static final float attackRange = 10F;
 
-    public ZombieArcher(Game game) {
+    public ZombieArcher() {
         super(SpritesFactory.getSpriteByNumber(15), ObjectType.ENEMY);
-        this.game = game;
         NpcFactory.init(this);
     }
 

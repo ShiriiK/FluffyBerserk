@@ -49,29 +49,32 @@ public class PopUpPortal extends PopUp {
 
         Button area2 = new Button("Area 2");
         area2.setOnAction(event -> {
-            game.playerSpawner.spawnOnMap(4);
-            if (game.map4 == null){
-                game.map4 = new Map4();
-                game.setCurrentMap(game.map4);
-            } else {
-                game.setCurrentMap(game.map4);
+            if (!game.getCurrentMap().getName().equals("map4")) {
+                game.playerSpawner.spawnOnMap(4);
+                if (game.map4 == null){
+                    game.map4 = new Map4();
+                    game.setCurrentMap(game.map4);
+                } else {
+                    game.setCurrentMap(game.map4);
+                }
+                Main.app.hidePopUp();
+                Main.app.getGame().getGameLoop().start();
             }
-            Main.app.hidePopUp();
-            Main.app.getGame().getGameLoop().start();
         });
 
         Button area3 = new Button("Area 3");
         area3.setOnAction(event -> {
-            game.playerSpawner.spawnOnMap(4);
-            if (game.map5 == null){
-                game.map5 = new Map3(); // TODO
-                game.setCurrentMap(game.map5);
-            } else {
-                game.setCurrentMap(game.map5);
-            }
-            Main.app.hidePopUp();
-            Main.app.getGame().getGameLoop().start();
-        });
+            if (!game.getCurrentMap().getName().equals("map5")) {
+                game.playerSpawner.spawnOnMap(4);
+                if (game.map5 == null) {
+                    game.map5 = new Map3(); // TODO
+                    game.setCurrentMap(game.map5);
+                } else {
+                    game.setCurrentMap(game.map5);
+                }
+                Main.app.hidePopUp();
+                Main.app.getGame().getGameLoop().start();
+            }});
 
         Button area4 = new Button("Area 4");
         area4.setOnAction(event -> {
