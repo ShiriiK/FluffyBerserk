@@ -32,4 +32,6 @@ public abstract class Map {
     public abstract boolean isForCombat();
 
     public abstract Entity[] getObjects();
+
+    public abstract int getId();
 }

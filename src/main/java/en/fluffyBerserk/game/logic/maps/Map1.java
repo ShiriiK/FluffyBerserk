@@ -42,4 +42,7 @@ public final class Map1 extends Map {
         return objects;
     }
 
+    @Override
+    public int getId() { return 1;}
+
 }

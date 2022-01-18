@@ -103,9 +103,14 @@ public final class Game {
         pants1.setX(800);
         pants1.setY(800);
 
-        // Spawn player in the center of current map
-        player.setX(((float) 13 * Constants.TILE_SIZE));
-        player.setY(((float) 7 * Constants.TILE_SIZE));
+        // Spawn player in the center of current map or at last save location
+        if (player.getCharacter().getLastX() == 0 && player.getCharacter().getLastY() == 0) {
+            player.setX(((float) 13 * Constants.TILE_SIZE));
+            player.setY(((float) 7 * Constants.TILE_SIZE));
+        } else {
+            player.setX(player.getCharacter().getLastX());
+            player.setY(player.getCharacter().getLastY());
+        }
         player.setHitBoxX(player.getX() + 20);
         player.setHitBoxY(player.getY() + 30);
 

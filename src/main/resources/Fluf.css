@@ -64,7 +64,7 @@
     -fx-border-color: transparent;
     -fx-text-fill: white;
     -fx-font-size: 20;
-    -fx-pref-width: BOLD;
+    -fx-pref-weight: BOLD;
 }
 .back-button:hover{
     -fx-padding: -20px 0 0 0 ;
