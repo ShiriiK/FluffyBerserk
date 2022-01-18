@@ -30,6 +30,22 @@ public abstract class Map {
         return String.format("maps/%s.png", getName());
     }
 
+    public Map loadMapById(int mapId) {
+        switch (mapId) {
+            case 1:
+                return new Map1();
+            case 2:
+                return new Map2();
+            case 3:
+                return new Map3();
+            case 4:
+                return new Map4();
+            case 6:
+                return new Map6();
+        }
+        return new Map1();
+    }
+
     public abstract String getName();
 
     public abstract int getWidth();
@@ -37,4 +53,5 @@ public abstract class Map {
     public abstract int getHeight();
 
     public abstract boolean isForCombat();
+
 }
