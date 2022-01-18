@@ -4,11 +4,14 @@ import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.gui.graphics.objects.ObjectsForMap;
 
+import java.util.ArrayList;
+
 /**
  * Area1
  */
 public final class Map4 extends Map{
     Entity[] objects = ObjectsForMap.loadObjects(4);
+    ArrayList<Entity> entities = EntitiesForMaps.loadMap4();
 
     @Override
     public String getName() {
@@ -34,6 +37,9 @@ public final class Map4 extends Map{
     public Entity[] getObjects() {
         return objects;
     }
+
+    @Override
+    public ArrayList<Entity> getEntities(){ return entities; }
 
     @Override
     public int getId() { return 4;}

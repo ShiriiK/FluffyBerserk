@@ -2,13 +2,17 @@ package en.fluffyBerserk.game.logic.maps;
 
 import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.objects.Entity;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ZombieArcher;
 import en.fluffyBerserk.gui.graphics.objects.ObjectsForMap;
+
+import java.util.ArrayList;
 
 /**
  * Area1
  */
 public final class Map3 extends Map{
     Entity[] objects = ObjectsForMap.loadObjects(3);
+    ArrayList<Entity> entities = EntitiesForMaps.loadMap3();
 
     @Override
     public String getName() {
@@ -36,5 +40,10 @@ public final class Map3 extends Map{
     }
 
     @Override
+    public ArrayList<Entity> getEntities(){ return entities; }
+
+    @Override
     public int getId() { return 3;}
+
+
 }

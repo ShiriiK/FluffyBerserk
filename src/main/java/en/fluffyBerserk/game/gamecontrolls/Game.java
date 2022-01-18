@@ -24,7 +24,7 @@ public final class Game {
 
     private final Inventory inventory;
 
-    private final EntityManager entityManager = new EntityManager();
+    private EntityManager entityManager = new EntityManager();
 
     private final GameGraphics gameGraphics = new GameGraphics();
 
@@ -70,7 +70,13 @@ public final class Game {
     }
 
     public void setCurrentMap(Map map) {
+        if (currentMap.getEntities() != null){
+            this.getEntityManager().removeEntites(currentMap.getEntities());
+        }
         currentMap = map;
+        if (currentMap.getEntities() != null) {
+            this.getEntityManager().addEntites(currentMap.getEntities());
+        }
     }
 
     public GameLoop getGameLoop() {
@@ -83,8 +89,6 @@ public final class Game {
 
     private void bootDefaultState() {
         entityManager.addEntity(player);
-
-        addNpcs(5, 5, this);
 
         BodyArmor bodyArmor1 = new BodyArmor("bodyArmor1", 2, 2, 2, 2, ObjectType.WEARABLE);
         Head head1 = new Head("head1", 4, 2, 2, 2, ObjectType.WEARABLE);
@@ -103,7 +107,7 @@ public final class Game {
         pants1.setX(800);
         pants1.setY(800);
 
-        // Spawn player in the center of current map or at last save location
+        // Spawn player on defined spawn location at last save location
         if (player.getCharacter().getLastX() == 0 && player.getCharacter().getLastY() == 0) {
             player.setX(((float) 13 * Constants.TILE_SIZE));
             player.setY(((float) 7 * Constants.TILE_SIZE));
@@ -117,17 +121,5 @@ public final class Game {
         map1 = new Map1();
         currentMap = map1;
 
-    }
-
-    private void addNpcs(int melee_count, int ranged_count, Game game) {
-        for (int i = 0; i < melee_count; i++) {
-            ZombieCatto idk = new ZombieCatto(this);
-            entityManager.addEntity(idk);
-        }
-
-        for(int i = 0; i < ranged_count; i++){
-            ZombieArcher idk = new ZombieArcher(this);
-            entityManager.addEntity(idk);
-        }
     }
 }
