@@ -25,7 +25,7 @@ public class PopUpPortal extends PopUp {
         safeZone.setOnAction(event -> {
             if (!game.getCurrentMap().getName().equals("map1")) {
                 game.playerSpawner.spawnOnMap(1);
-                game.setCurrentMap(game.map1); //TODO creating new safe zone map not returning to old one
+                game.setCurrentMap(game.getCurrentMap().loadMapById(1));
                 Main.app.hidePopUp();
                 Main.app.getGame().getGameLoop().start();
             }
@@ -65,7 +65,7 @@ public class PopUpPortal extends PopUp {
         Button area3 = new Button("Area 3");
         area3.setOnAction(event -> {
             if (!game.getCurrentMap().getName().equals("map5")) {
-                game.playerSpawner.spawnOnMap(4);
+                game.playerSpawner.spawnOnMap(3);
                 if (game.map5 == null) {
                     game.map5 = new Map3(); // TODO
                     game.setCurrentMap(game.map5);
@@ -78,7 +78,7 @@ public class PopUpPortal extends PopUp {
 
         Button area4 = new Button("Area 4");
         area4.setOnAction(event -> {
-            if (!game.getCurrentMap().getName().equals("map6")) {
+            if (!game.getCurrentMap().getName().equals("map6")) { //TODO DO DO DO a MAP DODO and DON'Ts (collosion)
                 game.playerSpawner.spawnOnMap(6);
                 if (game.map6 == null){
                     game.map6 = new Map6();
