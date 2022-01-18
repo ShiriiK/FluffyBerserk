@@ -27,11 +27,6 @@ public class Map2 extends Map{
     }
 
     @Override
-    public boolean isLocked() {
-        return false;
-    }
-
-    @Override
     public boolean isForCombat() {
         return false;
     }
