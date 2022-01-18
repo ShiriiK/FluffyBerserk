@@ -23,8 +23,10 @@ public final class Main extends javafx.application.Application {
         (app = new Application(primaryStage)).start(new HomeScreen());
 
         primaryStage.setOnCloseRequest(event -> {
-            Main.app.getGame().getGameLoop().stop();
-            Main.app.setGame(null);
+            if(Main.app.getGame() != null){
+                Main.app.getGame().getGameLoop().stop();
+                Main.app.setGame(null);
+            }
         });
     }
 }

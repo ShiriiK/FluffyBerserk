@@ -49,8 +49,8 @@ public class NodesFactory {
     private void setLogOutButton() {
         logOutButton = new Button("Log out");
         logOutButton.setOnAction(event -> {
-            Main.app.setGame(null);
             Main.app.getGame().getGameLoop().stop();
+            Main.app.setGame(null);
             Main.app.logout();
             Main.app.changeScreen(new HomeScreen());
         });

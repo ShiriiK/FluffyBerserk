@@ -15,16 +15,6 @@ public class TileFactory {
             TILE_TREE2 = 1,
             TILE_TREE3 = 2,
 
-            TILE_FENCE1 = 3,
-            TILE_FENCE2 = 4,
-            TILE_FENCE3 = 5,
-            TILE_FENCE4 = 6,
-            TILE_FENCE5 = 7,
-            TILE_FENCE6 = 9,
-            TILE_FENCE7 = 10,
-            TILE_FENCE8 = 11,
-
-
             TILE_BLANK = 8,
             TILE_BLANK_WITH_COLLISION = 12;
 
@@ -32,14 +22,6 @@ public class TileFactory {
         put(TILE_TREE1, new Image("/tiles/Tree1.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
         put(TILE_TREE2, new Image("/tiles/Tree2.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
         put(TILE_TREE3, new Image("/tiles/Tree3.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
-        put(TILE_FENCE1, new Image("/tiles/f1.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
-        put(TILE_FENCE2, new Image("/tiles/f2.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
-        put(TILE_FENCE3, new Image("/tiles/f3.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
-        put(TILE_FENCE4, new Image("/tiles/f4.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
-        put(TILE_FENCE5, new Image("/tiles/f5.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
-        put(TILE_FENCE6, new Image("/tiles/f6.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
-        put(TILE_FENCE7, new Image("/tiles/f7.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
-        put(TILE_FENCE8, new Image("/tiles/f8.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
         put(TILE_BLANK_WITH_COLLISION, new Image("/tiles/blank.png", Constants.TILE_SIZE, Constants.TILE_SIZE, false, false));
 
     }};

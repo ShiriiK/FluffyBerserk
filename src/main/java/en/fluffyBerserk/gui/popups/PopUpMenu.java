@@ -55,6 +55,9 @@ public final class PopUpMenu extends PopUp {
             deleteCharacterButton.setDisable(true);
             deleteAccountButton.setDisable(true);
             logoutButton.setText("Leave game");
+            loadButton.setOnAction(event -> {
+                Main.app.changeScreen(new HomeScreen());
+            });
         }
 
         buttons.getChildren().addAll(resumeButton, saveButton, loadButton, helpButton, logoutButton, deleteCharacterButton, deleteAccountButton);
