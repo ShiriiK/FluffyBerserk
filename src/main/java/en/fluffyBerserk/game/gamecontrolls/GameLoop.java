@@ -12,9 +12,8 @@ import en.fluffyBerserk.game.logic.objects.TileObject;
 import en.fluffyBerserk.game.logic.objects.bullets.Bullet;
 import en.fluffyBerserk.game.logic.objects.creatures.Creature;
 import en.fluffyBerserk.game.logic.objects.creatures.Death;
-import en.fluffyBerserk.game.logic.objects.creatures.npc.ArcherCatto;
-import en.fluffyBerserk.game.logic.objects.creatures.npc.Boss1;
-import en.fluffyBerserk.game.logic.objects.creatures.npc.ZombieCatto;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.*;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.Boss4;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.potions.HealthPotion;
 import en.fluffyBerserk.game.logic.objects.items.potions.Potion;
@@ -33,14 +32,14 @@ public final class GameLoop {
 
     @NotNull
     private final Game game;
-    private Death death;
-    private Potion potion;
-    private double span = 1;    public AnimationTimer potionTimer = new AnimationTimer() {
+    private Death death;    public AnimationTimer potionTimer = new AnimationTimer() {
         @Override
         public void handle(long now) {
             handleDrink();
         }
     };
+    private Potion potion;
+    private double span = 1;
     public GameLoop(@NotNull Game game) {
         this.game = game;
     }
@@ -50,7 +49,12 @@ public final class GameLoop {
         Main.app.setGame(game);
         game.running = true;
         System.out.println("Game loop started");
-    }
+    }    private AnimationTimer deathTimer = new AnimationTimer() {
+        @Override
+        public void handle(long now) {
+            hadnleDeath();
+        }
+    };
 
     public void stop() {
         timer.stop();
@@ -117,12 +121,7 @@ public final class GameLoop {
                 }
             }
         }
-    }    private AnimationTimer deathTimer = new AnimationTimer() {
-        @Override
-        public void handle(long now) {
-            hadnleDeath();
-        }
-    };
+    }
 
     private void drawObjects(Canvas canvas) {
         Entity[] objects = game.getCurrentMap().getObjects();
@@ -186,6 +185,24 @@ public final class GameLoop {
             if (entity instanceof ZombieCatto) {
                 ((ZombieCatto) entity).refreshCd();
             }
+
+            if (entity instanceof Boss1) {
+                ((Boss1) entity).refreshCd();
+            }
+
+            if (entity instanceof Boss2) {
+                ((Boss2) entity).refreshCd();
+            }
+
+            if (entity instanceof Boss3) {
+                ((Boss3) entity).refreshCd();
+            }
+
+            if (entity instanceof Boss4) {
+                ((Boss4) entity).refreshCd();
+            }
+
+
 
             //reduce lifeSpan of a used bullet
             if (entity instanceof Bullet && ((Bullet) entity).bulletDmg <= 0) {
@@ -300,6 +317,27 @@ public final class GameLoop {
                                     ((Player) entity2).damaged(((Creature) entity1).getDmg());
                                     System.out.println("You have got: " + ((Creature) entity1).getDmg() + " dmg");
                                 }
+                            } else if (entity1 instanceof Boss2) {
+                                if (((Boss2) entity1).canAttack()) {
+                                    ((Boss2) entity1).resetCd();
+                                    ((Player) entity2).damaged(((Creature) entity1).getDmg());
+                                    System.out.println("You have got: " + ((Creature) entity1).getDmg() + " dmg");
+                                }
+
+                            }else if (entity1 instanceof Boss3) {
+                                if (((Boss3) entity1).canAttack()) {
+                                    ((Boss3) entity1).resetCd();
+                                    ((Player) entity2).damaged(((Creature) entity1).getDmg());
+                                    System.out.println("You have got: " + ((Creature) entity1).getDmg() + " dmg");
+                                }
+
+                            } else if (entity1 instanceof Boss4) {
+                                if (((Boss4) entity1).canAttack()) {
+                                    ((Boss4) entity1).resetCd();
+                                    ((Player) entity2).damaged(((Creature) entity1).getDmg());
+                                    System.out.println("You have got: " + ((Creature) entity1).getDmg() + " dmg");
+                                }
+
                             }
                         }
                     }
@@ -375,13 +413,7 @@ public final class GameLoop {
                 game.getEntityManager().getEntities().remove(entity);
             }
         }
-    }    @NotNull
-    private final AnimationTimer timer = new AnimationTimer() {
-        @Override
-        public void handle(long now) {
-            updateGame();
-        }
-    };
+    }
 
     private void hadnleDeath() {
         span -= 0.033;
@@ -404,7 +436,13 @@ public final class GameLoop {
         }
     }
 
-
+    @NotNull
+    private final AnimationTimer timer = new AnimationTimer() {
+        @Override
+        public void handle(long now) {
+            updateGame();
+        }
+    };
 
 
 

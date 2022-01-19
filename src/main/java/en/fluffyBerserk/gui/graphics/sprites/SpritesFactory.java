@@ -68,7 +68,6 @@ public class SpritesFactory {
         return rangedEnemies.get(random.nextInt(rangedEnemies.size()));
     }
 
-
     public static @Nullable LocateImage getSpriteByNumber(Integer key) {
         return skins.get(key);
     }

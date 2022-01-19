@@ -7,16 +7,21 @@ import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.objects.creatures.Creature;
 import en.fluffyBerserk.gui.utils.LocateImage;
 
-public class Boss1 extends Creature implements HasName {
+public class Boss3 extends Creature implements HasName {
     private Game game;
     private int attackCd = 50;
 
-    public Boss1(Game game) {
-        super(new LocateImage("npcs/boss4.png"), ObjectType.ENEMY);
+    public Boss3(Game game) {
+        super(new LocateImage("npcs/boss1.png"), ObjectType.ENEMY);
         this.game = game;
         this.setDmg(5);
         this.setHp(35);
         NpcFactory.init(this);
+    }
+
+    @Override
+    public String getName() {
+        return "boss3";
     }
 
     @Override
@@ -27,11 +32,6 @@ public class Boss1 extends Creature implements HasName {
     @Override
     public int getWidth(){
         return (int) (Constants.TILE_SIZE*1.5);
-    }
-
-    @Override
-    public String getName() {
-        return "boss1";
     }
 
     @Override
