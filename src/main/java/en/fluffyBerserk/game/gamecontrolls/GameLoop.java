@@ -193,7 +193,7 @@ public final class GameLoop {
             }
 
             // Don't check collision for bullets X tiles or objects (structures)
-            if (!(entity.getType().equals(ObjectType.BULLET_PLAYER))) {
+            if (!(entity.getType().equals(ObjectType.BULLET_PLAYER) || entity.getType().equals(ObjectType.BULLET_ENEMY))) {
 
                 // Check collision with tiles
                 Vector<Vector<TileObject>> tiles = game.getCurrentMap().getTiles();
@@ -260,7 +260,8 @@ public final class GameLoop {
 
         // Check collision with other entities (bullets, monsters, npc, items etc.)
         for (Entity entity1 : game.getEntityManager().getEntities()) {
-            if (entity1.getType().equals(ObjectType.BULLET_PLAYER))
+            //check for player bullets X enemy
+            if (entity1.getType().equals(ObjectType.BULLET_PLAYER)) {
                 for (Entity entity2 : game.getEntityManager().getEntities()) {
                     if (entity2.getType().equals(ObjectType.ENEMY)) {
                         if (Collision.objectsCollide(entity1, entity2)) {
@@ -269,6 +270,17 @@ public final class GameLoop {
                         }
                     }
                 }
+            }
+            if (entity1.getType().equals(ObjectType.BULLET_ENEMY)) {
+                for (Entity entity2 : game.getEntityManager().getEntities()) {
+                    if (entity2.getType().equals(ObjectType.PLAYER)) {
+                        if (Collision.objectsCollide(entity1, entity2)) {
+                            // ((PLAYER) entity2).damaged(((Bullet) entity1).getDmg()); //TODO Player gets damage to his HP
+                            ((Bullet) entity1).setDmg(0);
+                        }
+                    }
+                }
+            }
         }
 
 

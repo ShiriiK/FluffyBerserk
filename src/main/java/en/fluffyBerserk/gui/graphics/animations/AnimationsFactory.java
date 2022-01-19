@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 
 public class AnimationsFactory {
-    public static ArrayList<Image> portal, bullets;
+    public static ArrayList<Image> portal, bullets, bulletsEnemy;
 
     /**
      * Creates animations for portal
@@ -38,5 +38,18 @@ public class AnimationsFactory {
         bullets.add(7, new SpriteImage(sprite, Constants.TILE_SIZE * 7,0, Constants.TILE_SIZE, Constants.TILE_SIZE).getFrame());
 
         return bullets;
+    }
+
+    public static ArrayList<Image> bulletAnimationsEnemy() {
+        LocateImage sprite = new LocateImage("bullets/pantsu_basic_sprite.png");
+        bulletsEnemy = new ArrayList<>(4);
+        int pantsuTileSize = Constants.TILE_SIZE / 4 * 3;
+
+        bulletsEnemy.add(0, new SpriteImage(sprite, 0,0, pantsuTileSize, pantsuTileSize).getFrame());
+        bulletsEnemy.add(1, new SpriteImage(sprite, pantsuTileSize,0, pantsuTileSize, pantsuTileSize).getFrame());
+        bulletsEnemy.add(2, new SpriteImage(sprite, 0, pantsuTileSize, pantsuTileSize, pantsuTileSize).getFrame());
+        bulletsEnemy.add(3, new SpriteImage(sprite, pantsuTileSize, pantsuTileSize, pantsuTileSize, pantsuTileSize).getFrame());
+
+        return bulletsEnemy;
     }
 }

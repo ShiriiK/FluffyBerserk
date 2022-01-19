@@ -16,10 +16,10 @@ public class ArcherCatto extends Creature implements HasName {
     private int attackCd = 100;
 
     public ArcherCatto(Game game) {
-        super(SpritesFactory.getSpriteByNumber(15), ObjectType.ENEMY);
+        super(SpritesFactory.getRandomRangedEnemySprite(), ObjectType.ENEMY);
         this.game = game;
         this.setDmg(10);
-        this.setHp(80);
+        this.setHp(25);
         NpcFactory.init(this);
     }
 

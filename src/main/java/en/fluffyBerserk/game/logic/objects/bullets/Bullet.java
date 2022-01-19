@@ -28,7 +28,7 @@ public class Bullet extends MovableEntity implements Animated {
 
     public Bullet(int dmg) {
         super(ObjectType.BULLET_ENEMY);
-        animations = AnimationsFactory.bulletAnimations();
+        animations = AnimationsFactory.bulletAnimationsEnemy();
         animationManager = new AnimationManager(this);
         bulletDmg = dmg;
     }
