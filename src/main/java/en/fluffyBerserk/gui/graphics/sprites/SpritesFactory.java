@@ -28,11 +28,24 @@ public class SpritesFactory {
         put(10, new LocateImage("player/fluf11.png", 10));
         put(11, new LocateImage("player/fluf12.png", 11));
         put(12, new LocateImage("player/fluf13.png", 12));
-        put(13, new LocateImage("npcs/melee1.png", 13));
-        put(14, new LocateImage("npcs/melee2.png", 14));
-        put(15, new LocateImage("npcs/ranged1.png", 15));
+
+
 
     }};
+
+    private static final Map<Integer, LocateImage> meleeEnemies = new HashMap<Integer, LocateImage>() {{
+        put(0, new LocateImage("npcs/melee1.png", 0));
+        put(1, new LocateImage("npcs/melee2.png", 1));
+        put(2, new LocateImage("npcs/melee3.png", 2));
+    }};
+
+    private static final Map<Integer, LocateImage> rangedEnemies = new HashMap<Integer, LocateImage>() {{
+        put(0, new LocateImage("npcs/ranged1.png", 0));
+        put(1, new LocateImage("npcs/ranged2.png", 1));
+        put(2, new LocateImage("npcs/ranged3.png", 2));
+    }};
+
+
 
     public static boolean indexExists(Integer key) {
         return skins.containsKey(key);
@@ -45,6 +58,14 @@ public class SpritesFactory {
     public static @NotNull LocateImage getRandomSprite() {
         Random random = new Random();
         return skins.get(random.nextInt(skins.size()));
+    }
+    public static @NotNull LocateImage getRandomMeleeEnemySprite() {
+        Random random = new Random();
+        return meleeEnemies.get(random.nextInt(meleeEnemies.size()));
+    }
+    public static @NotNull LocateImage getRandomRangedEnemySprite() {
+        Random random = new Random();
+        return rangedEnemies.get(random.nextInt(rangedEnemies.size()));
     }
 
     public static @Nullable LocateImage getSpriteByNumber(Integer key) {

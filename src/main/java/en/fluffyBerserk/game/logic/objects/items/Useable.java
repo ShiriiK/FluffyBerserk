@@ -1,6 +1,6 @@
 package en.fluffyBerserk.game.logic.objects.items;
 
-public interface UsableItem {
+public interface Useable {
 
     public void use();
 }

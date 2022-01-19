@@ -8,14 +8,14 @@ import org.jetbrains.annotations.Nullable;
 
 public final class CharacterForm extends Form {
 
-    private int pointsLeft = 0;
+    private int pointsLeft = 5;
 
     @Nullable
     private String name = null;
 
-    private int stamina = 0;
+    private int stamina = 5;
 
-    private int strength = 0;
+    private int strength = 5;
 
     private int intellect = 0;
 
@@ -30,7 +30,7 @@ public final class CharacterForm extends Form {
             return;
         }
 
-        pointsLeft = 0;
+        pointsLeft = 5;
         name = character.getName();
         stamina = character.getStamina();
         strength = character.getStrength();

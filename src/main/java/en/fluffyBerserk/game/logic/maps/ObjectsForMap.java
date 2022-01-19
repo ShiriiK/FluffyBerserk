@@ -1,8 +1,11 @@
-package en.fluffyBerserk.gui.graphics.objects;
+package en.fluffyBerserk.game.logic.maps;
 
 import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.portals.HomePortal;
+import en.fluffyBerserk.gui.graphics.objects.EntityFactory;
+
+import static en.fluffyBerserk.game.logic.maps.EntitiesForMaps.loadMap5;
 
 public class ObjectsForMap {
 
@@ -19,6 +22,8 @@ public class ObjectsForMap {
                 return loadMap3();
             case 4:
                 return loadMap4();
+            case 5:
+                return loadMap5();
             case 6:
                 return loadMap6();
         }
@@ -29,8 +34,18 @@ public class ObjectsForMap {
         object = new Entity[1];
 
         object[0] = new HomePortal();
-        object[0].setX(950);
-        object[0].setY(1300);
+        object[0].setX(10 * Constants.TILE_SIZE);
+        object[0].setY(17 * Constants.TILE_SIZE);
+
+        return object;
+    }
+
+    private static Entity[] loadMap5() {
+        object = new Entity[1];
+
+        object[0] = new HomePortal();
+        object[0].setX(5 * Constants.TILE_SIZE);
+        object[0].setY(18 * Constants.TILE_SIZE);
 
         return object;
     }

@@ -8,8 +8,11 @@ public enum ObjectType {
     CARPET, // changes map to safe zone
     PLAYER, // TODO
     BED, // TODO healing or something
-    BULLET,
+    BULLET_PLAYER,
+    BULLET_ENEMY,
     CLOSET,
-    WEARABLE,
+    HEALTH_POTION,
+    STAMINA_POTION,
+    STRENGTH_POTION,
     ENEMY
 }

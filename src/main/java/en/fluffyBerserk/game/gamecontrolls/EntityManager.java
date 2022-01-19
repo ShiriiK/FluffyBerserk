@@ -21,6 +21,10 @@ public final class EntityManager {
         entities.clear();
     }
 
+    public void addEntites(ArrayList<Entity> mapsEntities){ entities.addAll(mapsEntities);}
+
+    public void removeEntites(ArrayList<Entity> mapsEntities){entities.removeAll(mapsEntities);}
+
     public List<Entity> getEntities() {
         return entities;
     }

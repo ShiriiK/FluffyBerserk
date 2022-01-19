@@ -4,7 +4,6 @@ import en.fluffyBerserk.Main;
 import en.fluffyBerserk.gui.graphics.sprites.SpriteImage;
 import en.fluffyBerserk.gui.graphics.sprites.SpritesFactory;
 import en.fluffyBerserk.gui.utils.AttachCSS;
-import en.fluffyBerserk.persistence.DeleteTask;
 import en.fluffyBerserk.persistence.SelectTask;
 import en.fluffyBerserk.persistence.models.Character;
 import en.fluffyBerserk.persistence.models.User;
@@ -17,7 +16,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.persistence.TypedQuery;
 import java.util.List;
-import java.util.Optional;
 
 public final class SaveSlotsScreen extends BaseScreen {
 
@@ -38,31 +36,11 @@ public final class SaveSlotsScreen extends BaseScreen {
     }
 
     private void prepareButtons(User user) {
-        final Button deleteAccount = new Button("Delete Account");
-        deleteAccount.setOnAction(event -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirm deleting your account");
-            alert.setHeaderText("Are you sure you want to delete your account?");
-            alert.setContentText("If the account will be deleted, you will lose your progress in the game.");
 
-            ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Delete");
+        Button deleteAccountButton = factory.getDeleteAccountButton(user);
+        Button logOutButton = factory.getLogOutButton();
 
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                Main.app.logout();
-                if (new DeleteTask<User>().delete(user)) {
-                    Main.app.changeScreen(new HomeScreen());
-                }
-            }
-        });
-
-        final Button logOutButton = new Button("Log out");
-        logOutButton.setOnAction(event -> {
-            Main.app.logout();
-            Main.app.changeScreen(new HomeScreen());
-        });
-
-        bottomButtons.getChildren().addAll(deleteAccount, logOutButton);
+        bottomButtons.getChildren().addAll(deleteAccountButton, logOutButton);
     }
 
     private void loadSaveSlots(User user) {

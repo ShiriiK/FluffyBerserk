@@ -41,4 +41,12 @@ public abstract class MovableAnimatedEntity extends MovableEntity {
     public Direction getDirection() {
         return movableEntityAnimationManager.direction;
     }
+
+    public void updateSpriteForMAE(LocateImage sprite){
+        movableEntityAnimationManager = new MovableEntityAnimationManager(sprite, this);
+    }
+
+    public AnimationManager getAnimationManager() {
+        return animationManager;
+    }
 }

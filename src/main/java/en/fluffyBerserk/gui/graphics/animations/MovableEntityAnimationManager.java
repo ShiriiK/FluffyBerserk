@@ -10,16 +10,11 @@ import java.util.ArrayList;
 public class MovableEntityAnimationManager {
 
     private static final int CHANGE_ANIMATION_NUMBER = 10;
-
-    public Direction direction = Direction.DOWN;
-
-    private int ticks = 0;
-
-    private int animationNumber = 0;
-
     private final MovableEntityAnimations animations;
-
     private final MovableEntity entity;
+    public Direction direction = Direction.DOWN;
+    public int animationNumber = 0;
+    private int ticks = 0;
 
     public MovableEntityAnimationManager(LocateImage sprite, MovableEntity entity) {
         this.entity = entity;
@@ -76,8 +71,8 @@ public class MovableEntityAnimationManager {
     public Image getImage() {
         // Entity is not moving, always return index 1 => standing
         if (!entity.isMoving()) {
-            return getAnimationList().get(1);
-        }
+         return getAnimationList().get(1);
+         }
         return getAnimationList().get(animationNumber);
     }
 
@@ -92,5 +87,6 @@ public class MovableEntityAnimationManager {
             ticks = 0;
             animationNumber = (animationNumber + 1) > 2 ? 0 : animationNumber + 1;
         }
+
     }
 }

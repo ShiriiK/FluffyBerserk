@@ -1,5 +1,6 @@
 package en.fluffyBerserk.gui.popups;
 
+import en.fluffyBerserk.gui.nodes.NodesFactory;
 import en.fluffyBerserk.gui.utils.PopUpBuilder;
 import javafx.stage.Stage;
 
@@ -8,6 +9,7 @@ import javafx.stage.Stage;
  */
 public abstract class PopUp {
 
+    protected NodesFactory factory = new NodesFactory();
     protected final Stage popUpStage;
 
     // Structure of PopUp

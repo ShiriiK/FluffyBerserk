@@ -28,7 +28,7 @@ public class AnimationManager {
 
         if (ticks % CHANGE_ANIMATION_NUMBER == 0) {
             ticks = 0;
-            animationNumber = (animationNumber + 1) > 3 ? 0 : animationNumber + 1;
+            animationNumber = (animationNumber + 1) > (animations.size()-1) ? 0 : animationNumber + 1;
         }
     }
 }

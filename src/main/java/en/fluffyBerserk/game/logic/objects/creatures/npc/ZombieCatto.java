@@ -1,4 +1,4 @@
-package en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive;
+package en.fluffyBerserk.game.logic.objects.creatures.npc;
 
 import en.fluffyBerserk.game.gamecontrolls.Game;
 import en.fluffyBerserk.game.logic.HasName;
@@ -11,10 +11,13 @@ import java.util.Random;
 
 public class ZombieCatto extends Creature implements HasName {
     private Game game;
+    private int attackCd = 50;
 
     public ZombieCatto(Game game) {
-        super(SpritesFactory.getSpriteByNumber(new Random().ints(13, 14).findFirst().getAsInt()), ObjectType.ENEMY);
+        super(SpritesFactory.getRandomMeleeEnemySprite(), ObjectType.ENEMY);
         this.game = game;
+        this.setDmg(5);
+        this.setHp(35);
         NpcFactory.init(this);
     }
 
@@ -25,27 +28,27 @@ public class ZombieCatto extends Creature implements HasName {
 
     @Override
     public void move() {
-        //TODO dojebalo se otaceni
-        boolean move_left = false;
-        boolean move_right = false;
         if (game.getPlayer().getX() > this.getX()) {
             setMoveX(+getNpcSpeed());
-            move_right = true;
         }
-        if (game.getPlayer().getX() < this.getX()) {
+        else if (this.getX() >= game.getPlayer().getX()) {
             setMoveX(-getNpcSpeed());
-            move_left = true;
         }
+
         if (game.getPlayer().getY() > this.getY()) {
-            if (move_left || move_right) {
-                setMoveY(getNpcSpeed());
-            }
+            setMoveY(getNpcSpeed());
         }
-        if (game.getPlayer().getY() < this.getY()) {
-            if (move_left || move_right) {
-                setMoveY(-getNpcSpeed());
-            }
+        else if (this.getY() >= game.getPlayer().getY()) {
+            setMoveY(-getNpcSpeed());
         }
-        super.move();
+
+        setX(this.getX() + getMoveX());
+        setY(this.getY() + getMoveY());
     }
+
+    public boolean canAttack() {return attackCd == 50;}
+
+    public void resetCd() {attackCd = 0;}
+
+    public void refreshCd() {if (attackCd < 50) attackCd++;}
 }

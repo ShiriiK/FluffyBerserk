@@ -10,6 +10,9 @@ public class Constants {
 
     public static final int ENTITIES_SIZE = TILE_SIZE - 10;
 
+    public static final int PLAYER_HP_SCALE = 20;       //Hp = stamina(or vitality) * this constant
+    public static final int PLAYER_DMG_SCALE = 1;       //Dmg = strength * this constant
+
     public static final int MAX_WORLD_COL = 20;
     public static final int MAX_WORLD_ROW = 20;
 
@@ -22,7 +25,9 @@ public class Constants {
     public static final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL;
     public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW;
 
-    public static final int PLAYER_CD = 20;
+    public static final int DROP_RATE = 100;
+    public static final int NUMBER_OF_POTIONS = 4;
 
     public static boolean SHOW_HIT_BOX = false;
+
 }

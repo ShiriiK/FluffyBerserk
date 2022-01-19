@@ -6,6 +6,7 @@ import en.fluffyBerserk.game.gamecontrolls.Game;
 import en.fluffyBerserk.gui.graphics.sprites.SpriteImage;
 import en.fluffyBerserk.gui.graphics.sprites.SpritesFactory;
 import en.fluffyBerserk.gui.utils.AttachCSS;
+import en.fluffyBerserk.gui.utils.Handy;
 import en.fluffyBerserk.gui.utils.LocateImage;
 import en.fluffyBerserk.persistence.DeleteTask;
 import en.fluffyBerserk.persistence.InsertTask;
@@ -129,10 +130,10 @@ public final class CharacterScreen extends BaseScreen {
         } else { // logged user is viewing detail of existing character
             final Button backToProfileButton = new Button("Back");
             backToProfileButton.setOnAction(event -> {
-                Main.app.changeScreen(new SaveSlotsScreen());
+                    Main.app.changeScreen(new SaveSlotsScreen());
             });
 
-            final Button saveButton = new Button("Save character");
+            final Button saveButton =  new Button("Save character");
             saveButton.setOnAction(event -> {
                 form.clearErrors();
 
@@ -148,38 +149,20 @@ public final class CharacterScreen extends BaseScreen {
                 character.setStrength(form.getStrength());
                 character.setSpriteIndex(form.getSprite().getIndex());
 
-                new UpdateTask<Character>().update(character);
-
-                Main.app.changeScreen(new SaveSlotsScreen());
-            });
-
-            final Button deleteButton = new Button("Delete character");
-            deleteButton.setOnAction(event -> {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Confirm deleting your character");
-                alert.setHeaderText("Are you sure you want to delete your character?");
-                alert.setContentText("If the character will be deleted, you will lose your progress in the game.");
-
-                ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Delete");
-
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.isPresent() && result.get() == ButtonType.OK) {
-                    if (new DeleteTask<Character>().delete(character)) {
-                        Main.app.changeScreen(new SaveSlotsScreen());
-                    }
+                if(Main.app.getGame() != null){
+                    Main.app.getGame().getPlayer().getCharacter().setSpriteIndex(form.getSprite().getIndex());
                 }
+
+                new UpdateTask<Character>().update(character);
             });
+
+            final Button deleteButton = factory.getDeleteCharacterButton(character);
 
             final Button playButton = new Button("Play");
             playButton.setOnAction(event -> {
-
                 if (Main.app.getGame() != null) {
                     if (Main.app.getGame().running) {
-                        Game game = Main.app.getGame();
-                        Main.app.changeScreen(Main.app.getGame().gameScreen); //TODO now just save this to database
-                        game.setCurrentMap(Main.app.getGame().getCurrentMap());
-                        game.getGameLoop().start();
-                        System.out.println("Back in same game");
+                        Handy.backToGame();
                     }
 
                 } else {
@@ -190,6 +173,10 @@ public final class CharacterScreen extends BaseScreen {
 
             rightBox.getChildren().addAll(backToProfileButton, playButton);
             leftBox.getChildren().addAll(deleteButton, saveButton);
+
+            if (Main.app.getGame() != null){
+                rightBox.getChildren().remove(backToProfileButton);
+            }
         }
     }
 
@@ -198,16 +185,16 @@ public final class CharacterScreen extends BaseScreen {
 
         rightBox.getChildren().add(pointsLeftLabel);
 
-        final Label staminaLabel = new Label("Stamina");
+        final Label staminaLabel = new Label("Vitality");
         final Spinner<Integer> staminaSpinner = new Spinner<>();
-        staminaSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, form.getPointsLeft() + form.getStamina(), form.getStamina()));
+        staminaSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(5, form.getPointsLeft() + form.getStamina(), form.getStamina()));
 
         rightBox.getChildren().add(staminaLabel);
         rightBox.getChildren().add(staminaSpinner);
 
         final Label strengthLabel = new Label("Strength");
         final Spinner<Integer> strengthSpinner = new Spinner<>();
-        strengthSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, form.getPointsLeft() + form.getStrength(), form.getStrength()));
+        strengthSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(5, form.getPointsLeft() + form.getStrength(), form.getStrength()));
 
         rightBox.getChildren().add(strengthLabel);
         rightBox.getChildren().add(strengthSpinner);
@@ -279,7 +266,7 @@ public final class CharacterScreen extends BaseScreen {
         buttonNext.setOnAction(event -> {
             int newIndex = form.getSprite().getIndex() + 1;
 
-            if (!SpritesFactory.indexExists(newIndex)) {
+            if (!SpritesFactory.indexExists(newIndex) || newIndex > 12) {
                 return;
             }
 

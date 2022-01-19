@@ -14,11 +14,14 @@ public final class Player extends MovableAnimatedEntity implements HasName, CanA
 
     private final Character character;
 
-    private int attackCd = 20; //
+    private int maxCd = 50;
+    private int attackCd = 0; //
+    private int hp = 0;
 
     public Player(Character character) {
         super(SpritesFactory.getSpriteByNumber(character.getSpriteIndex()), ObjectType.PLAYER);
         this.character = character;
+        this.hp = character.getStamina() * Constants.PLAYER_HP_SCALE;
     }
 
     @Override
@@ -48,12 +51,20 @@ public final class Player extends MovableAnimatedEntity implements HasName, CanA
 
     @Override
     public boolean canAttack() {
-        return attackCd == Constants.PLAYER_CD;
+        return attackCd == maxCd;
+    }
+
+    public int getMaxCd() {
+        return maxCd;
+    }
+
+    public void setMaxCd(int cd){
+        maxCd = cd;
     }
 
     @Override
     public void reduceCooldown() {
-        if (attackCd != Constants.PLAYER_CD) ++attackCd;
+        if (attackCd != maxCd) ++attackCd;
     }
 
     @Override
@@ -61,7 +72,28 @@ public final class Player extends MovableAnimatedEntity implements HasName, CanA
         attackCd = 0;
     }
 
+    public int getDmg() {return character.getStrength() * Constants.PLAYER_DMG_SCALE;}   // Should return total damage of  player with initial number
+                                                            // plus equipment bonuses in future
+
+    public int getHp() {
+        return hp;                 // Hp of player = stamina * 10
+    }
+
+    public void damaged(int dmg) {
+        this.hp -= dmg;
+    }
+
+    public boolean isDead(){
+        return hp <= 0;
+    }
+
+    public void regenHp() {this.hp = character.getStamina() * Constants.PLAYER_HP_SCALE;}
+
     public Character getCharacter() {
         return character;
+    }
+
+    public void refreshSprite(){
+        updateSpriteForMAE(SpritesFactory.getSpriteByNumber(character.getSpriteIndex()));
     }
 }

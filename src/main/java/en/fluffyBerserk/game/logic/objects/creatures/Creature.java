@@ -4,6 +4,7 @@ import en.fluffyBerserk.game.logic.HasName;
 import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.objects.MovableAnimatedEntity;
 import en.fluffyBerserk.gui.utils.LocateImage;
+import javafx.scene.image.Image;
 
 public abstract class Creature extends MovableAnimatedEntity implements HasName {
 
@@ -84,4 +85,6 @@ public abstract class Creature extends MovableAnimatedEntity implements HasName 
     public void setDmg(int dmg) {
         this.dmg = dmg;
     }
+
+    public void damaged(int incomingDmg) {this.hp -= incomingDmg;}
 }

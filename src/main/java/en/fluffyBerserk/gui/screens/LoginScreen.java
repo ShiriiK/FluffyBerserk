@@ -138,8 +138,6 @@ public final class LoginScreen extends BaseScreen {
 
         scene= new Scene(root);
         AttachCSS.attachCSS(scene);
-
-
     }
 
     @Override

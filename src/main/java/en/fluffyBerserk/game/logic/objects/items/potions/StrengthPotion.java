@@ -5,26 +5,28 @@ import javafx.scene.image.Image;
 
 public class StrengthPotion extends Potion {
 
-    private int strength;
+    public StrengthPotion() {
+        super(ObjectType.STRENGTH_POTION);
+    }
 
-    public StrengthPotion(int strength,ObjectType type) {
-        super(type);
-        this.strength = strength;
+    @Override
+    protected int setEffect() {
+        return 10;
     }
 
 
     @Override
     protected void drink() {
-        // TODO add strength to user!
+        // TODO add health to user!
     }
 
     @Override
     public String getName() {
-        return "Strength potion";
+        return "strength";
     }
 
     @Override
     public Image getImage() {
-        return null;
+        return new Image("items/strength.png");
     }
 }

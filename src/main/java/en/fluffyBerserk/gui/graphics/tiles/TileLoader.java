@@ -22,6 +22,7 @@ public final class TileLoader {
         int maxRow = height/Constants.TILE_SIZE;
         int maxCol = width/Constants.TILE_SIZE;
         Vector<Vector<TileObject>> matrix = new Vector<>(maxRow);
+        Vector<Vector<TileObject>> spawnable= new Vector<>(maxRow);
 
         try {
             InputStream inputStream = TileLoader.class.getClassLoader().getResourceAsStream(path);
