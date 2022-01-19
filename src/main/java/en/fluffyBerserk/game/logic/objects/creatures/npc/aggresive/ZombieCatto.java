@@ -16,7 +16,7 @@ public class ZombieCatto extends Creature implements HasName {
         super(SpritesFactory.getRandomMeleeEnemySprite(), ObjectType.ENEMY);
         this.game = game;
         this.setDmg(5);
-        this.setHp(45);
+        this.setHp(35);
         NpcFactory.init(this);
     }
 
