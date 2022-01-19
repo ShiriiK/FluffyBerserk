@@ -34,7 +34,7 @@ public class ObjectsForMap {
         object = new Entity[1];
 
         object[0] = new HomePortal();
-        object[0].setX(12 * Constants.TILE_SIZE);
+        object[0].setX(10 * Constants.TILE_SIZE);
         object[0].setY(17 * Constants.TILE_SIZE);
 
         return object;

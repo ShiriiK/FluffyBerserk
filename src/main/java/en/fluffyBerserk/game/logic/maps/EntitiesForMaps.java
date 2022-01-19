@@ -3,8 +3,8 @@ package en.fluffyBerserk.game.logic.maps;
 import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.logic.objects.Entity;
-import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ArcherCatto;
-import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ZombieCatto;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.ArcherCatto;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.ZombieCatto;
 
 import java.util.ArrayList;
 
@@ -184,7 +184,7 @@ public class EntitiesForMaps {
         catto1.setY(4 * Constants.TILE_SIZE);
 
         Entity catto2 = new ZombieCatto(Main.app.getGame());
-        catto2.setX(20 * Constants.TILE_SIZE);
+        catto2.setX(12 * Constants.TILE_SIZE);
         catto2.setY(4 * Constants.TILE_SIZE);
 
         Entity catto3 = new ZombieCatto(Main.app.getGame());
@@ -193,19 +193,19 @@ public class EntitiesForMaps {
 
         Entity catto4 = new ZombieCatto(Main.app.getGame());
         catto4.setX(12 * Constants.TILE_SIZE);
-        catto4.setY(20 * Constants.TILE_SIZE);
+        catto4.setY(3 * Constants.TILE_SIZE);
 
         Entity catto5 = new ZombieCatto(Main.app.getGame());
-        catto5.setX(21 * Constants.TILE_SIZE);
+        catto5.setX(3 * Constants.TILE_SIZE);
         catto5.setY(18 * Constants.TILE_SIZE);
 
         Entity catto6 = new ArcherCatto(Main.app.getGame());
         catto6.setX(12 * Constants.TILE_SIZE);
-        catto6.setY(21 * Constants.TILE_SIZE);
+        catto6.setY(15 * Constants.TILE_SIZE);
 
         Entity catto7 = new ArcherCatto(Main.app.getGame());
         catto7.setX(3 * Constants.TILE_SIZE);
-        catto7.setY(21 * Constants.TILE_SIZE);
+        catto7.setY(16 * Constants.TILE_SIZE);
 
         Entity catto8 = new ArcherCatto(Main.app.getGame());
         catto8.setX(14 * Constants.TILE_SIZE);

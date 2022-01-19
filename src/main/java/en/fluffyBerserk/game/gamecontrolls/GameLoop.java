@@ -12,10 +12,9 @@ import en.fluffyBerserk.game.logic.objects.TileObject;
 import en.fluffyBerserk.game.logic.objects.bullets.Bullet;
 import en.fluffyBerserk.game.logic.objects.creatures.Creature;
 import en.fluffyBerserk.game.logic.objects.creatures.Death;
-import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ArcherCatto;
-import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ZombieCatto;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.ArcherCatto;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.ZombieCatto;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
-import en.fluffyBerserk.game.logic.objects.items.Pickable;
 import en.fluffyBerserk.game.logic.objects.items.potions.HealthPotion;
 import en.fluffyBerserk.game.logic.objects.items.potions.Potion;
 import en.fluffyBerserk.game.logic.objects.items.potions.StaminaPotion;
@@ -34,30 +33,27 @@ public final class GameLoop {
 
     @NotNull
     private final Game game;
-
-
+    private Death death;    
     public AnimationTimer potionTimer = new AnimationTimer() {
         @Override
         public void handle(long now) {
             handleDrink();
         }
-    };    @NotNull
+    };
+    private Potion potion;    @NotNull
     private final AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(long now) {
             updateGame();
         }
     };
+    private double span = 1;    
     private AnimationTimer deathTimer = new AnimationTimer() {
         @Override
         public void handle(long now) {
             hadnleDeath();
         }
     };
-
-    private Death death;
-    private Potion potion;
-    private double span = 1;
 
     public GameLoop(@NotNull Game game) {
         this.game = game;
@@ -195,12 +191,12 @@ public final class GameLoop {
             }
 
             //ArchcerCatto checks and shoots if possible (shoot depends on CD and Range)
-            if (entity instanceof ArcherCatto){
+            if (entity instanceof ArcherCatto) {
                 ((ArcherCatto) entity).shoot();
             }
 
             //ZombieCatto refresh attackCd
-            if(entity instanceof ZombieCatto) {
+            if (entity instanceof ZombieCatto) {
                 ((ZombieCatto) entity).refreshCd();
             }
 
@@ -348,14 +344,14 @@ public final class GameLoop {
                 game.getEntityManager().addEntity(death);
 
                 Random random = new Random();
-                if(Constants.DROP_RATE >= random.nextInt(100)){
+                if (Constants.DROP_RATE >= random.nextInt(100)) {
                     Random random1 = new Random();
 
-                    if(random1.nextInt(Constants.NUMBER_OF_POTIONS) == 1){
+                    if (random1.nextInt(Constants.NUMBER_OF_POTIONS) == 1) {
                         potion = new StaminaPotion();
-                    } else if(random1.nextInt(Constants.NUMBER_OF_POTIONS) == 2){
+                    } else if (random1.nextInt(Constants.NUMBER_OF_POTIONS) == 2) {
                         potion = new HealthPotion();
-                    } else if (random1.nextInt(Constants.NUMBER_OF_POTIONS) == 3){
+                    } else if (random1.nextInt(Constants.NUMBER_OF_POTIONS) == 3) {
                         potion = new StaminaPotion();
                     }
                     potion.setX(entity.getX());
@@ -390,7 +386,7 @@ public final class GameLoop {
     private void handleDrink() {
         span -= 0.01;
         System.out.println("cd =" + game.getPlayer().getMaxCd());
-        if(span <= 0){
+        if (span <= 0) {
             game.getPlayer().setMaxCd(50);
             span = 1;
             potionTimer.stop();
