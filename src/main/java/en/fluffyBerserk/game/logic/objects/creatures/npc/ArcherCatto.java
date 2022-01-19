@@ -1,4 +1,4 @@
-package en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive;
+package en.fluffyBerserk.game.logic.objects.creatures.npc;
 
 
 import en.fluffyBerserk.Constants;

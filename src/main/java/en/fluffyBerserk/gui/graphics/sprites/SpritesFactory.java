@@ -41,6 +41,8 @@ public class SpritesFactory {
 
     private static final Map<Integer, LocateImage> rangedEnemies = new HashMap<Integer, LocateImage>() {{
         put(0, new LocateImage("npcs/ranged1.png", 1));
+        put(1, new LocateImage("npcs/ranged2.png", 1));
+        put(2, new LocateImage("npcs/ranged3.png", 1));
     }};
 
 

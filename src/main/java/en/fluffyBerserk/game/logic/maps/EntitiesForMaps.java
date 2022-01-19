@@ -3,8 +3,8 @@ package en.fluffyBerserk.game.logic.maps;
 import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.logic.objects.Entity;
-import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ArcherCatto;
-import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ZombieCatto;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.ArcherCatto;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.ZombieCatto;
 
 import java.util.ArrayList;
 
