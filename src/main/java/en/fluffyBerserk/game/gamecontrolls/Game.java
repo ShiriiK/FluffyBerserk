@@ -3,11 +3,8 @@ package en.fluffyBerserk.game.gamecontrolls;
 import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.maps.Map;
-import en.fluffyBerserk.game.logic.maps.Map1;
 import en.fluffyBerserk.game.logic.maps.MapLoader;
 import en.fluffyBerserk.game.logic.maps.PlayerSpawnManager;
-import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ZombieArcher;
-import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ZombieCatto;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.armor.BodyArmor;
 import en.fluffyBerserk.game.logic.objects.items.armor.Head;
@@ -24,24 +21,15 @@ public final class Game {
     private final Player player;
 
     private final Inventory inventory;
-
-    private EntityManager entityManager = new EntityManager();
-
     private final GameGraphics gameGraphics = new GameGraphics();
-
     private final GameLoop gameLoop = new GameLoop(this);
-
     private final Camera camera = new Camera(this);
-
-    private Map currentMap;
-
     public Map map1, map2, map3, map4, map5, map6;
-
     public PlayerSpawnManager playerSpawner;
-
     public GameScreen gameScreen;
-
     public boolean running = false;
+    private EntityManager entityManager = new EntityManager();
+    private Map currentMap;
 
     public Game(Character character) {
         player = new Player(character);
@@ -71,7 +59,7 @@ public final class Game {
     }
 
     public void setCurrentMap(Map map) {
-        if (currentMap.getEntities() != null){
+        if (currentMap.getEntities() != null) {
             this.getEntityManager().removeEntites(currentMap.getEntities());
         }
         currentMap = map;
@@ -91,9 +79,10 @@ public final class Game {
     private void bootDefaultState() {
         entityManager.addEntity(player);
 
-        BodyArmor bodyArmor1 = new BodyArmor("bodyArmor1", 2, 2, 2, 2, ObjectType.WEARABLE);
-        Head head1 = new Head("head1", 4, 2, 2, 2, ObjectType.WEARABLE);
-        Pants pants1 = new Pants("pants1", 1, 2, 4, 1, ObjectType.WEARABLE);
+
+        BodyArmor bodyArmor1 = new BodyArmor("Body1", 2, 2, 2, 2, ObjectType.WEARABLE);
+        Head head1 = new Head("Head1", 4, 2, 2, 2, ObjectType.WEARABLE);
+        Pants pants1 = new Pants("Pants1", 1, 2, 4, 1, ObjectType.WEARABLE);
 
         entityManager.addEntity(bodyArmor1);
         entityManager.addEntity(head1);
