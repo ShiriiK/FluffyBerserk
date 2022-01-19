@@ -41,7 +41,27 @@ public class EntitiesForMaps {
         catto1.setX(7 * Constants.TILE_SIZE);
         catto1.setY(16 * Constants.TILE_SIZE);
 
+        Entity catto2 = new ZombieCatto(Main.app.getGame());
+        catto2.setX(17 * Constants.TILE_SIZE);
+        catto2.setY(16 * Constants.TILE_SIZE);
+
+        Entity catto3 = new ZombieCatto(Main.app.getGame());
+        catto3.setX(13 * Constants.TILE_SIZE);
+        catto3.setY(11 * Constants.TILE_SIZE);
+
+        Entity catto4 = new ZombieCatto(Main.app.getGame());
+        catto4.setX(5 * Constants.TILE_SIZE);
+        catto4.setY(9 * Constants.TILE_SIZE);
+
+        Entity catto5 = new ZombieCatto(Main.app.getGame());
+        catto5.setX(10 * Constants.TILE_SIZE);
+        catto5.setY(2 * Constants.TILE_SIZE);
+
         entities.add(catto1);
+        entities.add(catto2);
+        entities.add(catto3);
+        entities.add(catto4);
+        entities.add(catto5);
 
         return entities;
     }

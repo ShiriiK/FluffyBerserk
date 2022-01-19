@@ -4,20 +4,21 @@ import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.logic.Animated;
 import en.fluffyBerserk.game.logic.ObjectType;
-import en.fluffyBerserk.game.logic.maps.Map2;
 import en.fluffyBerserk.game.logic.maps.Map1;
+import en.fluffyBerserk.game.logic.maps.Map2;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.MovableEntity;
 import en.fluffyBerserk.game.logic.objects.TileObject;
 import en.fluffyBerserk.game.logic.objects.bullets.Bullet;
 import en.fluffyBerserk.game.logic.objects.creatures.Creature;
+import en.fluffyBerserk.game.logic.objects.creatures.Death;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.PickableItem;
 import en.fluffyBerserk.gui.utils.Collision;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -27,15 +28,18 @@ public final class GameLoop {
 
     @NotNull
     private final Game game;
+    AnimationTimer labelTimer = new AnimationTimer() {
+        @Override
+        public void handle(long now) {
 
-    @NotNull
+        }
+    };    @NotNull
     private final AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(long now) {
             updateGame();
         }
     };
-
     AnimationTimer deathTimer = new AnimationTimer() {
         @Override
         public void handle(long now) {
@@ -43,17 +47,12 @@ public final class GameLoop {
         }
     };
 
+    private Death death;
+    private double span = 1;
+
     public GameLoop(@NotNull Game game) {
         this.game = game;
     }
-
-    private double opacity = 1;
-    Entity death = new Entity(ObjectType.TILE) {
-        @Override
-        public Image getImage() {
-            return new Image("npcs/death.png");
-        }
-    };
 
     public void start() {
         timer.start();
@@ -62,7 +61,7 @@ public final class GameLoop {
         System.out.println("Game loop started");
     }
 
-    public void stop(){
+    public void stop() {
         timer.stop();
     }
 
@@ -138,10 +137,10 @@ public final class GameLoop {
                             objects[i].getWidth(),
                             objects[i].getHeight()
                     );
+
                     if (objects[i] instanceof Animated) {
                         ((Animated) objects[i]).getAnimationManager().increaseTick();
                     }
-
 
                     if (Constants.SHOW_HIT_BOX) {
                         canvas.getGraphicsContext2D().strokeRect(
@@ -166,7 +165,7 @@ public final class GameLoop {
             }
 
             for (Entity entity1 : game.getEntityManager().getEntities())
-                if (entity1 instanceof PickableItem && entity instanceof Player && Collision.objectsCollide(entity,entity1)){
+                if (entity1 instanceof PickableItem && entity instanceof Player && Collision.objectsCollide(entity, entity1)) {
                     game.getInventory().addItem((PickableItem) entity1);
                     itemsToRemoveFromMap.add(entity1);
                     System.out.println("Item picked");
@@ -222,7 +221,7 @@ public final class GameLoop {
 
                             if (objects[i].getType().equals(ObjectType.HOME)) {
                                 game.playerSpawner.spawnOnMap(2);
-                                if (game.map2 == null){
+                                if (game.map2 == null) {
                                     game.map2 = new Map2();
                                     game.setCurrentMap(game.map2);
                                     System.out.println("new map");
@@ -243,23 +242,23 @@ public final class GameLoop {
             }
         }
 
-        if (itemsToRemoveFromMap.size() == 1){
+        if (itemsToRemoveFromMap.size() == 1) {
             game.getEntityManager().removeEntity(itemsToRemoveFromMap.get(0));
             itemsToRemoveFromMap.clear();
         }
 
 
         // Check collision with other entities (bullets, monsters, npc, items etc.)
-        for (Entity entity1 : game.getEntityManager().getEntities()){
+        for (Entity entity1 : game.getEntityManager().getEntities()) {
             if (entity1.getType().equals(ObjectType.BULLET_PLAYER))
-            for (Entity  entity2 : game.getEntityManager().getEntities()){
-                if (entity2.getType().equals(ObjectType.ENEMY)) {
-                    if (Collision.objectsCollide(entity1, entity2)){
-                        ((Creature) entity2).damaged(((Bullet) entity1).getDmg());
-                        ((Bullet) entity1).setDmg(0);
+                for (Entity entity2 : game.getEntityManager().getEntities()) {
+                    if (entity2.getType().equals(ObjectType.ENEMY)) {
+                        if (Collision.objectsCollide(entity1, entity2)) {
+                            ((Creature) entity2).damaged(((Bullet) entity1).getDmg());
+                            ((Bullet) entity1).setDmg(0);
+                        }
                     }
                 }
-            }
         }
 
 
@@ -297,28 +296,31 @@ public final class GameLoop {
 
             //Delete Hostile entities, who have less than 0 hp;
             if (entity.getType().equals(ObjectType.ENEMY) && ((Creature) entity).getHp() <= 0) {
+                death = new Death();
                 death.setX(entity.getX());
                 death.setY(entity.getY());
-                game.getEntityManager().addEntity(death);
-
                 game.getEntityManager().removeEntity(entity);
+                game.getEntityManager().addEntity(death);
                 deathTimer.start();
             }
 
             //Delete bullets which lifeSpan is below 0
-            if((entity.getType().equals(ObjectType.BULLET_PLAYER) || entity.getType().equals(ObjectType.BULLET_HOSTILE))
-            && ((Bullet) entity).lifeSpan <= 0) {
+            if ((entity.getType().equals(ObjectType.BULLET_PLAYER) || entity.getType().equals(ObjectType.BULLET_HOSTILE))
+                    && ((Bullet) entity).lifeSpan <= 0) {
                 game.getEntityManager().getEntities().remove(entity);
             }
         }
     }
 
-    private void hadnleDeath(){
-        opacity -= 0.033;
-        death.setY(death.getY()-2);
-        if (opacity <= 0) {
+    private void hadnleDeath() {
+        span -= 0.033;
+        death.setY(death.getY() - 2);
+        if (span <= 0) {
             game.getEntityManager().removeEntity(death);
+            span = 1;
             deathTimer.stop();
         }
     }
+
+
 }

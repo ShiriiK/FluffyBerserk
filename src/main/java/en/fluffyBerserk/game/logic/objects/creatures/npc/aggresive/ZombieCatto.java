@@ -13,7 +13,7 @@ public class ZombieCatto extends Creature implements HasName {
     private Game game;
 
     public ZombieCatto(Game game) {
-        super(SpritesFactory.getSpriteByNumber(new Random().ints(13, 14).findFirst().getAsInt()), ObjectType.ENEMY);
+        super(SpritesFactory.getRandomMeleeEnemySprite(), ObjectType.ENEMY);
         this.game = game;
         NpcFactory.init(this);
     }
@@ -25,26 +25,21 @@ public class ZombieCatto extends Creature implements HasName {
 
     @Override
     public void move() {
-        //TODO dojebalo se otaceni
-        boolean move_left = false;
-        boolean move_right = false;
-        if (game.getPlayer().getX() > this.getX()) {
+        float playerX = game.getPlayer().getX();
+        float playerY = game.getPlayer().getY();
+
+        if (playerX >= this.getX()) {
             setMoveX(+getNpcSpeed());
-            move_right = true;
         }
-        if (game.getPlayer().getX() < this.getX()) {
+        if (playerX < this.getX()) {
             setMoveX(-getNpcSpeed());
-            move_left = true;
         }
-        if (game.getPlayer().getY() > this.getY()) {
-            if (move_left || move_right) {
-                setMoveY(getNpcSpeed());
-            }
+        if (playerY >= this.getY()) {
+            setMoveY(getNpcSpeed());
         }
-        if (game.getPlayer().getY() < this.getY()) {
-            if (move_left || move_right) {
-                setMoveY(-getNpcSpeed());
-            }
+        if (playerY < this.getY()) {
+            setMoveY(-getNpcSpeed());
+
         }
         super.move();
     }

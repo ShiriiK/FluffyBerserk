@@ -43,12 +43,12 @@ public abstract class Entity implements Object {
 
     @Override
     public int getHeight() {
-        return Constants.ENTITIES_SIZE;
+        return Constants.TILE_SIZE;
     }
 
     @Override
     public int getWidth() {
-        return Constants.ENTITIES_SIZE;
+        return Constants.TILE_SIZE;
     }
 
     @Override
