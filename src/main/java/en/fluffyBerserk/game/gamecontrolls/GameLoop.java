@@ -13,6 +13,7 @@ import en.fluffyBerserk.game.logic.objects.bullets.Bullet;
 import en.fluffyBerserk.game.logic.objects.creatures.Creature;
 import en.fluffyBerserk.game.logic.objects.creatures.Death;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.ArcherCatto;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.Boss1;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.ZombieCatto;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.potions.HealthPotion;
@@ -32,26 +33,14 @@ public final class GameLoop {
 
     @NotNull
     private final Game game;
-    private Death death;    public AnimationTimer potionTimer = new AnimationTimer() {
+    private Death death;
+    private Potion potion;
+    private double span = 1;    public AnimationTimer potionTimer = new AnimationTimer() {
         @Override
         public void handle(long now) {
             handleDrink();
         }
     };
-    private Potion potion;    @NotNull
-    private final AnimationTimer timer = new AnimationTimer() {
-        @Override
-        public void handle(long now) {
-            updateGame();
-        }
-    };
-    private double span = 1;    private AnimationTimer deathTimer = new AnimationTimer() {
-        @Override
-        public void handle(long now) {
-            hadnleDeath();
-        }
-    };
-
     public GameLoop(@NotNull Game game) {
         this.game = game;
     }
@@ -128,7 +117,12 @@ public final class GameLoop {
                 }
             }
         }
-    }
+    }    private AnimationTimer deathTimer = new AnimationTimer() {
+        @Override
+        public void handle(long now) {
+            hadnleDeath();
+        }
+    };
 
     private void drawObjects(Canvas canvas) {
         Entity[] objects = game.getCurrentMap().getObjects();
@@ -293,10 +287,20 @@ public final class GameLoop {
             if (entity1.getType().equals(ObjectType.ENEMY)) {
                 for (Entity entity2 : game.getEntityManager().getEntities()) {
                     if (entity2.getType().equals(ObjectType.PLAYER)) {
-                        if (Collision.objectsCollide(entity1, entity2) && ((ZombieCatto) entity1).canAttack()) {
-                            ((Player) entity2).damaged(((Creature) entity1).getDmg());
-                            ((ZombieCatto) entity1).resetCd();
-                            System.out.println("You have got: " + ((Creature) entity1).getDmg() + " dmg");
+                        if (Collision.objectsCollide(entity1, entity2)) {
+                            if (entity1 instanceof ZombieCatto) {
+                                if (((ZombieCatto) entity1).canAttack()) {
+                                    ((ZombieCatto) entity1).resetCd();
+                                    ((Player) entity2).damaged(((Creature) entity1).getDmg());
+                                    System.out.println("You have got: " + ((Creature) entity1).getDmg() + " dmg");
+                                }
+                            } else if (entity1 instanceof Boss1) {
+                                if (((Boss1) entity1).canAttack()) {
+                                    ((Boss1) entity1).resetCd();
+                                    ((Player) entity2).damaged(((Creature) entity1).getDmg());
+                                    System.out.println("You have got: " + ((Creature) entity1).getDmg() + " dmg");
+                                }
+                            }
                         }
                     }
                 }
@@ -371,7 +375,13 @@ public final class GameLoop {
                 game.getEntityManager().getEntities().remove(entity);
             }
         }
-    }
+    }    @NotNull
+    private final AnimationTimer timer = new AnimationTimer() {
+        @Override
+        public void handle(long now) {
+            updateGame();
+        }
+    };
 
     private void hadnleDeath() {
         span -= 0.033;

@@ -70,9 +70,9 @@ public class MovableEntityAnimationManager {
 
     public Image getImage() {
         // Entity is not moving, always return index 1 => standing
-        /**if (!entity.isMoving()) {
+        if (!entity.isMoving()) {
          return getAnimationList().get(1);
-         }*/
+         }
         return getAnimationList().get(animationNumber);
     }
 

@@ -30,19 +30,31 @@ public class ZombieCatto extends Creature implements HasName {
     public void move() {
         float playerX = game.getPlayer().getX();
         float playerY = game.getPlayer().getY();
+        boolean move_left = false;
+        boolean move_right = false;
+
 
         if (playerX >= this.getX()) {
             setMoveX(+getNpcSpeed());
+            setX(this.getX() + getMoveX());
+            move_left = true;
         }
         if (playerX < this.getX()) {
             setMoveX(-getNpcSpeed());
+            setX(this.getX() + getMoveX());
+            move_right = true;
         }
         if (playerY >= this.getY()) {
-            setMoveY(getNpcSpeed());
+            if (!move_left || !move_right) {
+                setMoveY(getNpcSpeed());
+            }
+            setY(this.getY() + getMoveY());
         }
         if (playerY < this.getY()) {
-            setMoveY(-getNpcSpeed());
-
+            if (!move_left || !move_right) {
+                setMoveY(-getNpcSpeed());
+            }
+            setY(this.getY() + getMoveY());
         }
         super.move();
     }
