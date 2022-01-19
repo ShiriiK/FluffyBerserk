@@ -59,16 +59,16 @@ public class EntitiesForMaps {
         catto5.setY(2 * Constants.TILE_SIZE);
 
         Entity catto6 = new ArcherCatto(Main.app.getGame());
-        catto6.setX(12 * Constants.TILE_SIZE);
-        catto6.setY(3 * Constants.TILE_SIZE);
+        catto6.setX(15 * Constants.TILE_SIZE);
+        catto6.setY(2 * Constants.TILE_SIZE);
 
         Entity catto7 = new ArcherCatto(Main.app.getGame());
-        catto7.setX(13 * Constants.TILE_SIZE);
-        catto7.setY(3 * Constants.TILE_SIZE);
+        catto7.setX(18 * Constants.TILE_SIZE);
+        catto7.setY(4 * Constants.TILE_SIZE);
 
         Entity catto8 = new ArcherCatto(Main.app.getGame());
-        catto8.setX(12 * Constants.TILE_SIZE);
-        catto8.setY(4 * Constants.TILE_SIZE);
+        catto8.setX(4 * Constants.TILE_SIZE);
+        catto8.setY(9 * Constants.TILE_SIZE);
 
         entities.add(catto1);
         entities.add(catto2);
@@ -85,17 +85,140 @@ public class EntitiesForMaps {
     public static ArrayList<Entity> loadMap4() {
         entities = new ArrayList<Entity>(20);
 
+        Entity catto1 = new ZombieCatto(Main.app.getGame());
+        catto1.setX(9 * Constants.TILE_SIZE);
+        catto1.setY(8 * Constants.TILE_SIZE);
+
+        Entity catto2 = new ZombieCatto(Main.app.getGame());
+        catto2.setX(11 * Constants.TILE_SIZE);
+        catto2.setY(16 * Constants.TILE_SIZE);
+
+        Entity catto3 = new ZombieCatto(Main.app.getGame());
+        catto3.setX(11 * Constants.TILE_SIZE);
+        catto3.setY(2 * Constants.TILE_SIZE);
+
+        Entity catto4 = new ZombieCatto(Main.app.getGame());
+        catto4.setX(16 * Constants.TILE_SIZE);
+        catto4.setY(7 * Constants.TILE_SIZE);
+
+        Entity catto5 = new ZombieCatto(Main.app.getGame());
+        catto5.setX(2 * Constants.TILE_SIZE);
+        catto5.setY(13 * Constants.TILE_SIZE);
+
+        Entity catto6 = new ArcherCatto(Main.app.getGame());
+        catto6.setX(17 * Constants.TILE_SIZE);
+        catto6.setY(7 * Constants.TILE_SIZE);
+
+        Entity catto7 = new ArcherCatto(Main.app.getGame());
+        catto7.setX(17 * Constants.TILE_SIZE);
+        catto7.setY(6 * Constants.TILE_SIZE);
+
+        Entity catto8 = new ArcherCatto(Main.app.getGame());
+        catto8.setX(3 * Constants.TILE_SIZE);
+        catto8.setY(2 * Constants.TILE_SIZE);
+
+        entities.add(catto1);
+        entities.add(catto2);
+        entities.add(catto3);
+        entities.add(catto4);
+        entities.add(catto5);
+        entities.add(catto6);
+        entities.add(catto7);
+        entities.add(catto8);
+
         return entities;
     }
 
     public static ArrayList<Entity> loadMap5(){
         entities = new ArrayList<Entity>(20);
 
+        Entity catto1 = new ZombieCatto(Main.app.getGame());
+        catto1.setX(8 * Constants.TILE_SIZE);
+        catto1.setY(9 * Constants.TILE_SIZE);
+
+        Entity catto2 = new ZombieCatto(Main.app.getGame());
+        catto2.setX(8 * Constants.TILE_SIZE);
+        catto2.setY(6 * Constants.TILE_SIZE);
+
+        Entity catto3 = new ZombieCatto(Main.app.getGame());
+        catto3.setX(15 * Constants.TILE_SIZE);
+        catto3.setY(4 * Constants.TILE_SIZE);
+
+        Entity catto4 = new ZombieCatto(Main.app.getGame());
+        catto4.setX(2 * Constants.TILE_SIZE);
+        catto4.setY(5 * Constants.TILE_SIZE);
+
+        Entity catto5 = new ZombieCatto(Main.app.getGame());
+        catto5.setX(2 * Constants.TILE_SIZE);
+        catto5.setY(13 * Constants.TILE_SIZE);
+
+        Entity catto6 = new ZombieCatto(Main.app.getGame());
+        catto6.setX(15 * Constants.TILE_SIZE);
+        catto6.setY(14 * Constants.TILE_SIZE);
+
+        Entity catto7 = new ZombieCatto(Main.app.getGame());
+        catto7.setX(16 * Constants.TILE_SIZE);
+        catto7.setY(14 * Constants.TILE_SIZE);
+
+        Entity catto8 = new ZombieCatto(Main.app.getGame());
+        catto8.setX(11 * Constants.TILE_SIZE);
+        catto8.setY(4 * Constants.TILE_SIZE);
+
+        entities.add(catto1);
+        entities.add(catto2);
+        entities.add(catto3);
+        entities.add(catto4);
+        entities.add(catto5);
+        entities.add(catto6);
+        entities.add(catto7);
+        entities.add(catto8);
+
         return entities;
     }
 
     public static ArrayList<Entity> loadMap6(){
         entities = new ArrayList<Entity>(20);;
+
+        Entity catto1 = new ZombieCatto(Main.app.getGame());
+        catto1.setX(8 * Constants.TILE_SIZE);
+        catto1.setY(4 * Constants.TILE_SIZE);
+
+        Entity catto2 = new ZombieCatto(Main.app.getGame());
+        catto2.setX(20 * Constants.TILE_SIZE);
+        catto2.setY(4 * Constants.TILE_SIZE);
+
+        Entity catto3 = new ZombieCatto(Main.app.getGame());
+        catto3.setX(3 * Constants.TILE_SIZE);
+        catto3.setY(13 * Constants.TILE_SIZE);
+
+        Entity catto4 = new ZombieCatto(Main.app.getGame());
+        catto4.setX(12 * Constants.TILE_SIZE);
+        catto4.setY(20 * Constants.TILE_SIZE);
+
+        Entity catto5 = new ZombieCatto(Main.app.getGame());
+        catto5.setX(21 * Constants.TILE_SIZE);
+        catto5.setY(18 * Constants.TILE_SIZE);
+
+        Entity catto6 = new ArcherCatto(Main.app.getGame());
+        catto6.setX(12 * Constants.TILE_SIZE);
+        catto6.setY(21 * Constants.TILE_SIZE);
+
+        Entity catto7 = new ArcherCatto(Main.app.getGame());
+        catto7.setX(3 * Constants.TILE_SIZE);
+        catto7.setY(21 * Constants.TILE_SIZE);
+
+        Entity catto8 = new ArcherCatto(Main.app.getGame());
+        catto8.setX(14 * Constants.TILE_SIZE);
+        catto8.setY(4 * Constants.TILE_SIZE);
+
+        entities.add(catto1);
+        entities.add(catto2);
+        entities.add(catto3);
+        entities.add(catto4);
+        entities.add(catto5);
+        entities.add(catto6);
+        entities.add(catto7);
+        entities.add(catto8);
 
         return entities;
     }
