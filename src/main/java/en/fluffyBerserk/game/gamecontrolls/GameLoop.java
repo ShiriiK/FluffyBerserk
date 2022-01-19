@@ -311,8 +311,8 @@ public final class GameLoop {
                     if (entity2.getType().equals(ObjectType.PLAYER)) {
                         if (Collision.objectsCollide(entity1, entity2)) {
                             ((Player) entity2).damaged(((Bullet) entity1).getDmg());
-                            ((Bullet) entity1).setDmg(0);
                             System.out.println("You have got: " + ((Bullet) entity1).getDmg() + " dmg");
+                            ((Bullet) entity1).setDmg(0);
                         }
                     }
                 }
