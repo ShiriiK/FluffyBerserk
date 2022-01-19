@@ -5,8 +5,10 @@ import en.fluffyBerserk.game.gamecontrolls.Game;
 
 import en.fluffyBerserk.game.logic.objects.items.Item;
 import en.fluffyBerserk.game.logic.objects.items.armor.Armor;
+import en.fluffyBerserk.game.logic.objects.items.inventory.Inventory;
 import en.fluffyBerserk.gui.utils.AttachCSS;
 
+import en.fluffyBerserk.gui.utils.Handy;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
@@ -14,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -33,37 +36,46 @@ public class PopUpInventory extends PopUp {
     }
 
     protected void initPopUpStage() {
+        Inventory playersInventory = Main.app.getGame().getInventory();
 
-        VBox inventory = new VBox();
-        GridPane gridPane = new GridPane();
-        FlowPane flowPane = new FlowPane();
+        BorderPane inventory = new BorderPane();
+        FlowPane contetnt = new FlowPane();
 
-        Label label = new Label("Inventory");
-        Label label1 = new Label("Equiped items");
+        Set<String> items = playersInventory.itemsInInventory();
+        for(String name : items){
+            String path = "items/" + name + ".png";
+            ImageView imageView = new ImageView(new Image(path, 50, 50, false, false));
+            contetnt.getChildren().add(imageView);
+        }
 
-        Button resumeButton = new Button("Resume");
-        resumeButton.setOnAction(event -> Main.app.hidePopUp());
-        Set<String> items = Game.inventory.itemsInInventory();
+        Button resumeButton = new Button("Close inventory");
+        resumeButton.setOnAction(event -> {
+            Main.app.getGame().getGameLoop().start();
+            Main.app.hidePopUp();
+        });
 
+        inventory.setTop(contetnt);
+        inventory.setBottom(resumeButton);
+
+
+        /**
         int m = 1;
         int n = 1;
-
-
         for (String itemName : items){
             String itemImageName = "/armor/" + itemName + ".png";
             Image image = new Image(itemImageName,50.0,50.0, true, true);
             ImageView imageView = new ImageView(image);
-            Item item = Game.inventory.getItem(itemName);
+            Item item = playersInventory.getItem(itemName);
 
             if(!((Armor) item).isEquiped){
                 imageView.setOnMouseClicked(event -> {
-                    Game.inventory.equip(item);
+                    playersInventory.equip(item);
                     flowPane.getChildren().add(imageView);});
             }
 
             if(((Armor) item).isEquiped){
                 imageView.setOnMouseClicked(event -> {
-                    Game.inventory.unEquip(item);;
+                    playersInventory.unEquip(item);;
                     flowPane.getChildren().remove(imageView);});
 
             }
@@ -82,13 +94,11 @@ public class PopUpInventory extends PopUp {
             }
         }
 
-
-
         gridPane.setGridLinesVisible(true);
 
-        inventory.getChildren().addAll(resumeButton, label, gridPane, label1,flowPane);
+        inventory.getChildren().addAll(resumeButton, label, gridPane, label1,flowPane);*/
 
-        inventory.getStyleClass().add("pop-up-menu");
+        inventory.getStyleClass().add("inventory");
         Scene scene = new Scene(inventory);
         scene.setFill(Color.TRANSPARENT);
         AttachCSS.attachCSS(scene);

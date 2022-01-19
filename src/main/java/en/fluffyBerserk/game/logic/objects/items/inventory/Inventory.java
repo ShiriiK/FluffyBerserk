@@ -18,23 +18,20 @@ import java.util.*;
 
 public class Inventory {
     private final Map<String, PickableItem> content;
-    private final Character character;
-    private int bodyArmorSlot;
+    /**private int bodyArmorSlot;
     private int headSlot;
-    private int pantsSlot;
+    private int pantsSlot;*/
 
 
 
     // Constructor
     public Inventory(Character character) {
-        this.character = character;
         content = new HashMap<>();
-        bodyArmorSlot = 0;
+        /**bodyArmorSlot = 0;
         headSlot = 0;
-        pantsSlot = 0;
+        pantsSlot = 0;*/
 
     }
-
 
     // Returns the content of the inventory
     public Map<String, PickableItem> getContent() {
@@ -57,7 +54,7 @@ public class Inventory {
     }
 
     // Equips selected item and applies it's stats
-    public void equip (Item item){
+    /**public void equip (Item item){
         if (item instanceof Armor && content.containsValue(item) && !((Armor) item).isEquiped){
             System.out.println(((Armor) item).name + " equiped");
             ((Armor) item).setEquiped(true);
@@ -76,9 +73,9 @@ public class Inventory {
                 applyStats(item);
             }
         }
-    }
+    }*/
 
-    private void applyStats(Item item){
+    /**private void applyStats(Item item){
         ((Armor) item).setEquiped(true);
         int str = ((Armor) item).getStr();
         int armor = ((Armor) item).getArmor();
@@ -94,10 +91,10 @@ public class Inventory {
         character.setArmor(newArmor);
         character.setStamina(newStamina);
         character.setIntellect(newIntellect);
-    }
+    }*/
 
     //Uneuips selected item and changes player's stats accordingly
-    public void unEquip(Item item){
+    /**public void unEquip(Item item){
         if (item instanceof Armor && ((Armor) item).isEquiped()){
             ((Armor) item).setEquiped(false);
             if(item instanceof BodyArmor && bodyArmorSlot == 1){
@@ -115,9 +112,9 @@ public class Inventory {
                 unapplyStats(item);
             }
         }
-    }
+    }*/
 
-    private void unapplyStats(Item item){
+    /**private void unapplyStats(Item item){
         ((Armor) item).setEquiped(false);
         int str = ((Armor) item).getStr();
         int armor = ((Armor) item).getArmor();
@@ -133,7 +130,7 @@ public class Inventory {
         character.setArmor(newArmor);
         character.setStamina(newStamina);
         character.setIntellect(newIntellect);
-    }
+    }*/
 
     // Return a reference to an item by its name
     public Item getItem(String name) {

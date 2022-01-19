@@ -55,6 +55,9 @@ public class KeyHandler {
                     break;
                 case B:
                     Main.app.showPopUp(new PopUpInventory(game));
+                    game.getPlayer().setMoveY(0F);
+                    game.getPlayer().setMoveX(0F);
+                    game.getGameLoop().stop();
                     break;
                 case SPACE:
                     if (game.getPlayer().canAttack() && game.getCurrentMap().isForCombat()) {

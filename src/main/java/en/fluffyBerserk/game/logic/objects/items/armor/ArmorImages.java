@@ -15,9 +15,9 @@ public class ArmorImages {
 
 
     private static final Map<Integer, Image> armors = new HashMap<Integer, Image>() {{
-        put(BODY1, new Image("/armor/Body1.png", Constants.BASE_TILE_SIZE, Constants.BASE_TILE_SIZE, false, false));
-        put(HEAD1, new Image("/armor/Head1.png", Constants.BASE_TILE_SIZE, Constants.BASE_TILE_SIZE, false, false));
-        put(PANTS1, new Image("/armor/Pants1.png", Constants.BASE_TILE_SIZE, Constants.BASE_TILE_SIZE, false, false));
+        put(BODY1, new Image("/items/Body1.png", Constants.BASE_TILE_SIZE, Constants.BASE_TILE_SIZE, false, false));
+        put(HEAD1, new Image("/items/Head1.png", Constants.BASE_TILE_SIZE, Constants.BASE_TILE_SIZE, false, false));
+        put(PANTS1, new Image("/items/Pants1.png", Constants.BASE_TILE_SIZE, Constants.BASE_TILE_SIZE, false, false));
     }};
 
     public static @NotNull Image getByIndex(int index) {
