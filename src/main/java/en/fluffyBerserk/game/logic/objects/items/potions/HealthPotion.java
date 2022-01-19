@@ -5,11 +5,13 @@ import javafx.scene.image.Image;
 
 public class HealthPotion extends Potion {
 
-    private int health;
+    public HealthPotion() {
+        super(ObjectType.HEALTH_POTION);
+    }
 
-    public HealthPotion(int health, ObjectType type) {
-        super(type);
-        this.health = health;
+    @Override
+    protected int setEffect() {
+        return 10;
     }
 
     @Override
@@ -19,11 +21,11 @@ public class HealthPotion extends Potion {
 
     @Override
     public String getName() {
-        return "Health potion";
+        return "health";
     }
 
     @Override
     public Image getImage() {
-        return null;
+        return new Image("items/health.png");
     }
 }

@@ -80,7 +80,7 @@ public final class Game {
         entityManager.addEntity(player);
 
 
-        BodyArmor bodyArmor1 = new BodyArmor("Body1", 2, 2, 2, 2, ObjectType.WEARABLE);
+        /**BodyArmor bodyArmor1 = new BodyArmor("Body1", 2, 2, 2, 2, ObjectType.p);
         Head head1 = new Head("Head1", 4, 2, 2, 2, ObjectType.WEARABLE);
         Pants pants1 = new Pants("Pants1", 1, 2, 4, 1, ObjectType.WEARABLE);
 
@@ -95,7 +95,7 @@ public final class Game {
         head1.setY(350);
 
         pants1.setX(800);
-        pants1.setY(800);
+        pants1.setY(800);*/
 
         // Spawn player on defined spawn location at last save location
         if (player.getCharacter().getLastX() == 0 && player.getCharacter().getLastY() == 0) {

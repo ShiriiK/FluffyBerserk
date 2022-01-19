@@ -3,10 +3,10 @@ package en.fluffyBerserk.game.logic.objects.items.potions;
 import en.fluffyBerserk.game.logic.ObjectType;
 import javafx.scene.image.Image;
 
-public class StrengthPotion extends Potion {
+public class StaminaPotion extends Potion{
 
-    public StrengthPotion() {
-        super(ObjectType.STRENGTH_POTION);
+    public StaminaPotion() {
+        super(ObjectType.STAMINA_POTION);
     }
 
     @Override
@@ -22,11 +22,11 @@ public class StrengthPotion extends Potion {
 
     @Override
     public String getName() {
-        return "strength";
+        return "stamina";
     }
 
     @Override
     public Image getImage() {
-        return new Image("items/strenght.png");
+        return new Image("items/health.png");
     }
 }

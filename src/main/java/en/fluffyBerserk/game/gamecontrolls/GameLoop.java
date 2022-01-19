@@ -14,6 +14,9 @@ import en.fluffyBerserk.game.logic.objects.creatures.Creature;
 import en.fluffyBerserk.game.logic.objects.creatures.Death;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.PickableItem;
+import en.fluffyBerserk.game.logic.objects.items.potions.HealthPotion;
+import en.fluffyBerserk.game.logic.objects.items.potions.Potion;
+import en.fluffyBerserk.game.logic.objects.items.potions.StaminaPotion;
 import en.fluffyBerserk.gui.utils.Collision;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
@@ -22,6 +25,7 @@ import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Vector;
 
 public final class GameLoop {
@@ -48,6 +52,7 @@ public final class GameLoop {
     };
 
     private Death death;
+    private Potion potion;
     private double span = 1;
 
     public GameLoop(@NotNull Game game) {
@@ -301,6 +306,20 @@ public final class GameLoop {
                 death.setY(entity.getY());
                 game.getEntityManager().removeEntity(entity);
                 game.getEntityManager().addEntity(death);
+
+                Random random = new Random();
+                if(Constants.DROP_RATE > random.nextInt(100)){
+                    Random random1 = new Random();
+                    if(random1.nextInt(Constants.NUMBER_OF_POTIONS) == 1){
+                        potion = new StaminaPotion();
+                    } else if(random1.nextInt(Constants.NUMBER_OF_POTIONS) == 2){
+                        potion = new HealthPotion();
+                    } else if (random1.nextInt(Constants.NUMBER_OF_POTIONS) == 3){
+                        potion = new StaminaPotion();
+                    }
+                };
+
+
                 deathTimer.start();
             }
 
