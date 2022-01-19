@@ -317,6 +317,7 @@ public final class GameLoop {
                     }
                 }
             }
+
             //ZombieCatto damages player
             if (entity1.getType().equals(ObjectType.ENEMY)) {
                 for (Entity entity2 : game.getEntityManager().getEntities()) {

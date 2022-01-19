@@ -36,35 +36,22 @@ public class Boss4 extends Creature implements HasName {
 
     @Override
     public void move() {
-        float playerX = game.getPlayer().getX();
-        float playerY = game.getPlayer().getY();
-        boolean move_left = false;
-        boolean move_right = false;
-
-
-        if (playerX >= this.getX()) {
+        if (game.getPlayer().getX() > this.getX()) {
             setMoveX(+getNpcSpeed());
-            setX(this.getX() + getMoveX());
-            move_left = true;
         }
-        if (playerX < this.getX()) {
+        else if (this.getX() > game.getPlayer().getX()) {
             setMoveX(-getNpcSpeed());
-            setX(this.getX() + getMoveX());
-            move_right = true;
         }
-        if (playerY >= this.getY()) {
-            if (!move_left || !move_right) {
-                setMoveY(getNpcSpeed());
-            }
-            setY(this.getY() + getMoveY());
+
+        if (game.getPlayer().getY() > this.getY()) {
+            setMoveY(getNpcSpeed());
         }
-        if (playerY < this.getY()) {
-            if (!move_left || !move_right) {
-                setMoveY(-getNpcSpeed());
-            }
-            setY(this.getY() + getMoveY());
+        else if (this.getY() > game.getPlayer().getY()) {
+            setMoveY(-getNpcSpeed());
         }
-        super.move();
+
+        setX(this.getX() + getMoveX());
+        setY(this.getY() + getMoveY());
     }
 
     public boolean canAttack() {
