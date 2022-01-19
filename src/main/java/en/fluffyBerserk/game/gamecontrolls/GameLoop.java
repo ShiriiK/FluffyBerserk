@@ -18,6 +18,7 @@ import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.potions.HealthPotion;
 import en.fluffyBerserk.game.logic.objects.items.potions.Potion;
 import en.fluffyBerserk.game.logic.objects.items.potions.StaminaPotion;
+import en.fluffyBerserk.gui.popups.PopUpMenu;
 import en.fluffyBerserk.gui.utils.Collision;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
@@ -32,14 +33,28 @@ public final class GameLoop {
 
     @NotNull
     private final Game game;
-    private Death death;    public AnimationTimer potionTimer = new AnimationTimer() {
+    private Death death;
+    public AnimationTimer potionTimer = new AnimationTimer() {
         @Override
         public void handle(long now) {
             handleDrink();
         }
     };
-    private Potion potion;
+    private Potion potion;    @NotNull
+    private final AnimationTimer timer = new AnimationTimer() {
+        @Override
+        public void handle(long now) {
+            updateGame();
+        }
+    };
     private double span = 1;
+    private AnimationTimer deathTimer = new AnimationTimer() {
+        @Override
+        public void handle(long now) {
+            hadnleDeath();
+        }
+    };
+
     public GameLoop(@NotNull Game game) {
         this.game = game;
     }
@@ -49,12 +64,7 @@ public final class GameLoop {
         Main.app.setGame(game);
         game.running = true;
         System.out.println("Game loop started");
-    }    private AnimationTimer deathTimer = new AnimationTimer() {
-        @Override
-        public void handle(long now) {
-            hadnleDeath();
-        }
-    };
+    }
 
     public void stop() {
         timer.stop();
@@ -78,8 +88,21 @@ public final class GameLoop {
 
         game.getPlayer().reduceCooldown();
 
-        if (game.getPlayer().isDead()) {
-            //what next
+        if(game.getPlayer().isDead()) {
+            Main.app.showPopUp(new PopUpMenu());
+            game.getPlayer().setMoveY(0F);
+            game.getPlayer().setMoveX(0F);
+            game.getGameLoop().stop();
+            System.out.println("Game loop stopped");
+            removeAllBullets();
+        }
+    }
+
+    private void removeAllBullets() {
+        for(Entity entity : game.getEntityManager().getEntities()){
+            if(entity instanceof Bullet){
+                game.getEntityManager().removeEntity(entity);
+            }
         }
     }
 
@@ -248,15 +271,8 @@ public final class GameLoop {
 
                             if (objects[i].getType().equals(ObjectType.HOME)) {
                                 game.playerSpawner.spawnOnMap(2);
-                                if (game.map2 == null) {
-                                    game.map2 = new Map2();
-                                    game.setCurrentMap(game.map2);
-                                    System.out.println("new map");
-                                } else {
-                                    game.setCurrentMap(game.map2);
-                                    System.out.println("old map");
-                                }
-
+                                if (game.map2 == null) { game.map2 = new Map2(); }
+                                game.setCurrentMap(game.map2);
                             }
                             if (objects[i].getType().equals(ObjectType.CARPET)) {
                                 game.playerSpawner.spawnOnMap(1);
@@ -435,16 +451,6 @@ public final class GameLoop {
             System.out.println("timer stopped, cd = " + game.getPlayer().getMaxCd());
         }
     }
-
-    @NotNull
-    private final AnimationTimer timer = new AnimationTimer() {
-        @Override
-        public void handle(long now) {
-            updateGame();
-        }
-    };
-
-
 
 
 

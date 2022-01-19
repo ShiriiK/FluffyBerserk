@@ -2,6 +2,7 @@ package en.fluffyBerserk.gui.popups;
 
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.gamecontrolls.Game;
+import en.fluffyBerserk.game.logic.maps.Map2;
 import en.fluffyBerserk.gui.screens.HomeScreen;
 import en.fluffyBerserk.gui.screens.LoginScreen;
 import en.fluffyBerserk.gui.screens.SaveSlotsScreen;
@@ -10,6 +11,7 @@ import en.fluffyBerserk.persistence.UpdateTask;
 import en.fluffyBerserk.persistence.models.Character;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -73,7 +75,26 @@ public final class PopUpMenu extends PopUp {
             });
         }
 
-        buttons.getChildren().addAll(resumeButton, saveButton, loadButton, helpButton, logoutButton, deleteCharacterButton, deleteAccountButton);
+        Label uDead = new Label("You have died!");
+        uDead.setStyle("-fx-text-fill: #cc0f0f;");
+        uDead.setScaleX(1.5);
+        uDead.setScaleY(1.5);
+
+        Button respawn = new Button("Respawn");
+        respawn.setOnAction(event -> {
+            game.getPlayer().regenHp();
+            game.playerSpawner.spawnOnMap(2);
+            if (game.map2 == null) { game.map2 = new Map2();}
+            game.setCurrentMap(game.map2);
+            Main.app.hidePopUp();
+            Main.app.getGame().getGameLoop().start();
+        });
+
+        if(Main.app.getGame().getPlayer().isDead()){
+            buttons.getChildren().addAll(uDead, respawn, loadButton, logoutButton);
+        } else {
+            buttons.getChildren().addAll(resumeButton, saveButton, loadButton, helpButton, logoutButton, deleteCharacterButton, deleteAccountButton);
+        }
         buttons.getStyleClass().add("pop-up-menu");
 
 

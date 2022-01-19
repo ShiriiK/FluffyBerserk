@@ -87,6 +87,8 @@ public final class Player extends MovableAnimatedEntity implements HasName, CanA
         return hp <= 0;
     }
 
+    public void regenHp() {this.hp = character.getStamina() * 10;}
+
     public Character getCharacter() {
         return character;
     }
