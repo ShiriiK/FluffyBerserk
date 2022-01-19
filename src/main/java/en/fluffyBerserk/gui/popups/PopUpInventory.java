@@ -54,6 +54,7 @@ public class PopUpInventory extends PopUp {
             imageView.setOnMouseClicked(event -> {
                 potion.use();
                 playersInventory.removeItem(name);
+                contetnt.getChildren().remove(this);
             });
             contetnt.getChildren().add(imageView);
         }
