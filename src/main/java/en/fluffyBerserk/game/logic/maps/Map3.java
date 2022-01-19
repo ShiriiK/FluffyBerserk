@@ -2,8 +2,6 @@ package en.fluffyBerserk.game.logic.maps;
 
 import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.objects.Entity;
-import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ZombieArcher;
-import en.fluffyBerserk.gui.graphics.objects.ObjectsForMap;
 
 import java.util.ArrayList;
 
