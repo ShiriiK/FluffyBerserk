@@ -63,6 +63,7 @@ public final class GameLoop {
         timer.start();
         Main.app.setGame(game);
         game.running = true;
+        removeAllBullets();
         System.out.println("Game loop started");
     }
 
@@ -89,18 +90,18 @@ public final class GameLoop {
         game.getPlayer().reduceCooldown();
 
         if(game.getPlayer().isDead()) {
+            removeAllBullets();
             Main.app.showPopUp(new PopUpMenu());
             game.getPlayer().setMoveY(0F);
             game.getPlayer().setMoveX(0F);
             game.getGameLoop().stop();
             System.out.println("Game loop stopped");
-            removeAllBullets();
         }
     }
 
     private void removeAllBullets() {
         for(Entity entity : game.getEntityManager().getEntities()){
-            if(entity instanceof Bullet){
+            if(entity.getType().equals(ObjectType.BULLET_PLAYER) || entity.getType().equals(ObjectType.BULLET_ENEMY)){
                 game.getEntityManager().removeEntity(entity);
             }
         }

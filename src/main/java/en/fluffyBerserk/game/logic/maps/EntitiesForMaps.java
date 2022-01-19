@@ -3,6 +3,7 @@ package en.fluffyBerserk.game.logic.maps;
 import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.logic.objects.Entity;
+import en.fluffyBerserk.game.logic.objects.creatures.Creature;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.ArcherCatto;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.ZombieCatto;
 
@@ -23,6 +24,19 @@ public class EntitiesForMaps {
      * private static ArcherCatto archer5 = new ArcherCatto();
      */
 
+    private Entity setZCatto(float x, float y) {
+        Entity entity = new ZombieCatto(Main.app.getGame());
+        entity.setX(x * Constants.TILE_SIZE);
+        entity.setY(y * Constants.TILE_SIZE);
+        return entity;
+    }
+    private Entity setACatto(float x, float y) {
+        Entity entity = new ArcherCatto(Main.app.getGame());
+        entity.setX(x * Constants.TILE_SIZE);
+        entity.setY(y * Constants.TILE_SIZE);
+        return entity;
+    }
+
     public static ArrayList<Entity> loadMap1() {
         entities = new ArrayList<Entity>(20);
 
@@ -37,6 +51,7 @@ public class EntitiesForMaps {
 
     public static ArrayList<Entity> loadMap3() {
         entities = new ArrayList<Entity>(20);
+
 
         Entity catto1 = new ZombieCatto(Main.app.getGame());
         catto1.setX(7 * Constants.TILE_SIZE);
