@@ -24,8 +24,8 @@ public class Constants {
 
     public static final int PLAYER_CD = 50;
 
-    public static final int DROP_RATE = 50;
-    public static final int NUMBER_OF_POTIONS = 3;
+    public static final int DROP_RATE = 90;
+    public static final int NUMBER_OF_POTIONS = 4;
 
     public static boolean SHOW_HIT_BOX = false;
 

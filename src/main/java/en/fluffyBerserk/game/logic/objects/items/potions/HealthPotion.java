@@ -28,4 +28,5 @@ public class HealthPotion extends Potion {
     public Image getImage() {
         return new Image("items/health.png");
     }
+
 }

@@ -27,6 +27,6 @@ public class StaminaPotion extends Potion{
 
     @Override
     public Image getImage() {
-        return new Image("items/health.png");
+        return new Image("items/stamina.png");
     }
 }

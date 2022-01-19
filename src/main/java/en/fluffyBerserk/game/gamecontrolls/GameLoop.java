@@ -13,14 +13,13 @@ import en.fluffyBerserk.game.logic.objects.bullets.Bullet;
 import en.fluffyBerserk.game.logic.objects.creatures.Creature;
 import en.fluffyBerserk.game.logic.objects.creatures.Death;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
-import en.fluffyBerserk.game.logic.objects.items.PickableItem;
+import en.fluffyBerserk.game.logic.objects.items.Pickable;
 import en.fluffyBerserk.game.logic.objects.items.potions.HealthPotion;
 import en.fluffyBerserk.game.logic.objects.items.potions.Potion;
 import en.fluffyBerserk.game.logic.objects.items.potions.StaminaPotion;
 import en.fluffyBerserk.gui.utils.Collision;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 
@@ -170,8 +169,8 @@ public final class GameLoop {
             }
 
             for (Entity entity1 : game.getEntityManager().getEntities())
-                if (entity1 instanceof PickableItem && entity instanceof Player && Collision.objectsCollide(entity, entity1)) {
-                    game.getInventory().addItem((PickableItem) entity1);
+                if (entity1 instanceof Potion && entity instanceof Player && Collision.objectsCollide(entity, entity1)) {
+                    game.getInventory().addItem((Potion) entity1);
                     itemsToRemoveFromMap.add(entity1);
                     System.out.println("Item picked");
                     break;
@@ -304,12 +303,12 @@ public final class GameLoop {
                 death = new Death();
                 death.setX(entity.getX());
                 death.setY(entity.getY());
-                game.getEntityManager().removeEntity(entity);
                 game.getEntityManager().addEntity(death);
 
                 Random random = new Random();
-                if(Constants.DROP_RATE > random.nextInt(100)){
+                if(Constants.DROP_RATE >= random.nextInt(100)){
                     Random random1 = new Random();
+
                     if(random1.nextInt(Constants.NUMBER_OF_POTIONS) == 1){
                         potion = new StaminaPotion();
                     } else if(random1.nextInt(Constants.NUMBER_OF_POTIONS) == 2){
@@ -317,9 +316,14 @@ public final class GameLoop {
                     } else if (random1.nextInt(Constants.NUMBER_OF_POTIONS) == 3){
                         potion = new StaminaPotion();
                     }
-                };
+                    potion.setX(entity.getX());
+                    potion.setY(entity.getY());
+
+                    game.getEntityManager().addEntity(potion);
+                }
 
 
+                game.getEntityManager().removeEntity(entity);
                 deathTimer.start();
             }
 

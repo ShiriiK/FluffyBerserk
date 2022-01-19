@@ -1,14 +1,10 @@
 package en.fluffyBerserk.game.gamecontrolls;
 
 import en.fluffyBerserk.Constants;
-import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.maps.Map;
 import en.fluffyBerserk.game.logic.maps.MapLoader;
 import en.fluffyBerserk.game.logic.maps.PlayerSpawnManager;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
-import en.fluffyBerserk.game.logic.objects.items.armor.BodyArmor;
-import en.fluffyBerserk.game.logic.objects.items.armor.Head;
-import en.fluffyBerserk.game.logic.objects.items.armor.Pants;
 import en.fluffyBerserk.game.logic.objects.items.inventory.Inventory;
 import en.fluffyBerserk.gui.screens.GameScreen;
 import en.fluffyBerserk.gui.utils.Camera;
@@ -78,24 +74,6 @@ public final class Game {
 
     private void bootDefaultState() {
         entityManager.addEntity(player);
-
-
-        /**BodyArmor bodyArmor1 = new BodyArmor("Body1", 2, 2, 2, 2, ObjectType.p);
-        Head head1 = new Head("Head1", 4, 2, 2, 2, ObjectType.WEARABLE);
-        Pants pants1 = new Pants("Pants1", 1, 2, 4, 1, ObjectType.WEARABLE);
-
-        entityManager.addEntity(bodyArmor1);
-        entityManager.addEntity(head1);
-        entityManager.addEntity(pants1);
-
-        bodyArmor1.setX(500);
-        bodyArmor1.setY(500);
-
-        head1.setX(350);
-        head1.setY(350);
-
-        pants1.setX(800);
-        pants1.setY(800);*/
 
         // Spawn player on defined spawn location at last save location
         if (player.getCharacter().getLastX() == 0 && player.getCharacter().getLastY() == 0) {

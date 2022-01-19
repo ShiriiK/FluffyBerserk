@@ -1,15 +1,12 @@
 package en.fluffyBerserk.game.logic.objects.items.inventory;
 
 
-import en.fluffyBerserk.game.logic.objects.items.Item;
-import en.fluffyBerserk.game.logic.objects.items.PickableItem;
-import en.fluffyBerserk.game.logic.objects.items.armor.Armor;
-import en.fluffyBerserk.game.logic.objects.items.armor.BodyArmor;
-import en.fluffyBerserk.game.logic.objects.items.armor.Head;
-import en.fluffyBerserk.game.logic.objects.items.armor.Pants;
+import en.fluffyBerserk.game.logic.objects.items.potions.Potion;
 import en.fluffyBerserk.persistence.models.Character;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -17,24 +14,26 @@ import java.util.*;
  */
 
 public class Inventory {
-    private final Map<String, PickableItem> content;
-    /**private int bodyArmorSlot;
-    private int headSlot;
-    private int pantsSlot;*/
+    private final Map<String, Potion> content;
 
+    /**
+     * private int bodyArmorSlot;
+     * private int headSlot;
+     * private int pantsSlot;
+     */
 
 
     // Constructor
     public Inventory(Character character) {
         content = new HashMap<>();
         /**bodyArmorSlot = 0;
-        headSlot = 0;
-        pantsSlot = 0;*/
+         headSlot = 0;
+         pantsSlot = 0;*/
 
     }
 
     // Returns the content of the inventory
-    public Map<String, PickableItem> getContent() {
+    public Map<String, Potion> getContent() {
         return content;
     }
 
@@ -44,8 +43,8 @@ public class Inventory {
     }
 
     // Inserts the item into the inventory
-    public void addItem(PickableItem item) {
-            content.put(item.getName(), item);
+    public void addItem(Potion item) {
+        content.put(item.getName(), item);
     }
 
     //removes the item from inventory
@@ -53,89 +52,10 @@ public class Inventory {
         content.remove(name);
     }
 
-    // Equips selected item and applies it's stats
-    /**public void equip (Item item){
-        if (item instanceof Armor && content.containsValue(item) && !((Armor) item).isEquiped){
-            System.out.println(((Armor) item).name + " equiped");
-            ((Armor) item).setEquiped(true);
-            if(item instanceof BodyArmor && bodyArmorSlot == 0){
-                bodyArmorSlot = 1;
-                applyStats(item);
-            }
-
-            if(item instanceof Head && headSlot == 0){
-                headSlot = 1;
-                applyStats(item);
-            }
-
-            if(item instanceof Pants && pantsSlot == 0){
-                pantsSlot = 1;
-                applyStats(item);
-            }
-        }
-    }*/
-
-    /**private void applyStats(Item item){
-        ((Armor) item).setEquiped(true);
-        int str = ((Armor) item).getStr();
-        int armor = ((Armor) item).getArmor();
-        int stamina = ((Armor) item).getStamina();
-        int intellect = ((Armor) item).getIntelllect();
-
-        int newStr = str + character.getStrength();
-        int newArmor = armor + character.getArmor();
-        int newStamina = stamina + character.getStamina();
-        int newIntellect = intellect + character.getIntellect();
-
-        character.setStrength(newStr);
-        character.setArmor(newArmor);
-        character.setStamina(newStamina);
-        character.setIntellect(newIntellect);
-    }*/
-
-    //Uneuips selected item and changes player's stats accordingly
-    /**public void unEquip(Item item){
-        if (item instanceof Armor && ((Armor) item).isEquiped()){
-            ((Armor) item).setEquiped(false);
-            if(item instanceof BodyArmor && bodyArmorSlot == 1){
-                bodyArmorSlot = 0;
-                unapplyStats(item);
-            }
-
-            if(item instanceof Head && headSlot == 1){
-                headSlot = 0;
-                unapplyStats(item);
-            }
-
-            if(item instanceof Pants && pantsSlot == 1){
-                pantsSlot = 0;
-                unapplyStats(item);
-            }
-        }
-    }*/
-
-    /**private void unapplyStats(Item item){
-        ((Armor) item).setEquiped(false);
-        int str = ((Armor) item).getStr();
-        int armor = ((Armor) item).getArmor();
-        int stamina = ((Armor) item).getStamina();
-        int intellect = ((Armor) item).getIntelllect();
-
-        int newStr = character.getStrength() - str;
-        int newArmor = character.getArmor() - armor;
-        int newStamina = character.getStamina() - stamina;
-        int newIntellect = character.getIntellect() - intellect;
-
-        character.setStrength(newStr);
-        character.setArmor(newArmor);
-        character.setStamina(newStamina);
-        character.setIntellect(newIntellect);
-    }*/
-
     // Return a reference to an item by its name
-    public Item getItem(String name) {
-        Item item = null;
-        if(content.containsKey(name)) {
+    public Potion getItem(String name) {
+        Potion item = null;
+        if (content.containsKey(name)) {
             item = content.get(name);
         }
         return item;

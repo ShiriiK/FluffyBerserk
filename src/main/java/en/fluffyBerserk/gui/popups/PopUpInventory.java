@@ -3,23 +3,20 @@ package en.fluffyBerserk.gui.popups;
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.gamecontrolls.Game;
 
-import en.fluffyBerserk.game.logic.objects.items.Item;
-import en.fluffyBerserk.game.logic.objects.items.armor.Armor;
+import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.items.inventory.Inventory;
+import en.fluffyBerserk.game.logic.objects.items.potions.Potion;
 import en.fluffyBerserk.gui.utils.AttachCSS;
 
-import en.fluffyBerserk.gui.utils.Handy;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
-import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import org.jetbrains.annotations.NotNull;
 
@@ -41,10 +38,18 @@ public class PopUpInventory extends PopUp {
         BorderPane inventory = new BorderPane();
         FlowPane contetnt = new FlowPane();
 
+
         Set<String> items = playersInventory.itemsInInventory();
         for(String name : items){
-            String path = "items/" + name + ".png";
-            ImageView imageView = new ImageView(new Image(path, 50, 50, false, false));
+            Potion potion =  playersInventory.getItem(name);
+            ImageView imageView = new ImageView(potion.getImage());
+            imageView.setFitWidth(75);
+            imageView.setFitHeight(75);
+
+            Tooltip tooltip = new Tooltip();
+            tooltip.setText("This is " + potion.getName() + " potion.");
+
+            Tooltip.install(imageView, tooltip);
             contetnt.getChildren().add(imageView);
         }
 
