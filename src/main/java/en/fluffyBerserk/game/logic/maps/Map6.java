@@ -18,12 +18,12 @@ public final class Map6 extends Map {
 
     @Override
     public int getWidth() {
-        return 25 * Constants.TILE_SIZE;
+        return 20 * Constants.TILE_SIZE;
     }
 
     @Override
     public int getHeight() {
-        return 25 * Constants.TILE_SIZE;
+        return 20 * Constants.TILE_SIZE;
     }
 
     @Override
