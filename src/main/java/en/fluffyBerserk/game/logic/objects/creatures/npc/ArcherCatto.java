@@ -30,14 +30,14 @@ public class ArcherCatto extends Creature implements HasName {
     @Override
     public void move() {
 
-        if (game.getPlayer().getX() - this.getX() > attackRange) {
+        if (game.getPlayer().getX() - this.getX() >= attackRange) {
             setMoveX(+getNpcSpeed());
         }
         else if (this.getX() - game.getPlayer().getX() < attackRange) {
             setMoveX(-getNpcSpeed());
         }
 
-        if (game.getPlayer().getY() - this.getY() > attackRange) {
+        if (game.getPlayer().getY() - this.getY() >= attackRange) {
             setMoveY(getNpcSpeed());
         }
         else if (this.getY() - game.getPlayer().getY() < attackRange) {
