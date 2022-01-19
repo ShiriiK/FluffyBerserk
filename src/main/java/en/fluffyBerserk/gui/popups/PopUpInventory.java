@@ -50,6 +50,11 @@ public class PopUpInventory extends PopUp {
             tooltip.setText("This is " + potion.getName() + " potion.");
 
             Tooltip.install(imageView, tooltip);
+
+            imageView.setOnMouseClicked(event -> {
+                potion.use();
+                playersInventory.removeItem(name);
+            });
             contetnt.getChildren().add(imageView);
         }
 

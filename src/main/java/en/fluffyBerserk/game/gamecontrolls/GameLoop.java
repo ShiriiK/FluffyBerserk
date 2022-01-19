@@ -32,10 +32,11 @@ public final class GameLoop {
 
     @NotNull
     private final Game game;
-    AnimationTimer labelTimer = new AnimationTimer() {
+
+    public AnimationTimer potionTimer = new AnimationTimer() {
         @Override
         public void handle(long now) {
-
+            handleDrink();
         }
     };    @NotNull
     private final AnimationTimer timer = new AnimationTimer() {
@@ -44,7 +45,7 @@ public final class GameLoop {
             updateGame();
         }
     };
-    AnimationTimer deathTimer = new AnimationTimer() {
+    private AnimationTimer deathTimer = new AnimationTimer() {
         @Override
         public void handle(long now) {
             hadnleDeath();
@@ -360,6 +361,17 @@ public final class GameLoop {
             game.getEntityManager().removeEntity(death);
             span = 1;
             deathTimer.stop();
+        }
+    }
+
+    private void handleDrink() {
+        span -= 0.01;
+        System.out.println("cd =" + game.getPlayer().getMaxCd());
+        if(span <= 0){
+            game.getPlayer().setMaxCd(50);
+            span = 1;
+            potionTimer.stop();
+            System.out.println("timer stopped, cd = " + game.getPlayer().getMaxCd());
         }
     }
 

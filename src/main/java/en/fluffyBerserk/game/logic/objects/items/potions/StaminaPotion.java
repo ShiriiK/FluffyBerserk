@@ -1,5 +1,6 @@
 package en.fluffyBerserk.game.logic.objects.items.potions;
 
+import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.logic.ObjectType;
 import javafx.scene.image.Image;
 
@@ -17,7 +18,10 @@ public class StaminaPotion extends Potion{
 
     @Override
     protected void drink() {
-        // TODO add health to user!
+        Main.app.getGame().getPlayer().resetCooldown();
+        Main.app.getGame().getPlayer().setMaxCd(10);
+        System.out.println("max cd set to " + Main.app.getGame().getPlayer().getMaxCd());
+        Main.app.getGame().getGameLoop().potionTimer.start();
     }
 
     @Override

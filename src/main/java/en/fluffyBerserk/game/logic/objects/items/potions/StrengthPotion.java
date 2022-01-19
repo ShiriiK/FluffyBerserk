@@ -27,6 +27,6 @@ public class StrengthPotion extends Potion {
 
     @Override
     public Image getImage() {
-        return new Image("items/strenght.png");
+        return new Image("items/strength.png");
     }
 }
