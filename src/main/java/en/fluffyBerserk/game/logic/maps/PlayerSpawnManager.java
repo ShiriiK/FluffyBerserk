@@ -26,8 +26,13 @@ public class PlayerSpawnManager {
                 }
                 break;
             case 2:
-                timesX = 4.5F;
-                timesY = 7F;
+                if(game.getCurrentMap().getName().equals("map1")){
+                    timesX = 4.5F;
+                    timesY = 7F;
+                } else {
+                    timesX = 7F;
+                    timesY = 3F;
+                }
                 break;
             case 3:
                 timesX = 4F;

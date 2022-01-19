@@ -19,6 +19,7 @@ import en.fluffyBerserk.game.logic.objects.items.Pickable;
 import en.fluffyBerserk.game.logic.objects.items.potions.HealthPotion;
 import en.fluffyBerserk.game.logic.objects.items.potions.Potion;
 import en.fluffyBerserk.game.logic.objects.items.potions.StaminaPotion;
+import en.fluffyBerserk.gui.popups.PopUpMenu;
 import en.fluffyBerserk.gui.utils.Collision;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
@@ -33,6 +34,7 @@ public final class GameLoop {
 
     @NotNull
     private final Game game;
+
 
     public AnimationTimer potionTimer = new AnimationTimer() {
         @Override
@@ -91,7 +93,11 @@ public final class GameLoop {
         game.getPlayer().reduceCooldown();
 
         if(game.getPlayer().isDead()) {
-            //what next
+            Main.app.showPopUp(new PopUpMenu());
+            game.getPlayer().setMoveY(0F);
+            game.getPlayer().setMoveX(0F);
+            game.getGameLoop().stop();
+            System.out.println("Game loop stopped");
         }
     }
 
@@ -242,15 +248,8 @@ public final class GameLoop {
 
                             if (objects[i].getType().equals(ObjectType.HOME)) {
                                 game.playerSpawner.spawnOnMap(2);
-                                if (game.map2 == null) {
-                                    game.map2 = new Map2();
-                                    game.setCurrentMap(game.map2);
-                                    System.out.println("new map");
-                                } else {
-                                    game.setCurrentMap(game.map2);
-                                    System.out.println("old map");
-                                }
-
+                                if (game.map2 == null) { game.map2 = new Map2(); }
+                                game.setCurrentMap(game.map2);
                             }
                             if (objects[i].getType().equals(ObjectType.CARPET)) {
                                 game.playerSpawner.spawnOnMap(1);

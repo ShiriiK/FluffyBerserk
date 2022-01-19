@@ -21,7 +21,6 @@ public class PopUpPortal extends PopUp {
         VBox buttons = new VBox();
 
         Button safeZone = new Button("Safe zone");
-
         safeZone.setOnAction(event -> {
             if (!game.getCurrentMap().getName().equals("map1")) {
                 game.playerSpawner.spawnOnMap(1);
