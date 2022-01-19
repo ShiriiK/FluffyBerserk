@@ -16,10 +16,12 @@ public final class Player extends MovableAnimatedEntity implements HasName, CanA
 
     private int maxCd = 50;
     private int attackCd = 0; //
+    private int hp = 0;
 
     public Player(Character character) {
         super(SpritesFactory.getSpriteByNumber(character.getSpriteIndex()), ObjectType.PLAYER);
         this.character = character;
+        this.hp = character.getStamina() * 10;
     }
 
     @Override
@@ -72,6 +74,18 @@ public final class Player extends MovableAnimatedEntity implements HasName, CanA
 
     public int getDmg() {return character.getStrength();}   // Should return total damage of  player with initial number
                                                             // plus equipment bonuses in future
+
+    public int getHp() {
+        return hp;                 // Hp of player = stamina * 10
+    }
+
+    public void damaged(int dmg) {
+        this.hp -= dmg;
+    }
+
+    public boolean isDead(){
+        return hp <= 0;
+    }
 
     public Character getCharacter() {
         return character;
