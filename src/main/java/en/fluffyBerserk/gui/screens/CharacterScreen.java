@@ -187,14 +187,14 @@ public final class CharacterScreen extends BaseScreen {
 
         final Label staminaLabel = new Label("Stamina");
         final Spinner<Integer> staminaSpinner = new Spinner<>();
-        staminaSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, form.getPointsLeft() + form.getStamina(), form.getStamina()));
+        staminaSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(5, form.getPointsLeft() + form.getStamina(), form.getStamina()));
 
         rightBox.getChildren().add(staminaLabel);
         rightBox.getChildren().add(staminaSpinner);
 
         final Label strengthLabel = new Label("Strength");
         final Spinner<Integer> strengthSpinner = new Spinner<>();
-        strengthSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, form.getPointsLeft() + form.getStrength(), form.getStrength()));
+        strengthSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(5, form.getPointsLeft() + form.getStrength(), form.getStrength()));
 
         rightBox.getChildren().add(strengthLabel);
         rightBox.getChildren().add(strengthSpinner);
