@@ -80,7 +80,7 @@ public class EntitiesForMaps {
         catto7.setY(4 * Constants.TILE_SIZE);
 
         Entity catto8 = new ArcherCatto(Main.app.getGame());
-        catto8.setX(4 * Constants.TILE_SIZE);
+        catto8.setX(5 * Constants.TILE_SIZE);
         catto8.setY(9 * Constants.TILE_SIZE);
 
         Entity boss1 = new Boss1(Main.app.getGame());
@@ -188,8 +188,8 @@ public class EntitiesForMaps {
         catto8.setY(4 * Constants.TILE_SIZE);
 
         Entity boss = new Boss3(Main.app.getGame());
-        catto8.setX(9 * Constants.TILE_SIZE);
-        catto8.setY(8 * Constants.TILE_SIZE);
+        catto8.setX(3 * Constants.TILE_SIZE);
+        catto8.setY(11 * Constants.TILE_SIZE);
 
         entities.add(catto1);
         entities.add(catto2);

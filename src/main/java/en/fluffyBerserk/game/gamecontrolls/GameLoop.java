@@ -444,7 +444,7 @@ public final class GameLoop {
     }
 
     private void handleDrink() {
-        span -= 0.01;
+        span -= 0.001;
         System.out.println("cd =" + game.getPlayer().getMaxCd());
         if (span <= 0) {
             game.getPlayer().setMaxCd(50);
