@@ -13,6 +13,7 @@ import en.fluffyBerserk.game.logic.objects.bullets.Bullet;
 import en.fluffyBerserk.game.logic.objects.creatures.Creature;
 import en.fluffyBerserk.game.logic.objects.creatures.Death;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ArcherCatto;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ZombieCatto;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.Pickable;
 import en.fluffyBerserk.game.logic.objects.items.potions.HealthPotion;
@@ -88,6 +89,10 @@ public final class GameLoop {
         drawEntities(gameCanvas);
 
         game.getPlayer().reduceCooldown();
+
+        if(game.getPlayer().isDead()) {
+            //what next
+        }
     }
 
     private void drawMap(Canvas canvas) {
@@ -184,8 +189,13 @@ public final class GameLoop {
             }
 
             //ArchcerCatto checks and shoots if possible (shoot depends on CD and Range)
-            if ((entity instanceof ArcherCatto)){
+            if (entity instanceof ArcherCatto){
                 ((ArcherCatto) entity).shoot();
+            }
+
+            //ZombieCatto refresh attackCd
+            if(entity instanceof ZombieCatto) {
+                ((ZombieCatto) entity).refreshCd();
             }
 
             //reduce lifeSpan of a used bullet
@@ -272,12 +282,26 @@ public final class GameLoop {
                     }
                 }
             }
+            //Enemy bullet damages player
             if (entity1.getType().equals(ObjectType.BULLET_ENEMY)) {
                 for (Entity entity2 : game.getEntityManager().getEntities()) {
                     if (entity2.getType().equals(ObjectType.PLAYER)) {
                         if (Collision.objectsCollide(entity1, entity2)) {
-                            // ((PLAYER) entity2).damaged(((Bullet) entity1).getDmg()); //TODO Player gets damage to his HP
+                            ((Player) entity2).damaged(((Bullet) entity1).getDmg());
                             ((Bullet) entity1).setDmg(0);
+                            System.out.println("You have got: " + ((Bullet) entity1).getDmg() + " dmg");
+                        }
+                    }
+                }
+            }
+            //ZombieCatto damages player
+            if (entity1.getType().equals(ObjectType.ENEMY)) {
+                for (Entity entity2 : game.getEntityManager().getEntities()) {
+                    if (entity2.getType().equals(ObjectType.PLAYER)) {
+                        if (Collision.objectsCollide(entity1, entity2) && ((ZombieCatto) entity1).canAttack()) {
+                            ((Player) entity2).damaged(((Creature) entity1).getDmg());
+                            ((ZombieCatto) entity1).resetCd();
+                            System.out.println("You have got: " + ((Creature) entity1).getDmg() + " dmg");
                         }
                     }
                 }

@@ -11,6 +11,7 @@ import java.util.Random;
 
 public class ZombieCatto extends Creature implements HasName {
     private Game game;
+    private int attackCd = 50;
 
     public ZombieCatto(Game game) {
         super(SpritesFactory.getRandomMeleeEnemySprite(), ObjectType.ENEMY);
@@ -45,4 +46,10 @@ public class ZombieCatto extends Creature implements HasName {
         }
         super.move();
     }
+
+    public boolean canAttack() {return attackCd == 50;}
+
+    public void resetCd() {attackCd = 0;}
+
+    public void refreshCd() {if (attackCd < 50) attackCd++;}
 }
