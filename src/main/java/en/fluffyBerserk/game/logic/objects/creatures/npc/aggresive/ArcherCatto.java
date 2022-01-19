@@ -12,14 +12,14 @@ import en.fluffyBerserk.gui.graphics.sprites.SpritesFactory;
 
 public class ArcherCatto extends Creature implements HasName {
     private Game game;
-    private static final float attackRange = 15F;
+    private static final float attackRange = 5F;
     private int attackCd = 100;
 
     public ArcherCatto(Game game) {
         super(SpritesFactory.getRandomRangedEnemySprite(), ObjectType.ENEMY);
         this.game = game;
         this.setDmg(10);
-        this.setHp(25);
+        this.setHp(20);
         NpcFactory.init(this);
     }
 
@@ -71,10 +71,10 @@ public class ArcherCatto extends Creature implements HasName {
                     bullet.setMoveY(-Bullet.SPEED);
                     break;
                 case 2:
-                    bullet.setMoveY(Bullet.SPEED);
+                    bullet.setMoveX(Bullet.SPEED);
                     break;
                 case 3:
-                    bullet.setMoveX(Bullet.SPEED);
+                    bullet.setMoveY(Bullet.SPEED);
                     break;
                 case 4:
                     bullet.setMoveX(-Bullet.SPEED);
@@ -90,20 +90,15 @@ public class ArcherCatto extends Creature implements HasName {
 
     private int bulletDirection() {
         int direction = 0;
-        if (game.getPlayer().getX() - this.getX() > attackRange || this.getX() - game.getPlayer().getX() < attackRange) {
-            if (game.getPlayer().getX() > this.getX()) {
-                direction = 3;
-            }
-            if (game.getPlayer().getX() < this.getX()) {
-                direction = 4;
-            }
+        float diffX = game.getPlayer().getX() - this.getX();
+        float diffY = game.getPlayer().getY() - this.getY();
+        boolean yCloserThanX = Math.abs(diffX) < Math.abs(diffY);
 
-            if (game.getPlayer().getY() > this.getY()) {
-                direction = 2;
-            }
-            if (game.getPlayer().getY() < this.getY()) {
-                direction = 1;
-            }
+        if (diffX > attackRange || -diffX < attackRange || diffY > attackRange || -diffY < attackRange) {
+            if (diffY < 0 && yCloserThanX) {direction = 1;}
+            else if (diffX > 0 && !yCloserThanX) {direction = 2;}
+            if (diffY > 0 && yCloserThanX) {direction = 3;}
+            else if (diffX < 0 && !yCloserThanX) {direction = 4;}
         }
         return direction;
     }
