@@ -1,6 +1,7 @@
 package en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive;
 
 
+import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.gamecontrolls.Game;
 import en.fluffyBerserk.game.logic.HasName;
 import en.fluffyBerserk.game.logic.ObjectType;
@@ -9,18 +10,22 @@ import en.fluffyBerserk.game.logic.objects.creatures.Creature;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.NpcFactory;
 import en.fluffyBerserk.gui.graphics.sprites.SpritesFactory;
 
-public class ZombieArcher extends Creature implements HasName {
+public class ArcherCatto extends Creature implements HasName {
     private Game game;
-    private static final float attackRange = 10F;
+    private static final float attackRange = 15F;
+    private int attackCd = 100;
 
-    public ZombieArcher() {
-        super(SpritesFactory.getSpriteByNumber(15), ObjectType.ENEMY);
+    public ArcherCatto(Game game) {
+        super(SpritesFactory.getRandomRangedEnemySprite(), ObjectType.ENEMY);
+        this.game = game;
+        this.setDmg(10);
+        this.setHp(25);
         NpcFactory.init(this);
     }
 
     @Override
     public String getName() {
-        return "ZombieArcher";
+        return "ArcherCatto";
     }
 
     @Override
@@ -59,28 +64,48 @@ public class ZombieArcher extends Creature implements HasName {
     }
 
     public void shoot() {
-        //TODO every now and then shoot at the player kekw
-        new Bullet();
+        if(attackCd >= 100 && bulletDirection() != 0) {
+            Bullet bullet = new Bullet(this.getDmg());
+            switch(bulletDirection()){
+                case 1:
+                    bullet.setMoveY(-Bullet.SPEED);
+                    break;
+                case 2:
+                    bullet.setMoveY(Bullet.SPEED);
+                    break;
+                case 3:
+                    bullet.setMoveX(Bullet.SPEED);
+                    break;
+                case 4:
+                    bullet.setMoveX(-Bullet.SPEED);
+                    break;
+            }
+            bullet.setX(this.getX() + Constants.ENTITIES_SIZE/2);
+            bullet.setY(this.getY() + Constants.ENTITIES_SIZE/2);
+            game.getEntityManager().getEntities().add(bullet);
+            this.attackCd = 0;
+
+        } else {attackCd++;}
     }
 
-    private Bullet newBullet() {
-        int direction = 4;
+    private int bulletDirection() {
+        int direction = 0;
         if (game.getPlayer().getX() - this.getX() > attackRange || this.getX() - game.getPlayer().getX() < attackRange) {
             if (game.getPlayer().getX() > this.getX()) {
-                direction = 1;
+                direction = 3;
             }
             if (game.getPlayer().getX() < this.getX()) {
                 direction = 4;
             }
 
             if (game.getPlayer().getY() > this.getY()) {
-                direction = 7;
+                direction = 2;
             }
             if (game.getPlayer().getY() < this.getY()) {
-                direction = 8;
+                direction = 1;
             }
         }
-        return new Bullet();
+        return direction;
     }
 
 }

@@ -10,8 +10,6 @@ public class NpcFactory {
     public static void init(Creature creature) {
         creature.setY(getSpawnableY());
         creature.setX(getSpawnableX());
-        creature.setHp(20);
-        creature.setStr(5);
         creature.setNpcSpeed(2F);
         creature.setMoveX(creature.getNpcSpeed());
         creature.setMoveY(creature.getNpcSpeed());

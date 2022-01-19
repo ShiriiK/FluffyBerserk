@@ -12,6 +12,7 @@ import en.fluffyBerserk.game.logic.objects.TileObject;
 import en.fluffyBerserk.game.logic.objects.bullets.Bullet;
 import en.fluffyBerserk.game.logic.objects.creatures.Creature;
 import en.fluffyBerserk.game.logic.objects.creatures.Death;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ArcherCatto;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.Pickable;
 import en.fluffyBerserk.game.logic.objects.items.potions.HealthPotion;
@@ -181,13 +182,18 @@ public final class GameLoop {
                 ((Animated) entity).getAnimationManager().increaseTick();
             }
 
+            //ArchcerCatto checks and shoots if possible (shoot depends on CD and Range)
+            if ((entity instanceof ArcherCatto)){
+                ((ArcherCatto) entity).shoot();
+            }
+
             //reduce lifeSpan of a used bullet
             if (entity instanceof Bullet && ((Bullet) entity).bulletDmg <= 0) {
                 ((Bullet) entity).reduceLifeSpan();
             }
 
             // Don't check collision for bullets X tiles or objects (structures)
-            if (!(entity.getType().equals(ObjectType.BULLET_PLAYER))) {
+            if (!(entity.getType().equals(ObjectType.BULLET_PLAYER) || entity.getType().equals(ObjectType.BULLET_ENEMY))) {
 
                 // Check collision with tiles
                 Vector<Vector<TileObject>> tiles = game.getCurrentMap().getTiles();
@@ -254,7 +260,8 @@ public final class GameLoop {
 
         // Check collision with other entities (bullets, monsters, npc, items etc.)
         for (Entity entity1 : game.getEntityManager().getEntities()) {
-            if (entity1.getType().equals(ObjectType.BULLET_PLAYER))
+            //check for player bullets X enemy
+            if (entity1.getType().equals(ObjectType.BULLET_PLAYER)) {
                 for (Entity entity2 : game.getEntityManager().getEntities()) {
                     if (entity2.getType().equals(ObjectType.ENEMY)) {
                         if (Collision.objectsCollide(entity1, entity2)) {
@@ -263,6 +270,17 @@ public final class GameLoop {
                         }
                     }
                 }
+            }
+            if (entity1.getType().equals(ObjectType.BULLET_ENEMY)) {
+                for (Entity entity2 : game.getEntityManager().getEntities()) {
+                    if (entity2.getType().equals(ObjectType.PLAYER)) {
+                        if (Collision.objectsCollide(entity1, entity2)) {
+                            // ((PLAYER) entity2).damaged(((Bullet) entity1).getDmg()); //TODO Player gets damage to his HP
+                            ((Bullet) entity1).setDmg(0);
+                        }
+                    }
+                }
+            }
         }
 
 
@@ -328,7 +346,7 @@ public final class GameLoop {
             }
 
             //Delete bullets which lifeSpan is below 0
-            if ((entity.getType().equals(ObjectType.BULLET_PLAYER) || entity.getType().equals(ObjectType.BULLET_HOSTILE))
+            if ((entity.getType().equals(ObjectType.BULLET_PLAYER) || entity.getType().equals(ObjectType.BULLET_ENEMY))
                     && ((Bullet) entity).lifeSpan <= 0) {
                 game.getEntityManager().getEntities().remove(entity);
             }

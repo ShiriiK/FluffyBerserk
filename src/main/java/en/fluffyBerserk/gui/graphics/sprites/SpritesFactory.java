@@ -61,6 +61,10 @@ public class SpritesFactory {
         Random random = new Random();
         return meleeEnemies.get(random.nextInt(meleeEnemies.size()));
     }
+    public static @NotNull LocateImage getRandomRangedEnemySprite() {
+        Random random = new Random();
+        return rangedEnemies.get(random.nextInt(rangedEnemies.size()));
+    }
 
 
     public static @Nullable LocateImage getSpriteByNumber(Integer key) {

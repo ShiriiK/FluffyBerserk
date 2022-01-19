@@ -3,6 +3,7 @@ package en.fluffyBerserk.game.logic.maps;
 import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.logic.objects.Entity;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ArcherCatto;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ZombieCatto;
 
 import java.util.ArrayList;
@@ -15,11 +16,11 @@ public class EntitiesForMaps {
      * ZombieCatto catto4 = new ZombieCatto();
      * ZombieCatto catto5 = new ZombieCatto();
      * <p>
-     * private static ZombieArcher archer1 = new ZombieArcher();
-     * private static ZombieArcher archer2 = new ZombieArcher();
-     * private static ZombieArcher archer3 = new ZombieArcher();
-     * private static ZombieArcher archer4 = new ZombieArcher();
-     * private static ZombieArcher archer5 = new ZombieArcher();
+     * private static ArcherCatto archer1 = new ArcherCatto();
+     * private static ArcherCatto archer2 = new ArcherCatto();
+     * private static ArcherCatto archer3 = new ArcherCatto();
+     * private static ArcherCatto archer4 = new ArcherCatto();
+     * private static ArcherCatto archer5 = new ArcherCatto();
      */
 
     public static ArrayList<Entity> loadMap1() {
@@ -57,17 +58,32 @@ public class EntitiesForMaps {
         catto5.setX(10 * Constants.TILE_SIZE);
         catto5.setY(2 * Constants.TILE_SIZE);
 
+        Entity catto6 = new ArcherCatto(Main.app.getGame());
+        catto6.setX(12 * Constants.TILE_SIZE);
+        catto6.setY(3 * Constants.TILE_SIZE);
+
+        Entity catto7 = new ArcherCatto(Main.app.getGame());
+        catto7.setX(13 * Constants.TILE_SIZE);
+        catto7.setY(3 * Constants.TILE_SIZE);
+
+        Entity catto8 = new ArcherCatto(Main.app.getGame());
+        catto8.setX(12 * Constants.TILE_SIZE);
+        catto8.setY(4 * Constants.TILE_SIZE);
+
         entities.add(catto1);
         entities.add(catto2);
         entities.add(catto3);
         entities.add(catto4);
         entities.add(catto5);
+        entities.add(catto6);
+        entities.add(catto7);
+        entities.add(catto8);
 
         return entities;
     }
 
     public static ArrayList<Entity> loadMap4() {
-        entities = new ArrayList<Entity>(20); //TODO FILL THE F i mean Entities
+        entities = new ArrayList<Entity>(20);
 
         return entities;
     }
