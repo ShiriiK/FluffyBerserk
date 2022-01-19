@@ -15,7 +15,7 @@ public class MovableEntityAnimationManager {
 
     private int ticks = 0;
 
-    private int animationNumber = 0;
+    public int animationNumber = 0;
 
     private final MovableEntityAnimations animations;
 
@@ -81,6 +81,10 @@ public class MovableEntityAnimationManager {
         return getAnimationList().get(animationNumber);
     }
 
+    public Image getDeathImage(){
+        return new Image("npcs/death.png");
+    }
+
     public void increaseTick() {
         if (!entity.isMoving()) {
             return;
@@ -92,5 +96,6 @@ public class MovableEntityAnimationManager {
             ticks = 0;
             animationNumber = (animationNumber + 1) > 2 ? 0 : animationNumber + 1;
         }
+
     }
 }

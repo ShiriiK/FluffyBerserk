@@ -17,6 +17,7 @@ import en.fluffyBerserk.gui.utils.Collision;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -35,9 +36,24 @@ public final class GameLoop {
         }
     };
 
+    AnimationTimer deathTimer = new AnimationTimer() {
+        @Override
+        public void handle(long now) {
+            hadnleDeath();
+        }
+    };
+
     public GameLoop(@NotNull Game game) {
         this.game = game;
     }
+
+    private double opacity = 1;
+    Entity death = new Entity(ObjectType.TILE) {
+        @Override
+        public Image getImage() {
+            return new Image("npcs/death.png");
+        }
+    };
 
     public void start() {
         timer.start();
@@ -281,7 +297,12 @@ public final class GameLoop {
 
             //Delete Hostile entities, who have less than 0 hp;
             if (entity.getType().equals(ObjectType.ENEMY) && ((Creature) entity).getHp() <= 0) {
+                death.setX(entity.getX());
+                death.setY(entity.getY());
+                game.getEntityManager().addEntity(death);
+
                 game.getEntityManager().removeEntity(entity);
+                deathTimer.start();
             }
 
             //Delete bullets which lifeSpan is below 0
@@ -289,6 +310,15 @@ public final class GameLoop {
             && ((Bullet) entity).lifeSpan <= 0) {
                 game.getEntityManager().getEntities().remove(entity);
             }
+        }
+    }
+
+    private void hadnleDeath(){
+        opacity -= 0.033;
+        death.setY(death.getY()-2);
+        if (opacity <= 0) {
+            game.getEntityManager().removeEntity(death);
+            deathTimer.stop();
         }
     }
 }
