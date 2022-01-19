@@ -65,9 +65,9 @@ public class PopUpPortal extends PopUp {
         Button area3 = new Button("Area 3");
         area3.setOnAction(event -> {
             if (!game.getCurrentMap().getName().equals("map5")) {
-                game.playerSpawner.spawnOnMap(3);
+                game.playerSpawner.spawnOnMap(5);
                 if (game.map5 == null) {
-                    game.map5 = new Map3(); // TODO
+                    game.map5 = new Map5();
                     game.setCurrentMap(game.map5);
                 } else {
                     game.setCurrentMap(game.map5);
@@ -78,7 +78,7 @@ public class PopUpPortal extends PopUp {
 
         Button area4 = new Button("Area 4");
         area4.setOnAction(event -> {
-            if (!game.getCurrentMap().getName().equals("map6")) { //TODO DO DO DO a MAP DODO and DON'Ts (collosion)
+            if (!game.getCurrentMap().getName().equals("map6")) {
                 game.playerSpawner.spawnOnMap(6);
                 if (game.map6 == null){
                     game.map6 = new Map6();
