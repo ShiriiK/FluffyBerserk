@@ -11,6 +11,8 @@ public enum ObjectType {
     BULLET_PLAYER,
     BULLET_ENEMY,
     CLOSET,
-    WEARABLE,
+    HEALTH_POTION,
+    STAMINA_POTION,
+    STRENGTH_POTION,
     ENEMY
 }
