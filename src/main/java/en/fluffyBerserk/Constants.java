@@ -10,7 +10,7 @@ public class Constants {
 
     public static final int ENTITIES_SIZE = TILE_SIZE - 10;
 
-    public static final int PLAYER_HP_SCALE = 20;       //Hp = stamina * this constant
+    public static final int PLAYER_HP_SCALE = 20;       //Hp = stamina(or vitality) * this constant
     public static final int PLAYER_DMG_SCALE = 1;       //Dmg = strength * this constant
 
     public static final int MAX_WORLD_COL = 20;
