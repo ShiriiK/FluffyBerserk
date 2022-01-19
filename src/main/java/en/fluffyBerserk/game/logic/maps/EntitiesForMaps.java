@@ -15,11 +15,11 @@ public class EntitiesForMaps {
      * ZombieCatto catto4 = new ZombieCatto();
      * ZombieCatto catto5 = new ZombieCatto();
      * <p>
-     * private static ZombieArcher archer1 = new ZombieArcher();
-     * private static ZombieArcher archer2 = new ZombieArcher();
-     * private static ZombieArcher archer3 = new ZombieArcher();
-     * private static ZombieArcher archer4 = new ZombieArcher();
-     * private static ZombieArcher archer5 = new ZombieArcher();
+     * private static ArcherCatto archer1 = new ArcherCatto();
+     * private static ArcherCatto archer2 = new ArcherCatto();
+     * private static ArcherCatto archer3 = new ArcherCatto();
+     * private static ArcherCatto archer4 = new ArcherCatto();
+     * private static ArcherCatto archer5 = new ArcherCatto();
      */
 
     public static ArrayList<Entity> loadMap1() {
@@ -67,7 +67,7 @@ public class EntitiesForMaps {
     }
 
     public static ArrayList<Entity> loadMap4() {
-        entities = new ArrayList<Entity>(20); //TODO FILL THE F i mean Entities
+        entities = new ArrayList<Entity>(20);
 
         return entities;
     }

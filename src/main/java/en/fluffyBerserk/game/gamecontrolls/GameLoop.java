@@ -12,12 +12,12 @@ import en.fluffyBerserk.game.logic.objects.TileObject;
 import en.fluffyBerserk.game.logic.objects.bullets.Bullet;
 import en.fluffyBerserk.game.logic.objects.creatures.Creature;
 import en.fluffyBerserk.game.logic.objects.creatures.Death;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.aggresive.ArcherCatto;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.PickableItem;
 import en.fluffyBerserk.gui.utils.Collision;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 
@@ -177,6 +177,11 @@ public final class GameLoop {
                 ((Animated) entity).getAnimationManager().increaseTick();
             }
 
+            //ArchcerCatto checks and shoots if possible (shoot depends on CD and Range)
+            if ((entity instanceof ArcherCatto)){
+                ((ArcherCatto) entity).shoot();
+            }
+
             //reduce lifeSpan of a used bullet
             if (entity instanceof Bullet && ((Bullet) entity).bulletDmg <= 0) {
                 ((Bullet) entity).reduceLifeSpan();
@@ -305,7 +310,7 @@ public final class GameLoop {
             }
 
             //Delete bullets which lifeSpan is below 0
-            if ((entity.getType().equals(ObjectType.BULLET_PLAYER) || entity.getType().equals(ObjectType.BULLET_HOSTILE))
+            if ((entity.getType().equals(ObjectType.BULLET_PLAYER) || entity.getType().equals(ObjectType.BULLET_ENEMY))
                     && ((Bullet) entity).lifeSpan <= 0) {
                 game.getEntityManager().getEntities().remove(entity);
             }

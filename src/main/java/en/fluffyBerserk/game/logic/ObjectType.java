@@ -9,7 +9,7 @@ public enum ObjectType {
     PLAYER, // TODO
     BED, // TODO healing or something
     BULLET_PLAYER,
-    BULLET_HOSTILE,
+    BULLET_ENEMY,
     CLOSET,
     WEARABLE,
     ENEMY
