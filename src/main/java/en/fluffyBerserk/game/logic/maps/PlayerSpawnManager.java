@@ -38,8 +38,8 @@ public class PlayerSpawnManager {
                 timesY = 15F;
                 break;
             case 6:
-                timesX = 15F;
-                timesY = 22F;
+                timesX = 13F;
+                timesY = 19F;
                 break;
         }
 

@@ -67,7 +67,7 @@ public class EntitiesForMaps {
     }
 
     public static ArrayList<Entity> loadMap4() {
-        entities = new ArrayList<Entity>(20);
+        entities = new ArrayList<Entity>(20); //TODO FILL THE F i mean Entities
 
         return entities;
     }
