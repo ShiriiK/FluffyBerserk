@@ -94,6 +94,15 @@ public final class GameLoop {
             game.getPlayer().setMoveX(0F);
             game.getGameLoop().stop();
             System.out.println("Game loop stopped");
+            removeAllBullets();
+        }
+    }
+
+    private void removeAllBullets() {
+        for(Entity entity : game.getEntityManager().getEntities()){
+            if(entity instanceof Bullet){
+                game.getEntityManager().removeEntity(entity);
+            }
         }
     }
 
