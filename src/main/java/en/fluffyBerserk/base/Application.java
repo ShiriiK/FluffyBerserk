@@ -7,7 +7,6 @@ import en.fluffyBerserk.gui.screens.Screen;
 import en.fluffyBerserk.gui.utils.PopUpBuilder;
 import en.fluffyBerserk.persistence.DatabaseSession;
 import en.fluffyBerserk.persistence.models.User;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -18,9 +17,6 @@ import org.jetbrains.annotations.Nullable;
  * as well as pop-ups are being displayed and hidden.
  */
 public final class Application {
-
-    public static final String APP_NAME = "Fluffy Berserk";
-    public static final Image APP_ICON = new Image("/icon/icon.png");
 
     @NotNull
     private final Stage primaryStage;
@@ -42,15 +38,16 @@ public final class Application {
     }
 
     public void init() {
-        primaryStage.setTitle(APP_NAME);
-        primaryStage.getIcons().add(APP_ICON);
+        primaryStage.setTitle(Constants.APP_NAME);
+        primaryStage.getIcons().add(Constants.APP_ICON);
         primaryStage.setHeight(Constants.SCREEN_HEIGHT);
         primaryStage.setWidth(Constants.SCREEN_WIDTH);
         primaryStage.setResizable(false);
+        int i = 10;
     }
 
     public void start(Screen defaultScreen) {
-        DatabaseSession.startSession();
+        //DatabaseSession.startSession();
         this.changeScreen(defaultScreen);
         primaryStage.show();
     }

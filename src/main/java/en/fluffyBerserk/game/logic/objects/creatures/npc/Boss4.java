@@ -1,22 +1,14 @@
 package en.fluffyBerserk.game.logic.objects.creatures.npc;
 
 import en.fluffyBerserk.Constants;
-import en.fluffyBerserk.game.gamecontrolls.Game;
-import en.fluffyBerserk.game.logic.HasName;
-import en.fluffyBerserk.game.logic.ObjectType;
-import en.fluffyBerserk.game.logic.objects.creatures.Creature;
 import en.fluffyBerserk.gui.utils.LocateImage;
 
-public class Boss4 extends Creature implements HasName {
-    private Game game;
-    private int attackCd = 50;
+public class Boss4 extends MeleeNpc {
 
-    public Boss4(Game game) {
-        super(new LocateImage("npcs/boss5.png"), ObjectType.ENEMY);
-        this.game = game;
-        this.setDmg(5);
-        this.setHp(35);
-        NpcFactory.init(this);
+    public Boss4() {
+        super(new LocateImage("npcs/boss5.png"));
+        this.setDmg(10);
+        this.setHp(50);
     }
 
     @Override
@@ -25,44 +17,13 @@ public class Boss4 extends Creature implements HasName {
     }
 
     @Override
-    public int getHeight(){
-        return (int) (Constants.TILE_SIZE*1.5);
+    public int getHeight() {
+        return (int) (Constants.TILE_SIZE * 1.5);
     }
 
     @Override
-    public int getWidth(){
-        return (int) (Constants.TILE_SIZE*1.5);
+    public int getWidth() {
+        return (int) (Constants.TILE_SIZE * 1.5);
     }
 
-    @Override
-    public void move() {
-        if (game.getPlayer().getX() > this.getX()) {
-            setMoveX(+getNpcSpeed());
-        }
-        else if (this.getX() >= game.getPlayer().getX()) {
-            setMoveX(-getNpcSpeed());
-        }
-
-        if (game.getPlayer().getY() > this.getY()) {
-            setMoveY(getNpcSpeed());
-        }
-        else if (this.getY() >= game.getPlayer().getY()) {
-            setMoveY(-getNpcSpeed());
-        }
-
-        setX(this.getX() + getMoveX());
-        setY(this.getY() + getMoveY());
-    }
-
-    public boolean canAttack() {
-        return attackCd == 50;
-    }
-
-    public void resetCd() {
-        attackCd = 0;
-    }
-
-    public void refreshCd() {
-        if (attackCd < 50) attackCd++;
-    }
 }

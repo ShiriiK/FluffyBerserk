@@ -1,6 +1,11 @@
 package en.fluffyBerserk;
 
+import javafx.scene.image.Image;
+
 public class Constants {
+
+    public static final String APP_NAME = "Fluffy Berserk";
+    public static final Image APP_ICON = new Image("/icon/icon.png");
 
     public static final int BASE_TILE_SIZE = 32;
 

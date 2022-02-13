@@ -8,50 +8,12 @@ import javafx.scene.image.Image;
 
 public abstract class Creature extends MovableAnimatedEntity implements HasName {
 
-    private int hp;
-    private int str;
-    private int armor;
-    private int stamina;
-    private int intelllect;
-    private int level;
-    private float npcSpeed;
-    private int dmg;
+    protected int hp;
+    protected float npcSpeed;
+    protected int dmg;
 
     public Creature(LocateImage sprite, ObjectType type) {
         super(sprite, type);
-    }
-
-
-    public int getArmor() {
-        return armor;
-    }
-
-    public void setArmor(int armor) {
-        this.armor = armor;
-    }
-
-    public int getStamina() {
-        return stamina;
-    }
-
-    public void setStamina(int stamina) {
-        this.stamina = stamina;
-    }
-
-    public int getIntelllect() {
-        return intelllect;
-    }
-
-    public void setIntelllect(int intelllect) {
-        this.intelllect = intelllect;
-    }
-
-    public int getStr() {
-        return str;
-    }
-
-    public void setStr(int str) {
-        this.str = str;
     }
 
     public int getHp() {
@@ -60,14 +22,6 @@ public abstract class Creature extends MovableAnimatedEntity implements HasName 
 
     public void setHp(int hp) {
         this.hp = hp;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
     }
 
     public float getNpcSpeed() {
