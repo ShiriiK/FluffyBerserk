@@ -14,6 +14,7 @@ import en.fluffyBerserk.game.logic.objects.creatures.Creature;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.MeleeNpc;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.Npc;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.RangedNpc;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.npcs.Boss;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.npcs.Death;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.potions.HealthPotion;
@@ -94,7 +95,6 @@ public final class GameLoop {
         gameCanvas.getGraphicsContext2D().setFill(Color.RED);
         gameCanvas.getGraphicsContext2D().setFont(new Font(30));
         gameCanvas.getGraphicsContext2D().fillText("HP: " + game.getPlayer().getHp() + "\nCooldown: " + (game.getPlayer().getAttackCd()-50), Constants.SCREEN_WIDTH-200, Constants.SCREEN_HEIGHT-100);
-
 
         game.getPlayer().reduceCooldown();
 
@@ -322,13 +322,12 @@ public final class GameLoop {
                 }
             }
 
-            /**for (Entity entity1 : game.getEntityManager().getEntities()){
-                if(entity1 instanceof Npc && entity instanceof Npc) {
-                    if(Collision.objectsCollide(entity1, entity)){
-                        returnEntityPosition(entity);
-                    }
+            for (Entity entity1 : game.getEntityManager().getEntities()) {
+                if (!entity.equals(entity1) && entity1 instanceof Npc && entity instanceof Npc &&
+                        Collision.objectsCollide(entity1, entity)) {
+                    returnEntityPosition(entity);
                 }
-            }*/
+            }
         }
     }
 
@@ -371,6 +370,10 @@ public final class GameLoop {
                 death.setX(entity.getX());
                 death.setY(entity.getY());
                 game.getEntityManager().addEntity(death);
+
+                if(entity instanceof Boss){
+                    game.setPhase(game.getPhase() + 1);
+                }
 
                 Random random = new Random();
                 if (Constants.DROP_RATE >= random.nextInt(100)) {

@@ -4,7 +4,7 @@ import en.fluffyBerserk.Constants;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.MeleeNpc;
 import en.fluffyBerserk.gui.utils.LocateImage;
 
-public class Boss3 extends MeleeNpc {
+public class Boss3 extends MeleeNpc implements Boss {
 
     public Boss3() {
         super(new LocateImage("npcs/boss1.png"));
