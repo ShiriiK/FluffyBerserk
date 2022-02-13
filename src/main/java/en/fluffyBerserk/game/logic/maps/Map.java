@@ -1,6 +1,5 @@
 package en.fluffyBerserk.game.logic.maps;
 
-import en.fluffyBerserk.game.gamecontrolls.EntityManager;
 import en.fluffyBerserk.game.logic.objects.Entity;
 import en.fluffyBerserk.game.logic.objects.TileObject;
 import en.fluffyBerserk.gui.graphics.tiles.TileLoader;
@@ -10,13 +9,15 @@ import java.util.Vector;
 
 public abstract class Map {
 
+    public final int phase = setPhase();
+
+    private final Vector<Vector<TileObject>> tiles = TileLoader.loadTiles(getTilePath(), getWidth(), getHeight());
+
     public abstract ArrayList<Entity> getEntities();
 
     public abstract Entity[] getObjects();
 
     public abstract int getId();
-
-    private final Vector<Vector<TileObject>> tiles = TileLoader.loadTiles(getTilePath(), getWidth(), getHeight());
 
     public Vector<Vector<TileObject>> getTiles() {
         return tiles;
@@ -54,4 +55,9 @@ public abstract class Map {
 
     public abstract boolean isForCombat();
 
+    public int getPhase(){
+        return phase;
+    };
+
+    protected abstract int setPhase();
 }

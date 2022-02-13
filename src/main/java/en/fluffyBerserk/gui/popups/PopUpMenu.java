@@ -32,7 +32,7 @@ public final class PopUpMenu extends PopUp {
         });
 
         // Save button
-        Button saveButton = new Button("Save game"); //TODO
+        Button saveButton = new Button("Save game");
         saveButton.setOnAction(event ->{
             character.setGamePhase(6);
             character.setLastMapId(game.getCurrentMap().getId());

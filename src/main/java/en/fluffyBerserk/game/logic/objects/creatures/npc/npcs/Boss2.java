@@ -7,9 +7,8 @@ import en.fluffyBerserk.gui.utils.LocateImage;
 
 public class Boss2 extends MeleeNpc {
 
-    public Boss2(Game game) {
+    public Boss2() {
         super(new LocateImage("npcs/boss3.png"));
-        this.game = game;
         this.setDmg(10);
         this.setHp(50);
     }

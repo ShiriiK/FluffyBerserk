@@ -91,7 +91,7 @@ public class KeyHandler {
                                 game.getPlayer().setMoveX(0F);
                                 Main.app.getGame().getGameLoop().stop();
                             } else if (object.getType().equals(ObjectType.PORTAL)) {
-                                PopUpPortal portal = new PopUpPortal(game);
+                                PopUpPortal portal = new PopUpPortal();
                                 Main.app.showPopUp(portal);
                                 game.getPlayer().setMoveY(0F);
                                 game.getPlayer().setMoveX(0F);

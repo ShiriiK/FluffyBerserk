@@ -1,9 +1,7 @@
 package en.fluffyBerserk.game.gamecontrolls;
 
 import en.fluffyBerserk.Constants;
-import en.fluffyBerserk.game.logic.maps.Map;
-import en.fluffyBerserk.game.logic.maps.MapLoader;
-import en.fluffyBerserk.game.logic.maps.PlayerSpawnManager;
+import en.fluffyBerserk.game.logic.maps.*;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.inventory.Inventory;
 import en.fluffyBerserk.gui.screens.GameScreen;
@@ -20,12 +18,13 @@ public final class Game {
     private final GameGraphics gameGraphics = new GameGraphics();
     private final GameLoop gameLoop = new GameLoop(this);
     private final Camera camera = new Camera(this);
-    public Map map1, map2, map3, map4, map5, map6;
+    public Map map2, map3 = new Map3(), map4 = new Map4(), map5 = new Map5(), map6 = new Map6();
     public PlayerSpawnManager playerSpawner;
     public GameScreen gameScreen;
     public boolean running = false;
     private EntityManager entityManager = new EntityManager();
     private Map currentMap;
+    private int phase = 1;
 
     public Game(Character character) {
         player = new Player(character);
@@ -87,5 +86,13 @@ public final class Game {
         player.setHitBoxY(player.getY() + 30);
 
         currentMap = MapLoader.loadMapById(player.getCharacter().getLastMapId());
+    }
+
+    public int getPhase() {
+        return phase;
+    }
+
+    public void setPhase(int phase) {
+        this.phase = phase;
     }
 }

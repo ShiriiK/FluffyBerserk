@@ -37,6 +37,11 @@ public final class Map6 extends Map {
     }
 
     @Override
+    protected int setPhase() {
+        return 4;
+    }
+
+    @Override
     public ArrayList<Entity> getEntities(){ return entities; }
 
     @Override
