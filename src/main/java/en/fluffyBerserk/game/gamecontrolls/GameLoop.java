@@ -12,6 +12,7 @@ import en.fluffyBerserk.game.logic.objects.TileObject;
 import en.fluffyBerserk.game.logic.objects.bullets.Bullet;
 import en.fluffyBerserk.game.logic.objects.creatures.Creature;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.MeleeNpc;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.Npc;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.RangedNpc;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.npcs.Death;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
@@ -27,7 +28,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
 
@@ -70,7 +70,7 @@ public final class GameLoop {
     }    private AnimationTimer deathTimer = new AnimationTimer() {
         @Override
         public void handle(long now) {
-            hadnleDeath();
+            handleDeath();
         }
     };
 
@@ -189,140 +189,12 @@ public final class GameLoop {
     }
 
     private void drawEntities(Canvas canvas) {
-        ArrayList<Entity> itemsToRemoveFromMap = new ArrayList<>();
 
         for (Entity entity : game.getEntityManager().getEntities()) {
-            if (!(entity instanceof MovableEntity)) {
-                continue;
-            }
-
-            for (Entity entity1 : game.getEntityManager().getEntities())
-                if (entity1 instanceof Potion && entity instanceof Player && Collision.objectsCollide(entity, entity1)) {
-                    game.getInventory().addItem((Potion) entity1);
-                    itemsToRemoveFromMap.add(entity1);
-                    System.out.println("Item picked");
-                    break;
-                }
-
-            ((MovableEntity) entity).move();
-
-            if (entity instanceof Animated) {
-                ((Animated) entity).getAnimationManager().increaseTick();
-            }
-
-            //ArchcerCatto checks and shoots if possible (shoot depends on CD and Range)
-            if (entity instanceof RangedNpc) {
-                ((RangedNpc) entity).shoot();
-            }
-
-            //Melee npc refresh attackCd
-            if (entity instanceof MeleeNpc) {
-                ((MeleeNpc) entity).refreshCd();
-            }
-
-            //Reduce lifeSpan of a used bullet
-            if (entity instanceof Bullet && ((Bullet) entity).bulletDmg <= 0) {
-                ((Bullet) entity).reduceLifeSpan();
-            }
-
-            // Don't check collision for bullets X tiles or objects (structures)
-            if (!(entity.getType().equals(ObjectType.BULLET_PLAYER) || entity.getType().equals(ObjectType.BULLET_ENEMY))) {
-
-                // Check collision with tiles
-                Vector<Vector<TileObject>> tiles = game.getCurrentMap().getTiles();
-                outerFor:
-                for (Vector<TileObject> tileObjects : tiles) {
-                    for (TileObject tile : tileObjects) {
-                        if (tile == null) { // blank tile
-                            continue;
-                        }
-
-                        if (Collision.objectsCollide(tile, entity)) {
-                            entity.setX(entity.getPreviousX());
-                            entity.setY(entity.getPreviousY());
-                            entity.setHitBoxX(entity.getPreviousHitBoxX());
-                            entity.setHitBoxY(entity.getPreviousHitBoxY());
-                            break outerFor;
-                        }
-                    }
-                }
-
-                // Check collision with objects
-                Entity[] objects = game.getCurrentMap().getObjects();
-                outerFor:
-                if (objects != null) {
-                    for (int i = 0; i < objects.length; i++) {
-                        if (objects[i] == null) {
-                            continue;
-                        }
-
-                        if (Collision.objectsCollide(objects[i], entity)) {
-                            entity.setX(entity.getPreviousX());
-                            entity.setY(entity.getPreviousY());
-                            entity.setHitBoxX(entity.getPreviousHitBoxX());
-                            entity.setHitBoxY(entity.getPreviousHitBoxY());
-
-                            if (objects[i].getType().equals(ObjectType.HOME)) {
-                                game.playerSpawner.spawnOnMap(2);
-                                if (game.map2 == null) {
-                                    game.map2 = new Map2();
-                                }
-                                game.setCurrentMap(game.map2);
-                            }
-                            if (objects[i].getType().equals(ObjectType.CARPET)) {
-                                game.playerSpawner.spawnOnMap(1);
-                                game.setCurrentMap(new Map1());
-                            }
-                            break outerFor;
-                        }
-                    }
-                }
-            }
+            if (!(entity instanceof MovableEntity)) { continue; }
+            this.checkEntityMove(entity);
+            this.checkEntityMechanic(entity);
         }
-
-        if (itemsToRemoveFromMap.size() == 1) {
-            game.getEntityManager().removeEntity(itemsToRemoveFromMap.get(0));
-            itemsToRemoveFromMap.clear();
-        }
-
-
-        // Check collision with other entities (bullets, monsters, npc, items etc.)
-        for (Entity entity1 : game.getEntityManager().getEntities()) {
-            //check for player bullets X enemy
-            if (entity1.getType().equals(ObjectType.BULLET_PLAYER)) {
-                for (Entity entity2 : game.getEntityManager().getEntities()) {
-                    if (entity2.getType().equals(ObjectType.ENEMY) && Collision.objectsCollide(entity1, entity2)) {
-                        ((Creature) entity2).damaged(((Bullet) entity1).getDmg());
-                        ((Bullet) entity1).setDmg(0);
-                    }
-                }
-            }
-
-            //Enemy bullet damages player
-            if (entity1.getType().equals(ObjectType.BULLET_ENEMY)) {
-                for (Entity entity2 : game.getEntityManager().getEntities()) {
-                    if (entity2.getType().equals(ObjectType.PLAYER) && Collision.objectsCollide(entity1, entity2)) {
-                        ((Player) entity2).damaged(((Bullet) entity1).getDmg());
-                        System.out.println("You have got: " + ((Bullet) entity1).getDmg() + " dmg");
-                        ((Bullet) entity1).setDmg(0);
-                    }
-                }
-            }
-
-            //Melee npc damages player / entity that collides with player is melee enemy
-            if (entity1 instanceof MeleeNpc) {
-                for (Entity entity2 : game.getEntityManager().getEntities()) {
-                    // 2nd entity is player && they do collide && enemy can attack
-                    if (entity2.getType().equals(ObjectType.PLAYER) && Collision.objectsCollide(entity1, entity2) && ((MeleeNpc) entity1).canAttack()) {
-                        ((MeleeNpc) entity1).resetCd();
-                        ((Player) entity2).damaged(((Creature) entity1).getDmg());
-                        System.out.println("You have got: " + ((Creature) entity1).getDmg() + " dmg");
-                    }
-                }
-            }
-
-        }
-
 
         // This will render all entities on the map (npcs, bullets, player, items, chests, portals etc.)
         for (Entity entity : game.getEntityManager().getEntities()) {
@@ -333,7 +205,6 @@ public final class GameLoop {
                     entity.getWidth(),
                     entity.getHeight()
             );
-
             if (Constants.SHOW_HIT_BOX) {
                 canvas.getGraphicsContext2D().strokeRect(
                         game.getCamera().processX(entity.getHitBoxX()),
@@ -343,6 +214,144 @@ public final class GameLoop {
                 );
             }
         }
+    }
+
+    // Checks for Entity mechanics such as cooldowns, health change or bullet collisions
+    private void checkEntityMechanic(Entity entity) {
+
+        //Player picks up Potion
+        for (Entity entity1 : game.getEntityManager().getEntities()) {
+            if (entity1 instanceof Potion && entity instanceof Player && Collision.objectsCollide(entity, entity1)) {
+                game.getInventory().addItem((Potion) entity1);
+                game.getEntityManager().removeEntity(entity1);
+                System.out.println("Item picked");
+                break;
+            }
+        }
+
+        // Check if RangedNPC can shoot
+        if (entity instanceof RangedNpc) {
+            ((RangedNpc) entity).shoot();
+        }
+
+        // Melee attackCd calculation
+        if (entity instanceof MeleeNpc) {
+            ((MeleeNpc) entity).refreshCd();
+        }
+
+        // Reduce used Bullet lifespan for visual
+        if (entity instanceof Bullet && ((Bullet) entity).bulletDmg <= 0) {
+            ((Bullet) entity).reduceLifeSpan();
+        }
+
+        // Player Bullet X Enemy
+        if (entity.getType().equals(ObjectType.BULLET_PLAYER)) {
+            for (Entity entity2 : game.getEntityManager().getEntities()) {
+                if (entity2.getType().equals(ObjectType.ENEMY) && Collision.objectsCollide(entity, entity2)) {
+                    ((Creature) entity2).damaged(((Bullet) entity).getDmg());
+                    ((Bullet) entity).setDmg(0);
+                }
+            }
+        }
+
+        // Enemy Bullet x Player
+        if (entity.getType().equals(ObjectType.BULLET_ENEMY)) {
+            for (Entity entity2 : game.getEntityManager().getEntities()) {
+                if (entity2.getType().equals(ObjectType.PLAYER) && Collision.objectsCollide(entity, entity2)) {
+                    ((Player) entity2).damaged(((Bullet) entity).getDmg());
+                    System.out.println("You have got: " + ((Bullet) entity).getDmg() + " dmg");
+                    ((Bullet) entity).setDmg(0);
+                }
+            }
+        }
+
+        // Check if MeleeNPC can damage x Player
+        if (entity instanceof MeleeNpc) {
+            for (Entity entity1 : game.getEntityManager().getEntities()) {
+                if (entity1.getType().equals(ObjectType.PLAYER) && Collision.objectsCollide(entity, entity1) && ((MeleeNpc) entity).canAttack()) {
+                    ((MeleeNpc) entity).resetCd();
+                    ((Player) entity1).damaged(((Creature) entity).getDmg());
+                    System.out.println("You have got: " + ((Creature) entity).getDmg() + " dmg");
+                }
+            }
+        }
+    }
+
+    // Checks for Entity movement and position
+    private void checkEntityMove(Entity entity) {
+        ((MovableEntity) entity).move();
+
+        if (entity instanceof Animated) {
+            ((Animated) entity).getAnimationManager().increaseTick();
+        }
+
+        // Don't check Bullet collision with Tiles and Objects (Structures)
+        if (!(entity instanceof Bullet)) {
+            // Check collision with tiles
+            Vector<Vector<TileObject>> tiles = game.getCurrentMap().getTiles();
+            outerFor:
+            for (Vector<TileObject> tileObjects : tiles) {
+                for (TileObject tile : tileObjects) {
+                    if (tile == null) { continue; }
+
+                    if (Collision.objectsCollide(tile, entity)) {
+                        returnEntityPosition(entity);
+                        break outerFor;
+                    }
+                }
+            }
+
+            // Check collision with objects
+            Entity[] objects = game.getCurrentMap().getObjects();
+            outerFor:
+            if (objects != null) {
+                for (int i = 0; i < objects.length; i++) {
+                    if (objects[i] == null) { continue; }
+
+                    if (Collision.objectsCollide(objects[i], entity)) {
+                        returnEntityPosition(entity);
+
+                        if (objects[i].getType().equals(ObjectType.HOME)) {
+                            teleportToHome();
+                        }
+                        if (objects[i].getType().equals(ObjectType.CARPET)) {
+                            teleportFromHome();
+                        }
+                        break outerFor;
+                    }
+                }
+            }
+
+            /**for (Entity entity1 : game.getEntityManager().getEntities()){
+                if(entity1 instanceof Npc && entity instanceof Npc) {
+                    if(Collision.objectsCollide(entity1, entity)){
+                        returnEntityPosition(entity);
+                    }
+                }
+            }*/
+        }
+    }
+
+
+
+    private void teleportFromHome() {
+        game.playerSpawner.spawnOnMap(1);
+        game.setCurrentMap(new Map1());
+    }
+
+    private void returnEntityPosition(Entity entity) {
+        entity.setX(entity.getPreviousX());
+        entity.setY(entity.getPreviousY());
+        entity.setHitBoxX(entity.getPreviousHitBoxX());
+        entity.setHitBoxY(entity.getPreviousHitBoxY());
+    }
+
+    private void teleportToHome() {
+        game.playerSpawner.spawnOnMap(2);
+        if (game.map2 == null) {
+            game.map2 = new Map2();
+        }
+        game.setCurrentMap(game.map2);
     }
 
     private void removeUnnecessaryEntities() {
@@ -393,7 +402,7 @@ public final class GameLoop {
         }
     }
 
-    private void hadnleDeath() {
+    private void handleDeath() {
         span -= 0.033;
         death.setY(death.getY() - 2);
         if (span <= 0) {
