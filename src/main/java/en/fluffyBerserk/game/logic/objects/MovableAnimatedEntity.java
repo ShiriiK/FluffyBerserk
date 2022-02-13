@@ -9,8 +9,8 @@ import javafx.scene.image.Image;
 
 public abstract class MovableAnimatedEntity extends MovableEntity {
 
-    private MovableEntityAnimationManager movableEntityAnimationManager;
-    private AnimationManager animationManager;
+    protected MovableEntityAnimationManager movableEntityAnimationManager;
+    protected AnimationManager animationManager;
 
     public MovableAnimatedEntity(LocateImage sprite, ObjectType type) {
         super(type);

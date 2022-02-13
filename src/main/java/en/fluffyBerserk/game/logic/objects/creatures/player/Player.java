@@ -54,6 +54,10 @@ public final class Player extends MovableAnimatedEntity implements HasName, CanA
         return attackCd == maxCd;
     }
 
+    public int getAttackCd(){
+        return attackCd;
+    }
+
     public int getMaxCd() {
         return maxCd;
     }
@@ -73,7 +77,6 @@ public final class Player extends MovableAnimatedEntity implements HasName, CanA
     }
 
     public int getDmg() {return character.getStrength() * Constants.PLAYER_DMG_SCALE;}   // Should return total damage of  player with initial number
-                                                            // plus equipment bonuses in future
 
     public int getHp() {
         return hp;                 // Hp of player = stamina * 10

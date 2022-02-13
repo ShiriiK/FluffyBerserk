@@ -53,11 +53,11 @@ public class MovableEntityAnimationManager {
     }
 
     private void checkYDirection() {
-        if (entity.getMoveY() > 0F) {
-            direction = Direction.DOWN;
-        } else if (entity.getMoveY() < 0F) {
-            direction = Direction.UP;
-        }
+            if (entity.getMoveY() > 0F) {
+                direction = Direction.DOWN;
+            } else if (entity.getMoveY() < 0F) {
+                direction = Direction.UP;
+            }
     }
 
     private void checkXDirection() {

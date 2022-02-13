@@ -1,4 +1,4 @@
-package en.fluffyBerserk.game.logic.objects.creatures;
+package en.fluffyBerserk.game.logic.objects.creatures.npc.npcs;
 
 import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.objects.Entity;

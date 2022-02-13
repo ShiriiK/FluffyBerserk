@@ -11,9 +11,9 @@ import en.fluffyBerserk.game.logic.objects.MovableEntity;
 import en.fluffyBerserk.game.logic.objects.TileObject;
 import en.fluffyBerserk.game.logic.objects.bullets.Bullet;
 import en.fluffyBerserk.game.logic.objects.creatures.Creature;
-import en.fluffyBerserk.game.logic.objects.creatures.Death;
-import en.fluffyBerserk.game.logic.objects.creatures.npc.*;
-import en.fluffyBerserk.game.logic.objects.creatures.npc.Boss4;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.MeleeNpc;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.RangedNpc;
+import en.fluffyBerserk.game.logic.objects.creatures.npc.npcs.Death;
 import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.potions.HealthPotion;
 import en.fluffyBerserk.game.logic.objects.items.potions.Potion;
@@ -23,6 +23,8 @@ import en.fluffyBerserk.gui.utils.Collision;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -31,27 +33,23 @@ import java.util.Vector;
 
 public final class GameLoop {
 
-    @NotNull
-    private final Game game;
+    @NotNull private final Game game;
     private Death death;
+    private Potion potion;
+    private double span = 1;
+
     public AnimationTimer potionTimer = new AnimationTimer() {
         @Override
         public void handle(long now) {
             handleDrink();
         }
     };
-    private Potion potion;    @NotNull
-    private final AnimationTimer timer = new AnimationTimer() {
+
+
+    @NotNull private final AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(long now) {
             updateGame();
-        }
-    };
-    private double span = 1;
-    private AnimationTimer deathTimer = new AnimationTimer() {
-        @Override
-        public void handle(long now) {
-            hadnleDeath();
         }
     };
 
@@ -69,7 +67,12 @@ public final class GameLoop {
 
     public void stop() {
         timer.stop();
-    }
+    }    private AnimationTimer deathTimer = new AnimationTimer() {
+        @Override
+        public void handle(long now) {
+            hadnleDeath();
+        }
+    };
 
     private void updateGame() {
         Canvas gameCanvas = game.getGameGraphics().getCanvas();
@@ -87,9 +90,15 @@ public final class GameLoop {
 
         drawEntities(gameCanvas);
 
+
+        gameCanvas.getGraphicsContext2D().setFill(Color.RED);
+        gameCanvas.getGraphicsContext2D().setFont(new Font(30));
+        gameCanvas.getGraphicsContext2D().fillText("HP: " + game.getPlayer().getHp() + "\nCooldown: " + (game.getPlayer().getAttackCd()-50), Constants.SCREEN_WIDTH-200, Constants.SCREEN_HEIGHT-100);
+
+
         game.getPlayer().reduceCooldown();
 
-        if(game.getPlayer().isDead()) {
+        if (game.getPlayer().isDead()) {
             removeAllBullets();
             Main.app.showPopUp(new PopUpMenu());
             game.getPlayer().setMoveY(0F);
@@ -100,8 +109,8 @@ public final class GameLoop {
     }
 
     private void removeAllBullets() {
-        for(Entity entity : game.getEntityManager().getEntities()){
-            if(entity.getType().equals(ObjectType.BULLET_PLAYER) || entity.getType().equals(ObjectType.BULLET_ENEMY)){
+        for (Entity entity : game.getEntityManager().getEntities()) {
+            if (entity.getType().equals(ObjectType.BULLET_PLAYER) || entity.getType().equals(ObjectType.BULLET_ENEMY)) {
                 game.getEntityManager().removeEntity(entity);
             }
         }
@@ -196,39 +205,22 @@ public final class GameLoop {
                 }
 
             ((MovableEntity) entity).move();
+
             if (entity instanceof Animated) {
                 ((Animated) entity).getAnimationManager().increaseTick();
             }
 
             //ArchcerCatto checks and shoots if possible (shoot depends on CD and Range)
-            if (entity instanceof ArcherCatto) {
-                ((ArcherCatto) entity).shoot();
+            if (entity instanceof RangedNpc) {
+                ((RangedNpc) entity).shoot();
             }
 
-            //ZombieCatto refresh attackCd
-            if (entity instanceof ZombieCatto) {
-                ((ZombieCatto) entity).refreshCd();
+            //Melee npc refresh attackCd
+            if (entity instanceof MeleeNpc) {
+                ((MeleeNpc) entity).refreshCd();
             }
 
-            if (entity instanceof Boss1) {
-                ((Boss1) entity).refreshCd();
-            }
-
-            if (entity instanceof Boss2) {
-                ((Boss2) entity).refreshCd();
-            }
-
-            if (entity instanceof Boss3) {
-                ((Boss3) entity).refreshCd();
-            }
-
-            if (entity instanceof Boss4) {
-                ((Boss4) entity).refreshCd();
-            }
-
-
-
-            //reduce lifeSpan of a used bullet
+            //Reduce lifeSpan of a used bullet
             if (entity instanceof Bullet && ((Bullet) entity).bulletDmg <= 0) {
                 ((Bullet) entity).reduceLifeSpan();
             }
@@ -272,7 +264,9 @@ public final class GameLoop {
 
                             if (objects[i].getType().equals(ObjectType.HOME)) {
                                 game.playerSpawner.spawnOnMap(2);
-                                if (game.map2 == null) { game.map2 = new Map2(); }
+                                if (game.map2 == null) {
+                                    game.map2 = new Map2();
+                                }
                                 game.setCurrentMap(game.map2);
                             }
                             if (objects[i].getType().equals(ObjectType.CARPET)) {
@@ -297,70 +291,36 @@ public final class GameLoop {
             //check for player bullets X enemy
             if (entity1.getType().equals(ObjectType.BULLET_PLAYER)) {
                 for (Entity entity2 : game.getEntityManager().getEntities()) {
-                    if (entity2.getType().equals(ObjectType.ENEMY)) {
-                        if (Collision.objectsCollide(entity1, entity2)) {
-                            ((Creature) entity2).damaged(((Bullet) entity1).getDmg());
-                            ((Bullet) entity1).setDmg(0);
-                        }
+                    if (entity2.getType().equals(ObjectType.ENEMY) && Collision.objectsCollide(entity1, entity2)) {
+                        ((Creature) entity2).damaged(((Bullet) entity1).getDmg());
+                        ((Bullet) entity1).setDmg(0);
                     }
                 }
             }
+
             //Enemy bullet damages player
             if (entity1.getType().equals(ObjectType.BULLET_ENEMY)) {
                 for (Entity entity2 : game.getEntityManager().getEntities()) {
-                    if (entity2.getType().equals(ObjectType.PLAYER)) {
-                        if (Collision.objectsCollide(entity1, entity2)) {
-                            ((Player) entity2).damaged(((Bullet) entity1).getDmg());
-                            System.out.println("You have got: " + ((Bullet) entity1).getDmg() + " dmg");
-                            ((Bullet) entity1).setDmg(0);
-                        }
+                    if (entity2.getType().equals(ObjectType.PLAYER) && Collision.objectsCollide(entity1, entity2)) {
+                        ((Player) entity2).damaged(((Bullet) entity1).getDmg());
+                        System.out.println("You have got: " + ((Bullet) entity1).getDmg() + " dmg");
+                        ((Bullet) entity1).setDmg(0);
                     }
                 }
             }
 
-            //ZombieCatto damages player
-            if (entity1.getType().equals(ObjectType.ENEMY)) {
+            //Melee npc damages player / entity that collides with player is melee enemy
+            if (entity1 instanceof MeleeNpc) {
                 for (Entity entity2 : game.getEntityManager().getEntities()) {
-                    if (entity2.getType().equals(ObjectType.PLAYER)) {
-                        if (Collision.objectsCollide(entity1, entity2)) {
-                            if (entity1 instanceof ZombieCatto) {
-                                if (((ZombieCatto) entity1).canAttack()) {
-                                    ((ZombieCatto) entity1).resetCd();
-                                    ((Player) entity2).damaged(((Creature) entity1).getDmg());
-                                    System.out.println("You have got: " + ((Creature) entity1).getDmg() + " dmg");
-                                }
-                            } else if (entity1 instanceof Boss1) {
-                                if (((Boss1) entity1).canAttack()) {
-                                    ((Boss1) entity1).resetCd();
-                                    ((Player) entity2).damaged(((Creature) entity1).getDmg());
-                                    System.out.println("You have got: " + ((Creature) entity1).getDmg() + " dmg");
-                                }
-                            } else if (entity1 instanceof Boss2) {
-                                if (((Boss2) entity1).canAttack()) {
-                                    ((Boss2) entity1).resetCd();
-                                    ((Player) entity2).damaged(((Creature) entity1).getDmg());
-                                    System.out.println("You have got: " + ((Creature) entity1).getDmg() + " dmg");
-                                }
-
-                            }else if (entity1 instanceof Boss3) {
-                                if (((Boss3) entity1).canAttack()) {
-                                    ((Boss3) entity1).resetCd();
-                                    ((Player) entity2).damaged(((Creature) entity1).getDmg());
-                                    System.out.println("You have got: " + ((Creature) entity1).getDmg() + " dmg");
-                                }
-
-                            } else if (entity1 instanceof Boss4) {
-                                if (((Boss4) entity1).canAttack()) {
-                                    ((Boss4) entity1).resetCd();
-                                    ((Player) entity2).damaged(((Creature) entity1).getDmg());
-                                    System.out.println("You have got: " + ((Creature) entity1).getDmg() + " dmg");
-                                }
-
-                            }
-                        }
+                    // 2nd entity is player && they do collide && enemy can attack
+                    if (entity2.getType().equals(ObjectType.PLAYER) && Collision.objectsCollide(entity1, entity2) && ((MeleeNpc) entity1).canAttack()) {
+                        ((MeleeNpc) entity1).resetCd();
+                        ((Player) entity2).damaged(((Creature) entity1).getDmg());
+                        System.out.println("You have got: " + ((Creature) entity1).getDmg() + " dmg");
                     }
                 }
             }
+
         }
 
 
@@ -453,6 +413,10 @@ public final class GameLoop {
             System.out.println("timer stopped, cd = " + game.getPlayer().getMaxCd());
         }
     }
+
+
+
+
 
 
 

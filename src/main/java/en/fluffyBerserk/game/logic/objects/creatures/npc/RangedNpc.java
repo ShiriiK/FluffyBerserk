@@ -1,51 +1,59 @@
 package en.fluffyBerserk.game.logic.objects.creatures.npc;
 
-
 import en.fluffyBerserk.Constants;
-import en.fluffyBerserk.game.gamecontrolls.Game;
-import en.fluffyBerserk.game.logic.HasName;
-import en.fluffyBerserk.game.logic.ObjectType;
 import en.fluffyBerserk.game.logic.objects.bullets.Bullet;
-import en.fluffyBerserk.game.logic.objects.creatures.Creature;
-import en.fluffyBerserk.gui.graphics.sprites.SpritesFactory;
+import en.fluffyBerserk.gui.utils.LocateImage;
 
-public class ArcherCatto extends Creature implements HasName {
-    private Game game;
-    private static final float attackRange = 3F;
-    private int attackCd = 100;
+import java.time.temporal.ValueRange;
 
-    public ArcherCatto(Game game) {
-        super(SpritesFactory.getRandomRangedEnemySprite(), ObjectType.ENEMY);
-        this.game = game;
-        this.setDmg(10);
-        this.setHp(20);
-        NpcFactory.init(this);
-    }
+public abstract class RangedNpc extends Npc{
 
-    @Override
-    public String getName() {
-        return "ArcherCatto";
+    protected static final long attackRange = 100L;
+    protected int attackCd = 100;
+
+    public RangedNpc(LocateImage sprite) {
+        super(sprite);
     }
 
     @Override
     public void move() {
+        long moveX = (long) this.getX();
+        ValueRange rangeX = ValueRange.of((long) game.getPlayer().getX() - attackRange,(long) game.getPlayer().getX() + attackRange);
 
-        if (game.getPlayer().getX() - this.getX() >= attackRange) {
-            setMoveX(+getNpcSpeed());
-        }
-        else if (this.getX() - game.getPlayer().getX() < attackRange) {
-            setMoveX(-getNpcSpeed());
+        long moveY = (long) this.getY();
+        ValueRange rangeY = ValueRange.of((long) game.getPlayer().getY()- attackRange,(long) game.getPlayer().getY()+ attackRange);
+
+        if(rangeX.isValidValue(moveX)){
+            this.setMoveX(0F);
+            if(rangeY.getMaximum() > moveY){
+                this.setMoveX(0.000001F);
+            } else {
+                this.setMoveX(-0.000001F);
+            }
+        } else if(rangeX.getMaximum() > moveX){
+            this.setMoveX(this.getNpcSpeed());
+        } else {
+            this.setMoveX(- this.getNpcSpeed());
         }
 
-        if (game.getPlayer().getY() - this.getY() >= attackRange) {
-            setMoveY(getNpcSpeed());
-        }
-        else if (this.getY() - game.getPlayer().getY() < attackRange) {
-            setMoveY(-getNpcSpeed());
+
+
+        if(rangeY.isValidValue(moveY)){
+            setMoveY(0F);
+            if(rangeY.getMaximum() > moveY){
+                this.setMoveY(0.000001F);
+            } else {
+                this.setMoveY(-0.000001F);
+            }
+        } else if(rangeY.getMaximum() > moveY){
+            this.setMoveY(this.getNpcSpeed());
+        } else {
+            this.setMoveY(- this.getNpcSpeed());
         }
 
-        setX(this.getX() + getMoveX());
-        setY(this.getY() + getMoveY());
+        setX(this.getX() + this.getMoveX());
+        setY(this.getY() + this.getMoveY());
+        this.movableEntityAnimationManager.increaseTick();
     }
 
     public void shoot() {
@@ -75,7 +83,7 @@ public class ArcherCatto extends Creature implements HasName {
         }
     }
 
-    private int bulletDirection() {
+    public int bulletDirection() {
         int direction = 0;
         float diffX = game.getPlayer().getX() - this.getX();
         float diffY = game.getPlayer().getY() - this.getY();
@@ -95,5 +103,4 @@ public class ArcherCatto extends Creature implements HasName {
         }
         return direction;
     }
-
 }
