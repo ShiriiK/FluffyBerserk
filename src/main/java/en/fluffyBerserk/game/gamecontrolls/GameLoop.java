@@ -23,6 +23,8 @@ import en.fluffyBerserk.gui.utils.Collision;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -87,6 +89,12 @@ public final class GameLoop {
         removeUnnecessaryEntities();
 
         drawEntities(gameCanvas);
+
+
+        gameCanvas.getGraphicsContext2D().setFill(Color.RED);
+        gameCanvas.getGraphicsContext2D().setFont(new Font(30));
+        gameCanvas.getGraphicsContext2D().fillText("HP: " + game.getPlayer().getHp() + "\nCooldown: " + (game.getPlayer().getAttackCd()-50), Constants.SCREEN_WIDTH-200, Constants.SCREEN_HEIGHT-100);
+
 
         game.getPlayer().reduceCooldown();
 

@@ -54,6 +54,10 @@ public final class Player extends MovableAnimatedEntity implements HasName, CanA
         return attackCd == maxCd;
     }
 
+    public int getAttackCd(){
+        return attackCd;
+    }
+
     public int getMaxCd() {
         return maxCd;
     }
