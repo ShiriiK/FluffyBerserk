@@ -6,7 +6,7 @@ import en.fluffyBerserk.gui.utils.LocateImage;
 
 import java.time.temporal.ValueRange;
 
-public abstract class RangedNpc extends MeleeNpc{
+public abstract class RangedNpc extends Npc{
 
     protected static final long attackRange = 100L;
     protected int attackCd = 100;
@@ -20,19 +20,31 @@ public abstract class RangedNpc extends MeleeNpc{
         long moveX = (long) this.getX();
         ValueRange rangeX = ValueRange.of((long) game.getPlayer().getX() - attackRange,(long) game.getPlayer().getX() + attackRange);
 
+        long moveY = (long) this.getY();
+        ValueRange rangeY = ValueRange.of((long) game.getPlayer().getY()- attackRange,(long) game.getPlayer().getY()+ attackRange);
+
         if(rangeX.isValidValue(moveX)){
             this.setMoveX(0F);
+            if(rangeY.getMaximum() > moveY){
+                this.setMoveX(0.000001F);
+            } else {
+                this.setMoveX(-0.000001F);
+            }
         } else if(rangeX.getMaximum() > moveX){
             this.setMoveX(this.getNpcSpeed());
         } else {
             this.setMoveX(- this.getNpcSpeed());
         }
 
-        long moveY = (long) this.getY();
-        ValueRange rangeY = ValueRange.of((long) game.getPlayer().getY()- attackRange,(long) game.getPlayer().getY()+ attackRange);
+
 
         if(rangeY.isValidValue(moveY)){
             setMoveY(0F);
+            if(rangeY.getMaximum() > moveY){
+                this.setMoveY(0.000001F);
+            } else {
+                this.setMoveY(-0.000001F);
+            }
         } else if(rangeY.getMaximum() > moveY){
             this.setMoveY(this.getNpcSpeed());
         } else {
