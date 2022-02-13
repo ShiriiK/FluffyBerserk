@@ -33,6 +33,6 @@ public class Constants {
     public static final int DROP_RATE = 100;
     public static final int NUMBER_OF_POTIONS = 4;
 
-    public static boolean SHOW_HIT_BOX = false;
+    public static boolean SHOW_HIT_BOX = true;
 
 }

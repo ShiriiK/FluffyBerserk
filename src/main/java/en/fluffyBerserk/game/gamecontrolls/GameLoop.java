@@ -68,12 +68,7 @@ public final class GameLoop {
 
     public void stop() {
         timer.stop();
-    }    private AnimationTimer deathTimer = new AnimationTimer() {
-        @Override
-        public void handle(long now) {
-            handleDeath();
-        }
-    };
+    }
 
     private void updateGame() {
         Canvas gameCanvas = game.getGameGraphics().getCanvas();
@@ -244,6 +239,12 @@ public final class GameLoop {
             ((Bullet) entity).reduceLifeSpan();
         }
 
+        // Reduce Death lifespan for visual
+        if (entity instanceof Death) {
+            entity.setY(entity.getY() - 2);
+            ((Death) entity).reduceLifeSpan();
+        }
+
         // Player Bullet X Enemy
         if (entity.getType().equals(ObjectType.BULLET_PLAYER)) {
             for (Entity entity2 : game.getEntityManager().getEntities()) {
@@ -392,9 +393,7 @@ public final class GameLoop {
                     game.getEntityManager().addEntity(potion);
                 }
 
-
                 game.getEntityManager().removeEntity(entity);
-                deathTimer.start();
             }
 
             //Delete bullets which lifeSpan is below 0
@@ -402,16 +401,12 @@ public final class GameLoop {
                     && ((Bullet) entity).lifeSpan <= 0) {
                 game.getEntityManager().getEntities().remove(entity);
             }
-        }
-    }
 
-    private void handleDeath() {
-        span -= 0.033;
-        death.setY(death.getY() - 2);
-        if (span <= 0) {
-            game.getEntityManager().removeEntity(death);
-            span = 1;
-            deathTimer.stop();
+            //Delete DeathAngels which lifeSpan is below 0
+            if (entity instanceof Death
+                    && ((Death) entity).lifeSpan <= 0) {
+                game.getEntityManager().getEntities().remove(entity);
+            }
         }
     }
 
