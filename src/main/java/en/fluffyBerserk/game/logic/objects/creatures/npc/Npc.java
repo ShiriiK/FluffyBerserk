@@ -8,7 +8,6 @@ import en.fluffyBerserk.game.logic.objects.creatures.Creature;
 import en.fluffyBerserk.gui.utils.LocateImage;
 
 public abstract class Npc extends Creature implements HasName{
-    protected Game game = Main.app.getGame();
     protected int attackCd = 50;
 
     public Npc(LocateImage sprite) {

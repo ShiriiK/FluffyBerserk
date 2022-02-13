@@ -1,5 +1,6 @@
 package en.fluffyBerserk.game.logic.objects.creatures.npc;
 
+import en.fluffyBerserk.Main;
 import en.fluffyBerserk.gui.utils.LocateImage;
 
 import java.time.temporal.ValueRange;
@@ -13,7 +14,7 @@ public abstract class MeleeNpc extends Npc {
     @Override
     public void move() {
         long moveX = (long) this.getX();
-        ValueRange rangeX = ValueRange.of((long) game.getPlayer().getX() - 10, (long) game.getPlayer().getX() + 10);
+        ValueRange rangeX = ValueRange.of((long) Main.app.getGame().getPlayer().getX() - 10, (long) Main.app.getGame().getPlayer().getX() + 10);
 
         if (rangeX.isValidValue(moveX)) {
             this.setMoveX(0F);
@@ -24,7 +25,7 @@ public abstract class MeleeNpc extends Npc {
         }
 
         long moveY = (long) this.getY();
-        ValueRange rangeY = ValueRange.of((long) game.getPlayer().getY() - 10, (long) game.getPlayer().getY() + 10);
+        ValueRange rangeY = ValueRange.of((long) Main.app.getGame().getPlayer().getY() - 10, (long) Main.app.getGame().getPlayer().getY() + 10);
 
         if (rangeY.isValidValue(moveY)) {
             setMoveY(0F);
