@@ -83,7 +83,7 @@ public class Character {
     }
 
     public void setStrength(int strength) {
-        this.strength = strength;
+        this.strength += strength;
     }
 
     @Basic

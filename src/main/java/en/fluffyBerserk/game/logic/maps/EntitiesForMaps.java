@@ -99,7 +99,7 @@ public class EntitiesForMaps {
         Entity catto8 = NpcSetter.setZombieCatto(11, 4);
 
         Entity boss = new Boss3();
-        boss.setX(3 * Constants.TILE_SIZE);
+        boss.setX(2 * Constants.TILE_SIZE);
         boss.setY(11 * Constants.TILE_SIZE);
 
         entities.add(catto1);

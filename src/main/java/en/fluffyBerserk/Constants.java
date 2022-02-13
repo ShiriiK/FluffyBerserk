@@ -30,7 +30,7 @@ public class Constants {
     public static final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL;
     public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW;
 
-    public static final int DROP_RATE = 100;
+    public static final int DROP_RATE = 20;
     public static final int NUMBER_OF_POTIONS = 4;
 
     public static boolean SHOW_HIT_BOX = true;

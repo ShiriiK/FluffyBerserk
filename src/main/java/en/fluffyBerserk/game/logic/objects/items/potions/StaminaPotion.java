@@ -21,7 +21,7 @@ public class StaminaPotion extends Potion{
         Main.app.getGame().getPlayer().resetCooldown();
         Main.app.getGame().getPlayer().setMaxCd(10);
         System.out.println("max cd set to " + Main.app.getGame().getPlayer().getMaxCd());
-        Main.app.getGame().getGameLoop().potionTimer.start();
+        Main.app.getGame().getGameLoop().staminaPotionTimer.start();
     }
 
     @Override

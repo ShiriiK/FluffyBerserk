@@ -20,6 +20,7 @@ import en.fluffyBerserk.game.logic.objects.creatures.player.Player;
 import en.fluffyBerserk.game.logic.objects.items.potions.HealthPotion;
 import en.fluffyBerserk.game.logic.objects.items.potions.Potion;
 import en.fluffyBerserk.game.logic.objects.items.potions.StaminaPotion;
+import en.fluffyBerserk.game.logic.objects.items.potions.StrengthPotion;
 import en.fluffyBerserk.gui.popups.PopUpMenu;
 import en.fluffyBerserk.gui.utils.Collision;
 import javafx.animation.AnimationTimer;
@@ -37,15 +38,22 @@ public final class GameLoop {
     @NotNull private final Game game;
     private Death death;
     private Potion potion;
-    private double span = 1;
+    private double staminaSpan = 1;
+    private double strengthSpan = 1;
 
-    public AnimationTimer potionTimer = new AnimationTimer() {
+    public AnimationTimer staminaPotionTimer = new AnimationTimer() {
         @Override
         public void handle(long now) {
-            handleDrink();
+            staminaPotion();
         }
     };
 
+    public AnimationTimer stenghtPotionTimer = new AnimationTimer() {
+        @Override
+        public void handle(long now) {
+            strengthPotion();
+        }
+    };
 
     @NotNull private final AnimationTimer timer = new AnimationTimer() {
         @Override
@@ -379,21 +387,23 @@ public final class GameLoop {
                 Random random = new Random();
                 if (Constants.DROP_RATE >= random.nextInt(100)) {
                     Random random1 = new Random();
-
-                    if (random1.nextInt(Constants.NUMBER_OF_POTIONS) == 1) {
+                    int i = random1.nextInt(Constants.NUMBER_OF_POTIONS);
+                    if (i == 1) {
                         potion = new StaminaPotion();
-                    } else if (random1.nextInt(Constants.NUMBER_OF_POTIONS) == 2) {
+                    } else if (i == 2) {
                         potion = new HealthPotion();
-                    } else if (random1.nextInt(Constants.NUMBER_OF_POTIONS) == 3) {
-                        potion = new StaminaPotion();
+                    } else if (i == 3) {
+                        potion = new StrengthPotion();
                     }
                     potion.setX(entity.getX());
                     potion.setY(entity.getY());
 
                     game.getEntityManager().addEntity(potion);
+                    game.getCurrentMap().getEntities().add(potion);
                 }
 
                 game.getEntityManager().removeEntity(entity);
+                game.getCurrentMap().getEntities().remove(entity);
             }
 
             //Delete bullets which lifeSpan is below 0
@@ -410,18 +420,26 @@ public final class GameLoop {
         }
     }
 
-    private void handleDrink() {
-        span -= 0.001;
+    private void staminaPotion() {
+        staminaSpan -= 0.001;
         System.out.println("cd =" + game.getPlayer().getMaxCd());
-        if (span <= 0) {
+        if (staminaSpan <= 0) {
             game.getPlayer().setMaxCd(50);
-            span = 1;
-            potionTimer.stop();
+            staminaSpan = 1;
+            staminaPotionTimer.stop();
             System.out.println("timer stopped, cd = " + game.getPlayer().getMaxCd());
         }
     }
 
-
+    private void strengthPotion() {
+        strengthSpan -= 0.001;
+        if (strengthSpan <= 0) {
+            game.getPlayer().getCharacter().setStrength(-10);
+            strengthSpan = 1;
+            staminaPotionTimer.stop();
+            System.out.println("timer stopped");
+        }
+    }
 
 
 

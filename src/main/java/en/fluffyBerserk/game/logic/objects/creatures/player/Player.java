@@ -82,6 +82,10 @@ public final class Player extends MovableAnimatedEntity implements HasName, CanA
         return hp;                 // Hp of player = stamina * 10
     }
 
+    public void setHp(int hp){
+        this.hp += hp;
+    }
+
     public void damaged(int dmg) {
         this.hp -= dmg;
     }

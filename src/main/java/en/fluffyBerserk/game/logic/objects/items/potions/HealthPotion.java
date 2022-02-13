@@ -1,5 +1,6 @@
 package en.fluffyBerserk.game.logic.objects.items.potions;
 
+import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.logic.ObjectType;
 import javafx.scene.image.Image;
 
@@ -16,7 +17,7 @@ public class HealthPotion extends Potion {
 
     @Override
     protected void drink() {
-        // TODO add health to user!
+        Main.app.getGame().getPlayer().setHp(20);
     }
 
     @Override
