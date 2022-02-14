@@ -11,7 +11,7 @@ public class ZombieCatto extends MeleeNpc implements HasName {
         super(SpritesFactory.getRandomMeleeEnemySprite());
 
         this.setDmg(5);
-        this.setHp(35);
+        this.setMaxHp(35);
     }
 
     @Override

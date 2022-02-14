@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 public abstract class Creature extends MovableAnimatedEntity implements HasName {
 
     protected int hp;
+    protected int maxHp;
     protected float npcSpeed;
     protected int dmg;
 
@@ -22,6 +23,15 @@ public abstract class Creature extends MovableAnimatedEntity implements HasName 
 
     public void setHp(int hp) {
         this.hp = hp;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
+    }
+
+    public void setMaxHp(int hp) {
+        this.hp = hp;
+        this.maxHp = hp;
     }
 
     public float getNpcSpeed() {

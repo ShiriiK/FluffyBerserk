@@ -8,7 +8,7 @@ public class ArcherCatto extends RangedNpc {
     public ArcherCatto() {
         super(SpritesFactory.getRandomRangedEnemySprite());
         this.setDmg(10);
-        this.setHp(20);
+        this.setMaxHp(20);
     }
 
     @Override

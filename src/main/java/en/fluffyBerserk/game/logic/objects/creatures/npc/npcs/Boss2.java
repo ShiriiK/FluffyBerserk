@@ -9,7 +9,7 @@ public class Boss2 extends MeleeNpc implements Boss {
     public Boss2() {
         super(new LocateImage("npcs/boss3.png"));
         this.setDmg(10);
-        this.setHp(50);
+        this.setMaxHp(50);
     }
 
     @Override

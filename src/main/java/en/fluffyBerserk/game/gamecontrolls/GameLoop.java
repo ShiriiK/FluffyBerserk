@@ -27,6 +27,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import org.jetbrains.annotations.NotNull;
 
@@ -48,7 +49,7 @@ public final class GameLoop {
         }
     };
 
-    public AnimationTimer stenghtPotionTimer = new AnimationTimer() {
+    public AnimationTimer stengthPotionTimer = new AnimationTimer() {
         @Override
         public void handle(long now) {
             strengthPotion();
@@ -94,29 +95,18 @@ public final class GameLoop {
 
         drawEntities(gameCanvas);
 
-
-        gameCanvas.getGraphicsContext2D().setFill(Color.RED);
-        gameCanvas.getGraphicsContext2D().setFont(new Font(30));
-        gameCanvas.getGraphicsContext2D().fillText("HP: " + game.getPlayer().getHp() + "\nCooldown: " + (game.getPlayer().getAttackCd()-50), Constants.SCREEN_WIDTH-200, Constants.SCREEN_HEIGHT-100);
+        drawHpHud(gameCanvas);
 
         game.getPlayer().reduceCooldown();
 
-        if (game.getPlayer().isDead()) {
-            removeAllBullets();
-            Main.app.showPopUp(new PopUpMenu());
-            game.getPlayer().setMoveY(0F);
-            game.getPlayer().setMoveX(0F);
-            game.getGameLoop().stop();
-            System.out.println("Game loop stopped");
-        }
+        checkPlayerDead();
     }
 
-    private void removeAllBullets() {
-        for (Entity entity : game.getEntityManager().getEntities()) {
-            if (entity.getType().equals(ObjectType.BULLET_PLAYER) || entity.getType().equals(ObjectType.BULLET_ENEMY)) {
-                game.getEntityManager().removeEntity(entity);
-            }
-        }
+
+    private void drawHpHud(Canvas gameCanvas) {
+        gameCanvas.getGraphicsContext2D().setFill(Color.RED);
+        gameCanvas.getGraphicsContext2D().setFont(new Font(30));
+        gameCanvas.getGraphicsContext2D().fillText("HP: " + game.getPlayer().getHp() + "\nCooldown: " + (game.getPlayer().getAttackCd()-50), Constants.SCREEN_WIDTH-200, Constants.SCREEN_HEIGHT-100);
     }
 
     private void drawMap(Canvas canvas) {
@@ -196,7 +186,7 @@ public final class GameLoop {
         for (Entity entity : game.getEntityManager().getEntities()) {
             if (!(entity instanceof MovableEntity)) { continue; }
             this.checkEntityMove(entity);
-            this.checkEntityMechanic(entity);
+            this.checkEntityMechanics(entity);
         }
 
         // This will render all entities on the map (npcs, bullets, player, items, chests, portals etc.)
@@ -216,11 +206,39 @@ public final class GameLoop {
                         entity.getHitBoxHeight()
                 );
             }
+            // Add health bar for Enemies
+            if (entity instanceof Npc){
+                canvas.getGraphicsContext2D().fillRect(
+                        game.getCamera().processX(entity.getHitBoxX()),
+                        game.getCamera().processY(entity.getHitBoxY() - 5),
+                        (float) (entity.getHitBoxWidth() * ((Npc) entity).getHp() / ((Npc) entity).getMaxHp()),
+                        5
+                );
+                canvas.getGraphicsContext2D().strokeRect(
+                        game.getCamera().processX(entity.getHitBoxX()),
+                        game.getCamera().processY(entity.getHitBoxY() - 5),
+                        entity.getHitBoxWidth(),
+                        5
+                );
+            }
+        }
+    }
+
+
+
+    private void checkPlayerDead() {
+        if (game.getPlayer().isDead()) {
+            removeAllBullets();
+            Main.app.showPopUp(new PopUpMenu());
+            game.getPlayer().setMoveY(0F);
+            game.getPlayer().setMoveX(0F);
+            game.getGameLoop().stop();
+            System.out.println("Game loop stopped");
         }
     }
 
     // Checks for Entity mechanics such as cooldowns, health change or bullet collisions
-    private void checkEntityMechanic(Entity entity) {
+    private void checkEntityMechanics(Entity entity) {
 
         //Player picks up Potion
         for (Entity entity1 : game.getEntityManager().getEntities()) {
@@ -342,11 +360,6 @@ public final class GameLoop {
 
 
 
-    private void teleportFromHome() {
-        game.playerSpawner.spawnOnMap(1);
-        game.setCurrentMap(new Map1());
-    }
-
     private void returnEntityPosition(Entity entity) {
         entity.setX(entity.getPreviousX());
         entity.setY(entity.getPreviousY());
@@ -354,12 +367,12 @@ public final class GameLoop {
         entity.setHitBoxY(entity.getPreviousHitBoxY());
     }
 
-    private void teleportToHome() {
-        game.playerSpawner.spawnOnMap(2);
-        if (game.map2 == null) {
-            game.map2 = new Map2();
+    private void removeAllBullets() {
+        for (Entity entity : game.getEntityManager().getEntities()) {
+            if (entity.getType().equals(ObjectType.BULLET_PLAYER) || entity.getType().equals(ObjectType.BULLET_ENEMY)) {
+                game.getEntityManager().removeEntity(entity);
+            }
         }
-        game.setCurrentMap(game.map2);
     }
 
     private void removeUnnecessaryEntities() {
@@ -420,6 +433,8 @@ public final class GameLoop {
         }
     }
 
+
+
     private void staminaPotion() {
         staminaSpan -= 0.001;
         System.out.println("cd =" + game.getPlayer().getMaxCd());
@@ -439,6 +454,19 @@ public final class GameLoop {
             staminaPotionTimer.stop();
             System.out.println("timer stopped");
         }
+    }
+
+    private void teleportFromHome() {
+        game.playerSpawner.spawnOnMap(1);
+        game.setCurrentMap(new Map1());
+    }
+
+    private void teleportToHome() {
+        game.playerSpawner.spawnOnMap(2);
+        if (game.map2 == null) {
+            game.map2 = new Map2();
+        }
+        game.setCurrentMap(game.map2);
     }
 
 

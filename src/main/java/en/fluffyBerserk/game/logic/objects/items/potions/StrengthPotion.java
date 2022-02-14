@@ -20,7 +20,7 @@ public class StrengthPotion extends Potion {
     protected void drink() {
         Main.app.getGame().getPlayer().resetCooldown();
         Main.app.getGame().getPlayer().getCharacter().setStrength(10);
-        Main.app.getGame().getGameLoop().stenghtPotionTimer.start();
+        Main.app.getGame().getGameLoop().stengthPotionTimer.start();
     }
 
     @Override
