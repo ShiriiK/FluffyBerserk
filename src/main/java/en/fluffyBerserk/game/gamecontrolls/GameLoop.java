@@ -100,13 +100,14 @@ public final class GameLoop {
         game.getPlayer().reduceCooldown();
 
         checkPlayerDead();
+
     }
 
 
     private void drawHpHud(Canvas gameCanvas) {
         gameCanvas.getGraphicsContext2D().setFill(Color.RED);
         gameCanvas.getGraphicsContext2D().setFont(new Font(30));
-        gameCanvas.getGraphicsContext2D().fillText("HP: " + game.getPlayer().getHp() + "\nCooldown: " + (game.getPlayer().getAttackCd()-50), Constants.SCREEN_WIDTH-200, Constants.SCREEN_HEIGHT-100);
+        gameCanvas.getGraphicsContext2D().fillText("HP: " + game.getPlayer().getHp(),Constants.SCREEN_WIDTH-120, Constants.SCREEN_HEIGHT-50);
     }
 
     private void drawMap(Canvas canvas) {
@@ -230,6 +231,18 @@ public final class GameLoop {
         if (game.getPlayer().isDead()) {
             removeAllBullets();
             Main.app.showPopUp(new PopUpMenu());
+            game.getPlayer().setMoveY(0F);
+            game.getPlayer().setMoveX(0F);
+            game.getGameLoop().stop();
+            System.out.println("Game loop stopped");
+        }
+    }
+
+    private void checkPhase() {
+        if (game.getPhase() == 5) {
+            removeAllBullets();
+            Main.app.showPopUp(new PopUpMenu());
+
             game.getPlayer().setMoveY(0F);
             game.getPlayer().setMoveX(0F);
             game.getGameLoop().stop();
@@ -395,6 +408,7 @@ public final class GameLoop {
 
                 if(entity instanceof Boss){
                     game.setPhase(game.getPhase() + 1);
+                    checkPhase();
                 }
 
                 Random random = new Random();
@@ -449,7 +463,7 @@ public final class GameLoop {
     private void strengthPotion() {
         strengthSpan -= 0.001;
         if (strengthSpan <= 0) {
-            game.getPlayer().getCharacter().setStrength(-10);
+            game.getPlayer().getCharacter().setStrength(game.getPlayer().getCharacter().getStrength()-10);
             strengthSpan = 1;
             staminaPotionTimer.stop();
             System.out.println("timer stopped");

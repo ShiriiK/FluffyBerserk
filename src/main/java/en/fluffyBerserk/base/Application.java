@@ -47,7 +47,7 @@ public final class Application {
     }
 
     public void start(Screen defaultScreen) {
-        //DatabaseSession.startSession();
+        DatabaseSession.startSession();
         this.changeScreen(defaultScreen);
         primaryStage.show();
     }

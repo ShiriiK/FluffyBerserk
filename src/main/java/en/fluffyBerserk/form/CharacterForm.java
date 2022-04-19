@@ -30,7 +30,7 @@ public final class CharacterForm extends Form {
             return;
         }
 
-        pointsLeft = 5;
+        pointsLeft = 0;
         name = character.getName();
         stamina = character.getStamina();
         strength = character.getStrength();
