@@ -69,7 +69,7 @@ public class EntitiesForMaps {
         Entity catto7 = NpcSetter.setArcherCatto(15, 6);
         Entity catto8 = NpcSetter.setArcherCatto(2, 3);
 
-        Entity boss = new Boss2(Main.app.getGame());
+        Entity boss = new Boss2();
         boss.setX(14 * Constants.TILE_SIZE);
         boss.setY(15 * Constants.TILE_SIZE);
 
@@ -99,7 +99,7 @@ public class EntitiesForMaps {
         Entity catto8 = NpcSetter.setZombieCatto(11, 4);
 
         Entity boss = new Boss3();
-        boss.setX(3 * Constants.TILE_SIZE);
+        boss.setX(2 * Constants.TILE_SIZE);
         boss.setY(11 * Constants.TILE_SIZE);
 
         entities.add(catto1);

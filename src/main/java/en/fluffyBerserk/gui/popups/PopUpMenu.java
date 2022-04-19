@@ -32,9 +32,8 @@ public final class PopUpMenu extends PopUp {
         });
 
         // Save button
-        Button saveButton = new Button("Save game"); //TODO
+        Button saveButton = new Button("Save game");
         saveButton.setOnAction(event ->{
-            character.setGamePhase(6);
             character.setLastMapId(game.getCurrentMap().getId());
             character.setLastX(game.getPlayer().getX());
             character.setLastY(game.getPlayer().getY());
@@ -90,9 +89,27 @@ public final class PopUpMenu extends PopUp {
             Main.app.getGame().getGameLoop().start();
         });
 
+        Label uWOn = new Label("You have won!");
+        uWOn.setStyle("-fx-text-fill: #058d13;");
+        uWOn.setScaleX(1.5);
+        uWOn.setScaleY(1.5);
+
+        Button goHome = new Button("Go home!");
+        goHome.setOnAction(event -> {
+            game.getPlayer().regenHp();
+            game.setPhase(6);
+            game.playerSpawner.spawnOnMap(2);
+            if (game.map2 == null) { game.map2 = new Map2();}
+            game.setCurrentMap(game.map2);
+            Main.app.hidePopUp();
+            Main.app.getGame().getGameLoop().start();
+        });
+
         if(Main.app.getGame().getPlayer().isDead()){
             buttons.getChildren().addAll(uDead, respawn, loadButton, logoutButton);
-        } else {
+        } else if (Main.app.getGame().getPhase() == 5){
+            buttons.getChildren().addAll(uWOn, goHome, loadButton, logoutButton);
+        }else {
             buttons.getChildren().addAll(resumeButton, saveButton, loadButton, helpButton, logoutButton, deleteCharacterButton, deleteAccountButton);
         }
         buttons.getStyleClass().add("pop-up-menu");

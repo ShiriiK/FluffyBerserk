@@ -33,8 +33,10 @@ public class NodesFactory {
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 Main.app.logout();
                 if (new DeleteTask<User>().delete(user)) {
-                    Main.app.getGame().getGameLoop().stop();
-                    Main.app.setGame(null);
+                    if(Main.app.getGame() != null){
+                        Main.app.getGame().getGameLoop().stop();
+                        Main.app.setGame(null);
+                    }
                     Main.app.changeScreen(new HomeScreen());
                 }
             }
@@ -49,8 +51,10 @@ public class NodesFactory {
     private void setLogOutButton() {
         logOutButton = new Button("Log out");
         logOutButton.setOnAction(event -> {
-            Main.app.getGame().getGameLoop().stop();
-            Main.app.setGame(null);
+            if(Main.app.getGame() != null){
+                Main.app.getGame().getGameLoop().stop();
+                Main.app.setGame(null);
+            }
             Main.app.logout();
             Main.app.changeScreen(new HomeScreen());
         });
@@ -74,8 +78,10 @@ public class NodesFactory {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 if (new DeleteTask<Character>().delete(character)) {
-                    Main.app.getGame().getGameLoop().stop();
-                    Main.app.setGame(null);
+                    if(Main.app.getGame() != null){
+                        Main.app.getGame().getGameLoop().stop();
+                        Main.app.setGame(null);
+                    }
                     Main.app.changeScreen(new SaveSlotsScreen());
                 }
 

@@ -1,17 +1,15 @@
 package en.fluffyBerserk.game.logic.objects.creatures.npc.npcs;
 
 import en.fluffyBerserk.Constants;
-import en.fluffyBerserk.game.gamecontrolls.Game;
 import en.fluffyBerserk.game.logic.objects.creatures.npc.MeleeNpc;
 import en.fluffyBerserk.gui.utils.LocateImage;
 
-public class Boss2 extends MeleeNpc {
+public class Boss2 extends MeleeNpc implements Boss {
 
-    public Boss2(Game game) {
+    public Boss2() {
         super(new LocateImage("npcs/boss3.png"));
-        this.game = game;
         this.setDmg(10);
-        this.setHp(50);
+        this.setMaxHp(75);
     }
 
     @Override

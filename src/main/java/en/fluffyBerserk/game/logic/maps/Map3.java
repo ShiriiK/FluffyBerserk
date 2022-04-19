@@ -38,6 +38,11 @@ public final class Map3 extends Map{
     }
 
     @Override
+    protected int setPhase() {
+        return 1;
+    }
+
+    @Override
     public ArrayList<Entity> getEntities(){ return entities; }
 
     @Override

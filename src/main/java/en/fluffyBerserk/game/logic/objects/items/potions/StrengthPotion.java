@@ -1,5 +1,6 @@
 package en.fluffyBerserk.game.logic.objects.items.potions;
 
+import en.fluffyBerserk.Main;
 import en.fluffyBerserk.game.logic.ObjectType;
 import javafx.scene.image.Image;
 
@@ -17,7 +18,9 @@ public class StrengthPotion extends Potion {
 
     @Override
     protected void drink() {
-        // TODO add health to user!
+        Main.app.getGame().getPlayer().resetCooldown();
+        Main.app.getGame().getPlayer().getCharacter().setStrength(Main.app.getGame().getPlayer().getCharacter().getStrength()+10);
+        Main.app.getGame().getGameLoop().stengthPotionTimer.start();
     }
 
     @Override

@@ -38,7 +38,31 @@ public class PopUpInventory extends PopUp {
         BorderPane inventory = new BorderPane();
         FlowPane contetnt = new FlowPane();
 
+       loadItems(contetnt, playersInventory);
 
+        Button resumeButton = new Button("Close inventory");
+        resumeButton.setOnAction(event -> {
+            Main.app.hidePopUp();
+            Main.app.getGame().getGameLoop().start();
+        });
+
+        inventory.setTop(contetnt);
+        inventory.setBottom(resumeButton);
+
+        inventory.getStyleClass().add("inventory");
+        Scene scene = new Scene(inventory);
+        scene.setFill(Color.TRANSPARENT);
+        AttachCSS.attachCSS(scene);
+
+        popUpStage.setScene(scene);
+    }
+
+    private void update(FlowPane contetnt, Inventory playersInventory) {
+        contetnt.getChildren().clear();
+        loadItems(contetnt, playersInventory);
+    }
+
+    public void loadItems(FlowPane contetnt, Inventory playersInventory) {
         Set<String> items = playersInventory.itemsInInventory();
         for(String name : items){
             Potion potion =  playersInventory.getItem(name);
@@ -54,67 +78,11 @@ public class PopUpInventory extends PopUp {
             imageView.setOnMouseClicked(event -> {
                 potion.use();
                 playersInventory.removeItem(name);
+                update(contetnt, playersInventory);
                 contetnt.getChildren().remove(this);
             });
             contetnt.getChildren().add(imageView);
         }
-
-        Button resumeButton = new Button("Close inventory");
-        resumeButton.setOnAction(event -> {
-            Main.app.getGame().getGameLoop().start();
-            Main.app.hidePopUp();
-        });
-
-        inventory.setTop(contetnt);
-        inventory.setBottom(resumeButton);
-
-
-        /**
-        int m = 1;
-        int n = 1;
-        for (String itemName : items){
-            String itemImageName = "/armor/" + itemName + ".png";
-            Image image = new Image(itemImageName,50.0,50.0, true, true);
-            ImageView imageView = new ImageView(image);
-            Item item = playersInventory.getItem(itemName);
-
-            if(!((Armor) item).isEquiped){
-                imageView.setOnMouseClicked(event -> {
-                    playersInventory.equip(item);
-                    flowPane.getChildren().add(imageView);});
-            }
-
-            if(((Armor) item).isEquiped){
-                imageView.setOnMouseClicked(event -> {
-                    playersInventory.unEquip(item);;
-                    flowPane.getChildren().remove(imageView);});
-
-            }
-
-            gridPane.add(imageView,m,n);
-            if(m<5){
-                m++;
-            }
-            if (m >= 5 && n < 2){
-                n++;
-                m++;
-            }
-            if (n==2 && m >= 5){
-                n++;
-                m++;
-            }
-        }
-
-        gridPane.setGridLinesVisible(true);
-
-        inventory.getChildren().addAll(resumeButton, label, gridPane, label1,flowPane);*/
-
-        inventory.getStyleClass().add("inventory");
-        Scene scene = new Scene(inventory);
-        scene.setFill(Color.TRANSPARENT);
-        AttachCSS.attachCSS(scene);
-
-        popUpStage.setScene(scene);
     }
 
     @Override
